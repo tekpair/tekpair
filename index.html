@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tekpair — Local Tech Setup & Smart Home Services | Cohoes, NY</title>
+  <link rel="icon" type="image/png" href="logo-icon.png"/>
+  <meta name="description" content="Tekpair provides affordable tech setup, WiFi, smart home, camera installation and computer help in Cohoes, Troy, Latham, Albany and the Capital Region."/>
+  <meta property="og:title" content="Tekpair — Local Tech Setup & Smart Home Services"/>
+  <meta property="og:description" content="WiFi setup, smart home installs, security cameras, and computer help. Flat rates, same-day service, Capital Region NY."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tekpair.com"/>
+  <meta name="theme-color" content="#29d4f5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:        #111318;
+      --surface:   #191c23;
+      --card:      #1e2029;
+      --border:    rgba(255,255,255,0.09);
+      --border-md: rgba(255,255,255,0.14);
+      --cyan:      #29d4f5;
+      --cyan-soft: rgba(41,212,245,0.13);
+      --cyan-glow: rgba(41,212,245,0.28);
+      --white:     #eef1f8;
+      --off:       #9aa3b8;
+      --muted:     #636b82;
+      --radius:    14px;
+      --radius-sm: 8px;
+    }
+
+    /* ── BASE ── */
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute; top: -40px; left: 1rem;
+      background: var(--cyan); color: #111;
+      padding: 0.5rem 1rem; border-radius: 4px;
+      font-weight: 600; font-size: 0.85rem;
+      text-decoration: none; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0.5rem; }
+
+    .nav-logo-img {
+      height: 36px; width: auto;
+      mix-blend-mode: screen;
+      display: block;
+    }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(17,19,24,0.94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      gap: 1.5rem;
+    }
+    .nav-logo {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: 1.5rem; letter-spacing: -0.01em;
+      color: var(--white); text-decoration: none;
+      display: flex; align-items: center; gap: 0.45rem;
+      flex-shrink: 0;
+    }
+    .nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); flex-shrink:0; }
+    .nav-links {
+      display: flex; gap: 0.25rem; list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--off); text-decoration: none;
+      padding: 0.45rem 0.85rem; border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+    .nav-links a.active { color: var(--cyan); }
+    .nav-book {
+      font-size: 0.92rem; font-weight: 600;
+      background: var(--cyan); color: #0e1117;
+      padding: 0.6rem 1.4rem; border-radius: 8px;
+      text-decoration: none; white-space: nowrap; flex-shrink:0;
+      transition: opacity 0.18s, box-shadow 0.18s;
+    }
+    .nav-book:hover { opacity: 0.88; box-shadow: 0 0 20px var(--cyan-glow); }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 6px; border-radius: 6px;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 1rem 2rem 1.5rem;
+      gap: 0.25rem;
+    }
+    .mobile-menu a {
+      font-size: 1.1rem; font-weight: 500; color: var(--off);
+      text-decoration: none; padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--cyan); font-weight: 600; }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 2rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: 20%; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(41,212,245,0.055) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1140px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.25);
+      color: var(--cyan); font-size: 0.82rem; font-weight: 600;
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); animation: blink 2.5s ease infinite; }
+    .hero-title {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--white); margin-bottom: 1.3rem;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .hero-title em { font-style: normal; color: var(--cyan); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--off); line-height: 1.7;
+      max-width: 480px; margin-bottom: 2.5rem;
+      animation: fadeUp 0.5s 0.16s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.5s 0.24s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--cyan); color: #0e1117;
+      font-size: 1rem; font-weight: 600;
+      padding: 0.85rem 1.8rem; border-radius: 9px;
+      text-decoration: none; transition: opacity 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+    .btn-primary:hover { opacity: 0.88; box-shadow: 0 4px 24px var(--cyan-glow); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--white);
+      font-size: 1rem; font-weight: 500;
+      padding: 0.85rem 1.8rem; border-radius: 9px;
+      border: 1.5px solid var(--border-md);
+      text-decoration: none; transition: border-color 0.18s, color 0.18s, transform 0.18s;
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-1px); }
+
+    /* hero card */
+    .hero-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2.2rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+      position: relative; overflow: hidden;
+    }
+    .hero-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), rgba(41,212,245,0.2));
+    }
+    .hero-card-title {
+      font-family: 'Instrument Sans', sans-serif; font-size: 1rem; font-weight: 700;
+      color: var(--off); text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: 1.4rem;
+    }
+    .hero-card-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+    }
+    .hero-card-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .hci-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink:0;
+      color: var(--cyan);
+    }
+    .hci-text { flex: 1; }
+    .hci-label { font-weight: 600; font-size: 0.95rem; color: var(--white); }
+    .hci-price { font-size: 0.82rem; color: var(--cyan); font-weight: 600; margin-top: 0.1rem; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .trust-bar-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .trust-item {
+      padding: 2rem 1.5rem; text-align: center;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { color: var(--cyan); }
+    .trust-value {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: 1.9rem; color: var(--white); line-height: 1;
+    }
+    .trust-label { font-size: 0.88rem; color: var(--off); line-height: 1.4; }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 5.5rem 2rem; }
+    .section-surface { background: var(--surface); }
+    .container { max-width: 1140px; margin: 0 auto; }
+    .section-header { margin-bottom: 3rem; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 0.7rem;
+    }
+    .section-label-line { width: 24px; height: 2px; background: var(--cyan); border-radius: 2px; }
+    .section-title {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -0.02em; line-height: 1.1;
+      color: var(--white); margin-bottom: 0.8rem;
+    }
+    .section-desc { font-size: 1rem; color: var(--off); max-width: 560px; line-height: 1.7; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.8rem;
+      transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+      cursor: default; position: relative;
+    }
+    .service-card:hover {
+      border-color: rgba(41,212,245,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .sc-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.22);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyan); margin-bottom: 1.3rem;
+    }
+    .sc-name { font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 0.5rem; }
+    .sc-desc { font-size: 0.92rem; color: var(--off); line-height: 1.65; margin-bottom: 1.2rem; }
+    .sc-price { font-size: 0.9rem; font-weight: 600; color: var(--cyan); }
+    .sc-cta {
+      position: absolute; bottom: 1.8rem; right: 1.8rem;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyan); transition: background 0.18s;
+    }
+    .service-card:hover .sc-cta { background: var(--cyan); color: #0e1117; }
+
+    /* contact card in grid */
+    .service-card.contact-card {
+      background: linear-gradient(135deg, #1a1d24, #1e2029);
+      border-color: rgba(41,212,245,0.18);
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    }
+
+    /* ── AREA ── */
+    .area-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .area-towns {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem;
+    }
+    .area-town {
+      font-size: 0.88rem; font-weight: 500; color: var(--off);
+      background: var(--card); border: 1px solid var(--border);
+      padding: 0.45rem 1rem; border-radius: 100px;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .area-town:hover { border-color: var(--cyan); color: var(--cyan); }
+    .area-visual {
+      min-height: 380px;
+      position: relative;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    /* animated rings - unused */
+    .rings { position: relative; width: 80px; height: 80px; flex-shrink:0; }
+    .ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1.5px solid var(--cyan);
+      animation: ring-out 2.8s ease-out infinite;
+    }
+    .ring:nth-child(2) { animation-delay: 0.7s; }
+    .ring:nth-child(3) { animation-delay: 1.4s; }
+    .ring-dot {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 16px var(--cyan-glow);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .step {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.6rem;
+      position: relative;
+    }
+    .step-num {
+      font-family: 'Instrument Sans', sans-serif; font-size: 3rem; font-weight: 800;
+      color: rgba(41,212,245,0.15); line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+    .step-title { font-weight: 600; font-size: 0.98rem; color: var(--white); margin-bottom: 0.4rem; }
+    .step-desc { font-size: 0.88rem; color: var(--off); line-height: 1.6; }
+    .step-arrow {
+      display: none;
+      position: absolute; right: -1.1rem; top: 50%; transform: translateY(-50%);
+      color: var(--border-md); z-index: 2;
+    }
+    .step:not(:last-child) .step-arrow { display: flex; }
+
+    /* ── WHY US ── */
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
+    .why-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.8rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .why-card:hover { border-color: rgba(41,212,245,0.25); transform: translateY(-2px); }
+    .why-icon {
+      width: 46px; height: 46px; border-radius: 11px; flex-shrink:0;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
+      display: flex; align-items: center; justify-content: center; color: var(--cyan);
+    }
+    .why-title { font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 0.35rem; }
+    .why-desc { font-size: 0.88rem; color: var(--off); line-height: 1.65; }
+
+    /* ── BOOKING ── */
+    .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .booking-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.8rem 0 2.2rem; }
+    .bc-item { display: flex; align-items: center; gap: 0.9rem; font-size: 0.96rem; color: var(--off); }
+    .bc-check { color: var(--cyan); flex-shrink: 0; }
+    .booking-box {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: 20px; padding: 2.5rem;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 1.2rem;
+    }
+    .booking-box-icon { color: var(--cyan); }
+    .booking-box-title { font-family:'Instrument Sans',sans-serif; font-weight:800; font-size:1.3rem; color:var(--white); }
+    .booking-box-desc { font-size:0.9rem; color:var(--off); line-height:1.65; max-width:320px; }
+    .booking-box-steps { display:flex; flex-direction:column; gap:0.6rem; width:100%; text-align:left; }
+    .bbs-step {
+      display:flex; align-items:center; gap:0.75rem;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:9px; padding:0.75rem 1rem;
+      font-size:0.87rem; color:var(--off);
+    }
+    .bbs-num {
+      width:24px;height:24px;border-radius:50%;flex-shrink:0;
+      background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.25);
+      display:flex;align-items:center;justify-content:center;
+      font-size:0.72rem;font-weight:700;color:var(--cyan);
+    }
+    .booking-divider {
+      display:flex;align-items:center;gap:0.75rem;width:100%;
+      color:var(--muted);font-size:0.82rem;
+    }
+    .booking-divider::before, .booking-divider::after {
+      content:'';flex:1;height:1px;background:var(--border);
+    }
+
+    /* ── PAYMENT ── */
+    .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.5rem; }
+    .pay-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 0.7rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .pay-card:hover { border-color: rgba(41,212,245,0.25); transform: translateY(-2px); }
+    .pay-icon { color: var(--cyan); }
+    .pay-name { font-weight: 600; font-size: 0.96rem; color: var(--white); }
+    .pay-note { font-size: 0.82rem; color: var(--off); line-height: 1.5; }
+    .pay-badge {
+      font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px;
+      background: var(--cyan-soft); color: var(--cyan);
+      border: 1px solid rgba(41,212,245,0.2);
+    }
+    .pay-note-box {
+      margin-top: 1.8rem; padding: 1.3rem 1.6rem;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
+      border-radius: var(--radius);
+      display: flex; align-items: flex-start; gap: 1rem;
+      font-size: 0.9rem; color: var(--off); line-height: 1.65;
+    }
+    .pay-note-box svg { flex-shrink: 0; color: var(--cyan); margin-top: 0.1rem; }
+
+    /* ── CTA ── */
+    .cta-section { padding: 6rem 2rem; text-align: center; }
+    .cta-box {
+      max-width: 680px; margin: 0 auto;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 4rem 3rem;
+      position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+      width:360px;height:360px;
+      background:radial-gradient(circle, rgba(41,212,245,0.06), transparent 65%);
+      pointer-events:none;
+    }
+    .cta-box .section-title { font-size: clamp(1.5rem,3vw,2.1rem); margin-bottom: 0.8rem; }
+    .cta-box p { font-size: 1rem; color: var(--off); margin-bottom: 2.2rem; line-height: 1.7; }
+    .cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); background: var(--surface);
+      padding: 3rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem; padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .footer-brand-logo {
+      font-family:'Instrument Sans',sans-serif; font-weight:800; font-size:1.4rem;
+      color:var(--white); margin-bottom:0.8rem;
+      display:flex; align-items:center; gap:0.45rem;
+    }
+    .footer-brand-desc { font-size:0.9rem; color:var(--off); line-height:1.7; max-width:300px; margin-bottom:1.2rem; }
+    .footer-social { display:flex; gap:0.6rem; }
+    .footer-social a {
+      width:38px;height:38px;border-radius:9px;
+      background:var(--card);border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--off);text-decoration:none;
+      transition:border-color 0.18s,color 0.18s;
+    }
+    .footer-social a:hover { border-color:var(--cyan); color:var(--cyan); }
+    .footer-col h4 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+    .footer-col ul a { font-size:0.88rem; color:var(--off); text-decoration:none; transition:color 0.18s; }
+    .footer-col ul a:hover { color:var(--cyan); }
+    .footer-bottom {
+      max-width:1140px; margin:1.5rem auto 0;
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+      font-size:0.82rem; color:var(--muted);
+    }
+    .footer-bottom a { color:var(--off); text-decoration:none; }
+    .footer-bottom a:hover { color:var(--cyan); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:none; }
+    }
+    @keyframes blink {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:0.4; transform:scale(0.6); }
+    }
+    @keyframes ring-out {
+      0%   { transform:scale(0.25); opacity:0.9; }
+      100% { transform:scale(4); opacity:0; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .trust-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .trust-item:nth-child(2) { border-right: none; }
+      .trust-item:nth-child(3), .trust-item:nth-child(4) { border-top: 1px solid var(--border); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .area-inner { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .step-arrow { display:none !important; }
+      .why-grid { grid-template-columns: 1fr; }
+      .booking-inner { grid-template-columns: 1fr; }
+      .payment-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-inner > :first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .nav-toggle { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .trust-bar-inner { grid-template-columns: repeat(2,1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .payment-grid { grid-template-columns: 1fr 1fr; }
+      .cta-box { padding: 2.5rem 1.5rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
+    }
+    /* ── PROMO BANNER ── */
+    .promo-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 210;
+      background: linear-gradient(90deg, #0a6e82, #29d4f5 50%, #0a6e82);
+      background-size: 200% 100%;
+      animation: banner-shine 6s ease infinite;
+      padding: 0.6rem 3rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; flex-wrap: wrap; text-align: center;
+    }
+    .promo-banner-text {
+      font-size: 0.82rem; font-weight: 600; color: #07080d; line-height: 1.4;
+    }
+    .promo-banner-text span { font-weight: 700; }
+    .promo-sep {
+      width: 4px; height: 4px; border-radius: 50%; background: rgba(0,0,0,0.25); flex-shrink: 0;
+    }
+    .promo-close {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: rgba(0,0,0,0.45); font-size: 1rem; line-height: 1;
+      padding: 0.3rem; transition: color 0.18s;
+    }
+    .promo-close:hover { color: #07080d; }
+    @keyframes banner-shine {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    /* when banner is visible, push nav below it */
+    nav { transition: top 0.2s; }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Tekpair home">
+      <img src="logo-wide.png" alt="Tekpair" class="nav-logo-img"/>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#area">Service Area</a></li>
+      <li><a href="#booking">Book</a></li>
+      <li><a href="policies.html">Policies</a></li>
+    </ul>
+    <a href="#booking" class="nav-book">Book a Job</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile menu">
+    <a href="#services">Services</a>
+    <a href="#how">How It Works</a>
+    <a href="#area">Service Area</a>
+    <a href="#booking">Book</a>
+    <a href="policies.html">Policies</a>
+    <a href="#booking">Book a Job →</a>
+  </div>
+</nav>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" id="promo-banner" role="banner" aria-label="Promotional offer">
+  <div class="promo-banner-text">
+    <span>15% off</span> your first booking
+  </div>
+  <div class="promo-sep" aria-hidden="true"></div>
+  <div class="promo-banner-text">
+    Book again within 7 days and get <span>25% off</span> your next job
+  </div>
+  <button class="promo-close" id="promo-close" aria-label="Dismiss offer">✕</button>
+</div>
+
+<!-- HERO -->
+<main id="main">
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Now Serving the Capital Region, NY
+      </div>
+      <h1 class="hero-title" id="hero-heading">
+        Tech help that<br/><em>actually shows up.</em>
+      </h1>
+      <p class="hero-sub">
+        WiFi setup, smart home devices, security cameras, and computer help — all at flat rates with no surprise fees. We come to you.
+      </p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">
+          <!-- calendar icon -->
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a Job
+        </a>
+        <a href="#services" class="btn-outline">
+          See Our Services
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-title">Popular Services</div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">WiFi & Router Setup</div>
+          <div class="hci-price">From $75</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">Smart Home Devices</div>
+          <div class="hci-price">From $49</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 7 16 12 23 17V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">Smart TV & Streaming</div>
+          <div class="hci-price">From $49</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">Security Cameras</div>
+          <div class="hci-price">From $69</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar" role="complementary" aria-label="Key facts">
+  <div class="trust-bar-inner">
+    <div class="trust-item reveal">
+      <div class="trust-icon">
+        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="trust-value">Same Day</div>
+      <div class="trust-label">or next‑day availability</div>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">
+        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="trust-value">Flat Rates</div>
+      <div class="trust-label">no hourly surprises</div>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">
+        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="trust-value">Local Team</div>
+      <div class="trust-label">Connor &amp; Kamryn, Cohoes NY</div>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">
+        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="trust-value">7-Day</div>
+      <div class="trust-label">satisfaction guarantee</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label"><div class="section-label-line"></div>What We Do</div>
+      <h2 class="section-title" id="services-heading">Our Services</h2>
+      <p class="section-desc">All jobs are flat-rate, priced upfront. We come to your home or small business anywhere in the Capital Region.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="sc-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="sc-name">WiFi &amp; Network Setup</div>
+        <div class="sc-desc">Router and modem installation, WiFi troubleshooting, signal extenders, and mesh systems. We get you fully connected and fast.</div>
+        <div class="sc-price">From $75</div>
+        <div class="sc-cta" aria-hidden="true">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="sc-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="sc-name">Smart Home Devices</div>
+        <div class="sc-desc">Alexa, Google Home, smart bulbs, plugs, and thermostats — set up, linked to your app, and working exactly as they should.</div>
+        <div class="sc-price">From $49</div>
+        <div class="sc-cta" aria-hidden="true">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="sc-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 7 16 12 23 17V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="sc-name">Smart TV &amp; Streaming</div>
+        <div class="sc-desc">Firestick, Roku, Apple TV, or built-in smart TV setup. Apps installed, accounts connected, WiFi linked. Cord-cutting help included.</div>
+        <div class="sc-price">From $49</div>
+        <div class="sc-cta" aria-hidden="true">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="sc-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div class="sc-name">Security Cameras &amp; Doorbells</div>
+        <div class="sc-desc">Ring, Blink, Wyze, Eufy — mounted securely, connected to your WiFi, configured with motion alerts and app access from day one.</div>
+        <div class="sc-price">From $69 per device</div>
+        <div class="sc-cta" aria-hidden="true">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="sc-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="sc-name">Computer Setup &amp; Cleanup</div>
+        <div class="sc-desc">New computer setup, virus removal, speed improvements, software installs, and data transfer. Windows and Mac both covered.</div>
+        <div class="sc-price">From $79</div>
+        <div class="sc-cta" aria-hidden="true">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+      <div class="service-card contact-card reveal">
+        <div class="sc-icon" style="margin-bottom:1.3rem;">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="sc-name">Not sure what you need?</div>
+        <div class="sc-desc" style="margin-bottom:1.5rem;">Tell us what's going on — if it's a tech problem, we'll figure it out together before you pay anything.</div>
+        <a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener" class="btn-primary" style="font-size:0.9rem;">Message Us on Facebook</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-surface" id="how" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label"><div class="section-label-line"></div>Simple Process</div>
+      <h2 class="section-title" id="how-heading">How It Works</h2>
+      <p class="section-desc">Four easy steps from first contact to job done. No tech knowledge needed on your end.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Reach Out</div>
+        <div class="step-desc">Book on Calendly or message us on Facebook. Tell us what's going on — no judgment, no jargon.</div>
+        <div class="step-arrow" aria-hidden="true">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">Get a Quote</div>
+        <div class="step-desc">We'll confirm the flat rate before we show up. No surprises. You'll know exactly what it costs.</div>
+        <div class="step-arrow" aria-hidden="true">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">We Come to You</div>
+        <div class="step-desc">We travel to your home or business anywhere within 35 miles of Cohoes. Usually same or next day.</div>
+        <div class="step-arrow" aria-hidden="true">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">Job Done, Pay On-Site</div>
+        <div class="step-desc">We finish the job, walk you through what we did, and collect payment on the spot. Cash, Zelle, Cash App, or Apple Pay.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="section" id="area" aria-labelledby="area-heading">
+  <div class="container">
+    <div class="area-inner">
+      <div>
+        <div class="section-header reveal">
+          <div class="section-label"><div class="section-label-line"></div>Where We Work</div>
+          <h2 class="section-title" id="area-heading">Capital Region Coverage</h2>
+          <p class="section-desc">Based in Cohoes, NY. We serve homes and small businesses within 35 miles — covering most of the Capital Region.</p>
+        </div>
+        <div class="area-towns reveal">
+          <span class="area-town">Cohoes</span>
+          <span class="area-town">Troy</span>
+          <span class="area-town">Latham</span>
+          <span class="area-town">Watervliet</span>
+          <span class="area-town">Green Island</span>
+          <span class="area-town">Albany</span>
+          <span class="area-town">Colonie</span>
+          <span class="area-town">Schenectady</span>
+          <span class="area-town">Clifton Park</span>
+          <span class="area-town">Saratoga Springs</span>
+        </div>
+        <div style="margin-top:2rem;" class="reveal">
+          <p style="font-size:0.9rem;color:var(--off);">Not sure if we cover your area? <a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:500;">Message us</a> — we'll let you know.</p>
+        </div>
+      </div>
+      <div class="area-visual reveal">
+        <iframe
+          title="Tekpair service area — Capital Region, NY"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193000!2d-73.8!3d42.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89de0b4231e77cf7%3A0xaf27f1c29eddeb21!2sCohoes%2C%20NY!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.9);"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-surface" id="why" aria-labelledby="why-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label"><div class="section-label-line"></div>Why Tekpair</div>
+      <h2 class="section-title" id="why-heading">Why People Choose Us</h2>
+      <p class="section-desc">We're not Geek Squad. We're two locals who actually show up, speak plainly, and charge fair prices.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <div class="why-title">Flat rates — no surprises</div>
+          <div class="why-desc">You know the price before we ring the doorbell. No hourly billing, no "diagnostic fees", no hidden charges.</div>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="why-title">Fast, local response</div>
+          <div class="why-desc">We're right here in the Capital Region. Most jobs get done same-day or next-day — not weeks out like the big chains.</div>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="why-title">You talk to the people doing the job</div>
+          <div class="why-desc">No call centers, no third-party dispatch. Connor &amp; Kamryn answer messages and show up themselves.</div>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="why-title">7-day satisfaction guarantee</div>
+          <div class="why-desc">If something we set up stops working within 7 days and it's our fault, we come back and fix it — free of charge, no questions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section" id="booking" aria-labelledby="booking-heading">
+  <div class="container">
+    <div class="booking-inner">
+      <div>
+        <div class="section-header reveal">
+          <div class="section-label"><div class="section-label-line"></div>Schedule a Job</div>
+          <h2 class="section-title" id="booking-heading">Book Your Appointment</h2>
+          <p class="section-desc">Pick a time that works for you. We'll confirm fast and show up ready.</p>
+        </div>
+        <div class="booking-checklist reveal">
+          <div class="bc-item">
+            <div class="bc-check">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Pick a time — no phone tag, no back and forth
+          </div>
+          <div class="bc-item">
+            <div class="bc-check">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Confirmation sent automatically to your email
+          </div>
+          <div class="bc-item">
+            <div class="bc-check">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            Cancel or reschedule free with 24 hrs notice
+          </div>
+          <div class="bc-item">
+            <div class="bc-check">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            No payment until the job is done
+          </div>
+        </div>
+        <div class="reveal" style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener" class="btn-outline">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Prefer to message us instead?
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal" style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+        <!-- Calendly inline widget begin -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/connorwaugaman1222/tekpair-booking?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1e2029&text_color=eef1f8&primary_color=29d4f5" style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Calendly inline widget end -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="section section-surface" id="payment" aria-labelledby="payment-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label"><div class="section-label-line"></div>How to Pay</div>
+      <h2 class="section-title" id="payment-heading">Accepted Payment Methods</h2>
+      <p class="section-desc">Payment is collected on-site when the job is done. We keep it simple — whatever works best for you.</p>
+    </div>
+    <div class="payment-grid reveal">
+      <div class="pay-card">
+        <div class="pay-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="pay-name">Cash</div>
+        <div class="pay-note">Always accepted. No app needed.</div>
+        <div class="pay-badge">Preferred</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="pay-name">Zelle</div>
+        <div class="pay-note">Instant bank transfer, zero fees.</div>
+        <div class="pay-badge">Preferred</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="pay-name">Cash App</div>
+        <div class="pay-note">Quick and easy, instant confirmation.</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="pay-name">Apple Pay</div>
+        <div class="pay-note">Tap to pay from your iPhone or Apple Watch.</div>
+      </div>
+    </div>
+    <div class="pay-note-box reveal">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div>
+        <strong style="color:var(--white);display:block;margin-bottom:0.2rem;">How payment works</strong>
+        Payment is due on-site when the job is complete — no invoices, no delayed payments. For jobs over $100 we may ask for a 50% deposit upfront via Zelle or Cash App to confirm your booking. Need to cancel? Please give us 24 hours notice. See our <a href="policies.html" style="color:var(--cyan);text-decoration:none;font-weight:500;">full policies</a> for details.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" aria-labelledby="cta-heading">
+  <div class="cta-box reveal">
+    <div class="section-label" style="justify-content:center;">
+      <div class="section-label-line"></div>Ready to Go
+    </div>
+    <h2 class="section-title" id="cta-heading" style="text-align:center;">Let's get you<br/>set up right.</h2>
+    <p>Scroll up to book directly on the calendar, or message us on Facebook if you'd prefer to chat first.</p>
+    <div class="cta-actions">
+      <a href="#booking" class="btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book an Appointment
+      </a>
+      <a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener" class="btn-outline">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Message on Facebook
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-logo">
+        <img src="logo-wide.png" alt="Tekpair" style="height:32px;width:auto;mix-blend-mode:screen;"/>
+      </div>
+      <p class="footer-brand-desc">Local tech setup and smart home services in the Capital Region, NY. We come to you — flat rates, fast response, no fuss.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener" aria-label="Tekpair on Facebook">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">WiFi &amp; Network</a></li>
+        <li><a href="#services">Smart Home</a></li>
+        <li><a href="#services">Smart TV &amp; Streaming</a></li>
+        <li><a href="#services">Security Cameras</a></li>
+        <li><a href="#services">Computer Setup</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#booking">Book a Job</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#payment">Payment Options</a></li>
+        <li><a href="policies.html">Policies &amp; Guarantees</a></li>
+        <li><a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener">Facebook Page</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <img src="logo-wide.png" alt="Tekpair" style="height:26px;width:auto;mix-blend-mode:screen;"/>
+    <span>© 2026 Tekpair · Cohoes, NY · Capital Region</span>
+    <span><a href="policies.html">Policies</a> · <a href="https://www.facebook.com/tekpair" target="_blank" rel="noopener noreferrer">Facebook</a></span>
+  </div>
+</footer>
+
+<script>
+  // Promo banner — position nav below it, adjust hero offset
+  const banner = document.getElementById('promo-banner');
+  const bannerClose = document.getElementById('promo-close');
+  const navEl = document.querySelector('nav');
+  const heroEl = document.querySelector('.hero');
+
+  function applyBannerOffset() {
+    const bh = banner.offsetHeight;
+    navEl.style.top = bh + 'px';
+    if (heroEl) heroEl.style.paddingTop = (bh + 80) + 'px';
+  }
+
+  if (banner && bannerClose) {
+    applyBannerOffset();
+    window.addEventListener('resize', applyBannerOffset);
+    bannerClose.addEventListener('click', () => {
+      banner.style.display = 'none';
+      navEl.style.top = '0';
+      if (heroEl) heroEl.style.paddingTop = '';
+    });
+  }
+
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  toggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  // Close mobile menu when a link is clicked
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('in'), i * 55);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.09 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // Active nav link highlight
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  const onScroll = () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 130) current = sec.id;
+    });
+    navAs.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+</body>
+</html>
