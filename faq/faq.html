@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ — Tekpair</title>
+  <link rel="icon" type="image/png" href="/logo-icon.png"/>
+  <meta name="description" content="Frequently asked questions about Tekpair's local tech setup and smart home services in the Capital Region, NY."/>
+  <meta property="og:title" content="FAQ — Tekpair"/>
+  <meta property="og:description" content="Got questions? We've got answers. Tekpair local tech services, Capital Region NY."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tekpair.com/faq/"/>
+  <meta name="theme-color" content="#29d4f5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#111318;--surface:#191c23;--card:#1e2029;
+      --border:rgba(255,255,255,0.09);
+      --cyan:#29d4f5;--cyan-soft:rgba(41,212,245,0.13);--cyan-glow:rgba(41,212,245,0.28);
+      --white:#eef1f8;--off:#9aa3b8;--muted:#636b82;
+      --radius:12px;
+    }
+    html{scroll-behavior:smooth;font-size:15px;}
+    body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(17,19,24,0.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;}
+    .nav-logo{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.3rem;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:0.4rem;}
+    .nav-back{font-size:0.88rem;font-weight:500;color:var(--off);text-decoration:none;display:flex;align-items:center;gap:0.45rem;transition:color 0.18s;}
+    .nav-back:hover{color:var(--cyan);}
+
+    .page{max-width:760px;margin:0 auto;padding:7rem 2rem 6rem;}
+
+    .page-top{padding-bottom:2.5rem;border-bottom:1px solid var(--border);}
+    .page-label{font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
+    .page-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-0.02em;line-height:1.1;color:var(--white);margin-bottom:0.9rem;}
+    .page-intro{font-size:0.93rem;color:var(--off);max-width:560px;line-height:1.75;}
+
+    /* FAQ CATEGORIES */
+    .faq-category{padding:2.5rem 0;border-bottom:1px solid var(--border);}
+    .faq-category:last-of-type{border-bottom:none;}
+    .faq-cat-label{font-size:0.7rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+    .faq-cat-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:1.6rem;}
+
+    /* ACCORDION */
+    .faq-item{border-bottom:1px solid var(--border);}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-question{
+      width:100%;background:none;border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.1rem 0;gap:1rem;text-align:left;
+    }
+    .faq-question-text{font-weight:600;font-size:0.95rem;color:var(--white);line-height:1.5;}
+    .faq-icon{
+      width:24px;height:24px;border-radius:50%;flex-shrink:0;
+      background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.2);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--cyan);transition:transform 0.25s,background 0.2s;
+    }
+    .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--cyan);color:#0e1117;}
+    .faq-answer{
+      max-height:0;overflow:hidden;
+      transition:max-height 0.35s ease,padding 0.25s ease;
+      font-size:0.88rem;color:var(--off);line-height:1.75;
+    }
+    .faq-item.open .faq-answer{max-height:400px;padding-bottom:1.2rem;}
+    .faq-answer a{color:var(--cyan);text-decoration:none;}
+    .faq-answer a:hover{text-decoration:underline;}
+
+    /* CONTACT ROW */
+    .contact-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding-top:2.5rem;}
+    .contact-row p{font-size:0.9rem;color:var(--off);}
+    .btn{display:inline-flex;align-items:center;gap:0.45rem;background:var(--cyan);color:#0e1117;font-size:0.88rem;font-weight:600;padding:0.65rem 1.3rem;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.18s,box-shadow 0.18s;}
+    .btn:hover{opacity:0.88;box-shadow:0 4px 18px var(--cyan-glow);}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.45s ease,transform 0.45s ease;}
+    .reveal.in{opacity:1;transform:none;}
+
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.8rem 2rem;}
+    .footer-inner{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:0.8rem;color:var(--muted);align-items:center;}
+    footer a{color:var(--off);text-decoration:none;}
+    footer a:hover{color:var(--cyan);}
+
+    @media(max-width:600px){
+      .nav-inner{padding:1rem 1.25rem;}
+      .page{padding:6.5rem 1.25rem 4rem;}
+      .contact-row{flex-direction:column;align-items:flex-start;}
+      .footer-inner{flex-direction:column;align-items:center;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="68" height="68" rx="12" fill="#29d4f5"/><polyline points="28,13 12,34 28,51" fill="none" stroke="#0e1320" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="40,13 56,34 40,51" fill="none" stroke="#0e1320" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      TEKPAIR
+    </a>
+    <a href="/" class="nav-back">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </a>
+  </div>
+</nav>
+
+<main>
+<div class="page">
+
+  <div class="page-top reveal">
+    <div class="page-label">Tekpair · Capital Region, NY</div>
+    <h1 class="page-title">Frequently Asked Questions</h1>
+    <p class="page-intro">Everything you might be wondering before booking. If you don't see your question here, just message us — we're real people and we respond fast.</p>
+  </div>
+
+  <!-- BOOKING & SCHEDULING -->
+  <div class="faq-category reveal">
+    <div class="faq-cat-label">Booking</div>
+    <div class="faq-cat-title">Scheduling & Appointments</div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">How do I book an appointment?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">The easiest way is to use our booking calendar right on the homepage — pick a date and time that works for you and you'll get a confirmation email instantly. If you'd rather chat first, message us on <a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener">Facebook</a> or <a href="https://www.instagram.com/tekpairny" target="_blank" rel="noopener">Instagram</a> and we'll get you sorted from there.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">How quickly can you come out?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Usually same-day or next-day. We're local and we don't book out weeks in advance like the big chain stores. Check the calendar and you'll see what's available — we keep open slots specifically for last-minute requests.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">Do I need to be home for the appointment?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Yes — for most jobs we'll need access to your home and your devices, and we'll want to walk you through everything when we're done. If your situation is a little different, just let us know when you book and we'll figure something out.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">What if I need to cancel or reschedule?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Rescheduling is always free. To cancel without a fee, just give us at least 24 hours notice using the link in your confirmation email or by messaging us directly. Same-day cancellations have a $15 fee since we've already blocked that time. See our <a href="/policies/">full policies</a> for details.</div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="faq-category reveal">
+    <div class="faq-cat-label">Services</div>
+    <div class="faq-cat-title">What We Do</div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">How long does a typical job take?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">It depends on what we're doing. Most single-device setups like a smart TV, Alexa, or Ring doorbell take 30–45 minutes. WiFi and router jobs usually run about an hour. Larger jobs like a full smart home setup or multi-camera security system can take 2–3 hours. We'll always give you an honest time estimate before we show up.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">Do you bring your own equipment?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">We bring our tools, cables, and setup equipment. For devices like routers, cameras, or smart home gadgets — those are things you'd purchase yourself (Amazon, Best Buy, etc.) and we set them up for you. If you're not sure what to buy, message us before your appointment and we'll point you in the right direction.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">Do you work on both Mac and Windows computers?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Yes, both. Whether it's a Windows PC, a MacBook, or an iMac — we handle setup, cleanup, virus removal, software installs, and data transfers on either platform.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">My problem isn't on your services list — can you still help?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Probably. Just message us and describe what's going on. If it's tech-related and within our skill set, we'll come out. If it's something we can't help with, we'll tell you upfront before you pay a cent.</div>
+    </div>
+  </div>
+
+  <!-- PRICING & PAYMENT -->
+  <div class="faq-category reveal">
+    <div class="faq-cat-label">Pricing</div>
+    <div class="faq-cat-title">Rates & Payment</div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">How does your pricing work?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Everything is a flat rate — you know exactly what you're paying before we show up. No hourly billing, no surprise charges, no "diagnostic fees." Prices start at $49 depending on the job. We'll always confirm the rate with you before your appointment.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">Do you charge extra for same-day service?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Nope. Same rate regardless of when you book. Fast response is just part of how we operate — not an upsell.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">How and when do I pay?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Payment is collected on-site when the job is done — not before. We accept Cash, Zelle, Cash App, and Apple Pay. For jobs over $100, we may ask for a 50% deposit upfront to confirm your booking. We don't send invoices or accept payment after the fact.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">Is there a discount for first-time customers?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Yes — your first booking is 15% off. And if you book another job within 7 days of your first, that second booking is 25% off. No code needed, we apply it automatically.</div>
+    </div>
+  </div>
+
+  <!-- AFTER THE JOB -->
+  <div class="faq-category reveal">
+    <div class="faq-cat-label">After the Job</div>
+    <div class="faq-cat-title">Guarantees & Follow-Up</div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">What if the problem comes back after you leave?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">If something we set up stops working within 7 days and it's our fault, we come back and fix it at no charge. No arguments, no fees. That's our 7-day satisfaction guarantee and we take it seriously.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">Can I reach out after the job if I have questions?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">Absolutely. Message us on Facebook or Instagram any time. We're a small local team — not a call center — so you'll always be talking to the same people who did the job.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-question-text">I'm not very tech-savvy. Will I understand what's going on?</span>
+        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-answer">That's exactly who we're here for. We explain everything in plain language — no jargon, no condescension. Before we leave, we'll walk you through what we did and make sure you're comfortable with how everything works. You'll feel confident, not confused.</div>
+    </div>
+  </div>
+
+  <div class="contact-row reveal">
+    <p>Still have a question? We'll get back to you fast.</p>
+    <a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener noreferrer" class="btn">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Message Us on Facebook
+    </a>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);display:flex;align-items:center;gap:0.5rem;">
+      <svg width="22" height="22" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="68" height="68" rx="12" fill="#29d4f5"/><polyline points="28,13 12,34 28,51" fill="none" stroke="#0e1320" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="40,13 56,34 40,51" fill="none" stroke="#0e1320" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      TEKPAIR
+    </div>
+    <span>Cohoes, NY · Capital Region</span>
+    <span><a href="/">Home</a> · <a href="/policies/">Policies</a> · <a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener noreferrer">Facebook</a> · <a href="https://www.instagram.com/tekpairny" target="_blank" rel="noopener noreferrer">Instagram</a></span>
+    <span>© 2026 Tekpair. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // Accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 55);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
