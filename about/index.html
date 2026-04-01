@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — Tekpair</title>
+  <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
+  <meta name="description" content="Meet Connor and Kamryn — two locals from Cohoes, NY who started Tekpair to make real tech help actually accessible."/>
+  <meta property="og:title" content="About Us — Tekpair"/>
+  <meta property="og:url" content="https://tekpair.com/about/"/>
+  <meta name="theme-color" content="#29d4f5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#111318;--surface:#191c23;--card:#1e2029;--card2:#22252f;
+      --border:rgba(255,255,255,0.09);--border-md:rgba(255,255,255,0.14);
+      --cyan:#29d4f5;--cyan-soft:rgba(41,212,245,0.13);--cyan-glow:rgba(41,212,245,0.28);
+      --white:#eef1f8;--off:#9aa3b8;--muted:#636b82;
+      --green:#34c76f;--radius:12px;
+    }
+    html{scroll-behavior:smooth;font-size:15px;}
+    body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(17,19,24,0.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;}
+    .nav-back{font-size:0.88rem;font-weight:500;color:var(--off);text-decoration:none;display:flex;align-items:center;gap:0.45rem;transition:color 0.18s;}
+    .nav-back:hover{color:var(--cyan);}
+
+    .page{max-width:1100px;margin:0 auto;padding:7rem 2rem 6rem;}
+
+    /* SECTION STRUCTURE */
+    .page-top{padding-bottom:2.5rem;border-bottom:1px solid var(--border);}
+    .section{padding:2.5rem 0;border-bottom:1px solid var(--border);}
+    .section:last-of-type{border-bottom:none;}
+    .page-label{font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
+    .page-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-0.02em;line-height:1.1;color:var(--white);margin-bottom:0.9rem;}
+    .page-intro{font-size:0.95rem;color:var(--off);max-width:560px;line-height:1.8;}
+    .sec-label{font-size:0.7rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+    .sec-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:1.2rem;}
+    .body-text{font-size:0.92rem;color:var(--off);line-height:1.85;margin-bottom:0.9rem;}
+    .body-text:last-child{margin-bottom:0;}
+
+    /* MISSION STATEMENT */
+    .mission-box{background:var(--card);border:1px solid rgba(41,212,245,0.2);border-radius:var(--radius);padding:1.8rem 2rem;margin-top:1.4rem;position:relative;overflow:hidden;}
+    .mission-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);}
+    .mission-quote{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);line-height:1.45;letter-spacing:-0.01em;}
+    .mission-attr{font-size:0.78rem;color:var(--muted);margin-top:0.8rem;}
+
+    /* TEAM */
+    .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;}
+    .team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.18s;}
+    .team-card:hover{border-color:rgba(41,212,245,0.2);}
+    .team-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;display:block;background:var(--surface);}
+    .team-photo-placeholder{width:100%;aspect-ratio:4/5;background:var(--surface);display:flex;align-items:center;justify-content:center;}
+    .team-info{padding:1.1rem 1.2rem;}
+    .team-name{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem;}
+    .team-role{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
+    .team-bio{font-size:0.82rem;color:var(--off);line-height:1.65;}
+
+    /* VALUES */
+    .values-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.4rem;}
+    .value-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;}
+    .value-icon{width:30px;height:30px;border-radius:7px;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.18);display:flex;align-items:center;justify-content:center;color:var(--cyan);margin-bottom:0.65rem;}
+    .value-title{font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:0.25rem;}
+    .value-body{font-size:0.78rem;color:var(--off);line-height:1.6;}
+
+    /* COMMUNITY PHOTOS */
+    .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.4rem;}
+    .photo-item{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
+    .photo-item img{width:100%;height:200px;object-fit:cover;display:block;}
+    .photo-item.wide{grid-column:1/-1;}
+    .photo-item.wide img{height:260px;}
+    .photo-caption{font-size:0.72rem;color:var(--muted);padding:0.5rem 0.75rem;background:var(--card);}
+
+    /* TESTIMONIALS */
+    .testimonials-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.4rem;}
+    .testimonial{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.5rem;position:relative;}
+    .testimonial-stars{display:flex;gap:3px;margin-bottom:0.75rem;}
+    .testimonial-stars span{color:#f5c842;font-size:0.85rem;}
+    .testimonial-text{font-size:0.9rem;color:var(--off);line-height:1.8;margin-bottom:1rem;font-style:italic;}
+    .testimonial-text::before{content:'\201C';font-size:1.4rem;color:var(--cyan);font-family:'Instrument Sans',sans-serif;line-height:0;vertical-align:-0.3rem;margin-right:2px;}
+    .testimonial-footer{display:flex;align-items:center;gap:0.75rem;}
+    .testimonial-avatar{width:36px;height:36px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.2);display:flex;align-items:center;justify-content:center;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:0.78rem;color:var(--cyan);flex-shrink:0;}
+    .testimonial-name{font-weight:600;font-size:0.85rem;color:var(--white);}
+    .testimonial-meta{font-size:0.75rem;color:var(--muted);}
+    .testimonial-source{position:absolute;top:1.1rem;right:1.2rem;}
+    .testimonial-source svg{color:var(--muted);opacity:0.5;}
+    .testimonial-placeholder{background:var(--card);border:1px dashed var(--border-md);border-radius:var(--radius);padding:1.4rem 1.5rem;text-align:center;}
+    .testimonial-placeholder p{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+    .testimonial-placeholder a{color:var(--cyan);text-decoration:none;}
+
+    /* CTA ROW */
+    .cta-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding-top:2.5rem;}
+    .cta-row p{font-size:0.9rem;color:var(--off);}
+    .btn{display:inline-flex;align-items:center;gap:0.45rem;background:var(--cyan);color:#0e1117;font-size:0.88rem;font-weight:600;padding:0.65rem 1.3rem;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.18s,box-shadow 0.18s;}
+    .btn:hover{opacity:0.88;box-shadow:0 4px 18px var(--cyan-glow);}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.45s ease,transform 0.45s ease;}
+    .reveal.in{opacity:1;transform:none;}
+
+    footer{border-top:1px solid var(--border);background:var(--surface);padding:1.8rem 2rem;}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:0.8rem;color:var(--muted);align-items:center;}
+    footer a{color:var(--off);text-decoration:none;}
+    footer a:hover{color:var(--cyan);}
+
+    @media(max-width:600px){
+      .nav-inner,.page{padding-left:1.25rem;padding-right:1.25rem;}
+      .team-grid,.values-grid,.photo-grid{grid-template-columns:1fr;}
+      .photo-item.wide{grid-column:1;}
+      .cta-row{flex-direction:column;align-items:flex-start;}
+      .footer-inner{flex-direction:column;align-items:center;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" style="text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:32px;width:auto;display:block;"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+    </a>
+    <a href="/" class="nav-back">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </a>
+  </div>
+</nav>
+
+<main>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-top reveal">
+    <div class="page-label">Tekpair · Cohoes, NY</div>
+    <h1 class="page-title">Our Story</h1>
+    <p class="page-intro">We are two young locals from Cohoes building something real.</p>
+  </div>
+
+  <!-- MISSION -->
+  <div class="section reveal">
+    <div class="sec-label">Our Mission</div>
+    <div class="sec-title">What we're here to do</div>
+    <p class="body-text">Technology should work for people — not the other way around. Too many people in our community have devices sitting in boxes, Wi-Fi that doesn't reach half the house, or computers running so slow they've given up using them. And the options for help are either expensive, slow, or both.</p>
+    <p class="body-text">Our mission is simple: bring real, honest, in-person tech help directly to people in the Capital Region — at a price that makes sense, from people they can actually trust.</p>
+  </div>
+
+  <!-- OUR STORY -->
+  <div class="section reveal">
+    <div class="sec-label">Our Story</div>
+    <div class="sec-title">How Tekpair started</div>
+    <p class="body-text">Honestly? We were broke students trying to find a real path forward. Connor and Kamryn both knew they wanted to build something — not just work a job. The first idea was a local event crew. That didn't pan out. But technology felt right. It was something we both understood, something people around us clearly needed help with, and something we could actually start with very little.</p>
+    <p class="body-text">We built Tekpair with what we had left from work. We spent hours studying ads, figuring out what to post, doing outreach, putting up flyers across Cohoes and the Capital Region. No investors. No funding. Just two people grinding to make something out of nothing.</p>
+    <p class="body-text">This is the result — our company. We're incredibly proud of what we've built and genuinely happy to serve our neighbors at a price that actually makes sense. Because let's be honest: nobody should have to pay $100+ just to get a security camera set up.</p>
+  </div>
+
+  <!-- THE TEAM -->
+  <div class="section reveal">
+    <div class="sec-label">The Team</div>
+    <div class="sec-title">Who shows up at your door</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="/about/connor.jpg" alt="Connor, founder of Tekpair" class="team-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="team-photo-placeholder" style="display:none;"><svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <div class="team-info">
+          <div class="team-name">Connor</div>
+          <div class="team-role">Founder &amp; Owner</div>
+          <div class="team-bio">The idea and the engine behind Tekpair. Connor manages bookings, runs the ads, handles client communication, and keeps everything moving. The brain of the operation — and the first call you'll get.</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="/about/kam.jpg" alt="Kamryn, co-founder of Tekpair" class="team-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="team-photo-placeholder" style="display:none;"><svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <div class="team-info">
+          <div class="team-name">Kamryn</div>
+          <div class="team-role">Co-Founder</div>
+          <div class="team-bio">Brings deep technical knowledge from a background in robotics and mathematics. Great at identifying problems early and solving them before they become bigger issues. The kind of person you want on-site.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE WORK -->
+  <div class="section reveal">
+    <div class="sec-label">How We Work</div>
+    <div class="sec-title">What you can expect</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="value-title">Flat rates, confirmed upfront</div>
+        <div class="value-body">You know exactly what you're paying before we start. No hourly billing, no diagnostic fees, no surprise charges.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="value-title">Same-day, most days</div>
+        <div class="value-body">We don't book weeks out. Check the calendar and you'll usually find something today or tomorrow.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="value-title">Always a trusted crew</div>
+        <div class="value-body">Not a contractor we've never met. The founders show up — every time. You can always reach the same people who did the job.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="value-title">7-day satisfaction guarantee</div>
+        <div class="value-body">If something we set up stops working within 7 days through our fault, we come back and fix it free. No arguments.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IN THE COMMUNITY -->
+  <div class="section reveal">
+    <div class="sec-label">In the Community</div>
+    <div class="sec-title">Getting Tekpair out there</div>
+    <p class="body-text">We started by hitting the streets in Cohoes — putting up flyers, knocking on community boards, showing up. This is a local business built for local people, and we're treating it that way from day one.</p>
+    <div class="photo-grid">
+      <div class="photo-item wide">
+        <img src="/about/flyer-cohoes.jpg" alt="Tekpair flyer on the Cohoes community board at Cumberland Farms" onerror="this.style.height='200px';this.style.background='#1e2029';this.alt=''"/>
+        <div class="photo-caption">First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave</div>
+      </div>
+      <div class="photo-item">
+        <img src="/about/board-closeup.jpg" alt="Tekpair flyer on the community board" onerror="this.style.height='200px';this.style.background='#1e2029';this.alt=''"/>
+        <div class="photo-caption">Right there on the board.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section reveal">
+    <div class="sec-label">What Clients Say</div>
+    <div class="sec-title">Real reviews from real people</div>
+    <p class="body-text" style="margin-bottom:1.4rem;">We're just getting started, but every review we earn means everything to us. Here's what people are saying.</p>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial">
+        <div class="testimonial-source">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testimonial-text">Great work and affordable! Helped us with our website, security cameras and hooking up all of our electronics. Will definitely use these guys again!</div>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">JG</div>
+          <div>
+            <div class="testimonial-name">Jennifer G.</div>
+            <div class="testimonial-meta">Owner, Sweet Elevation Bakery · Latham, NY</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-source">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </div>
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testimonial-text">Highly Recommend! 5 stars!</div>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">OA</div>
+          <div>
+            <div class="testimonial-name">Olivia A.</div>
+            <div class="testimonial-meta">Facebook Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-placeholder">
+        <svg width="28" height="28" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 0.75rem;display:block;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <p><a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener">Leave us a review on Facebook</a> or <a href="https://share.google/ODqzmQhFldM4bXHaO" target="_blank" rel="noopener">Google</a> — it means the world to a small local business just getting started.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-row reveal">
+    <p>Ready to get something fixed? We're usually available same-day.</p>
+    <a href="/#booking" class="btn">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book a Visit
+    </a>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);display:flex;align-items:center;gap:0.5rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:28px;width:auto;display:block;"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+    </div>
+    <span>Cohoes, NY · Capital Region</span>
+    <span><a href="/faq/">FAQ</a> · <a href="/policies/">Policies</a> · <a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/tekpairny" target="_blank" rel="noopener">Instagram</a></span>
+    <span>© 2026 Tekpair. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 55); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
