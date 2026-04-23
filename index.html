@@ -1101,23 +1101,17 @@
           </div>
         </div>
 
-        <!-- DISCOUNT SELECTOR -->
-        <div class="est-group">
-          <div class="est-group-label">Apply a Discount</div>
-          <div class="est-items" id="disc-options">
-            <div class="est-disc-opt est-item checked" data-pct="0" style="border-color:var(--cyan);background:rgba(41,212,245,0.06);">
-              <div class="est-cb" style="background:var(--cyan);border-color:var(--cyan);"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div class="est-info"><div class="est-name">No discount</div></div>
-            </div>
-            <div class="est-disc-opt est-item" data-pct="15">
-              <div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div class="est-info"><div class="est-name">First-Time Client — 15% off</div><div class="est-sub">New clients only · 1 per household</div></div>
-            </div>
-            <div class="est-disc-opt est-item" data-pct="25">
-              <div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div class="est-info"><div class="est-name">Returning Client — 25% off</div><div class="est-sub">Book again within 7 days of your first visit</div></div>
-            </div>
-          </div>
+<!-- DISCOUNT SELECTOR -->
+<div class="est-group">
+  <div class="est-group-label">Discounts</div>
+  <div style="font-size:0.78rem;color:var(--muted);line-height:1.9;padding:0.5rem 0;">
+    Select one if it applies — discounts cannot be combined.
+    <br>
+    <span class="est-disc-opt" data-pct="15" style="cursor:pointer;color:var(--off);transition:color 0.15s;">First-Time Client — 15% off your first booking</span>
+    <br>
+    <span class="est-disc-opt" data-pct="25" style="cursor:pointer;color:var(--off);transition:color 0.15s;">Returning Client — 25% off if booking again within 7 days</span>
+  </div>
+</div>
         </div>
 
       </div>
@@ -1410,60 +1404,70 @@ let activePct = 0;
 
 discOpts.forEach(opt => {
   opt.addEventListener('click', () => {
-    activePct = parseInt(opt.dataset.pct);
-    discOpts.forEach(o => {
-      o.classList.remove('checked');
-      o.style.borderColor = 'var(--border)';
-      o.style.background = 'var(--card)';
-      o.querySelector('.est-cb').style.background = 'var(--surface)';
-      o.querySelector('.est-cb').style.borderColor = 'var(--border-md)';
-      o.querySelector('.est-cb svg').style.opacity = '0';
-    });
-    opt.classList.add('checked');
-    opt.style.borderColor = 'var(--cyan)';
-    opt.style.background = 'rgba(41,212,245,0.06)';
-    opt.querySelector('.est-cb').style.background = 'var(--cyan)';
-    opt.querySelector('.est-cb').style.borderColor = 'var(--cyan)';
-    opt.querySelector('.est-cb svg').style.opacity = '1';
+    const pct = parseInt(opt.dataset.pct);
+    // Toggle off if already active
+    if (activePct === pct) {
+      activePct = 0;
+      discOpts.forEach(o => o.style.fontWeight = '400');
+      opt.style.fontWeight = '400';
+    } else {
+      activePct = pct;
+      discOpts.forEach(o => { o.style.fontWeight = '400'; o.style.color = 'var(--muted)'; });
+      opt.style.fontWeight = '600';
+      opt.style.color = 'var(--cyan)';
+    }
     calcEstimator();
   });
 });
 
 function calcEstimator() {
-  let subtotal = 0, count = 0;
+  let subtotal = 0, travelFee = 0, count = 0;
   estSelected.querySelectorAll('.est-line').forEach(el => el.remove());
+
   estItems.forEach(i => {
     if (i.classList.contains('checked')) {
-      subtotal += parseInt(i.dataset.price);
-      count++;
+      const price = parseInt(i.dataset.price);
+      const name = i.dataset.name;
+      // Track travel fee separately — doesn't count toward multi-service
+      if (name.includes('Out-of-Area')) {
+        travelFee += price;
+      } else {
+        subtotal += price;
+        count++;
+      }
       const div = document.createElement('div');
       div.className = 'est-line';
-      div.innerHTML = `<span class="est-line-name">${i.dataset.name}</span><span class="est-line-price">$${i.dataset.price}</span>`;
+      div.innerHTML = `<span class="est-line-name">${name}</span><span class="est-line-price">$${price}</span>`;
       estSelected.appendChild(div);
     }
   });
-  estEmpty.style.display = count ? 'none' : 'block';
 
-  let pct = activePct;
+  estEmpty.style.display = (count === 0 && travelFee === 0) ? 'block' : 'none';
+
+  // Discount logic — travel fee never discounted, discounts never combined
+  let pct = 0;
   let msg = '';
 
-  if (activePct === 0 && subtotal >= 150) {
-    pct = 10;
-    msg = '✓ Multi-service discount applied — 10% off';
-  } else if (activePct === 15) {
+  if (activePct === 15) {
+    pct = 15;
     msg = '✓ First-time client discount — 15% off applied';
   } else if (activePct === 25) {
+    pct = 25;
     msg = '✓ Returning client discount — 25% off applied';
-  } else if (count >= 2 && subtotal < 150 && activePct === 0) {
+  } else if (activePct === 0 && subtotal >= 150) {
+    pct = 10;
+    msg = '✓ Multi-service discount applied — 10% off';
+  } else if (activePct === 0 && count >= 2 && subtotal < 150) {
     msg = '✓ Multi-service visit — 10% discount unlocks at $150+';
   }
 
-  const final = pct > 0 ? Math.round(subtotal * (1 - pct / 100)) : subtotal;
+  const discountedSubtotal = pct > 0 ? Math.round(subtotal * (1 - pct / 100)) : subtotal;
+  const final = discountedSubtotal + travelFee;
 
-  if (count && pct > 0) {
-    estTotal.innerHTML = `<span style="text-decoration:line-through;opacity:0.4;font-size:1.1rem;margin-right:0.3rem;">$${subtotal}</span>$${final}`;
+  if ((count > 0 || travelFee > 0) && pct > 0) {
+    estTotal.innerHTML = `<span style="text-decoration:line-through;opacity:0.4;font-size:1.1rem;margin-right:0.3rem;">$${subtotal + travelFee}</span>$${final}`;
   } else {
-    estTotal.textContent = '$' + subtotal.toLocaleString();
+    estTotal.textContent = '$' + (subtotal + travelFee).toLocaleString();
   }
 
   estDiscountBanner.style.display = msg ? 'block' : 'none';
