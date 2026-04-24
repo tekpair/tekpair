@@ -77,13 +77,21 @@
     .value-title{font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:0.25rem;}
     .value-body{font-size:0.78rem;color:var(--off);line-height:1.6;}
 
-    /* COMMUNITY PHOTOS */
-    .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.4rem;}
-    .photo-item{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
-    .photo-item img{width:100%;height:200px;object-fit:cover;display:block;}
-    .photo-item.wide{grid-column:1/-1;}
-    .photo-item.wide img{height:420px;object-fit:cover;object-position:center center;}
-    .photo-caption{font-size:0.72rem;color:var(--muted);padding:0.5rem 0.75rem;background:var(--card);}
+/* GALLERY CAROUSEL */
+.gallery{position:relative;margin-top:1.4rem;}
+.gallery-viewport{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);}
+.gallery-track{display:flex;transition:transform 0.35s cubic-bezier(0.33,1,0.68,1);will-change:transform;}
+.gallery-slide{flex:0 0 100%;min-width:0;}
+.gallery-slide img{width:100%;height:420px;object-fit:cover;object-position:center center;display:block;background:var(--surface);user-select:none;-webkit-user-drag:none;}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(17,19,24,0.82);backdrop-filter:blur(8px);border:1px solid var(--border-md);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;z-index:2;}
+.gallery-nav:hover{background:var(--cyan);color:#0e1117;border-color:var(--cyan);}
+.gallery-prev{left:0.75rem;}
+.gallery-next{right:0.75rem;}
+.gallery-caption{font-size:0.8rem;color:var(--off);padding:0.85rem 0.25rem 0;min-height:2.5rem;line-height:1.55;}
+.gallery-dots{display:flex;justify-content:center;gap:0.5rem;margin-top:0.75rem;}
+.gallery-dot{width:8px;height:8px;border-radius:50%;background:var(--border-md);border:none;cursor:pointer;padding:0;transition:background 0.18s,transform 0.18s;}
+.gallery-dot:hover{background:var(--off);}
+.gallery-dot.active{background:var(--cyan);transform:scale(1.2);}
 
     /* TESTIMONIALS */
     .testimonials-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.4rem;}
@@ -122,6 +130,10 @@
       .photo-item.wide{grid-column:1;}
       .cta-row{flex-direction:column;align-items:flex-start;}
       .footer-inner{flex-direction:column;align-items:center;text-align:center;}
+      .gallery-slide img{height:300px;}
+.gallery-nav{width:36px;height:36px;}
+.gallery-prev{left:0.5rem;}
+.gallery-next{right:0.5rem;}
     }
   </style>
 </head>
@@ -220,22 +232,31 @@
     </div>
   </div>
 
-  <!-- IN THE COMMUNITY -->
-  <div class="section reveal">
-    <div class="sec-label">In the Community</div>
-    <div class="sec-title">Getting Tekpair out there</div>
-    <p class="body-text">We started by hitting the streets in Cohoes — putting up flyers, knocking on community boards, showing up. This is a local business built for local people, and we're treating it that way from day one.</p>
-    <div class="photo-grid">
-      <div class="photo-item wide">
-        <img src="/about/flyer-cohoes.jpg" alt="Tekpair flyer on the Cohoes community board at Cumberland Farms" onerror="this.style.height='200px';this.style.background='#1e2029';this.alt=''"/>
-        <div class="photo-caption">First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave</div>
+<!-- GALLERY -->
+<div class="section reveal">
+  <div class="sec-label">Gallery</div>
+  <p class="body-text">We started by hitting the streets in Cohoes — putting up flyers, knocking on community boards, showing up. This is a local business built for local people, and we're treating it that way from day one.</p>
+  <div class="gallery" id="gallery">
+    <div class="gallery-viewport">
+      <div class="gallery-track">
+        <div class="gallery-slide" data-caption="First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave">
+          <img src="/about/flyer-cohoes.jpg" alt="Tekpair flyer on the Cohoes community board at Cumberland Farms"/>
+        </div>
+        <div class="gallery-slide" data-caption="Right there on the board.">
+          <img src="/about/board-closeup.jpg" alt="Tekpair flyer on the community board close-up"/>
+        </div>
       </div>
-      <div class="photo-item">
-        <img src="/about/board-closeup.jpg" alt="Tekpair flyer on the community board" onerror="this.style.height='200px';this.style.background='#1e2029';this.alt=''"/>
-        <div class="photo-caption">Right there on the board.</div>
-      </div>
+      <button class="gallery-nav gallery-prev" aria-label="Previous image" type="button">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gallery-nav gallery-next" aria-label="Next image" type="button">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
+    <div class="gallery-caption">First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave</div>
+    <div class="gallery-dots"></div>
   </div>
+</div>
 
   <!-- TESTIMONIALS -->
   <div class="section reveal">
@@ -343,6 +364,56 @@
     });
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // GALLERY CAROUSEL
+(function(){
+  const gallery = document.getElementById('gallery');
+  if(!gallery) return;
+  const track = gallery.querySelector('.gallery-track');
+  const slides = Array.from(gallery.querySelectorAll('.gallery-slide'));
+  const captionEl = gallery.querySelector('.gallery-caption');
+  const dotsEl = gallery.querySelector('.gallery-dots');
+  const prevBtn = gallery.querySelector('.gallery-prev');
+  const nextBtn = gallery.querySelector('.gallery-next');
+  let index = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(i){
+    index = (i + slides.length) % slides.length;
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    captionEl.textContent = slides[index].dataset.caption || '';
+    dotsEl.querySelectorAll('.gallery-dot').forEach((d, di) => {
+      d.classList.toggle('active', di === index);
+    });
+  }
+
+  prevBtn.addEventListener('click', () => goTo(index - 1));
+  nextBtn.addEventListener('click', () => goTo(index + 1));
+
+  // Touch swipe
+  let startX = 0, deltaX = 0, touching = false;
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; touching = true; deltaX = 0; }, {passive:true});
+  track.addEventListener('touchmove', (e) => { if(touching) deltaX = e.touches[0].clientX - startX; }, {passive:true});
+  track.addEventListener('touchend', () => {
+    if(touching && Math.abs(deltaX) > 40) goTo(index + (deltaX < 0 ? 1 : -1));
+    touching = false;
+  });
+
+  // Keyboard arrows
+  gallery.tabIndex = 0;
+  gallery.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); goTo(index - 1); }
+    if(e.key === 'ArrowRight'){ e.preventDefault(); goTo(index + 1); }
+  });
+})();
 </script>
 </body>
 </html>
