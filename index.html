@@ -463,6 +463,13 @@
 .est-line-price{font-size:0.78rem;color:var(--cyan);font-weight:600;white-space:nowrap;}
 @media(max-width:760px){.est-outer{grid-template-columns:1fr!important;}.est-outer>div:last-child{position:static!important;}}
 
+    /* ── ACCORDION ── */
+    .est-group summary.est-group-label { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; }
+    .est-group summary.est-group-label::after { content:'＋'; font-size:0.9rem; color:var(--cyan); transition:transform 0.2s; }
+    .est-group[open] summary.est-group-label::after { content:'−'; }
+    .est-group summary.est-group-label::-webkit-details-marker { display:none; }
+    .est-group .est-items { padding-top:0.5rem; }
+
     /* ── PAYMENT ── */
     .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.5rem; }
     .pay-card {
@@ -1036,10 +1043,10 @@
     </div>
     <div style="display:grid;grid-template-columns:1fr 280px;gap:2rem;align-items:start;" class="est-outer reveal">
 
-      <!-- SERVICE CHECKBOXES -->
+<!-- SERVICE CHECKBOXES -->
       <div>
-        <div class="est-group">
-          <div class="est-group-label">Wi-Fi &amp; Network</div>
+        <details class="est-group" open>
+          <summary class="est-group-label">Wi-Fi &amp; Network</summary>
           <div class="est-items">
             <div class="est-item" data-price="75" data-name="Basic Router Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Basic Router Setup</div><div class="est-sub">Install and configure a single router</div></div><div class="est-price">$75</div></div>
             <div class="est-item" data-price="89" data-name="Modem + Router Combo"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Modem + Router Combo Setup</div><div class="est-sub">Full setup of both modem and router</div></div><div class="est-price">$89</div></div>
@@ -1047,9 +1054,9 @@
             <div class="est-item" data-price="65" data-name="Wi-Fi Extender Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Wi-Fi Extender / Booster Setup</div><div class="est-sub">Install and configure a range extender</div></div><div class="est-price">$65</div></div>
             <div class="est-item" data-price="120" data-name="Mesh Network Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Mesh Network Setup (2–3 nodes)</div><div class="est-sub">Full mesh system with placement strategy</div></div><div class="est-price">$120</div></div>
           </div>
-        </div>
-        <div class="est-group">
-          <div class="est-group-label">Smart Home Devices</div>
+        </details>
+        <details class="est-group">
+          <summary class="est-group-label">Smart Home Devices</summary>
           <div class="est-items">
             <div class="est-item" data-price="49" data-name="Smart Bulb Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart Bulb Setup (up to 4)</div><div class="est-sub">Pair bulbs to app or voice assistant</div></div><div class="est-price">$49</div></div>
             <div class="est-item" data-price="49" data-name="Smart Plug Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart Plug Setup (up to 4)</div><div class="est-sub">Configure schedules and voice control</div></div><div class="est-price">$49</div></div>
@@ -1057,26 +1064,26 @@
             <div class="est-item" data-price="49" data-name="Alexa / Echo Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Alexa / Echo Device Setup</div><div class="est-sub">Connect to Wi-Fi, link Amazon account</div></div><div class="est-price">$49</div></div>
             <div class="est-item" data-price="49" data-name="Google Home / Nest Hub Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Google Home / Nest Hub Setup</div><div class="est-sub">Link accounts, connect devices, routines</div></div><div class="est-price">$49</div></div>
           </div>
-        </div>
-        <div class="est-group">
-          <div class="est-group-label">Smart TV &amp; Streaming</div>
+        </details>
+        <details class="est-group">
+          <summary class="est-group-label">Smart TV &amp; Streaming</summary>
           <div class="est-items">
             <div class="est-item" data-price="49" data-name="Smart TV Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart TV Initial Setup</div><div class="est-sub">Wi-Fi, streaming accounts, apps, walkthrough</div></div><div class="est-price">$49</div></div>
             <div class="est-item" data-price="49" data-name="Streaming Device Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Streaming Device Setup</div><div class="est-sub">Fire Stick, Roku, Apple TV, or Chromecast</div></div><div class="est-price">$49</div></div>
             <div class="est-item" data-price="75" data-name="Cord-Cutting Consultation"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Cord-Cutting Consultation &amp; Setup</div><div class="est-sub">Review cable bill, recommend and set up replacement</div></div><div class="est-price">$75</div></div>
           </div>
-        </div>
-        <div class="est-group">
-          <div class="est-group-label">Security Cameras &amp; Doorbells</div>
+        </details>
+        <details class="est-group">
+          <summary class="est-group-label">Security Cameras &amp; Doorbells</summary>
           <div class="est-items">
             <div class="est-item" data-price="69" data-name="Single Camera Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Single Camera Setup</div><div class="est-sub">Mount, connect, configure alerts and app</div></div><div class="est-price">$69</div></div>
             <div class="est-item" data-price="110" data-name="2-Camera System"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">2-Camera System</div><div class="est-sub">Full setup, mounting, app configuration</div></div><div class="est-price">$110</div></div>
             <div class="est-item" data-price="149" data-name="3-Camera System"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">3-Camera System</div><div class="est-sub">Front, back, and side coverage</div></div><div class="est-price">$149</div></div>
             <div class="est-item" data-price="69" data-name="Video Doorbell Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Video Doorbell Setup</div><div class="est-sub">Ring, Nest, or Eufy — full configuration</div></div><div class="est-price">$69</div></div>
           </div>
-        </div>
-        <div class="est-group">
-          <div class="est-group-label">Computer Setup &amp; Cleanup</div>
+        </details>
+        <details class="est-group">
+          <summary class="est-group-label">Computer Setup &amp; Cleanup</summary>
           <div class="est-items">
             <div class="est-item" data-price="79" data-name="New Computer Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">New Computer Setup</div><div class="est-sub">Unbox, configure, Wi-Fi, account, updates</div></div><div class="est-price">$79</div></div>
             <div class="est-item" data-price="79" data-name="Computer Tune-Up"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Computer Tune-Up &amp; Speed Optimization</div><div class="est-sub">Clean up startup, junk files, update drivers</div></div><div class="est-price">$79</div></div>
@@ -1088,16 +1095,13 @@
             <div class="est-item" data-price="49" data-name="Password Reset"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Password Reset &amp; Account Recovery</div><div class="est-sub">Windows, Mac, Google, or Microsoft accounts</div></div><div class="est-price">$49</div></div>
             <div class="est-item" data-price="79" data-name="Hard Drive Backup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Hard Drive Backup</div><div class="est-sub">Back up files to external drive or cloud</div></div><div class="est-price">$79</div></div>
           </div>
-        </div>
-
-        <!-- EXTRAS -->
-        <div class="est-group">
-          <div class="est-group-label">Extras</div>
+        </details>
+        <details class="est-group">
+          <summary class="est-group-label">Extras</summary>
           <div class="est-items">
             <div class="est-item" data-price="50" data-name="Out-of-Area Travel Fee (35–50 mi)"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Out-of-Area Travel Fee</div><div class="est-sub">For locations 35–50 miles from Cohoes — added at our discretion</div></div><div class="est-price">$50</div></div>
           </div>
-        </div>
-
+        </details>
       </div>
 
       <!-- SIDEBAR -->
@@ -1262,27 +1266,6 @@
         <strong style="color:var(--white);display:block;margin-bottom:0.2rem;">How payment works</strong>
         Payment is due on-site when the job is complete — no invoices, no delayed payments. For jobs over $150 we may ask for a 50% deposit upfront via Card or Zelle to confirm your booking. Need to cancel? Please give us 24 hours notice. See our <a href="/policies/" style="color:var(--cyan);text-decoration:none;font-weight:500;">full policies</a> for details.
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" aria-labelledby="cta-heading">
-  <div class="cta-box reveal">
-    <div class="section-label" style="justify-content:center;">
-      <div class="section-label-line"></div>Ready to Go
-    </div>
-    <h2 class="section-title" id="cta-heading" style="text-align:center;">Let's get you<br/>set up right.</h2>
-    <p>You're moments away.</p>
-    <div class="cta-actions">
-      <a href="#booking" class="btn-primary">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Book a Job
-      </a>
-      <a href="mailto:connor@tekpair.com?subject=Tekpair%20Inquiry" target="_blank" rel="noopener" class="btn-outline">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Email Us
-      </a>
     </div>
   </div>
 </section>
