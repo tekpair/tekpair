@@ -438,6 +438,7 @@
     @media(max-width:640px){
       #booking-selector { grid-template-columns: 1fr !important; }
       .form-group + .form-group { margin-top: 0; }
+      #form-inhome, #form-remote { scroll-margin-top: 5.5rem; }
     }
     .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .booking-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.8rem 0 2.2rem; }
@@ -1636,6 +1637,10 @@ estItems.forEach(item => {
     document.getElementById('form-remote').style.display = type === 'remote' ? 'block' : 'none';
     document.getElementById('btn-inhome').classList.toggle('active', type === 'inhome');
     document.getElementById('btn-remote').classList.toggle('active', type === 'remote');
+    const formId = type === 'inhome' ? 'form-inhome' : 'form-remote';
+    setTimeout(() => {
+      document.getElementById(formId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   }
   function resetBookingForm() {
     document.getElementById('form-inhome').style.display = 'none';
