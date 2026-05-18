@@ -1203,84 +1203,108 @@
           By submitting this form, you authorize Tekpair to photograph your setup for potential marketing use. All sensitive information (names, addresses, screens) will be blurred unless written approval is signed by both parties. Tekpair is not liable for any pre-existing damage to devices or issues caused by your ISP or service provider — please contact them directly for those issues. Same-day cancellations incur a $15 fee. No-shows without contact incur a $25 fee.
         </div>
 
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
-          <input type="hidden" name="Type" value="In-Home Visit"/>
+<form action="https://formspree.io/f/mykvynvr" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
+  <input type="hidden" name="Type" value="In-Home Visit"/>
+  <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-            <div class="form-group">
-              <label class="form-label">First Name *</label>
-              <input type="text" name="First Name" required class="form-input" placeholder="Jane"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Last Name *</label>
-              <input type="text" name="Last Name" required class="form-input" placeholder="Smith"/>
-            </div>
-          </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <div class="form-group">
+      <label class="form-label">First Name *</label>
+      <input type="text" name="First Name" required class="form-input" placeholder="Jane"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Last Name *</label>
+      <input type="text" name="Last Name" required class="form-input" placeholder="Smith"/>
+    </div>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Email Address *</label>
-            <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Email Address *</label>
+    <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Phone Number *</label>
-            <input type="tel" name="Phone" required class="form-input" placeholder="(518) 000-0000"/>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Phone Number *</label>
+    <input type="tel" name="Phone" required class="form-input" placeholder="(518) 000-0000"/>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Home Address *</label>
-            <input type="text" name="Address" required class="form-input" placeholder="123 Main St, Troy, NY 12180"/>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Home Address *</label>
+    <input type="text" name="Address" required class="form-input" placeholder="123 Main St, Troy, NY 12180"/>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Service Needed *</label>
-            <select name="Service" required class="form-input">
-              <option value="" disabled selected>Select a service…</option>
-              <option>Wi-Fi &amp; Network</option>
-              <option>Smart Home Devices (Alexa, Google Home, etc.)</option>
-              <option>Smart TV or Streaming</option>
-              <option>Security Camera / Doorbells</option>
-              <option>Computer Setup or Cleanup</option>
-              <option>Other</option>
-            </select>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Service Needed *</label>
+    <select name="Service" required class="form-input">
+      <option value="" disabled selected>Select a service…</option>
+      <option>Wi-Fi &amp; Network</option>
+      <option>Smart Home Devices (Alexa, Google Home, etc.)</option>
+      <option>Smart TV or Streaming</option>
+      <option>Security Camera / Doorbells</option>
+      <option>Computer Setup or Cleanup</option>
+      <option>Other</option>
+    </select>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Briefly describe the issue *</label>
-            <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My Wi-Fi keeps dropping in the back of the house…" style="resize:vertical;"></textarea>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Briefly describe the issue *</label>
+    <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My Wi-Fi keeps dropping in the back of the house…" style="resize:vertical;"></textarea>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Preferred Payment Method *</label>
-            <select name="Payment Method" required class="form-input">
-              <option value="" disabled selected>Select a method…</option>
-              <option>Cash</option>
-              <option>Card</option>
-              <option>Zelle</option>
-              <option>Cash App</option>
-              <option>Apple Pay</option>
-            </select>
-          </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <div class="form-group">
+      <label class="form-label">Preferred Date *</label>
+      <input type="date" name="Preferred Date" required class="form-input" id="inhome-date"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Preferred Time *</label>
+      <select name="Preferred Time" required class="form-input">
+        <option value="" disabled selected>Select a time…</option>
+        <option>8:00 AM</option>
+        <option>9:00 AM</option>
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>12:00 PM</option>
+        <option>1:00 PM</option>
+        <option>2:00 PM</option>
+        <option>3:00 PM</option>
+        <option>4:00 PM</option>
+        <option>5:00 PM</option>
+      </select>
+    </div>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">How did you hear about us?</label>
-            <select name="Referral Source" class="form-input">
-              <option value="" disabled selected>Select one…</option>
-              <option>Facebook</option>
-              <option>Word of Mouth</option>
-              <option>Instagram</option>
-              <option>Nextdoor</option>
-              <option>Google Search</option>
-              <option>Sweet Elevation Bakery</option>
-              <option>Other</option>
-            </select>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Preferred Payment Method *</label>
+    <select name="Payment Method" required class="form-input">
+      <option value="" disabled selected>Select a method…</option>
+      <option>Cash</option>
+      <option>Card</option>
+      <option>Zelle</option>
+      <option>Cash App</option>
+      <option>Apple Pay</option>
+    </select>
+  </div>
 
-          <button type="submit" class="form-submit">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Submit Request
-          </button>
-        </form>
+  <div class="form-group">
+    <label class="form-label">How did you hear about us?</label>
+    <select name="Referral Source" class="form-input">
+      <option value="" disabled selected>Select one…</option>
+      <option>Facebook</option>
+      <option>Word of Mouth</option>
+      <option>Instagram</option>
+      <option>Nextdoor</option>
+      <option>Google Search</option>
+      <option>Sweet Elevation Bakery</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <button type="submit" class="form-submit">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    Submit Request
+  </button>
+</form>
       </div>
     </div>
 
@@ -1304,43 +1328,67 @@
           Remote sessions require you to grant screen access to our technician so we can see and resolve your issue. You will be informed of every action taken. Sessions last approximately 15–30 minutes with a hard 30-minute cutoff. Payment must be completed before the session starts or it will be cancelled. No refunds on remote sessions once started. You'll receive a confirmation email with a payment link and meeting link — please join at least 5 minutes early.
         </div>
 
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
-          <input type="hidden" name="Type" value="Remote Session"/>
+<form action="https://formspree.io/f/mykvynvr" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
+  <input type="hidden" name="Type" value="Remote Session"/>
+  <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
-          <div class="form-group">
-            <label class="form-label">Full Name *</label>
-            <input type="text" name="Full Name" required class="form-input" placeholder="Jane Smith"/>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Full Name *</label>
+    <input type="text" name="Full Name" required class="form-input" placeholder="Jane Smith"/>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Email Address *</label>
-            <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Email Address *</label>
+    <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">Briefly describe the issue *</label>
-            <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My computer is running slow and keeps freezing…" style="resize:vertical;"></textarea>
-          </div>
+  <div class="form-group">
+    <label class="form-label">Briefly describe the issue *</label>
+    <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My computer is running slow and keeps freezing…" style="resize:vertical;"></textarea>
+  </div>
 
-          <div class="form-group">
-            <label class="form-label">How did you hear about us?</label>
-            <select name="Referral Source" class="form-input">
-              <option value="" disabled selected>Select one…</option>
-              <option>Facebook</option>
-              <option>Word of Mouth</option>
-              <option>Instagram</option>
-              <option>Nextdoor</option>
-              <option>Google Search</option>
-              <option>Sweet Elevation Bakery</option>
-              <option>Other</option>
-            </select>
-          </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <div class="form-group">
+      <label class="form-label">Preferred Date *</label>
+      <input type="date" name="Preferred Date" required class="form-input" id="remote-date"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Preferred Time *</label>
+      <select name="Preferred Time" required class="form-input">
+        <option value="" disabled selected>Select a time…</option>
+        <option>8:00 AM</option>
+        <option>9:00 AM</option>
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>12:00 PM</option>
+        <option>1:00 PM</option>
+        <option>2:00 PM</option>
+        <option>3:00 PM</option>
+        <option>4:00 PM</option>
+        <option>5:00 PM</option>
+      </select>
+    </div>
+  </div>
 
-          <button type="submit" class="form-submit">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Submit Request
-          </button>
-        </form>
+  <div class="form-group">
+    <label class="form-label">How did you hear about us?</label>
+    <select name="Referral Source" class="form-input">
+      <option value="" disabled selected>Select one…</option>
+      <option>Facebook</option>
+      <option>Word of Mouth</option>
+      <option>Instagram</option>
+      <option>Nextdoor</option>
+      <option>Google Search</option>
+      <option>Sweet Elevation Bakery</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <button type="submit" class="form-submit">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    Submit Request
+  </button>
+</form>
       </div>
     </div>
 
@@ -1554,6 +1602,33 @@ estItems.forEach(item => {
     calcEstimator();
   });
 });
+
+// Set min date to today dynamically and enforce rate limit
+  function setMinDates() {
+    const today = new Date().toISOString().split('T')[0];
+    const inhomeDate = document.getElementById('inhome-date');
+    const remoteDate = document.getElementById('remote-date');
+    if (inhomeDate) inhomeDate.min = today;
+    if (remoteDate) remoteDate.min = today;
+  }
+  setMinDates();
+
+  // Rate limiting — max 2 submissions per hour per browser
+  document.querySelectorAll('.form-submit').forEach(btn => {
+    btn.closest('form').addEventListener('submit', function(e) {
+      const key = 'tkp_last_submit';
+      const now = Date.now();
+      const stored = JSON.parse(localStorage.getItem(key) || '[]');
+      const recent = stored.filter(t => now - t < 3600000); // last 1 hour
+      if (recent.length >= 2) {
+        e.preventDefault();
+        alert('You\'ve submitted too many requests recently. Please wait before submitting again, or email us directly at connor@tekpair.com.');
+        return;
+      }
+      recent.push(now);
+      localStorage.setItem(key, JSON.stringify(recent));
+    });
+  });
 
 // Booking form toggle
   function showBookingForm(type) {
