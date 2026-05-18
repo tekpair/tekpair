@@ -440,6 +440,9 @@
       .form-group + .form-group { margin-top: 0; }
       #form-inhome, #form-remote { scroll-margin-top: 5.5rem; }
     }
+    @media(max-width:480px){
+      .form-date-row { grid-template-columns: 1fr !important; }
+    }
     .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .booking-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.8rem 0 2.2rem; }
     .bc-item { display: flex; align-items: center; gap: 0.9rem; font-size: 0.96rem; color: var(--off); }
@@ -1208,7 +1211,7 @@
   <input type="hidden" name="Type" value="In-Home Visit"/>
   <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
     <div class="form-group">
       <label class="form-label">First Name *</label>
       <input type="text" name="First Name" required class="form-input" placeholder="Jane"/>
@@ -1252,7 +1255,7 @@
     <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My Wi-Fi keeps dropping in the back of the house…" style="resize:vertical;"></textarea>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
     <div class="form-group">
       <label class="form-label">Preferred Date *</label>
       <input type="date" name="Preferred Date" required class="form-input" id="inhome-date"/>
