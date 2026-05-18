@@ -1643,6 +1643,13 @@ estItems.forEach(item => {
     document.getElementById('btn-inhome').classList.remove('active');
     document.getElementById('btn-remote').classList.remove('active');
   }
+
+  // Clear forms after submit to prevent resubmission
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function() {
+      setTimeout(() => this.reset(), 100);
+    });
+  });
 </script>
 </body>
 </html>
