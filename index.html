@@ -421,6 +421,7 @@
       font-family: 'DM Sans', sans-serif;
       outline: none; transition: border-color 0.18s;
       width: 100%;
+      color-scheme: dark;
     }
     .form-input:focus { border-color: var(--cyan); }
     .form-input option { background: var(--card); }
@@ -441,6 +442,9 @@
       #form-inhome, #form-remote { scroll-margin-top: 5.5rem; }
     }
     @media(max-width:480px){
+      .form-date-row { grid-template-columns: 1fr !important; }
+    }
+    @media(max-width:600px){
       .form-date-row { grid-template-columns: 1fr !important; }
     }
     .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
