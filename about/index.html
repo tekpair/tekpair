@@ -53,12 +53,6 @@
     .body-text{font-size:0.92rem;color:var(--off);line-height:1.85;margin-bottom:0.9rem;}
     .body-text:last-child{margin-bottom:0;}
 
-    /* MISSION STATEMENT */
-    .mission-box{background:var(--card);border:1px solid rgba(41,212,245,0.2);border-radius:var(--radius);padding:1.8rem 2rem;margin-top:1.4rem;position:relative;overflow:hidden;}
-    .mission-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);}
-    .mission-quote{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);line-height:1.45;letter-spacing:-0.01em;}
-    .mission-attr{font-size:0.78rem;color:var(--muted);margin-top:0.8rem;}
-
     /* TEAM */
     .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;}
     .team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.18s;}
@@ -69,13 +63,6 @@
     .team-name{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem;}
     .team-role{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
     .team-bio{font-size:0.82rem;color:var(--off);line-height:1.65;}
-
-    /* VALUES */
-    .values-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.4rem;}
-    .value-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;}
-    .value-icon{width:30px;height:30px;border-radius:7px;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.18);display:flex;align-items:center;justify-content:center;color:var(--cyan);margin-bottom:0.65rem;}
-    .value-title{font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:0.25rem;}
-    .value-body{font-size:0.78rem;color:var(--off);line-height:1.6;}
 
 /* GALLERY CAROUSEL */
 .gallery{position:relative;margin-top:1.4rem;}
@@ -161,14 +148,6 @@
     <p class="page-intro">We are just two young locals from the Capital Region.</p>
   </div>
 
-  <!-- MISSION -->
-  <div class="section reveal">
-    <div class="sec-label">Our Mission</div>
-    <div class="sec-title">What we're here to do</div>
-    <p class="body-text">Technology should work for people — not the other way around. Too many people in our community have devices sitting in boxes, Wi-Fi that doesn't reach half the house, or computers running so slow they've given up using them. And the options for help are either expensive, slow, or both.</p>
-    <p class="body-text">Our mission is simple: bring real, honest, in-person tech help directly to people in the Capital Region — at a price that makes sense, from people they can actually trust.</p>
-  </div>
-
   <!-- OUR STORY -->
   <div class="section reveal">
     <div class="sec-label">Our Story</div>
@@ -200,34 +179,6 @@
           <div class="team-role">Co-Founder &amp; Technical Lead</div>
           <div class="team-bio">The technical backbone of Tekpair. Kam handles hardware diagnostics, virus removal, device configuration, and anything that requires getting hands-on with the equipment. Background in robotics and mathematics — the guy you want on-site.</div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HOW WE WORK -->
-  <div class="section reveal">
-    <div class="sec-label">How We Work</div>
-    <div class="sec-title">What you can expect</div>
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="value-title">Flat rates, confirmed upfront</div>
-        <div class="value-body">You know exactly what you're paying before we start. No hourly billing, no diagnostic fees, no surprise charges.</div>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="value-title">Same-day, most days</div>
-        <div class="value-body">We don't book weeks out. Check the calendar and you'll usually find something today or tomorrow.</div>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="value-title">Always a trusted crew</div>
-        <div class="value-body">Not a contractor we've never met. The founders show up — every time. You can always reach the same people who did the job.</div>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="value-title">7-day satisfaction guarantee</div>
-        <div class="value-body">If something we set up stops working within 7 days through our fault, we come back and fix it free. No arguments.</div>
       </div>
     </div>
   </div>
@@ -273,6 +224,21 @@
 
                   <div class="testimonial">
         <div class="testimonial-source">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testimonial-text">Contacted Tekpair about problems with my printer. They arrived when they said they would, quickly diagnosed the problem and fixed it. Explained every step to me and how I could avoid the problem in the future. Great Company.</div>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">KB</div>
+          <div>
+            <div class="testimonial-name">Kerry B.</div>
+            <div class="testimonial-meta">Google Review · Albany, NY</div>
+          </div>
+        </div>
+      </div>
+
+                  <div class="testimonial">
+        <div class="testimonial-source">
           <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00B246"/><path d="M9 6v2.4L3.5 12l1.5 2.3L7 13.2V19h10v-5.8l2 1.3 1.5-2.3L12 6.3 11 7V6H9z" fill="#fff"/></svg>
         </div>
         <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
@@ -312,21 +278,6 @@
           <div>
             <div class="testimonial-name">Jennifer G.</div>
             <div class="testimonial-meta">Google Review · Latham, NY</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial">
-        <div class="testimonial-source">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </div>
-        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <div class="testimonial-text">Highly Recommend! 5 stars!</div>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">OA</div>
-          <div>
-            <div class="testimonial-name">Olivia A.</div>
-            <div class="testimonial-meta">Facebook Review · Wilmington, NC</div>
           </div>
         </div>
       </div>
