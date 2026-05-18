@@ -144,6 +144,11 @@
     .footer-bottom a { color:var(--off); text-decoration:none; }
     .footer-bottom a:hover { color:var(--cyan); }
 
+      @media(max-width:960px){
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-inner > :first-child { grid-column: 1 / -1; }
+    }
+
     @media(max-width:600px){
       .nav-inner,.page{padding-left:1.25rem;padding-right:1.25rem;}
       .team-grid,.values-grid,.photo-grid{grid-template-columns:1fr;}
