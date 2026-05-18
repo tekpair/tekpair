@@ -29,7 +29,7 @@
       --bg:#111318;--surface:#191c23;
       --border:rgba(255,255,255,0.09);
       --cyan:#29d4f5;--cyan-soft:rgba(41,212,245,0.13);--cyan-glow:rgba(41,212,245,0.28);
-      --white:#eef1f8;--off:#9aa3b8;--muted:#636b82;
+      --card:#1e2029;--white:#eef1f8;--off:#9aa3b8;--muted:#636b82;
     }
     html{scroll-behavior:smooth;font-size:15px;}
     body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden;}
@@ -69,12 +69,6 @@
     .policy-item:last-child{border-bottom:none;padding-bottom:0;}
     .pi-title{font-weight:600;font-size:0.92rem;color:var(--white);margin-bottom:0.25rem;}
     .pi-desc{font-size:0.86rem;color:var(--off);line-height:1.7;}
-
-    /* colored left rule to replace badges */
-    .policy-item.ok   { border-left: 2px solid #34c76f; padding-left: 1rem; }
-    .policy-item.warn { border-left: 2px solid #f5c842; padding-left: 1rem; }
-    .policy-item.no   { border-left: 2px solid #f55c5c; padding-left: 1rem; }
-    .policy-item.info { border-left: 2px solid var(--cyan); padding-left: 1rem; }
 
     /* CONTACT */
     .contact-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding-top:2.5rem;}
@@ -123,13 +117,18 @@
     }
     .footer-bottom a { color:var(--off); text-decoration:none; }
     .footer-bottom a:hover { color:var(--cyan); }
-
+    
+    @media(max-width:960px){
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-inner > :first-child { grid-column: 1 / -1; }
+    }
     @media(max-width:600px){
       .nav-inner{padding:1rem 1.25rem;}
       .page{padding:6.5rem 1.25rem 4rem;}
       .contact-row{flex-direction:column;align-items:flex-start;}
-      .footer-inner { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
+      .footer-inner { grid-template-columns: 1fr; max-width: 100%; padding-left: 1.25rem; padding-right: 1.25rem; }
+      .footer-bottom { text-align:center; }
+      footer { padding: 2rem 1.25rem 1.5rem; }
     }
   </style>
 </head>
