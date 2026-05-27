@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YBXCB2DFWV');
+
+    // ↓↓↓ GOOGLE ADS CONVERSION TRACKING ↓↓↓
+    gtag('event', 'conversion', {
+      'send_to': 'AW-XXXXXXXXX/YYYYYYYYY',
+      'value': 1.0,
+      'currency': 'USD'
+    });
+
+    gtag('event', 'booking_submitted', {
+      'event_category': 'Booking',
+      'event_label': new URLSearchParams(window.location.search).get('type') || 'unknown'
+    });
+  </script>
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Received — Tekpair</title>
+  <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
+  <meta name="description" content="Your Tekpair booking has been received. We'll confirm your appointment within 24 hours."/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #111318; --surface: #191c23; --card: #1e2029;
+      --border: rgba(255,255,255,0.09); --border-md: rgba(255,255,255,0.14);
+      --cyan: #29d4f5; --cyan-soft: rgba(41,212,245,0.13); --cyan-glow: rgba(41,212,245,0.28);
+      --white: #eef1f8; --off: #9aa3b8; --muted: #636b82;
+    }
+    html { font-size: 15px; }
+    body {
+      background: var(--bg); color: var(--white);
+      font-family: 'DM Sans', sans-serif; line-height: 1.65;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    nav {
+      padding: 1.2rem 2rem; border-bottom: 1px solid var(--border);
+      background: rgba(17,19,24,0.94); backdrop-filter: blur(18px);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.45rem;
+      text-decoration: none;
+    }
+    main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 4rem 2rem;
+    }
+    .card {
+      max-width: 580px; width: 100%;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3.5rem 3rem;
+      text-align: center; position: relative; overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), rgba(41,212,245,0.2));
+    }
+    .check-circle {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--cyan-soft); border: 2px solid var(--cyan);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.8rem;
+      color: var(--cyan);
+      animation: pop 0.5s 0.2s ease both;
+      box-shadow: 0 0 32px var(--cyan-glow);
+    }
+    h1 {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem; color: var(--white);
+    }
+    .lead {
+      font-size: 1.05rem; color: var(--off); line-height: 1.7;
+      margin-bottom: 2.2rem; max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .next-steps {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem 1.6rem;
+      text-align: left; margin-bottom: 2rem;
+    }
+    .next-steps-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 0.9rem;
+    }
+    .step {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 0.6rem 0;
+      font-size: 0.92rem; color: var(--off); line-height: 1.55;
+    }
+    .step:not(:last-child) { border-bottom: 1px solid var(--border); }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.25);
+      color: var(--cyan); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700;
+    }
+    .actions {
+      display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--cyan); color: #0e1117;
+      font-size: 0.95rem; font-weight: 600;
+      padding: 0.8rem 1.6rem; border-radius: 9px;
+      text-decoration: none;
+      transition: opacity 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+    .btn-primary:hover { opacity: 0.88; box-shadow: 0 4px 24px var(--cyan-glow); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--white);
+      font-size: 0.95rem; font-weight: 500;
+      padding: 0.8rem 1.6rem; border-radius: 9px;
+      border: 1.5px solid var(--border-md);
+      text-decoration: none;
+      transition: border-color 0.18s, color 0.18s, transform 0.18s;
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-1px); }
+    .contact-line {
+      margin-top: 1.6rem; padding-top: 1.6rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem; color: var(--muted);
+    }
+    .contact-line a { color: var(--cyan); text-decoration: none; font-weight: 500; }
+    .contact-line a:hover { text-decoration: underline; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem; text-align: center;
+      font-size: 0.82rem; color: var(--muted);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes pop {
+      0%   { opacity: 0; transform: scale(0.5); }
+      60%  { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @media (max-width: 640px) {
+      .card { padding: 2.5rem 1.8rem; }
+      .actions { flex-direction: column; }
+      .btn-primary, .btn-outline { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Tekpair home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:30px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+    </a>
+  </div>
+</nav>
+
+<main>
+  <div class="card">
+    <div class="check-circle">
+      <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <h1>You're all set!</h1>
+    <p class="lead">
+      Your booking request has been received. We'll review the details and confirm your appointment within 24 hours.
+    </p>
+
+    <div class="next-steps">
+      <div class="next-steps-title">What happens next</div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><strong style="color:var(--white);">We review your request</strong> — usually within a few hours.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><strong style="color:var(--white);">We confirm your appointment</strong> by email or text, with the flat-rate quote attached.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div><strong style="color:var(--white);">We show up on time</strong> and get the job done. Payment is collected on-site.</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="/" class="btn-primary">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Back to Home
+      </a>
+      <a href="/faq/" class="btn-outline">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Read our FAQ
+      </a>
+    </div>
+
+    <div class="contact-line">
+      Questions or need to change something? <br/>
+      Email <a href="mailto:connor@tekpair.com">connor@tekpair.com</a> or call <a href="tel:+15182796823">(518) 279-6823</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 Tekpair · Cohoes, NY · Capital Region
+</footer>
+
+</body>
+</html>
