@@ -8,18 +8,6 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-YBXCB2DFWV');
-
-    // ↓↓↓ GOOGLE ADS CONVERSION TRACKING ↓↓↓
-    gtag('event', 'conversion', {
-      'send_to': 'AW-XXXXXXXXX/YYYYYYYYY',
-      'value': 1.0,
-      'currency': 'USD'
-    });
-
-    gtag('event', 'booking_submitted', {
-      'event_category': 'Booking',
-      'event_label': new URLSearchParams(window.location.search).get('type') || 'unknown'
-    });
   </script>
 
   <meta charset="UTF-8"/>
