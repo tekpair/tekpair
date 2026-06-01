@@ -988,7 +988,7 @@ function renderResult(resultKey) {
   `).join('');
 
   // Build pre-filled booking URL
-  const bookingURL = `/#booking`;
+  const bookingURL = `/?service=${encodeURIComponent(svc.bookingValue)}#booking`;
 
   quizContent.innerHTML = `
     <div class="result-card">
