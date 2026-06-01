@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YBXCB2DFWV');
+  </script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find My Service — Tekpair | Capital Region, NY</title>
+  <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
+  <meta name="description" content="Not sure which Tekpair service you need? Take our quick 60-second quiz and we'll point you in the right direction."/>
+  <meta property="og:title" content="Find My Service — Tekpair"/>
+  <meta property="og:description" content="Not sure what tech help you need? Answer a few questions and we'll recommend the right service for you."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tekpair.com/find-my-service/"/>
+  <meta name="theme-color" content="#29d4f5"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* ── TOKENS (matched to homepage) ── */
+    :root {
+      --bg:        #111318;
+      --surface:   #191c23;
+      --card:      #1e2029;
+      --border:    rgba(255,255,255,0.09);
+      --border-md: rgba(255,255,255,0.14);
+      --cyan:      #29d4f5;
+      --cyan-soft: rgba(41,212,245,0.13);
+      --cyan-glow: rgba(41,212,245,0.28);
+      --white:     #eef1f8;
+      --off:       #9aa3b8;
+      --muted:     #636b82;
+      --radius:    14px;
+      --radius-sm: 8px;
+    }
+
+    /* ── BASE ── */
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute; top: -40px; left: 1rem;
+      background: var(--cyan); color: #111;
+      padding: 0.5rem 1rem; border-radius: 4px;
+      font-weight: 600; font-size: 0.85rem;
+      text-decoration: none; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0.5rem; }
+
+    /* ── NAV (matched to homepage) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(17,19,24,0.94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      gap: 1.5rem;
+    }
+    .nav-logo {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: 1.5rem; letter-spacing: -0.01em;
+      color: var(--white); text-decoration: none;
+      display: flex; align-items: center; gap: 0.45rem;
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex; gap: 0.25rem; list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--off); text-decoration: none;
+      padding: 0.45rem 0.85rem; border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+    .nav-links a.active { color: var(--cyan); }
+    .nav-book {
+      font-size: 0.92rem; font-weight: 600;
+      background: var(--cyan); color: #0e1117;
+      padding: 0.6rem 1.4rem; border-radius: 8px;
+      text-decoration: none; white-space: nowrap; flex-shrink:0;
+      transition: opacity 0.18s, box-shadow 0.18s;
+    }
+    .nav-book:hover { opacity: 0.88; box-shadow: 0 0 20px var(--cyan-glow); }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 6px; border-radius: 6px;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 1rem 2rem 1.5rem;
+      gap: 0.25rem;
+    }
+    .mobile-menu a {
+      font-size: 1.1rem; font-weight: 500; color: var(--off);
+      text-decoration: none; padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--cyan); font-weight: 600; }
+    .mobile-menu.open { display: flex; }
+
+    /* ── PAGE WRAPPER ── */
+    main {
+      padding-top: 5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ── HERO GLOW ── */
+    .hero-glow {
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse, rgba(41,212,245,0.055) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── PAGE INTRO ── */
+    .page-intro {
+      max-width: 720px; margin: 0 auto;
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+    .intro-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.25);
+      color: var(--cyan); font-size: 0.82rem; font-weight: 600;
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .intro-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--cyan); animation: blink 2.5s ease infinite;
+    }
+    .intro-title {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--white); margin-bottom: 1.2rem;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .intro-title em { font-style: normal; color: var(--cyan); }
+    .intro-sub {
+      font-size: 1.05rem; color: var(--off);
+      line-height: 1.7; max-width: 520px; margin: 0 auto 2rem;
+      animation: fadeUp 0.5s 0.16s ease both;
+    }
+    .intro-meta {
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      margin-top: 0.5rem;
+      animation: fadeUp 0.5s 0.24s ease both;
+    }
+    .meta-item {
+      display: flex; align-items: center; gap: 0.45rem;
+      font-size: 0.85rem; color: var(--muted);
+    }
+    .meta-item svg { color: var(--cyan); flex-shrink: 0; }
+
+    /* ── QUIZ CONTAINER ── */
+    .quiz-wrap {
+      max-width: 720px; margin: 0 auto;
+      padding: 1rem 2rem 2.5rem;
+      width: 100%;
+      position: relative; z-index: 1;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .progress-track {
+      flex: 1; height: 4px; background: var(--border);
+      border-radius: 4px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: var(--cyan);
+      border-radius: 4px; transition: width 0.4s ease;
+      width: 0%;
+    }
+    .progress-label {
+      font-size: 0.78rem; font-weight: 600; color: var(--muted);
+      white-space: nowrap; font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── QUESTION CARD ── */
+    .q-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      position: relative;
+      animation: slideUp 0.4s ease both;
+    }
+    .q-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), rgba(41,212,245,0.2));
+    }
+    .q-header {
+      padding: 1.8rem 1.8rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .q-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 0.7rem;
+    }
+    .q-eyebrow-line {
+      width: 20px; height: 2px; background: var(--cyan); border-radius: 2px;
+    }
+    .q-title {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 700;
+      font-size: 1.4rem; line-height: 1.25; letter-spacing: -0.01em;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .q-sub {
+      font-size: 0.92rem; color: var(--off); line-height: 1.65;
+    }
+    .q-body { padding: 1.5rem 1.8rem 1.8rem; }
+
+    /* ── ANSWER OPTIONS ── */
+    .options { display: flex; flex-direction: column; gap: 0.6rem; }
+    .opt-btn {
+      display: flex; align-items: center; gap: 0.95rem;
+      padding: 1.05rem 1.25rem; border-radius: 11px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--white); text-align: left;
+      font-family: 'DM Sans', sans-serif; font-size: 0.96rem; font-weight: 500;
+      cursor: pointer; transition: all 0.18s;
+      width: 100%;
+    }
+    .opt-btn:hover {
+      border-color: rgba(41,212,245,0.4);
+      background: var(--cyan-soft);
+      transform: translateX(2px);
+    }
+    .opt-btn.selected {
+      border-color: var(--cyan);
+      background: var(--cyan-soft);
+    }
+    .opt-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyan); flex-shrink: 0;
+    }
+    .opt-text { flex: 1; }
+    .opt-label { font-weight: 600; color: var(--white); font-size: 0.96rem; line-height: 1.3; }
+    .opt-desc { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
+    .opt-arrow {
+      color: var(--muted); flex-shrink: 0;
+      transition: color 0.18s, transform 0.18s;
+    }
+    .opt-btn:hover .opt-arrow {
+      color: var(--cyan); transform: translateX(3px);
+    }
+
+    /* ── NAV BUTTONS (BACK / SKIP) ── */
+    .q-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.5rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .q-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: transparent; border: none;
+      color: var(--muted); font-size: 0.88rem; font-weight: 500;
+      cursor: pointer; padding: 0.5rem 0;
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.18s;
+    }
+    .q-back:hover { color: var(--cyan); }
+    .q-skip {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      color: var(--muted); font-size: 0.82rem; font-weight: 500;
+      text-decoration: none;
+      transition: color 0.18s;
+      cursor: pointer; background: none; border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .q-skip:hover { color: var(--cyan); }
+
+    /* ── RESULT SCREEN ── */
+    .result-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      position: relative;
+      animation: slideUp 0.5s ease both;
+    }
+    .result-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), rgba(41,212,245,0.2));
+    }
+    .result-header {
+      padding: 2rem 2rem 1.6rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      background: linear-gradient(180deg, rgba(41,212,245,0.04), transparent);
+    }
+    .result-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyan); margin: 0 auto 1.2rem;
+    }
+    .result-eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .result-name {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 1.9rem);
+      letter-spacing: -0.01em; color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .result-price {
+      font-size: 1.05rem; font-weight: 600; color: var(--cyan);
+    }
+    .result-body { padding: 1.6rem 2rem 1.8rem; }
+    .result-section { margin-bottom: 1.5rem; }
+    .result-section:last-child { margin-bottom: 0; }
+    .result-section-title {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+    .result-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .result-list li {
+      display: flex; align-items: flex-start; gap: 0.65rem;
+      font-size: 0.92rem; color: var(--off); line-height: 1.6;
+    }
+    .result-list li svg {
+      color: var(--cyan); flex-shrink: 0; margin-top: 3px;
+    }
+    .result-summary {
+      padding: 1rem 1.2rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem; color: var(--off); line-height: 1.65;
+    }
+    .result-summary strong { color: var(--white); font-weight: 600; }
+    .result-actions {
+      display: flex; flex-direction: column; gap: 0.7rem;
+      padding: 0 2rem 2rem;
+    }
+    .btn-book {
+      display: flex; align-items: center; justify-content: center; gap: 0.55rem;
+      background: var(--cyan); color: #0e1117;
+      font-size: 1rem; font-weight: 700;
+      padding: 0.95rem 1.6rem; border-radius: 10px;
+      text-decoration: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+    .btn-book:hover {
+      opacity: 0.9; box-shadow: 0 6px 28px var(--cyan-glow);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+      background: transparent; color: var(--off);
+      font-size: 0.9rem; font-weight: 500;
+      padding: 0.75rem 1.4rem; border-radius: 10px;
+      border: 1.5px solid var(--border-md);
+      text-decoration: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ── RESTART BUTTON ── */
+    .restart-row {
+      margin-top: 1.5rem; text-align: center;
+    }
+    .restart-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 0.84rem; font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.18s;
+      padding: 0.5rem;
+    }
+    .restart-btn:hover { color: var(--cyan); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.6); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── FOOTER (matched to homepage) ── */
+    footer {
+      border-top: 1px solid var(--border); background: var(--surface);
+      padding: 3rem 2rem 2rem;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .footer-brand-logo {
+      font-family:'Instrument Sans',sans-serif; font-weight:800; font-size:1.4rem;
+      color:var(--white); margin-bottom:0.8rem;
+      display:flex; align-items:center; gap:0.45rem;
+    }
+    .footer-brand-desc { font-size:0.9rem; color:var(--off); line-height:1.7; max-width:300px; margin-bottom:1.2rem; }
+    .footer-social { display:flex; gap:0.6rem; }
+    .footer-social a {
+      width:38px; height:38px; border-radius:9px;
+      background:var(--card); border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--off); text-decoration:none;
+      transition:border-color 0.18s, color 0.18s;
+    }
+    .footer-social a:hover { border-color:var(--cyan); color:var(--cyan); }
+    .footer-col h4 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+    .footer-col ul a { font-size:0.88rem; color:var(--off); text-decoration:none; transition:color 0.18s; }
+    .footer-col ul a:hover { color:var(--cyan); }
+    .footer-bottom {
+      max-width:1140px; margin:1.5rem auto 0;
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+      font-size:0.82rem; color:var(--muted);
+    }
+    .footer-bottom a { color:var(--off); text-decoration:none; }
+    .footer-bottom a:hover { color:var(--cyan); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-inner > :first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .nav-toggle { display: flex; }
+      .page-intro { padding: 2rem 1.25rem 1.5rem; }
+      .quiz-wrap { padding: 1rem 1.25rem 2rem; }
+      .q-header { padding: 1.5rem 1.4rem 1.1rem; }
+      .q-body { padding: 1.3rem 1.4rem 1.5rem; }
+      .opt-btn { padding: 0.95rem 1rem; }
+      .opt-icon { width: 34px; height: 34px; }
+      .result-header, .result-body, .result-actions { padding-left: 1.4rem; padding-right: 1.4rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      footer { padding: 2rem 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- NAV (matched to homepage) -->
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Tekpair home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/webdesign/">Website Design</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/find-my-service/">Find My Service</a></li>
+      <li><a href="/#area">Service Area</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policies/">Policies</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+    </ul>
+    <a href="/#booking" class="nav-book">Book a Job</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile menu">
+    <a href="/webdesign/">Website Design</a>
+    <a href="/#services">Services</a>
+    <a href="/find-my-service/">Find My Service</a>
+    <a href="/#area">Service Area</a>
+    <a href="/about/">About</a>
+    <a href="/policies/">Policies</a>
+    <a href="/faq/">FAQ</a>
+    <a href="/#booking">Book a Job →</a>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- INTRO -->
+  <section class="page-intro" id="intro-screen">
+    <div class="intro-badge">
+      <div class="intro-badge-dot"></div>
+      Quick 60-Second Quiz
+    </div>
+    <h1 class="intro-title">
+      Not sure what<br/>service you <em>need?</em>
+    </h1>
+    <p class="intro-sub">
+      Answer a few quick questions about what's going on and we'll point you to the right service — and a clear price. No tech terms required.
+    </p>
+    <div class="intro-meta">
+      <div class="meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Takes about 60 seconds
+      </div>
+      <div class="meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        No commitment to book
+      </div>
+      <div class="meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        We come to you
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="quiz-wrap" id="quiz-wrap">
+    <div class="progress-wrap" id="progress-wrap" style="display:none;">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-label" id="progress-label">Step 1</div>
+    </div>
+
+    <div id="quiz-content"></div>
+  </section>
+</main>
+
+<!-- FOOTER (matched to homepage) -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+      </div>
+      <p class="footer-brand-desc">Local tech setup and smart home services in the Capital Region, NY. We come to you — flat rates, fast response, no fuss.</p>
+      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.2rem;">
+        <a href="mailto:connor@tekpair.com" style="font-size:0.88rem;color:var(--off);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.18s;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          connor@tekpair.com
+        </a>
+        <a href="tel:+15182796823" style="font-size:0.88rem;color:var(--off);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.18s;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (518) 279-6823
+        </a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener" aria-label="Tekpair on Facebook">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/tekpairny" target="_blank" rel="noopener" aria-label="Tekpair on Instagram">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/#services">Wi-Fi &amp; Network</a></li>
+        <li><a href="/#services">Smart Home</a></li>
+        <li><a href="/#services">Smart TV &amp; Streaming</a></li>
+        <li><a href="/#services">Security Cameras</a></li>
+        <li><a href="/#services">Computer Setup</a></li>
+        <li><a href="/webdesign/">Website Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/#booking">Book a Job</a></li>
+        <li><a href="/find-my-service/">Find My Service</a></li>
+        <li><a href="/#estimator">Pricing Estimator</a></li>
+        <li><a href="/#payment">Payment Options</a></li>
+        <li><a href="/#area">Service Area</a></li>
+        <li><a href="/about/">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="/policies/">Policies</a></li>
+        <li><a href="/faq/">Frequently Asked Questions</a></li>
+        <li><a href="/resources/">Resource Hub</a></li>
+        <li><a href="mailto:connor@tekpair.com?subject=Tekpair%20Business%20Inquiry">Business Inquiries</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Tekpair · Cohoes, NY · Capital Region</span>
+  </div>
+</footer>
+
+<script>
+/* ───────────────────────────────────────────
+   FIND MY SERVICE — Quiz Logic
+   ─────────────────────────────────────────── */
+
+/* ── Mobile nav toggle ── */
+const toggle = document.querySelector('.nav-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+toggle.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  toggle.classList.toggle('open', open);
+  toggle.setAttribute('aria-expanded', open);
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  });
+});
+
+/* ── Quiz Tree ── */
+// Each category has its own follow-up flow.
+// The result maps to your existing booking form's "Service Needed" dropdown values.
+
+const SERVICES = {
+  wifi: {
+    name: 'Wi-Fi & Network Setup',
+    bookingValue: 'Wi-Fi & Network',
+    priceRange: '$39 – $120',
+    icon: 'wifi',
+    duration: 'Usually 1–2 hours',
+    summary: "We'll figure out what's going on with your internet or Wi-Fi, fix the issue, and make sure every device in the house connects reliably before we leave.",
+    includes: [
+      'Test current speeds and signal strength',
+      'Identify the source of the problem',
+      'Fix or recommend the right solution',
+      'Confirm everything works on your devices',
+      'Walk you through how to handle common issues yourself'
+    ]
+  },
+  computer: {
+    name: 'Computer Setup & Cleanup',
+    bookingValue: 'Computer Setup or Cleanup',
+    priceRange: '$49 – $89',
+    icon: 'computer',
+    duration: 'Usually 1–2 hours',
+    summary: "We'll get your computer running the way it should — whether it's a brand-new machine that needs setting up or an old one that's slowed down.",
+    includes: [
+      'Full diagnostic of your computer',
+      'Clean up startup, junk files, and bloatware',
+      'Install updates and important software',
+      'Transfer files from old to new (if needed)',
+      'Show you how to keep it running smoothly'
+    ]
+  },
+  smarthome: {
+    name: 'Smart Home Device Setup',
+    bookingValue: 'Smart Home Devices (Alexa, Google Home, etc.)',
+    priceRange: '$49 – $99',
+    icon: 'smarthome',
+    duration: 'Usually 30 min – 1 hour',
+    summary: "We'll set up your smart devices, link them to your phone or voice assistant, and make sure they actually work the way they're supposed to.",
+    includes: [
+      'Pair device(s) to your Wi-Fi',
+      'Link to your Amazon, Google, or Apple account',
+      'Configure app, schedules, and notifications',
+      'Test voice commands and routines',
+      'Show you how to add more devices later'
+    ]
+  },
+  tv: {
+    name: 'Smart TV & Streaming Setup',
+    bookingValue: 'Smart TV or Streaming',
+    priceRange: '$39 – $79',
+    icon: 'tv',
+    duration: 'Usually 45 min – 1 hour',
+    summary: "We'll get your TV, streaming device, or cord-cutting setup configured properly — apps installed, accounts logged in, everything working from the remote.",
+    includes: [
+      'Connect TV or streaming device to Wi-Fi',
+      'Install and log into your streaming apps',
+      'Set up remote, inputs, and on-screen menus',
+      'Walk you through how to use everything',
+      'Cord-cutting consult if you want to drop cable'
+    ]
+  },
+  printer: {
+    name: 'Printer Setup & Troubleshooting',
+    bookingValue: 'Printer Troubleshooting & Repair',
+    priceRange: '$59',
+    icon: 'printer',
+    duration: 'Usually 30 min – 1 hour',
+    summary: "We'll get your printer working — whether it's a setup, a stubborn connection issue, or print quality problems, we'll diagnose and fix it.",
+    includes: [
+      'Connect printer to Wi-Fi or computer',
+      'Install drivers and apps',
+      'Fix offline errors, connection drops, or quality issues',
+      'Run test prints from your phone and computer',
+      'Show you how to troubleshoot common issues'
+    ]
+  },
+  camera: {
+    name: 'Security Camera & Doorbell Setup',
+    bookingValue: 'Security Camera / Doorbells',
+    priceRange: '$69 – $179',
+    icon: 'camera',
+    duration: 'Usually 1–2 hours',
+    summary: "We'll mount and configure your cameras or doorbell — connected to your Wi-Fi, sending alerts to your phone, and ready to go from day one.",
+    includes: [
+      'Mount cameras securely with proper placement',
+      'Connect each camera to your Wi-Fi',
+      'Configure motion zones and phone alerts',
+      'Set up app access and recording',
+      'Show you how to view footage and manage settings'
+    ]
+  },
+  newsetup: {
+    name: 'New Tech Setup',
+    bookingValue: 'Other',
+    priceRange: 'Depends on what you got',
+    icon: 'newsetup',
+    duration: 'Usually 1–2 hours',
+    summary: "Brand-new device? We'll handle the full setup — out of the box, through configuration, and ready to use. Tell us what you've got and we'll quote it before we come out.",
+    includes: [
+      'Unbox and inspect the device',
+      'Complete initial setup and configuration',
+      'Connect to Wi-Fi and your accounts',
+      'Install any apps or software you need',
+      'Walk you through how to use it'
+    ]
+  },
+  unsure: {
+    name: "Let's figure it out together",
+    bookingValue: 'Other',
+    priceRange: "We'll quote it before we come out",
+    icon: 'unsure',
+    duration: 'Phone consult $15 (credited toward booking)',
+    summary: "Not sure exactly what you need? That's okay — book a quick phone consultation and we'll figure out the right service and price together before scheduling anything.",
+    includes: [
+      "15–30 minute phone consultation",
+      "We'll review what's going on with your tech",
+      "Confirm which service fits best",
+      "Give you a flat-rate quote before we come out",
+      "Consultation fee credited toward your booking if you proceed"
+    ]
+  }
+};
+
+// Question tree
+const QUIZ = {
+  q1: {
+    title: "What's going on?",
+    sub: "Pick whichever sounds closest to what you're dealing with.",
+    options: [
+      { label: "My Wi-Fi or internet isn't working right", desc: "Slow, drops, won't connect", icon: 'wifi', next: 'q2_wifi' },
+      { label: "My computer is having issues", desc: "Slow, frozen, popups, or new setup", icon: 'computer', next: 'q2_computer' },
+      { label: "I need help with a smart home device", desc: "Alexa, Google Home, smart bulbs, thermostat", icon: 'smarthome', next: 'q2_smarthome' },
+      { label: "My TV or streaming isn't working", desc: "Apps, Roku, Fire TV, cord-cutting", icon: 'tv', next: 'q2_tv' },
+      { label: "My printer won't work", desc: "Won't print, offline, setup issues", icon: 'printer', result: 'printer' },
+      { label: "I want security cameras or a doorbell", desc: "Ring, Blink, Nest, Wyze, Eufy", icon: 'camera', next: 'q2_camera' },
+      { label: "I bought something new and need it set up", desc: "Out-of-the-box setup for any tech", icon: 'newsetup', result: 'newsetup' },
+      { label: "Not sure — I just need help", desc: "We'll figure it out together", icon: 'unsure', result: 'unsure' }
+    ]
+  },
+  q2_wifi: {
+    title: "What's the Wi-Fi situation?",
+    sub: "Pick the closest match — we'll handle the rest.",
+    options: [
+      { label: "Internet keeps dropping or disconnecting", desc: "Cuts out, devices lose connection", icon: 'wifi', result: 'wifi' },
+      { label: "Wi-Fi is slow everywhere", desc: "Across the whole house", icon: 'wifi', result: 'wifi' },
+      { label: "Wi-Fi doesn't reach certain rooms", desc: "Dead zones, weak signal in some areas", icon: 'wifi', result: 'wifi' },
+      { label: "I need to set up a new router or modem", desc: "Just bought new equipment", icon: 'wifi', result: 'wifi' },
+      { label: "I want better whole-home coverage", desc: "Mesh network or extenders", icon: 'wifi', result: 'wifi' },
+      { label: "Something else with Wi-Fi", desc: "Not sure exactly what's wrong", icon: 'wifi', result: 'wifi' }
+    ]
+  },
+  q2_computer: {
+    title: "What's going on with the computer?",
+    sub: "Pick whatever sounds closest.",
+    options: [
+      { label: "It's running really slow", desc: "Takes forever to load anything", icon: 'computer', result: 'computer' },
+      { label: "I just bought a new computer", desc: "Need everything set up", icon: 'computer', result: 'computer' },
+      { label: "I think there's a virus or popups", desc: "Strange behavior, ads, warnings", icon: 'computer', result: 'computer' },
+      { label: "I need files moved to a new computer", desc: "Transfer photos, docs, settings", icon: 'computer', result: 'computer' },
+      { label: "Email or passwords aren't working", desc: "Can't log in, account issues", icon: 'computer', result: 'computer' },
+      { label: "Something else with the computer", desc: "Not sure exactly what's wrong", icon: 'computer', result: 'computer' }
+    ]
+  },
+  q2_smarthome: {
+    title: "Which smart home device?",
+    sub: "Doesn't matter the brand — we can help with any of them.",
+    options: [
+      { label: "Alexa or Echo device", desc: "Amazon smart speaker or display", icon: 'smarthome', result: 'smarthome' },
+      { label: "Google Home or Nest Hub", desc: "Google smart speaker or display", icon: 'smarthome', result: 'smarthome' },
+      { label: "Smart bulbs or plugs", desc: "Philips Hue, smart outlets, etc.", icon: 'smarthome', result: 'smarthome' },
+      { label: "Smart thermostat", desc: "Nest, Ecobee, Honeywell, etc.", icon: 'smarthome', result: 'smarthome' },
+      { label: "Multiple devices at once", desc: "Setting up a full smart home", icon: 'smarthome', result: 'smarthome' },
+      { label: "Something else", desc: "Other smart device", icon: 'smarthome', result: 'smarthome' }
+    ]
+  },
+  q2_tv: {
+    title: "What's the TV situation?",
+    sub: "We'll get whatever you've got working properly.",
+    options: [
+      { label: "I just got a new smart TV and need it set up", desc: "Apps, Wi-Fi, streaming accounts", icon: 'tv', result: 'tv' },
+      { label: "I have a Roku, Fire TV, Apple TV, or Chromecast", desc: "Streaming device setup or fix", icon: 'tv', result: 'tv' },
+      { label: "My streaming apps are crashing or not loading", desc: "Netflix, Hulu, YouTube not working", icon: 'tv', result: 'tv' },
+      { label: "I want to drop cable and switch to streaming", desc: "Cord-cutting consultation and setup", icon: 'tv', result: 'tv' },
+      { label: "Something else with the TV", desc: "Other TV or streaming issue", icon: 'tv', result: 'tv' }
+    ]
+  },
+  q2_camera: {
+    title: "How many cameras do you have or want?",
+    sub: "This helps us give you a more accurate estimate.",
+    options: [
+      { label: "Just a video doorbell", desc: "Ring, Nest, Eufy doorbell", icon: 'camera', result: 'camera' },
+      { label: "One camera", desc: "Single indoor or outdoor camera", icon: 'camera', result: 'camera' },
+      { label: "Two cameras", desc: "Front and back, or two spots", icon: 'camera', result: 'camera' },
+      { label: "Three or more cameras", desc: "Full coverage system", icon: 'camera', result: 'camera' },
+      { label: "Not sure yet — I want to talk through it", desc: "We'll help you figure out what's right", icon: 'camera', result: 'camera' }
+    ]
+  }
+};
+
+/* ── Icon library ── */
+const ICONS = {
+  wifi: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>',
+  computer: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+  smarthome: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  tv: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 7 16 12 23 17V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
+  printer: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
+  camera: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  newsetup: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+  unsure: '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  arrow: '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+  check: '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+  calendar: '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  back: '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>',
+  restart: '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>',
+  award: '<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>'
+};
+
+/* ── State ── */
+let currentStep = 'intro';
+let history = [];
+let selectedAnswer = null;
+
+const STEP_NUMBERS = { 'q1': 1, 'q2_wifi': 2, 'q2_computer': 2, 'q2_smarthome': 2, 'q2_tv': 2, 'q2_camera': 2, 'result': 3 };
+const TOTAL_STEPS = 3;
+
+/* ── DOM refs ── */
+const intro = document.getElementById('intro-screen');
+const progressWrap = document.getElementById('progress-wrap');
+const progressFill = document.getElementById('progress-fill');
+const progressLabel = document.getElementById('progress-label');
+const quizContent = document.getElementById('quiz-content');
+
+/* ── Render functions ── */
+function renderStartButton() {
+  quizContent.innerHTML = `
+    <div style="text-align:center;margin-top:0.5rem;">
+      <button class="btn-book" id="start-btn" style="display:inline-flex;width:auto;padding-left:2.2rem;padding-right:2.2rem;">
+        ${ICONS.arrow}
+        Start the Quiz
+      </button>
+    </div>
+  `;
+  document.getElementById('start-btn').addEventListener('click', () => {
+    intro.style.display = 'none';
+    goTo('q1');
+  });
+}
+
+function renderQuestion(stepKey) {
+  const step = QUIZ[stepKey];
+  if (!step) return;
+
+  const optionsHTML = step.options.map((opt, i) => `
+    <button class="opt-btn" data-idx="${i}" type="button">
+      <div class="opt-icon">${ICONS[opt.icon] || ICONS.unsure}</div>
+      <div class="opt-text">
+        <div class="opt-label">${opt.label}</div>
+        ${opt.desc ? `<div class="opt-desc">${opt.desc}</div>` : ''}
+      </div>
+      <div class="opt-arrow">${ICONS.arrow}</div>
+    </button>
+  `).join('');
+
+  const showBack = history.length > 0;
+
+  quizContent.innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-eyebrow"><div class="q-eyebrow-line"></div>Step ${STEP_NUMBERS[stepKey] || 1} of ${TOTAL_STEPS}</div>
+        <h2 class="q-title">${step.title}</h2>
+        <p class="q-sub">${step.sub}</p>
+      </div>
+      <div class="q-body">
+        <div class="options" id="opt-list">${optionsHTML}</div>
+      </div>
+    </div>
+    <div class="q-nav">
+      ${showBack ? `<button class="q-back" id="back-btn" type="button">${ICONS.back} Back</button>` : '<div></div>'}
+      <div></div>
+    </div>
+  `;
+
+  // Wire up
+  quizContent.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx);
+      const opt = step.options[idx];
+      if (opt.result) {
+        showResult(opt.result);
+      } else if (opt.next) {
+        goTo(opt.next);
+      }
+    });
+  });
+
+  if (showBack) {
+    document.getElementById('back-btn').addEventListener('click', () => {
+      goBack();
+    });
+  }
+
+  updateProgress(stepKey);
+}
+
+function renderResult(resultKey) {
+  const svc = SERVICES[resultKey];
+  if (!svc) return;
+
+  const includesHTML = svc.includes.map(item => `
+    <li>${ICONS.check} ${item}</li>
+  `).join('');
+
+  // Build pre-filled booking URL
+  const bookingURL = `/?service=${encodeURIComponent(svc.bookingValue)}#booking`;
+
+  quizContent.innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <div class="result-icon">${ICONS[svc.icon] || ICONS.award}</div>
+        <div class="result-eyebrow">Recommended Service</div>
+        <h2 class="result-name">${svc.name}</h2>
+        <div class="result-price">${svc.priceRange} · ${svc.duration}</div>
+      </div>
+      <div class="result-body">
+        <div class="result-section">
+          <div class="result-summary">${svc.summary}</div>
+        </div>
+        <div class="result-section">
+          <div class="result-section-title">What's Included</div>
+          <ul class="result-list">${includesHTML}</ul>
+        </div>
+      </div>
+      <div class="result-actions">
+        <a href="${bookingURL}" class="btn-book">
+          ${ICONS.calendar}
+          Book This Service
+        </a>
+        <a href="/#booking" class="btn-secondary">
+          See All Booking Options
+        </a>
+      </div>
+    </div>
+    <div class="restart-row">
+      <button class="restart-btn" id="restart-btn" type="button">
+        ${ICONS.restart} Start over with different answers
+      </button>
+    </div>
+  `;
+
+  document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+
+  updateProgress('result');
+}
+
+function updateProgress(stepKey) {
+  if (stepKey === 'intro') {
+    progressWrap.style.display = 'none';
+    return;
+  }
+  progressWrap.style.display = 'flex';
+  const stepNum = STEP_NUMBERS[stepKey] || 1;
+  const pct = (stepNum / TOTAL_STEPS) * 100;
+  progressFill.style.width = pct + '%';
+  if (stepKey === 'result') {
+    progressLabel.textContent = 'Done!';
+  } else {
+    progressLabel.textContent = `Step ${stepNum} of ${TOTAL_STEPS}`;
+  }
+}
+
+/* ── Navigation ── */
+function goTo(stepKey) {
+  history.push(currentStep);
+  currentStep = stepKey;
+  renderQuestion(stepKey);
+  scrollIntoQuiz();
+}
+
+function goBack() {
+  if (history.length === 0) return;
+  const prev = history.pop();
+  currentStep = prev;
+  if (prev === 'intro') {
+    intro.style.display = 'block';
+    quizContent.innerHTML = '';
+    renderStartButton();
+    progressWrap.style.display = 'none';
+  } else {
+    renderQuestion(prev);
+  }
+  scrollIntoQuiz();
+}
+
+function showResult(resultKey) {
+  history.push(currentStep);
+  currentStep = 'result';
+  renderResult(resultKey);
+  scrollIntoQuiz();
+}
+
+function restartQuiz() {
+  history = [];
+  currentStep = 'intro';
+  intro.style.display = 'block';
+  progressWrap.style.display = 'none';
+  renderStartButton();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollIntoQuiz() {
+  const wrap = document.getElementById('quiz-wrap');
+  const offset = wrap.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top: offset, behavior: 'smooth' });
+}
+
+/* ── Init ── */
+renderStartButton();
+</script>
+</body>
+</html>
