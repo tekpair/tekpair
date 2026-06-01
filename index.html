@@ -1714,6 +1714,34 @@ estItems.forEach(item => {
       setTimeout(() => this.reset(), 100);
     });
   });
+
+// Pre-fill booking form from URL params (used by /find-my-service/)
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get('service');
+  if (service) {
+    // Default to in-home form since that's the primary path
+    setTimeout(() => {
+      if (typeof showBookingForm === 'function') {
+        showBookingForm('inhome');
+      }
+      // Wait for form to render, then set the dropdown
+      setTimeout(() => {
+        const select = document.querySelector('#form-inhome-submit select[name="Service"]');
+        if (select) {
+          // Find matching option
+          for (const opt of select.options) {
+            if (opt.value === service || opt.textContent.trim() === service) {
+              select.value = opt.value;
+              select.dispatchEvent(new Event('change'));
+              break;
+            }
+          }
+        }
+      }, 100);
+    }, 50);
+  }
+})();
 </script>
 </body>
 </html>
