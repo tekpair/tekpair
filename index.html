@@ -390,7 +390,8 @@
     .booking-type-label { font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 1rem; }
     .booking-type-sub { font-size: 0.8rem; color: var(--muted); }
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-    .form-label { font-size: 0.82rem; font-weight: 600; color: var(--off); }
+    .form-label { font-size: 0.82rem; font-weight: 600; color: var(--off); display:flex; align-items:center; gap:0.35rem; }
+    .form-label svg { color: var(--muted); flex-shrink:0; }
     .form-input {
       background: var(--surface); border: 1.5px solid var(--border-md);
       border-radius: 8px; padding: 0.7rem 0.9rem;
@@ -424,6 +425,23 @@
     @media(max-width:600px){
       .form-date-row { grid-template-columns: 1fr !important; }
     }
+    /* Form card with cyan top accent */
+    .form-card { position:relative; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; max-width:680px; }
+    .form-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--cyan),rgba(41,212,245,0.2)); }
+    /* Collapsible policy block */
+    .form-policies { margin:1.2rem 1.6rem 0; border-radius:10px; overflow:hidden; border:1px solid rgba(41,212,245,0.2); }
+    .form-policies-summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:0.5rem; padding:0.7rem 1rem; background:var(--cyan-soft); font-size:0.8rem; color:var(--off); user-select:none; -webkit-user-select:none; }
+    .form-policies-summary::-webkit-details-marker { display:none; }
+    .form-policies-summary strong { color:var(--white); }
+    .policy-chevron { margin-left:auto; transition:transform 0.2s; flex-shrink:0; }
+    .form-policies[open] .policy-chevron { transform:rotate(180deg); }
+    .form-policies-body { background:var(--surface); padding:0.75rem 1rem 0.9rem; display:flex; flex-direction:column; gap:0.55rem; }
+    .fp-item { display:flex; align-items:flex-start; gap:0.55rem; font-size:0.79rem; color:var(--off); line-height:1.55; }
+    .fp-item svg { color:var(--cyan); flex-shrink:0; margin-top:1px; }
+    .fp-item strong { color:var(--white); }
+    /* Date dropdowns (cross-browser, replaces <input type=date>) */
+    .date-select-row { display:grid; grid-template-columns:5fr 2fr 2fr; gap:0.5rem; }
+    @media(max-width:500px) { .date-select-row { grid-template-columns:1fr 1fr; } .date-select-row .date-month { grid-column:1/-1; } }
     .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .booking-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.8rem 0 2.2rem; }
     .bc-item { display: flex; align-items: center; gap: 0.9rem; font-size: 0.96rem; color: var(--off); }
@@ -1182,7 +1200,7 @@
 
     <!-- IN-HOME FORM -->
     <div id="form-inhome" style="display:none;" class="reveal">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:680px;">
+      <div class="form-card">
         <div style="padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
           <div>
             <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);">In-Home Visit Request</div>
@@ -1194,19 +1212,23 @@
           </button>
         </div>
 
-        <!-- ACKNOWLEDGEMENT -->
-<div style="margin:1.4rem 1.6rem 0;padding:1rem 1.2rem;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.2);border-radius:10px;font-size:0.82rem;color:var(--off);line-height:1.65;">
-  <strong style="color:var(--white);display:block;margin-bottom:0.6rem;">Before you submit — please read:</strong>
-  <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.4rem;">
-    <li>• <strong style="color:var(--white);">Payment:</strong> Due on-site when the job is complete. Card, cash, Zelle, Cash App, or Apple Pay.</li>
-    <li>• <strong style="color:var(--white);">Cancellations:</strong> Same-day cancellations $15. No-shows without contact $25.</li>
-    <li>• <strong style="color:var(--white);">Service area:</strong> Confirm your address is within 35 mi of Cohoes. Beyond that, a travel fee may apply.</li>
-    <li>• <strong style="color:var(--white);">Adult present:</strong> Someone 18 years or older must be home during the visit.</li>
-    <li>• <strong style="color:var(--white);">ISP issues:</strong> Tekpair is not liable for problems caused by your internet, cable, or phone provider.</li>
-    <li>• <strong style="color:var(--white);">Pre-existing damage:</strong> We are not responsible for pre-existing hardware or software issues.</li>
-    <li>• <strong style="color:var(--white);">Photos:</strong> We may photograph setups for marketing. All personal info (names, addresses, etc.) is blurred.</li>
-  </ul>
-</div>
+        <!-- POLICIES -->
+<details class="form-policies">
+  <summary class="form-policies-summary">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <strong>Policies</strong> &mdash; tap to review before booking
+    <svg class="policy-chevron" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="form-policies-body">
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span><strong>Payment:</strong> Due on-site when complete. Card, cash, Zelle, Cash App, or Apple Pay.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span><strong>Cancellations:</strong> Same-day $15. No-shows without contact $25.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Service area:</strong> Within 35 mi of Cohoes. A travel fee may apply beyond that.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span><strong>Adult present:</strong> Someone 18 or older must be home during the visit.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span><strong>ISP issues:</strong> Not liable for problems caused by your internet or cable provider.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span><strong>Pre-existing damage:</strong> Not responsible for pre-existing hardware or software issues.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span><strong>Photos:</strong> We may photograph setups for marketing. Personal info is always blurred.</span></div>
+  </div>
+</details>
 
 <form id="form-inhome-submit" action="https://formspree.io/f/mykvynvr" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
   <input type="hidden" name="Type" value="In-Home Visit"/>
@@ -1214,32 +1236,32 @@
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
     <div class="form-group">
-      <label class="form-label">First Name *</label>
+      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>First Name *</label>
       <input type="text" name="First Name" required class="form-input" placeholder="Jane"/>
     </div>
     <div class="form-group">
-      <label class="form-label">Last Name *</label>
+      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Last Name *</label>
       <input type="text" name="Last Name" required class="form-input" placeholder="Smith"/>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Email Address *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
     <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Phone Number *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Phone Number *</label>
     <input type="tel" name="Phone" required class="form-input" placeholder="(518) 000-0000"/>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Home Address *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Home Address *</label>
     <input type="text" name="Address" required class="form-input" placeholder="123 Main St, Troy, NY 12180"/>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Service Needed *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Service Needed *</label>
     <select name="Service" required class="form-input">
       <option value="" disabled selected>Select a service…</option>
       <option>Wi-Fi &amp; Network</option>
@@ -1247,62 +1269,48 @@
       <option>Smart TV or Streaming</option>
       <option>Security Camera / Doorbells</option>
       <option>Computer Setup or Cleanup</option>
-      <option>Printer Troubleshooting & Repair</option>
+      <option>Printer Troubleshooting &amp; Repair</option>
       <option>Other</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Briefly describe the issue *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefly describe the issue *</label>
     <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My Wi-Fi keeps dropping in the back of the house…" style="resize:vertical;"></textarea>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;" class="form-date-row">
     <div class="form-group">
-      <label class="form-label">Preferred Date *</label>
-      <input type="date" name="Preferred Date" required class="form-input" id="inhome-date"/>
+      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Preferred Date *</label>
+      <div class="date-select-row">
+        <select class="form-input date-month" required aria-label="Month"><option value="" disabled selected>Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+        <select class="form-input date-day" required aria-label="Day"><option value="" disabled selected>Day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
+        <select class="form-input date-year" required aria-label="Year"><option value="" disabled selected>Year</option><option>2026</option><option>2027</option></select>
+        <input type="hidden" name="Preferred Date"/>
+      </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Preferred Time *</label>
+      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Preferred Time *</label>
       <select name="Preferred Time" required class="form-input">
         <option value="" disabled selected>Select a time…</option>
-        <option>8:00 AM</option>
-        <option>9:00 AM</option>
-        <option>10:00 AM</option>
-        <option>11:00 AM</option>
-        <option>12:00 PM</option>
-        <option>1:00 PM</option>
-        <option>2:00 PM</option>
-        <option>3:00 PM</option>
-        <option>4:00 PM</option>
-        <option>5:00 PM</option>
+        <option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option>
       </select>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Preferred Payment Method *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Preferred Payment Method *</label>
     <select name="Payment Method" required class="form-input">
       <option value="" disabled selected>Select a method…</option>
-      <option>Cash</option>
-      <option>Card</option>
-      <option>Zelle</option>
-      <option>Cash App</option>
-      <option>Apple Pay</option>
+      <option>Cash</option><option>Card</option><option>Zelle</option><option>Cash App</option><option>Apple Pay</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label class="form-label">How did you hear about us?</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>How did you hear about us?</label>
     <select name="Referral Source" class="form-input">
       <option value="" disabled selected>Select one…</option>
-      <option>Facebook</option>
-      <option>Word of Mouth</option>
-      <option>Instagram</option>
-      <option>Nextdoor</option>
-      <option>Google Search</option>
-      <option>Sweet Elevation Bakery</option>
-      <option>Other</option>
+      <option>Facebook</option><option>Word of Mouth</option><option>Instagram</option><option>Nextdoor</option><option>Google Search</option><option>Sweet Elevation Bakery</option><option>Other</option>
     </select>
   </div>
 
@@ -1316,7 +1324,7 @@
 
     <!-- REMOTE FORM -->
     <div id="form-remote" style="display:none;" class="reveal">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:680px;">
+      <div class="form-card">
         <div style="padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
           <div>
             <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);">Remote Session Request</div>
@@ -1328,73 +1336,67 @@
           </button>
         </div>
 
-        <!-- ACKNOWLEDGEMENT -->
-<div style="margin:1.4rem 1.6rem 0;padding:1rem 1.2rem;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.2);border-radius:10px;font-size:0.82rem;color:var(--off);line-height:1.65;">
-  <strong style="color:var(--white);display:block;margin-bottom:0.6rem;">Before you submit — please read:</strong>
-  <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.4rem;">
-    <li>• <strong style="color:var(--white);">Payment:</strong> Paid in full before the session starts. Session is cancelled if payment isn't received in time.</li>
-    <li>• <strong style="color:var(--white);">Session length:</strong> 15–30 minutes with a hard 30-minute cutoff. Additional time requires a new session.</li>
-    <li>• <strong style="color:var(--white);">Connection method:</strong> Video call only (Zoom or FaceTime). No remote desktop control.</li>
-    <li>• <strong style="color:var(--white);">Passwords:</strong> You type any passwords or sensitive info yourself. We guide you, and never shared.</li>
-    <li>• <strong style="color:var(--white);">Requirements:</strong> Working internet, a smartphone or webcam, and the device you need help with.</li>
-    <li>• <strong style="color:var(--white);">No refunds:</strong> Once a session begins, the payment provided is non-refundable.</li>
-    <li>• <strong style="color:var(--white);">Cancellations:</strong> Full refund if you cancel 2+ hours before your session.</li>
-  </ul>
-</div>
+        <!-- POLICIES -->
+<details class="form-policies">
+  <summary class="form-policies-summary">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <strong>Policies</strong> &mdash; tap to review before booking
+    <svg class="policy-chevron" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="form-policies-body">
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span><strong>Payment:</strong> Paid in full before the session starts. Session is cancelled if payment isn't received in time.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span><strong>Session length:</strong> 15–30 minutes with a hard 30-minute cutoff. Additional time requires a new session.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span><strong>Connection method:</strong> Video call only (Zoom or FaceTime). No remote desktop control.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span><strong>Passwords:</strong> You type any sensitive info yourself. We guide you — never ask for your credentials.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><strong>Requirements:</strong> Working internet, a smartphone or webcam, and the device you need help with.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span><strong>No refunds:</strong> Once a session begins, the payment is non-refundable.</span></div>
+    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Cancellations:</strong> Full refund if you cancel 2+ hours before your session.</span></div>
+  </div>
+</details>
 
 <form id="form-remote-submit" action="https://formspree.io/f/mykvynvr" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
   <input type="hidden" name="Type" value="Remote Session"/>
   <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
   <div class="form-group">
-    <label class="form-label">Full Name *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Full Name *</label>
     <input type="text" name="Full Name" required class="form-input" placeholder="Jane Smith"/>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Email Address *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
     <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Briefly describe the issue *</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefly describe the issue *</label>
     <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My computer is running slow and keeps freezing…" style="resize:vertical;"></textarea>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="form-date-row">
     <div class="form-group">
-      <label class="form-label">Preferred Date *</label>
-      <input type="date" name="Preferred Date" required class="form-input" id="remote-date"/>
+      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Preferred Date *</label>
+      <div class="date-select-row">
+        <select class="form-input date-month" required aria-label="Month"><option value="" disabled selected>Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+        <select class="form-input date-day" required aria-label="Day"><option value="" disabled selected>Day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
+        <select class="form-input date-year" required aria-label="Year"><option value="" disabled selected>Year</option><option>2026</option><option>2027</option></select>
+        <input type="hidden" name="Preferred Date"/>
+      </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Preferred Time *</label>
+      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Preferred Time *</label>
       <select name="Preferred Time" required class="form-input">
         <option value="" disabled selected>Select a time…</option>
-        <option>8:00 AM</option>
-        <option>9:00 AM</option>
-        <option>10:00 AM</option>
-        <option>11:00 AM</option>
-        <option>12:00 PM</option>
-        <option>1:00 PM</option>
-        <option>2:00 PM</option>
-        <option>3:00 PM</option>
-        <option>4:00 PM</option>
-        <option>5:00 PM</option>
+        <option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option>
       </select>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="form-label">How did you hear about us?</label>
+    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>How did you hear about us?</label>
     <select name="Referral Source" class="form-input">
       <option value="" disabled selected>Select one…</option>
-      <option>Facebook</option>
-      <option>Word of Mouth</option>
-      <option>Instagram</option>
-      <option>Nextdoor</option>
-      <option>Google Search</option>
-      <option>Sweet Elevation Bakery</option>
-      <option>Other</option>
+      <option>Facebook</option><option>Word of Mouth</option><option>Instagram</option><option>Nextdoor</option><option>Google Search</option><option>Sweet Elevation Bakery</option><option>Other</option>
     </select>
   </div>
 
@@ -1725,6 +1727,17 @@ estItems.forEach(item => {
     document.getElementById('btn-inhome').classList.remove('active');
     document.getElementById('btn-remote').classList.remove('active');
   };
+
+  // Combine date selects into hidden input for Formspree submission
+  document.querySelectorAll('.date-select-row').forEach(function(row) {
+    var sels = row.querySelectorAll('select');
+    var hidden = row.querySelector('input[type="hidden"]');
+    function syncDate() {
+      var vals = Array.from(sels).map(function(s){ return s.value; });
+      if (vals.every(function(v){ return v; })) hidden.value = vals[0] + ' ' + vals[1] + ', ' + vals[2];
+    }
+    sels.forEach(function(s){ s.addEventListener('change', syncDate); });
+  });
 
   // Clear forms after submit to prevent resubmission
   document.querySelectorAll('form').forEach(form => {
