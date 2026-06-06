@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV"></script>
+  <!-- Google tag (gtag.js) — deferred until browser idle -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  
   gtag('config', 'G-YBXCB2DFWV');
+  function _loadGtag() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV';
+    document.head.appendChild(s);
+  }
+  if ('requestIdleCallback' in window) { requestIdleCallback(_loadGtag, {timeout:4000}); }
+  else { setTimeout(_loadGtag, 3000); }
 </script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -41,7 +47,7 @@
       --cyan-glow: rgba(41,212,245,0.28);
       --white:     #eef1f8;
       --off:       #9aa3b8;
-      --muted:     #636b82;
+      --muted:     #7e8899;
       --radius:    14px;
       --radius-sm: 8px;
     }
@@ -580,7 +586,7 @@
       transition:border-color 0.18s,color 0.18s;
     }
     .footer-social a:hover { border-color:var(--cyan); color:var(--cyan); }
-    .footer-col h4 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
+    .footer-col h3 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
     .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
     .footer-col ul a { font-size:0.88rem; color:var(--off); text-decoration:none; transition:color 0.18s; }
     .footer-col ul a:hover { color:var(--cyan); }
@@ -1022,15 +1028,10 @@
           <p style="font-size:0.9rem;color:var(--off);">Not sure if we cover your area? <a href="mailto:connor@tekpair.com?subject=Tekpair%20Coverage%20Inquiry" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:500;">Email us</a> — we'll let you know.</p>
         </div>
       </div>
-      <div class="area-visual reveal">
-        <iframe
-          title="Tekpair service area — Capital Region, NY"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193000!2d-73.8!3d42.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89de0b4231e77cf7%3A0xaf27f1c29eddeb21!2sCohoes%2C%20NY!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
-          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.9);"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+      <div class="area-visual reveal" id="map-container" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193000!2d-73.8!3d42.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89de0b4231e77cf7%3A0xaf27f1c29eddeb21!2sCohoes%2C%20NY!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus">
+        <div id="map-placeholder" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--card);">
+          <svg width="32" height="32" fill="none" stroke="var(--border-md)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
       </div>
     </div>
   </div>
@@ -1497,7 +1498,7 @@
       </div>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h3>Services</h3>
       <ul>
         <li><a href="/#services">Wi-Fi &amp; Network</a></li>
         <li><a href="/#services">Smart Home</a></li>
@@ -1508,7 +1509,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h3>Company</h3>
       <ul>
         <li><a href="/#booking">Book a Job</a></li>
         <li><a href="/find-my-service/">Find My Service</a></li>
@@ -1519,7 +1520,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Resources</h4>
+      <h3>Resources</h3>
       <ul>
         <li><a href="/policies/">Policies</a></li>
         <li><a href="/faq/">Frequently Asked Questions</a></li>
@@ -1762,6 +1763,28 @@ estItems.forEach(item => {
     }, 50);
   }
 })();
+</script>
+<script>
+  (function(){
+    var mc = document.getElementById('map-container');
+    if (!mc) return;
+    var src = mc.dataset.src;
+    var obs = new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting) {
+        var ph = document.getElementById('map-placeholder');
+        if (ph) ph.remove();
+        var f = document.createElement('iframe');
+        f.title = 'Tekpair service area — Capital Region, NY';
+        f.src = src;
+        f.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.9);';
+        f.allowFullscreen = true;
+        f.referrerPolicy = 'no-referrer-when-downgrade';
+        mc.appendChild(f);
+        obs.disconnect();
+      }
+    }, {rootMargin:'300px'});
+    obs.observe(mc);
+  })();
 </script>
 </body>
 </html>
