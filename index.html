@@ -337,21 +337,6 @@
       background: var(--card); border: 1px solid var(--border);
       border-radius: 20px; overflow: hidden;
     }
-    /* animated rings - unused */
-    .rings { position: relative; width: 80px; height: 80px; flex-shrink:0; }
-    .ring {
-      position: absolute; inset: 0; border-radius: 50%;
-      border: 1.5px solid var(--cyan);
-      animation: ring-out 2.8s ease-out infinite;
-    }
-    .ring:nth-child(2) { animation-delay: 0.7s; }
-    .ring:nth-child(3) { animation-delay: 1.4s; }
-    .ring-dot {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 12px; height: 12px; border-radius: 50%;
-      background: var(--cyan); box-shadow: 0 0 16px var(--cyan-glow);
-    }
-
     /* ── HOW IT WORKS ── */
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
     .step {
@@ -598,10 +583,6 @@
     @keyframes blink {
       0%,100% { opacity:1; transform:scale(1); }
       50%      { opacity:0.4; transform:scale(0.6); }
-    }
-    @keyframes ring-out {
-      0%   { transform:scale(0.25); opacity:0.9; }
-      100% { transform:scale(4); opacity:0; }
     }
     /* LCP fix: h1 slides in without starting at opacity:0 */
     @keyframes heroSlideUp {

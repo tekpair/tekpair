@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-YBXCB2DFWV');
+    function _loadGtag() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV';
+      document.head.appendChild(s);
+    }
+    if ('requestIdleCallback' in window) { requestIdleCallback(_loadGtag, {timeout:4000}); }
+    else { setTimeout(_loadGtag, 3000); }
   </script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Website Design — Tekpair</title>
   <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
+  <meta name="description" content="Tekpair builds clean, hand-coded websites for local businesses in the Capital Region, NY. Flat rates, mobile-first, no subscriptions."/>
+  <meta property="og:title" content="Website Design — Tekpair"/>
+  <meta property="og:description" content="Clean, hand-coded websites for local businesses. Flat rates, mobile-first, no subscriptions. Capital Region, NY."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tekpair.com/webdesign/"/>
   <meta name="theme-color" content="#29d4f5"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -428,6 +439,8 @@
         </div>
         <div class="scope-body">Hosting. Domain registration. Backends. Working forms. Ongoing maintenance. Tell us upfront and we'll price it in.</div>
       </div>
+    </div>
+  </div>
 
   <!-- CTA -->
   <div class="cta-row reveal">
