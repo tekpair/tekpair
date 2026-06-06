@@ -14,6 +14,15 @@
     }
     if ('requestIdleCallback' in window) { requestIdleCallback(_loadGtag, {timeout:4000}); }
     else { setTimeout(_loadGtag, 3000); }
+    function _loadClarity() {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window,document,"clarity","script","x2jgunqz83");
+    }
+    if ('requestIdleCallback' in window) { requestIdleCallback(_loadClarity, {timeout:4000}); }
+    else { setTimeout(_loadClarity, 3000); }
   </script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -35,7 +44,7 @@
       --bg:#111318;--surface:#191c23;--card:#1e2029;
       --border:rgba(255,255,255,0.09);--border-md:rgba(255,255,255,0.14);
       --cyan:#29d4f5;--cyan-soft:rgba(41,212,245,0.13);--cyan-glow:rgba(41,212,245,0.28);
-      --white:#eef1f8;--off:#9aa3b8;--muted:#636b82;
+      --white:#eef1f8;--off:#9aa3b8;--muted:#8a94aa;
       --green:#34c76f;--radius:12px;
     }
     html{scroll-behavior:smooth;font-size:15px;}
@@ -156,7 +165,7 @@
       transition:border-color 0.18s,color 0.18s;
     }
     .footer-social a:hover { border-color:var(--cyan); color:var(--cyan); }
-    .footer-col h4 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
+    .footer-col h2 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
     .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
     .footer-col ul a { font-size:0.88rem; color:var(--off); text-decoration:none; transition:color 0.18s; }
     .footer-col ul a:hover { color:var(--cyan); }
@@ -270,7 +279,7 @@
       </div>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h2>Services</h2>
       <ul>
         <li><a href="/#services">Wi-Fi &amp; Network</a></li>
         <li><a href="/#services">Smart Home</a></li>
@@ -281,7 +290,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h2>Company</h2>
       <ul>
         <li><a href="/#booking">Book a Job</a></li>
         <li><a href="/find-my-service/">Find My Service</a></li>
@@ -292,7 +301,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Resources</h4>
+      <h2>Resources</h2>
       <ul>
         <li><a href="/policies/">Policies</a></li>
         <li><a href="/faq/">Frequently Asked Questions</a></li>
