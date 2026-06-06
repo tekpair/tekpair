@@ -1514,6 +1514,15 @@
   }
   if ('requestIdleCallback' in window) { requestIdleCallback(_loadGtag, {timeout:4000}); }
   else { setTimeout(_loadGtag, 3000); }
+  function _loadClarity() {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","x2jgunqz83");
+  }
+  if ('requestIdleCallback' in window) { requestIdleCallback(_loadClarity, {timeout:4000}); }
+  else { setTimeout(_loadClarity, 3000); }
 </script>
 <script>
 setTimeout(function() {
@@ -1568,13 +1577,19 @@ setTimeout(function() {
   }, { threshold: 0.09 });
   revealEls.forEach(el => revealObs.observe(el));
 
-  // Active nav link highlight
+  // Active nav link highlight — cache offsetTop to avoid forced reflow on scroll
   const sections = document.querySelectorAll('section[id], div[id]');
   const navAs = document.querySelectorAll('.nav-links a');
+  let sectionOffsets = [];
+  function cacheSectionOffsets() {
+    sectionOffsets = Array.from(sections).map(sec => ({ id: sec.id, top: sec.offsetTop }));
+  }
+  cacheSectionOffsets();
+  window.addEventListener('resize', cacheSectionOffsets, { passive: true });
   const onScroll = () => {
     let current = '';
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 130) current = sec.id;
+    sectionOffsets.forEach(sec => {
+      if (window.scrollY >= sec.top - 130) current = sec.id;
     });
     navAs.forEach(a => {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
