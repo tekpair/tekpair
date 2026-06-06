@@ -81,23 +81,6 @@
     .team-role{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
     .team-bio{font-size:0.82rem;color:var(--off);line-height:1.65;}
 
-/* GALLERY CAROUSEL */
-.gallery{position:relative;margin-top:1.4rem;}
-.gallery-viewport{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);}
-.gallery-track{display:flex;transition:transform 0.35s cubic-bezier(0.33,1,0.68,1);will-change:transform;}
-.gallery-slide{flex:0 0 100%;min-width:0;}
-.gallery-slide img{width:100%;height:420px;object-fit:cover;object-position:center center;display:block;background:var(--surface);user-select:none;-webkit-user-drag:none;}
-.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(17,19,24,0.82);backdrop-filter:blur(8px);border:1px solid var(--border-md);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;z-index:2;}
-.gallery-nav:hover{background:var(--cyan);color:#0e1117;border-color:var(--cyan);}
-.gallery-prev{left:0.75rem;}
-.gallery-next{right:0.75rem;}
-.gallery-caption{font-size:0.8rem;color:var(--off);padding:0.85rem 0.25rem 0;min-height:2.5rem;line-height:1.55;}
-.gallery-dots{display:flex;justify-content:center;gap:0.5rem;margin-top:0.75rem;}
-.gallery-dot{width:24px;height:24px;border-radius:50%;background:transparent;border:none;cursor:pointer;padding:0;position:relative;transition:transform 0.18s;}
-.gallery-dot::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:var(--border-md);transition:background 0.18s;}
-.gallery-dot:hover::before{background:var(--off);}
-.gallery-dot.active::before{background:var(--cyan);width:10px;height:10px;}
-
     /* TESTIMONIALS */
     .testimonials-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.4rem;}
     .testimonial{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.5rem;position:relative;}
@@ -174,10 +157,6 @@
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { text-align:center; }
       footer { padding: 2rem 1.25rem 1.5rem; }
-      .gallery-slide img{height:300px;}
-      .gallery-nav{width:36px;height:36px;}
-      .gallery-prev{left:0.5rem;}
-      .gallery-next{right:0.5rem;}
       .gives-back-grid { grid-template-columns: 1fr !important; }
     }
   </style>
@@ -246,49 +225,6 @@
       </div>
     </div>
   </div>
-
-<!-- GALLERY -->
-<div class="section reveal">
-  <div class="sec-label">Gallery</div>
-  <div class="gallery" id="gallery" role="region" aria-label="Photo gallery">
-    <div class="gallery-viewport">
-      <div class="gallery-track">
-        <div class="gallery-slide" data-caption="First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave">
-          <picture>
-            <source srcset="/about/flyer-cohoes.webp" type="image/webp"/>
-            <img src="/about/flyer-cohoes.jpg" alt="Tekpair flyer on the Cohoes community board at Cumberland Farms" loading="lazy" decoding="async" width="1100" height="825"/>
-          </picture>
-        </div>
-        <div class="gallery-slide" data-caption="Kamryn from Tekpair transferring emails from an old computer to a new one for a client.">
-          <picture>
-            <source srcset="/about/kam-working.webp" type="image/webp"/>
-            <img src="/about/kam-working.png" alt="Kamryn from Tekpair transferring emails from an old computer to a new one for a client." loading="lazy" decoding="async" width="1100" height="825"/>
-          </picture>
-        </div>
-        <div class="gallery-slide" data-caption="A client said their Epson printer was skipping lines, so we fixed it within an hour and for an affordable price.">
-          <picture>
-            <source srcset="/about/working-epson.webp" type="image/webp"/>
-            <img src="/about/working-epson.png" alt="A client said their Epson printer was skipping lines, so we fixed it within an hour and for an affordable price." loading="lazy" decoding="async" width="1100" height="825"/>
-          </picture>
-        </div>
-          <div class="gallery-slide" data-caption="What could possibly be wrong? One of our technicians discovered that HP added a new firmware update, which blocked non-HP cartridges from being used with the printer.">
-          <picture>
-            <source srcset="/about/hp-firmware-printer.webp" type="image/webp"/>
-            <img src="/about/hp-firmware-printer.png" alt="What could possibly be wrong? One of our technicians discovered that HP added a new firmware update, which blocked non-HP cartridges from being used with the printer." loading="lazy" decoding="async" width="1100" height="825"/>
-          </picture>
-        </div>
-      </div>
-      <button class="gallery-nav gallery-prev" aria-label="Previous image" type="button">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="gallery-nav gallery-next" aria-label="Next image" type="button">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-    </div>
-    <div class="gallery-caption">First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave</div>
-    <div class="gallery-dots"></div>
-  </div>
-</div>
 
   <!-- TEKPAIR GIVES BACK -->
   
@@ -515,55 +451,6 @@
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // GALLERY CAROUSEL
-(function(){
-  const gallery = document.getElementById('gallery');
-  if(!gallery) return;
-  const track = gallery.querySelector('.gallery-track');
-  const slides = Array.from(gallery.querySelectorAll('.gallery-slide'));
-  const captionEl = gallery.querySelector('.gallery-caption');
-  const dotsEl = gallery.querySelector('.gallery-dots');
-  const prevBtn = gallery.querySelector('.gallery-prev');
-  const nextBtn = gallery.querySelector('.gallery-next');
-  let index = 0;
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-    dot.type = 'button';
-    dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
-    dot.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(dot);
-  });
-
-  function goTo(i){
-    index = (i + slides.length) % slides.length;
-    track.style.transform = 'translateX(-' + (index * 100) + '%)';
-    captionEl.textContent = slides[index].dataset.caption || '';
-    dotsEl.querySelectorAll('.gallery-dot').forEach((d, di) => {
-      d.classList.toggle('active', di === index);
-    });
-  }
-
-  prevBtn.addEventListener('click', () => goTo(index - 1));
-  nextBtn.addEventListener('click', () => goTo(index + 1));
-
-  // Touch swipe
-  let startX = 0, deltaX = 0, touching = false;
-  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; touching = true; deltaX = 0; }, {passive:true});
-  track.addEventListener('touchmove', (e) => { if(touching) deltaX = e.touches[0].clientX - startX; }, {passive:true});
-  track.addEventListener('touchend', () => {
-    if(touching && Math.abs(deltaX) > 40) goTo(index + (deltaX < 0 ? 1 : -1));
-    touching = false;
-  });
-
-  // Keyboard arrows
-  gallery.tabIndex = 0;
-  gallery.addEventListener('keydown', (e) => {
-    if(e.key === 'ArrowLeft'){ e.preventDefault(); goTo(index - 1); }
-    if(e.key === 'ArrowRight'){ e.preventDefault(); goTo(index + 1); }
-  });
-})();
 </script>
 </body>
 </html>
