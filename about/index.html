@@ -218,7 +218,10 @@
     <div class="sec-title">Who shows up at your door</div>
     <div class="team-grid">
       <div class="team-card">
-        <img src="/about/connor.jpg" alt="Connor, founder of Tekpair" class="team-photo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <picture>
+          <source srcset="/about/connor.webp" type="image/webp"/>
+          <img src="/about/connor.jpg" alt="Connor, founder of Tekpair" class="team-photo" width="1040" height="1040" fetchpriority="high" decoding="async" onerror="this.closest('picture').style.display='none';this.closest('picture').nextElementSibling.style.display='flex'"/>
+        </picture>
         <div class="team-photo-placeholder" style="display:none;"><svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
         <div class="team-info">
           <div class="team-name">Connor</div>
@@ -227,7 +230,10 @@
         </div>
       </div>
       <div class="team-card">
-        <img src="/about/kam.jpg" alt="Kamryn, co-founder of Tekpair" class="team-photo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <picture>
+          <source srcset="/about/kam.webp" type="image/webp"/>
+          <img src="/about/kam.jpg" alt="Kamryn, co-founder of Tekpair" class="team-photo" width="1040" height="1386" decoding="async" onerror="this.closest('picture').style.display='none';this.closest('picture').nextElementSibling.style.display='flex'"/>
+        </picture>
         <div class="team-photo-placeholder" style="display:none;"><svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
         <div class="team-info">
           <div class="team-name">Kamryn</div>
@@ -241,20 +247,32 @@
 <!-- GALLERY -->
 <div class="section reveal">
   <div class="sec-label">Gallery</div>
-  <div class="gallery" id="gallery">
+  <div class="gallery" id="gallery" role="region" aria-label="Photo gallery">
     <div class="gallery-viewport">
       <div class="gallery-track">
         <div class="gallery-slide" data-caption="First flyer up — Cohoes community board, Cumberland Farms · 77 Delaware Ave">
-          <img src="/about/flyer-cohoes.jpg" alt="Tekpair flyer on the Cohoes community board at Cumberland Farms" loading="lazy" decoding="async"/>
+          <picture>
+            <source srcset="/about/flyer-cohoes.webp" type="image/webp"/>
+            <img src="/about/flyer-cohoes.jpg" alt="Tekpair flyer on the Cohoes community board at Cumberland Farms" loading="lazy" decoding="async" width="1100" height="825"/>
+          </picture>
         </div>
         <div class="gallery-slide" data-caption="Kamryn from Tekpair transferring emails from an old computer to a new one for a client.">
-          <img src="/about/kam-working.png" alt="Kamryn from Tekpair transferring emails from an old computer to a new one for a client." loading="lazy" decoding="async"/>
+          <picture>
+            <source srcset="/about/kam-working.webp" type="image/webp"/>
+            <img src="/about/kam-working.png" alt="Kamryn from Tekpair transferring emails from an old computer to a new one for a client." loading="lazy" decoding="async" width="1100" height="825"/>
+          </picture>
         </div>
         <div class="gallery-slide" data-caption="A client said their Epson printer was skipping lines, so we fixed it within an hour and for an affordable price.">
-          <img src="/about/working-epson.png" alt="A client said their Epson printer was skipping lines, so we fixed it within an hour and for an affordable price." loading="lazy" decoding="async"/>
+          <picture>
+            <source srcset="/about/working-epson.webp" type="image/webp"/>
+            <img src="/about/working-epson.png" alt="A client said their Epson printer was skipping lines, so we fixed it within an hour and for an affordable price." loading="lazy" decoding="async" width="1100" height="825"/>
+          </picture>
         </div>
           <div class="gallery-slide" data-caption="What could possibly be wrong? One of our technicians discovered that HP added a new firmware update, which blocked non-HP cartridges from being used with the printer.">
-          <img src="/about/hp-firmware-printer.png" alt="What could possibly be wrong? One of our technicians discovered that HP added a new firmware update, which blocked non-HP cartridges from being used with the printer." loading="lazy" decoding="async"/>
+          <picture>
+            <source srcset="/about/hp-firmware-printer.webp" type="image/webp"/>
+            <img src="/about/hp-firmware-printer.png" alt="What could possibly be wrong? One of our technicians discovered that HP added a new firmware update, which blocked non-HP cartridges from being used with the printer." loading="lazy" decoding="async" width="1100" height="825"/>
+          </picture>
         </div>
       </div>
       <button class="gallery-nav gallery-prev" aria-label="Previous image" type="button">
