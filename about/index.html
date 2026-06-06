@@ -74,6 +74,7 @@
     .team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.18s;}
     .team-card:hover{border-color:rgba(41,212,245,0.2);}
     .team-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;display:block;background:var(--surface);}
+    .team-card picture{display:block;width:100%;line-height:0;}
     .team-photo-placeholder{width:100%;aspect-ratio:4/5;background:var(--surface);display:flex;align-items:center;justify-content:center;}
     .team-info{padding:1.1rem 1.2rem;}
     .team-name{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem;}
@@ -119,7 +120,7 @@
     .btn{display:inline-flex;align-items:center;gap:0.45rem;background:var(--cyan);color:#0e1117;font-size:0.88rem;font-weight:600;padding:0.65rem 1.3rem;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.18s,box-shadow 0.18s;}
     .btn:hover{opacity:0.88;box-shadow:0 4px 18px var(--cyan-glow);}
 
-    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.45s ease,transform 0.45s ease;}
+    .reveal{opacity:0.01;transform:translateY(12px);transition:opacity 0.45s ease,transform 0.45s ease;}
     .reveal.in{opacity:1;transform:none;}
 
     /* ── FOOTER ── */
@@ -205,7 +206,7 @@
   </div>
 
   <!-- OUR STORY -->
-  <div class="section reveal">
+  <div class="section">
     <div class="sec-label">Our Story</div>
     <div class="sec-title">How Tekpair started</div>
     <p class="body-text">Honestly? We were broke students trying to find a real path forward. We both knew we wanted to build something — not just work a job. The first idea was a local event crew. That didn't pan out. But technology felt right. It was something we both understood, something people around us clearly needed help with, and something we could actually start with very little.</p>
