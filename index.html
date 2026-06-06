@@ -1693,8 +1693,8 @@ estItems.forEach(item => {
     });
   });
 
-// Booking form toggle
-  function showBookingForm(type) {
+// Booking form toggle — assigned to window so inline onclick handlers can reach them
+  window.showBookingForm = function(type) {
     document.getElementById('form-inhome').style.display = type === 'inhome' ? 'block' : 'none';
     document.getElementById('form-remote').style.display = type === 'remote' ? 'block' : 'none';
     document.getElementById('btn-inhome').classList.toggle('active', type === 'inhome');
@@ -1703,13 +1703,13 @@ estItems.forEach(item => {
     setTimeout(() => {
       document.getElementById(formId).scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
-  }
-  function resetBookingForm() {
+  };
+  window.resetBookingForm = function() {
     document.getElementById('form-inhome').style.display = 'none';
     document.getElementById('form-remote').style.display = 'none';
     document.getElementById('btn-inhome').classList.remove('active');
     document.getElementById('btn-remote').classList.remove('active');
-  }
+  };
 
   // Clear forms after submit to prevent resubmission
   document.querySelectorAll('form').forEach(form => {
