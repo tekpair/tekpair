@@ -70,13 +70,13 @@
     .body-text:last-child{margin-bottom:0;}
 
     /* TEAM */
-    .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;align-items:start;}
-    .team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.18s;}
+    .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;}
+    .team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.18s;display:flex;flex-direction:column;}
     .team-card:hover{border-color:rgba(41,212,245,0.2);}
-    .team-photo{width:100%;height:260px;object-fit:cover;object-position:center top;display:block;background:var(--surface);}
+    .team-photo{width:100%;height:280px;object-fit:cover;object-position:center 20%;display:block;background:var(--surface);}
     .team-card picture{display:block;width:100%;line-height:0;}
-    .team-photo-placeholder{width:100%;height:260px;background:var(--surface);display:flex;align-items:center;justify-content:center;}
-    .team-info{padding:1.1rem 1.2rem;}
+    .team-photo-placeholder{width:100%;height:280px;background:var(--surface);display:flex;align-items:center;justify-content:center;}
+    .team-info{padding:1.1rem 1.2rem;flex:1;}
     .team-name{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem;}
     .team-role{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
     .team-bio{font-size:0.82rem;color:var(--off);line-height:1.65;}
