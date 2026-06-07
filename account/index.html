@@ -628,9 +628,10 @@ async function doSignIn() {
   errEl.style.display = 'none';
   if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; errEl.style.display = ''; return; }
   btn.disabled = true; btn.textContent = 'Signing in…';
-  const { error } = await sb.auth.signInWithPassword({ email, password });
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
   btn.disabled = false; btn.textContent = 'Sign In';
   if (error) { errEl.textContent = error.message; errEl.style.display = ''; }
+  else { await _signedIn(data.session.user); }
 }
 
 async function doRegister() {
@@ -692,6 +693,7 @@ async function doReset() {
 
 async function doSignOut() {
   await sb.auth.signOut();
+  _signedOut();
 }
 
 async function _signedIn(user) {
@@ -707,40 +709,10 @@ function _signedOut() {
   document.getElementById('nav-right').innerHTML = '';
 }
 
-// _wasSignedOut tracks whether the user was last known to be signed out,
-// so SIGNED_IN events from internal token refreshes don't re-run initialization.
-// Supabase v2 auto-refreshes expired tokens before firing INITIAL_SESSION,
-// so the session it provides is always safe for DB queries — no manual refresh needed.
-let _wasSignedOut = true;
-
+// Mirrors the /admin page bootstrap: getSession() is reliable for reading the
+// current (auto-refreshed) session on page load. onAuthStateChange is kept
+// only for password recovery and silent token refresh updates.
 sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'INITIAL_SESSION') {
-    if (session?.user) {
-      _wasSignedOut = false;
-      await _signedIn(session.user);
-    } else {
-      _wasSignedOut = true;
-      _signedOut();
-    }
-    return;
-  }
-  if (event === 'SIGNED_IN') {
-    if (_wasSignedOut) {
-      // Explicit sign-in (user was signed out)
-      _wasSignedOut = false;
-      await _signedIn(session.user);
-    } else {
-      // Already signed in — this is a token refresh event, not a new login.
-      // Just update currentUser silently; don't re-render or reload profile.
-      currentUser = session.user;
-    }
-    return;
-  }
-  if (event === 'SIGNED_OUT') {
-    _wasSignedOut = true;
-    _signedOut();
-    return;
-  }
   if (event === 'PASSWORD_RECOVERY') {
     showView('view-reset');
     document.getElementById('nav-right').innerHTML = '';
@@ -750,6 +722,16 @@ sb.auth.onAuthStateChange(async (event, session) => {
     currentUser = session.user;
   }
 });
+
+(async function() {
+  if (window.location.hash.includes('type=recovery')) return;
+  const { data: { session } } = await sb.auth.getSession();
+  if (session?.user) {
+    await _signedIn(session.user);
+  } else {
+    _signedOut();
+  }
+})();
 </script>
 </body>
 </html>
