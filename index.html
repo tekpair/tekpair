@@ -1697,11 +1697,18 @@ estItems.forEach(item => {
       if (rmName) rmName.value = (fn + ' ' + ln).trim();
       if (rmEmail) rmEmail.value = email;
     }
-    // Update nav link
+    // Update nav link — keep icon, add green dot indicator
     const navLink = document.getElementById('nav-account-link');
     if (navLink) {
-      navLink.textContent = 'My Account ✓';
       navLink.style.color = 'var(--cyan)';
+      navLink.style.position = 'relative';
+      if (!navLink.querySelector('.nav-signed-in-dot')) {
+        const dot = document.createElement('span');
+        dot.className = 'nav-signed-in-dot';
+        dot.setAttribute('aria-hidden', 'true');
+        dot.style.cssText = 'position:absolute;top:3px;right:3px;width:7px;height:7px;background:#34c76f;border-radius:50%;border:2px solid #0d0f14;';
+        navLink.appendChild(dot);
+      }
     }
   })();
 
@@ -1733,7 +1740,9 @@ estItems.forEach(item => {
         const { data: { session: _sess } } = await sb.auth.getSession();
         const user = _sess ? _sess.user : null;
 
+        const bookingId = crypto.randomUUID();
         const booking = {
+          id: bookingId,
           type: isInhome ? 'inhome' : 'remote',
           first_name: formData.get('First Name') || nameParts[0] || '',
           last_name: formData.get('Last Name') || (nameParts.slice(1).join(' ') || ''),
@@ -1749,7 +1758,7 @@ estItems.forEach(item => {
           user_id: user ? user.id : null,
         };
 
-        const { data, error } = await sb.from('bookings').insert(booking).select().single();
+        const { error } = await sb.from('bookings').insert(booking);
 
         if (error) {
           alert('Sorry — there was an issue sending your request. Please try again or email connor@tekpair.com directly.');
@@ -1767,7 +1776,7 @@ estItems.forEach(item => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4'
           },
-          body: JSON.stringify({ booking_id: data.id, action: 'created' })
+          body: JSON.stringify({ booking_id: bookingId, action: 'created' })
         }).catch(console.error);
 
         window.location.href = '/thank-you/?type=' + encodeURIComponent(isInhome ? 'In-Home Visit' : 'Remote Session');
