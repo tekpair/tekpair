@@ -1730,7 +1730,8 @@ estItems.forEach(item => {
         const fullName = formData.get('Full Name') || '';
         const nameParts = fullName.split(' ');
 
-        const { data: { user } } = await sb.auth.getUser();
+        const { data: { session: _sess } } = await sb.auth.getSession();
+        const user = _sess ? _sess.user : null;
 
         const booking = {
           type: isInhome ? 'inhome' : 'remote',
