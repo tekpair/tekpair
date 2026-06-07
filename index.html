@@ -680,6 +680,7 @@
     /* when banner is visible, push nav below it */
     nav { transition: top 0.2s; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -699,6 +700,7 @@
       <li><a href="/about/">About</a></li>
       <li><a href="/policies/">Policies</a></li>
       <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/account/" id="nav-account-link">My Account</a></li>
     </ul>
     <a href="#booking" class="nav-book">Book a Job</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
@@ -713,6 +715,7 @@
     <a href="/about/">About</a>
     <a href="/policies/">Policies</a>
     <a href="/faq/">FAQ</a>
+    <a href="/account/">My Account</a>
     <a href="#booking">Book a Job →</a>
   </div>
 </nav>
@@ -1230,7 +1233,7 @@
   </div>
 </details>
 
-<form id="form-inhome-submit" action="https://formspree.io/f/mykvynvr" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
+<form id="form-inhome-submit" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
   <input type="hidden" name="Type" value="In-Home Visit"/>
   <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
@@ -1354,7 +1357,7 @@
   </div>
 </details>
 
-<form id="form-remote-submit" action="https://formspree.io/f/mykvynvr" method="POST" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
+<form id="form-remote-submit" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
   <input type="hidden" name="Type" value="Remote Session"/>
   <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
@@ -1661,7 +1664,47 @@ estItems.forEach(item => {
   }
   setMinDates();
 
-// Form submission with AJAX + redirect to thank-you page (replaces Formspree's paid redirect feature)
+// Supabase + form submission
+  const { createClient } = supabase;
+  const sb = createClient('https://lfsuntijzbdoswbremaw.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4');
+
+  // Pre-fill form if user is logged in
+  (async function() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return;
+    const uid = session.user.id;
+    const { data: profile } = await sb.from('profiles').select('*').eq('id', uid).single();
+    const email = session.user.email || '';
+    if (profile) {
+      const fn = profile.first_name || '';
+      const ln = profile.last_name || '';
+      const ph = profile.phone || '';
+      const addr = profile.address || '';
+      // in-home form
+      const ihFn = document.querySelector('#form-inhome-submit input[name="First Name"]');
+      const ihLn = document.querySelector('#form-inhome-submit input[name="Last Name"]');
+      const ihEmail = document.querySelector('#form-inhome-submit input[name="Email"]');
+      const ihPhone = document.querySelector('#form-inhome-submit input[name="Phone"]');
+      const ihAddr = document.querySelector('#form-inhome-submit input[name="Address"]');
+      if (ihFn) ihFn.value = fn;
+      if (ihLn) ihLn.value = ln;
+      if (ihEmail) ihEmail.value = email;
+      if (ihPhone) ihPhone.value = ph;
+      if (ihAddr) ihAddr.value = addr;
+      // remote form
+      const rmName = document.querySelector('#form-remote-submit input[name="Full Name"]');
+      const rmEmail = document.querySelector('#form-remote-submit input[name="Email"]');
+      if (rmName) rmName.value = (fn + ' ' + ln).trim();
+      if (rmEmail) rmEmail.value = email;
+    }
+    // Update nav link
+    const navLink = document.getElementById('nav-account-link');
+    if (navLink) {
+      navLink.textContent = 'My Account ✓';
+      navLink.style.color = 'var(--cyan)';
+    }
+  })();
+
   document.querySelectorAll('#form-inhome-submit, #form-remote-submit').forEach(form => {
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -1683,27 +1726,52 @@ estItems.forEach(item => {
 
       try {
         const formData = new FormData(form);
-        const type = formData.get('Type') || 'Booking';
+        const isInhome = form.id === 'form-inhome-submit';
+        const fullName = formData.get('Full Name') || '';
+        const nameParts = fullName.split(' ');
 
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
+        const { data: { user } } = await sb.auth.getUser();
 
-        if (response.ok) {
-          recent.push(now);
-          localStorage.setItem(key, JSON.stringify(recent));
-          const typeParam = encodeURIComponent(type);
-          window.location.href = '/thank-you/?type=' + typeParam;
-        } else {
-          const data = await response.json().catch(() => ({}));
-          alert("Sorry — there was an issue sending your request. Please try again or email connor@tekpair.com directly.");
+        const booking = {
+          type: isInhome ? 'inhome' : 'remote',
+          first_name: formData.get('First Name') || nameParts[0] || '',
+          last_name: formData.get('Last Name') || (nameParts.slice(1).join(' ') || ''),
+          email: formData.get('Email') || '',
+          phone: formData.get('Phone') || null,
+          address: formData.get('Address') || null,
+          service: formData.get('Service') || null,
+          issue_description: formData.get('Issue Description') || '',
+          preferred_date: formData.get('Preferred Date') || '',
+          preferred_time: formData.get('Preferred Time') || '',
+          payment_method: formData.get('Payment Method') || null,
+          referral_source: formData.get('Referral Source') || null,
+          user_id: user ? user.id : null,
+        };
+
+        const { data, error } = await sb.from('bookings').insert(booking).select().single();
+
+        if (error) {
+          alert('Sorry — there was an issue sending your request. Please try again or email connor@tekpair.com directly.');
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
+          return;
         }
+
+        recent.push(now);
+        localStorage.setItem(key, JSON.stringify(recent));
+
+        fetch('https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-booking-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4'
+          },
+          body: JSON.stringify({ booking_id: data.id, action: 'created' })
+        }).catch(console.error);
+
+        window.location.href = '/thank-you/?type=' + encodeURIComponent(isInhome ? 'In-Home Visit' : 'Remote Session');
       } catch (err) {
-        alert("Sorry — there was a network issue. Please try again or email connor@tekpair.com directly.");
+        alert('Sorry — there was a network issue. Please try again or email connor@tekpair.com directly.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
@@ -1737,13 +1805,6 @@ estItems.forEach(item => {
       if (vals.every(function(v){ return v; })) hidden.value = vals[0] + ' ' + vals[1] + ', ' + vals[2];
     }
     sels.forEach(function(s){ s.addEventListener('change', syncDate); });
-  });
-
-  // Clear forms after submit to prevent resubmission
-  document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function() {
-      setTimeout(() => this.reset(), 100);
-    });
   });
 
 // Pre-fill booking form from URL params (used by /find-my-service/)
