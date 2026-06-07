@@ -450,7 +450,8 @@ async function loadProfile(uid) {
   document.getElementById('profile-email').value = currentUser.email || '';
   document.getElementById('profile-phone').value = currentProfile.phone || '';
   document.getElementById('profile-address').value = currentProfile.address || '';
-  const name = (currentProfile.first_name || '').trim() || currentUser.email;
+  const emailPrefix = currentUser.email.split('@')[0];
+  const name = (currentProfile.first_name || '').trim() || emailPrefix;
   setNavUser(name, currentUser.email);
 }
 
@@ -696,7 +697,7 @@ sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'SIGNED_IN') {
     currentUser = session.user;
     showView('view-auth-user');
-    setNavUser(session.user.email, session.user.email);
+    setNavUser(session.user.email.split('@')[0], session.user.email);
     await loadProfile(currentUser.id);
     return;
   }
@@ -717,7 +718,7 @@ sb.auth.onAuthStateChange(async (event, session) => {
   if (session) {
     currentUser = session.user;
     showView('view-auth-user');
-    setNavUser(session.user.email, session.user.email);
+    setNavUser(session.user.email.split('@')[0], session.user.email);
     await loadProfile(currentUser.id);
   } else {
     showView('view-auth');
