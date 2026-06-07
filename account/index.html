@@ -707,24 +707,49 @@ function _signedOut() {
   document.getElementById('nav-right').innerHTML = '';
 }
 
-// INITIAL_SESSION fires once on page load. The token it carries may be expired —
-// getSession() just reads memory and does NOT refresh. refreshSession() actually
-// exchanges the refresh_token for a new access_token, ensuring DB queries work.
-// We show the user view immediately (no blank screen) then refresh behind the scenes.
+// _wasSignedOut tracks whether the user was last known to be signed out,
+// so SIGNED_IN events from internal token refreshes don't re-run initialization.
+// Supabase v2 auto-refreshes expired tokens before firing INITIAL_SESSION,
+// so the session it provides is always safe for DB queries — no manual refresh needed.
+let _wasSignedOut = true;
+
 sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'INITIAL_SESSION') {
-    if (!session?.user) { _signedOut(); return; }
-    // Show UI immediately so user isn't staring at a loading spinner
-    currentUser = session.user;
-    showView('view-auth-user');
-    setNavUser(session.user.email.split('@')[0], session.user.email);
-    // Now get a guaranteed-fresh token before hitting the database
-    const { data: { session: fresh }, error } = await sb.auth.refreshSession();
-    if (error || !fresh) { _signedOut(); return; }
-    currentUser = fresh.user;
-    await loadProfile(currentUser.id);
+    if (session?.user) {
+      _wasSignedOut = false;
+      await _signedIn(session.user);
+    } else {
+      _wasSignedOut = true;
+      _signedOut();
+    }
     return;
   }
+  if (event === 'SIGNED_IN') {
+    if (_wasSignedOut) {
+      // Explicit sign-in (user was signed out)
+      _wasSignedOut = false;
+      await _signedIn(session.user);
+    } else {
+      // Already signed in — this is a token refresh event, not a new login.
+      // Just update currentUser silently; don't re-render or reload profile.
+      currentUser = session.user;
+    }
+    return;
+  }
+  if (event === 'SIGNED_OUT') {
+    _wasSignedOut = true;
+    _signedOut();
+    return;
+  }
+  if (event === 'PASSWORD_RECOVERY') {
+    showView('view-reset');
+    document.getElementById('nav-right').innerHTML = '';
+    return;
+  }
+  if (event === 'TOKEN_REFRESHED' && session?.user) {
+    currentUser = session.user;
+  }
+});
   if (event === 'SIGNED_IN')        { await _signedIn(session.user); return; }
   if (event === 'SIGNED_OUT')       { _signedOut(); return; }
   if (event === 'PASSWORD_RECOVERY') {
