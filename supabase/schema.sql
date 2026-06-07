@@ -1,20 +1,6 @@
 -- ── EXTENSIONS ──────────────────────────────────────────────────────────────
 create extension if not exists "uuid-ossp";
 
--- ── HELPER: is_admin() ───────────────────────────────────────────────────────
--- Reads the profiles table; SECURITY DEFINER so it bypasses RLS inside policies.
-create or replace function is_admin()
-returns boolean
-language sql
-security definer
-stable
-as $$
-  select coalesce(
-    (select is_admin from public.profiles where id = auth.uid()),
-    false
-  );
-$$;
-
 -- ── HELPER: update_updated_at() ──────────────────────────────────────────────
 create or replace function update_updated_at()
 returns trigger
@@ -68,6 +54,21 @@ create table if not exists public.bookings (
 create trigger trg_bookings_updated_at
   before update on public.bookings
   for each row execute function update_updated_at();
+
+-- ── HELPER: is_admin() ───────────────────────────────────────────────────────
+-- Defined AFTER profiles table so the reference resolves.
+-- SECURITY DEFINER bypasses RLS inside policy checks.
+create or replace function is_admin()
+returns boolean
+language sql
+security definer
+stable
+as $$
+  select coalesce(
+    (select is_admin from public.profiles where id = auth.uid()),
+    false
+  );
+$$;
 
 -- ── TRIGGER: auto-create profile on sign-up ───────────────────────────────────
 create or replace function handle_new_user()
@@ -133,7 +134,7 @@ create policy "bookings: admin updates all"
   using (is_admin());
 
 -- ── GRANT ADMIN TO connor@tekpair.com ────────────────────────────────────────
--- After connor signs up, run this to grant admin access:
+-- After connor signs up at /account/, run this in the SQL editor:
 --
 --   update public.profiles
 --   set is_admin = true
