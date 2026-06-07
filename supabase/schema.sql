@@ -133,6 +133,10 @@ create policy "bookings: admin updates all"
   on public.bookings for update
   using (is_admin());
 
+create policy "bookings: admin deletes all"
+  on public.bookings for delete
+  using (is_admin());
+
 -- ── GRANT ADMIN TO connor@tekpair.com ────────────────────────────────────────
 -- After connor signs up at /account/, run this in the SQL editor:
 --
