@@ -707,12 +707,13 @@ function _signedOut() {
   document.getElementById('nav-right').innerHTML = '';
 }
 
-// INITIAL_SESSION fires once on every page load with the real session state.
-// Handling it here (instead of a separate getSession() IIFE) avoids any
-// race between two async paths both trying to set the UI.
+// INITIAL_SESSION fires once on page load. The session it carries may have an
+// expired access token — getSession() is the only call that guarantees the
+// token is refreshed before we hand it to DB queries.
 sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'INITIAL_SESSION') {
-    if (session?.user) { await _signedIn(session.user); } else { _signedOut(); }
+    const { data: { session: s } } = await sb.auth.getSession();
+    if (s?.user) { await _signedIn(s.user); } else { _signedOut(); }
     return;
   }
   if (event === 'SIGNED_IN')        { await _signedIn(session.user); return; }
