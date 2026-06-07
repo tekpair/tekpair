@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>My Account — Tekpair</title>
+  <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/></noscript>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    img,svg{display:block;max-width:100%;}
+    :root{
+      --bg:#0d0f14;--surface:#13161d;--card:#181b24;
+      --border:rgba(255,255,255,0.08);--cyan:#29d4f5;
+      --cyan-soft:rgba(41,212,245,0.12);--cyan-glow:rgba(41,212,245,0.3);
+      --red:#f54e4e;--green:#34c76f;--yellow:#f5c518;
+      --white:#eef1f8;--off:#8a95b0;--muted:#7f8699;
+      --radius:12px;
+    }
+    html{font-size:15px;scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;line-height:1.65;min-height:100vh;display:flex;flex-direction:column;}
+    a{color:var(--cyan);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    input,select,textarea{font-family:'DM Sans',sans-serif;font-size:0.95rem;}
+    button{font-family:'DM Sans',sans-serif;cursor:pointer;}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,15,20,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1140px;margin:0 auto;padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-right{display:flex;align-items:center;gap:1rem;}
+    .nav-user-name{font-size:0.9rem;color:var(--off);font-weight:500;}
+    .btn-signout{background:none;border:1px solid var(--border);color:var(--off);font-size:0.85rem;padding:0.4rem 0.9rem;border-radius:8px;transition:border-color 0.18s,color 0.18s;}
+    .btn-signout:hover{border-color:var(--red);color:var(--red);}
+
+    /* MAIN LAYOUT */
+    main{flex:1;max-width:680px;margin:0 auto;padding:3rem 2rem 4rem;width:100%;}
+
+    /* LOADING */
+    .loading-wrap{display:flex;align-items:center;justify-content:center;min-height:40vh;}
+    .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--cyan);border-radius:50%;animation:spin 0.7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* AUTH CARD */
+    .auth-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .auth-card-header{padding:1.8rem 2rem 0;}
+    .auth-card-title{font-family:'Instrument Sans',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.4rem;}
+    .auth-card-sub{font-size:0.9rem;color:var(--off);}
+    .auth-tabs{display:flex;border-bottom:1px solid var(--border);margin-top:1.4rem;}
+    .auth-tab{flex:1;padding:0.7rem 1rem;background:none;border:none;color:var(--muted);font-size:0.92rem;font-weight:500;cursor:pointer;position:relative;transition:color 0.18s;}
+    .auth-tab.active{color:var(--cyan);}
+    .auth-tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--cyan);}
+    .auth-tab:hover:not(.active){color:var(--white);}
+    .auth-body{padding:1.6rem 2rem 2rem;}
+
+    /* FORM ELEMENTS */
+    .form-group{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem;}
+    .form-label{font-size:0.82rem;font-weight:600;color:var(--off);text-transform:uppercase;letter-spacing:0.04em;}
+    .form-input{background:var(--surface);border:1px solid var(--border);color:var(--white);padding:0.65rem 0.9rem;border-radius:8px;width:100%;transition:border-color 0.18s,box-shadow 0.18s;outline:none;}
+    .form-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-soft);}
+    .form-input[readonly]{opacity:0.6;cursor:default;}
+    .form-input::placeholder{color:var(--muted);}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;background:var(--cyan);color:#0e1117;font-weight:600;font-size:0.95rem;padding:0.75rem 1.5rem;border:none;border-radius:9px;width:100%;margin-top:0.5rem;transition:opacity 0.18s,box-shadow 0.18s;}
+    .btn-primary:hover{opacity:0.88;box-shadow:0 4px 20px var(--cyan-glow);}
+    .btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
+    .form-error{background:rgba(245,78,78,0.1);border:1px solid rgba(245,78,78,0.3);color:#f98c8c;font-size:0.88rem;padding:0.7rem 1rem;border-radius:8px;margin-bottom:1rem;}
+    .form-success{background:rgba(52,199,111,0.1);border:1px solid rgba(52,199,111,0.3);color:#6bd99c;font-size:0.88rem;padding:0.7rem 1rem;border-radius:8px;margin-bottom:1rem;}
+    .link-muted{font-size:0.88rem;color:var(--muted);margin-top:1rem;text-align:center;}
+    .link-muted a{color:var(--cyan);}
+    .back-link{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.88rem;color:var(--muted);margin-bottom:1.4rem;cursor:pointer;background:none;border:none;padding:0;}
+    .back-link:hover{color:var(--white);}
+
+    /* TABS (authenticated) */
+    .page-tabs{display:flex;gap:0.25rem;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:0;}
+    .page-tab{padding:0.6rem 1.2rem;background:none;border:none;color:var(--muted);font-size:0.95rem;font-weight:500;cursor:pointer;position:relative;transition:color 0.18s;border-radius:8px 8px 0 0;}
+    .page-tab.active{color:var(--cyan);}
+    .page-tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--cyan);}
+    .page-tab:hover:not(.active){color:var(--white);}
+
+    /* PROFILE SECTION */
+    .section-title{font-family:'Instrument Sans',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;}
+
+    /* BOOKING CARDS */
+    .booking-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-bottom:1rem;transition:border-color 0.18s;}
+    .booking-card:hover{border-color:rgba(255,255,255,0.14);}
+    .booking-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:0.8rem;flex-wrap:wrap;}
+    .booking-badges{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .badge{display:inline-flex;align-items:center;padding:0.25rem 0.65rem;border-radius:100px;font-size:0.75rem;font-weight:600;}
+    .badge-inhome{background:var(--cyan-soft);color:var(--cyan);}
+    .badge-remote{background:rgba(245,197,24,0.12);color:#f5c518;}
+    .badge-pending{background:rgba(245,197,24,0.12);color:#f5c518;}
+    .badge-confirmed{background:var(--cyan-soft);color:var(--cyan);}
+    .badge-completed{background:rgba(52,199,111,0.12);color:#34c76f;}
+    .badge-cancelled{background:rgba(245,78,78,0.12);color:#f54e4e;}
+    .badge-rescheduled{background:rgba(138,149,176,0.15);color:var(--off);}
+    .booking-service{font-weight:600;font-size:1rem;color:var(--white);}
+    .booking-meta{font-size:0.85rem;color:var(--off);margin-top:0.25rem;}
+    .booking-issue{font-size:0.88rem;color:var(--muted);margin-top:0.6rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .booking-actions{display:flex;gap:0.6rem;margin-top:1rem;flex-wrap:wrap;}
+    .btn-sm{padding:0.4rem 0.9rem;border-radius:8px;font-size:0.83rem;font-weight:600;border:none;transition:opacity 0.18s,background 0.18s;}
+    .btn-cancel{background:rgba(245,78,78,0.12);color:#f54e4e;border:1px solid rgba(245,78,78,0.2);}
+    .btn-cancel:hover{background:rgba(245,78,78,0.2);}
+    .btn-reschedule{background:var(--cyan-soft);color:var(--cyan);border:1px solid rgba(41,212,245,0.2);}
+    .btn-reschedule:hover{background:rgba(41,212,245,0.2);}
+    .confirm-strip{background:rgba(245,78,78,0.07);border:1px solid rgba(245,78,78,0.18);border-radius:8px;padding:0.8rem 1rem;margin-top:0.8rem;font-size:0.88rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;}
+    .confirm-strip-msg{color:var(--off);flex:1;}
+    .btn-confirm-cancel{background:var(--red);color:#fff;padding:0.35rem 0.8rem;border-radius:6px;font-size:0.82rem;font-weight:600;border:none;}
+    .btn-confirm-cancel:hover{opacity:0.85;}
+    .btn-nevermind{background:none;border:1px solid var(--border);color:var(--muted);padding:0.35rem 0.8rem;border-radius:6px;font-size:0.82rem;font-weight:500;}
+    .btn-nevermind:hover{border-color:var(--off);color:var(--white);}
+
+    /* RESCHEDULE PANEL */
+    .reschedule-panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem;margin-top:0.8rem;}
+    .reschedule-panel-title{font-size:0.88rem;font-weight:600;color:var(--white);margin-bottom:0.8rem;}
+    .date-selects{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .date-selects select,.date-selects .form-input{min-width:90px;}
+    .reschedule-row{display:flex;gap:0.6rem;margin-top:0.8rem;flex-wrap:wrap;align-items:center;}
+    .btn-confirm-reschedule{background:var(--cyan);color:#0e1117;font-weight:600;font-size:0.85rem;padding:0.45rem 1rem;border:none;border-radius:8px;}
+    .btn-confirm-reschedule:hover{opacity:0.88;}
+    .btn-confirm-reschedule:disabled{opacity:0.5;cursor:not-allowed;}
+
+    /* EMPTY STATE */
+    .empty-state{text-align:center;padding:3rem 1rem;color:var(--muted);}
+    .empty-state-icon{width:48px;height:48px;margin:0 auto 1rem;opacity:0.3;}
+    .empty-state p{margin-bottom:1rem;font-size:0.95rem;}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:2rem;right:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.9rem 1.2rem;font-size:0.9rem;z-index:500;transform:translateY(20px);opacity:0;transition:opacity 0.25s,transform 0.25s;pointer-events:none;max-width:320px;}
+    .toast.show{opacity:1;transform:translateY(0);}
+    .toast.success{border-color:rgba(52,199,111,0.3);color:#6bd99c;}
+    .toast.error{border-color:rgba(245,78,78,0.3);color:#f98c8c;}
+
+    /* PASSWORD RESET */
+    .reset-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-size:0.82rem;color:var(--muted);}
+
+    @media(max-width:600px){
+      main{padding:2rem 1rem 3rem;}
+      .form-row{grid-template-columns:1fr;}
+      .nav-inner{padding:0 1rem;}
+      .auth-body{padding:1.2rem 1.2rem 1.6rem;}
+      .auth-card-header{padding:1.4rem 1.2rem 0;}
+      .booking-card{padding:1rem;}
+      .toast{right:1rem;left:1rem;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" aria-label="Tekpair home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:32px;width:auto;display:block;" aria-hidden="true"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+    </a>
+    <div class="nav-right" id="nav-right">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <!-- LOADING -->
+  <div id="view-loading" class="loading-wrap">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- UNAUTHENTICATED (auth card) -->
+  <div id="view-auth" style="display:none;">
+    <div class="auth-card" id="auth-card-signin">
+      <div class="auth-card-header">
+        <div class="auth-card-title">My Account</div>
+        <div class="auth-card-sub">Sign in to manage your bookings and profile.</div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-signin" onclick="showAuthTab('signin')">Sign In</button>
+          <button class="auth-tab" id="tab-register" onclick="showAuthTab('register')">Create Account</button>
+        </div>
+      </div>
+      <div class="auth-body">
+        <!-- SIGN IN -->
+        <div id="pane-signin">
+          <div id="signin-error" class="form-error" style="display:none;"></div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="signin-email" class="form-input" placeholder="you@example.com" autocomplete="email"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="signin-password" class="form-input" placeholder="••••••••" autocomplete="current-password"/>
+          </div>
+          <button class="btn-primary" id="btn-signin" onclick="doSignIn()">Sign In</button>
+          <div class="link-muted"><a href="#" onclick="showForgot(event)">Forgot your password?</a></div>
+        </div>
+
+        <!-- REGISTER -->
+        <div id="pane-register" style="display:none;">
+          <div id="register-error" class="form-error" style="display:none;"></div>
+          <div id="register-success" class="form-success" style="display:none;"></div>
+          <div id="register-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">First Name</label>
+                <input type="text" id="reg-firstname" class="form-input" placeholder="Jane" autocomplete="given-name"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Last Name</label>
+                <input type="text" id="reg-lastname" class="form-input" placeholder="Smith" autocomplete="family-name"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" id="reg-email" class="form-input" placeholder="you@example.com" autocomplete="email"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <input type="tel" id="reg-phone" class="form-input" placeholder="(518) 555-0100" autocomplete="tel"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" id="reg-password" class="form-input" placeholder="At least 8 characters" autocomplete="new-password"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" id="reg-confirm" class="form-input" placeholder="Re-enter password" autocomplete="new-password"/>
+            </div>
+            <button class="btn-primary" id="btn-register" onclick="doRegister()">Create Account</button>
+          </div>
+        </div>
+
+        <!-- FORGOT PASSWORD -->
+        <div id="pane-forgot" style="display:none;">
+          <button class="back-link" onclick="showAuthTab('signin')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            Back to sign in
+          </button>
+          <div class="auth-card-title" style="margin-bottom:0.3rem;">Reset Password</div>
+          <div class="auth-card-sub" style="margin-bottom:1.4rem;">We'll send a reset link to your email.</div>
+          <div id="forgot-error" class="form-error" style="display:none;"></div>
+          <div id="forgot-success" class="form-success" style="display:none;"></div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="forgot-email" class="form-input" placeholder="you@example.com"/>
+          </div>
+          <button class="btn-primary" id="btn-forgot" onclick="doForgot()">Send Reset Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD RECOVERY -->
+  <div id="view-reset" style="display:none;">
+    <div class="reset-card">
+      <div class="auth-card-title" style="margin-bottom:0.3rem;">Set New Password</div>
+      <div class="auth-card-sub" style="margin-bottom:1.4rem;">Choose a new password for your account.</div>
+      <div id="reset-error" class="form-error" style="display:none;"></div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input type="password" id="reset-password" class="form-input" placeholder="At least 8 characters"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" id="reset-confirm" class="form-input" placeholder="Re-enter password"/>
+      </div>
+      <button class="btn-primary" id="btn-reset" onclick="doReset()">Update Password</button>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATED -->
+  <div id="view-auth-user" style="display:none;">
+    <div class="page-tabs">
+      <button class="page-tab active" id="tab-profile" onclick="showTab('profile')">Profile</button>
+      <button class="page-tab" id="tab-bookings" onclick="showTab('bookings')">My Bookings</button>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <div id="pane-profile">
+      <div class="section-title">Profile Settings</div>
+      <div id="profile-error" class="form-error" style="display:none;"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" id="profile-firstname" class="form-input" placeholder="Jane"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" id="profile-lastname" class="form-input" placeholder="Smith"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" id="profile-email" class="form-input" readonly/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="tel" id="profile-phone" class="form-input" placeholder="(518) 555-0100"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Address</label>
+        <input type="text" id="profile-address" class="form-input" placeholder="123 Main St, Cohoes, NY"/>
+      </div>
+      <button class="btn-primary" id="btn-save-profile" onclick="saveProfile()" style="margin-top:0.25rem;">Save Changes</button>
+    </div>
+
+    <!-- BOOKINGS TAB -->
+    <div id="pane-bookings" style="display:none;">
+      <div class="section-title">My Bookings</div>
+      <div id="bookings-loading" class="loading-wrap" style="min-height:120px;display:none;">
+        <div class="spinner"></div>
+      </div>
+      <div id="bookings-list"></div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  &copy; 2025 Tekpair &middot; Capital Region, NY
+</footer>
+
+<script>
+const SUPABASE_URL = 'https://lfsuntijzbdoswbremaw.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4';
+const EDGE_FN = 'https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-booking-email';
+
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let currentUser = null;
+let currentProfile = null;
+
+function showView(id) {
+  ['view-loading','view-auth','view-reset','view-auth-user'].forEach(v => {
+    document.getElementById(v).style.display = v === id ? '' : 'none';
+  });
+}
+
+function showAuthTab(tab) {
+  ['signin','register','forgot'].forEach(t => {
+    document.getElementById('pane-' + t).style.display = t === tab ? '' : 'none';
+  });
+  ['tab-signin','tab-register'].forEach(t => {
+    document.getElementById(t).classList.toggle('active', t === 'tab-' + tab);
+  });
+}
+
+function showForgot(e) {
+  e.preventDefault();
+  showAuthTab('forgot');
+}
+
+function showTab(tab) {
+  ['profile','bookings'].forEach(t => {
+    document.getElementById('pane-' + t).style.display = t === tab ? '' : 'none';
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+  if (tab === 'bookings') loadBookings();
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (type || '');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = 'toast'; }, 3200);
+}
+
+function setNavUser(name, email) {
+  const nr = document.getElementById('nav-right');
+  nr.innerHTML = `<span class="nav-user-name">Hi, ${name || email}</span><button class="btn-signout" onclick="doSignOut()">Sign Out</button>`;
+}
+
+async function loadProfile(uid) {
+  const { data } = await sb.from('profiles').select('*').eq('id', uid).single();
+  currentProfile = data || {};
+  document.getElementById('profile-firstname').value = currentProfile.first_name || '';
+  document.getElementById('profile-lastname').value = currentProfile.last_name || '';
+  document.getElementById('profile-email').value = currentUser.email || '';
+  document.getElementById('profile-phone').value = currentProfile.phone || '';
+  document.getElementById('profile-address').value = currentProfile.address || '';
+  const name = (currentProfile.first_name || '').trim() || currentUser.email;
+  setNavUser(name, currentUser.email);
+}
+
+async function saveProfile() {
+  const btn = document.getElementById('btn-save-profile');
+  const errEl = document.getElementById('profile-error');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+  const updates = {
+    first_name: document.getElementById('profile-firstname').value.trim(),
+    last_name: document.getElementById('profile-lastname').value.trim(),
+    phone: document.getElementById('profile-phone').value.trim(),
+    address: document.getElementById('profile-address').value.trim(),
+  };
+  const { error } = await sb.from('profiles').update(updates).eq('id', currentUser.id);
+  btn.disabled = false;
+  btn.textContent = 'Save Changes';
+  if (error) {
+    errEl.textContent = error.message;
+    errEl.style.display = '';
+  } else {
+    currentProfile = { ...currentProfile, ...updates };
+    setNavUser(updates.first_name || currentUser.email, currentUser.email);
+    showToast('Profile saved.', 'success');
+  }
+}
+
+async function loadBookings() {
+  const listEl = document.getElementById('bookings-list');
+  const loadEl = document.getElementById('bookings-loading');
+  listEl.innerHTML = '';
+  loadEl.style.display = 'flex';
+  const { data, error } = await sb.from('bookings').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
+  loadEl.style.display = 'none';
+  if (error || !data || data.length === 0) {
+    listEl.innerHTML = `<div class="empty-state">
+      <svg class="empty-state-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <p>No bookings yet.</p>
+      <a href="/#booking" style="color:var(--cyan);">Book your first appointment &rarr;</a>
+    </div>`;
+    return;
+  }
+  data.forEach(b => renderBookingCard(b, listEl));
+}
+
+function statusBadge(s) {
+  const map = { pending:'badge-pending', confirmed:'badge-confirmed', completed:'badge-completed', cancelled:'badge-cancelled', rescheduled:'badge-rescheduled' };
+  return `<span class="badge ${map[s] || 'badge-pending'}">${s.charAt(0).toUpperCase()+s.slice(1)}</span>`;
+}
+
+function typeBadge(t) {
+  return t === 'inhome'
+    ? `<span class="badge badge-inhome">In-Home</span>`
+    : `<span class="badge badge-remote">Remote</span>`;
+}
+
+function renderBookingCard(b, container) {
+  const canAct = b.status === 'pending' || b.status === 'confirmed';
+  const div = document.createElement('div');
+  div.className = 'booking-card';
+  div.id = 'booking-' + b.id;
+  div.innerHTML = `
+    <div class="booking-card-top">
+      <div class="booking-badges">${typeBadge(b.type)}${statusBadge(b.status)}</div>
+    </div>
+    <div class="booking-service">${b.service || (b.type === 'inhome' ? 'In-Home Visit' : 'Remote Session')}</div>
+    <div class="booking-meta">${b.preferred_date} &middot; ${b.preferred_time}</div>
+    ${b.issue_description ? `<div class="booking-issue">${b.issue_description}</div>` : ''}
+    ${canAct ? `<div class="booking-actions">
+      <button class="btn-sm btn-cancel" onclick="promptCancel('${b.id}')">Cancel</button>
+      <button class="btn-sm btn-reschedule" onclick="promptReschedule('${b.id}')">Reschedule</button>
+    </div>` : ''}
+    <div id="cancel-confirm-${b.id}" style="display:none;"></div>
+    <div id="reschedule-panel-${b.id}" style="display:none;"></div>`;
+  container.appendChild(div);
+}
+
+function promptCancel(id) {
+  const el = document.getElementById('cancel-confirm-' + id);
+  el.style.display = '';
+  el.innerHTML = `<div class="confirm-strip">
+    <span class="confirm-strip-msg">Are you sure? This cannot be undone.</span>
+    <button class="btn-confirm-cancel" onclick="doCancel('${id}')">Yes, Cancel</button>
+    <button class="btn-nevermind" onclick="document.getElementById('cancel-confirm-${id}').style.display='none'">Nevermind</button>
+  </div>`;
+}
+
+async function doCancel(id) {
+  const { error } = await sb.from('bookings').update({ status: 'cancelled' }).eq('id', id);
+  if (error) { showToast('Error cancelling booking.', 'error'); return; }
+  fetch(EDGE_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+    body: JSON.stringify({ booking_id: id, action: 'cancelled' })
+  }).catch(console.error);
+  showToast('Booking cancelled.', 'success');
+  loadBookings();
+}
+
+function promptReschedule(id) {
+  const el = document.getElementById('reschedule-panel-' + id);
+  el.style.display = '';
+  el.innerHTML = `<div class="reschedule-panel">
+    <div class="reschedule-panel-title">Select a new date and time</div>
+    <div class="date-selects">
+      <select class="form-input" id="rs-month-${id}" aria-label="Month">
+        <option value="" disabled selected>Month</option>
+        <option>January</option><option>February</option><option>March</option><option>April</option>
+        <option>May</option><option>June</option><option>July</option><option>August</option>
+        <option>September</option><option>October</option><option>November</option><option>December</option>
+      </select>
+      <select class="form-input" id="rs-day-${id}" aria-label="Day" style="max-width:80px;">
+        <option value="" disabled selected>Day</option>
+        ${Array.from({length:31},(_,i)=>`<option>${i+1}</option>`).join('')}
+      </select>
+      <select class="form-input" id="rs-year-${id}" aria-label="Year" style="max-width:90px;">
+        <option value="" disabled selected>Year</option>
+        <option>2026</option><option>2027</option>
+      </select>
+    </div>
+    <div class="reschedule-row">
+      <select class="form-input" id="rs-time-${id}" aria-label="Time" style="max-width:150px;">
+        <option value="" disabled selected>Time</option>
+        <option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
+        <option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+        <option>4:00 PM</option><option>5:00 PM</option>
+      </select>
+      <button class="btn-confirm-reschedule" onclick="doReschedule('${id}')">Confirm Reschedule</button>
+      <button class="btn-nevermind" onclick="document.getElementById('reschedule-panel-${id}').style.display='none'">Cancel</button>
+    </div>
+  </div>`;
+}
+
+async function doReschedule(id) {
+  const month = document.getElementById('rs-month-' + id).value;
+  const day = document.getElementById('rs-day-' + id).value;
+  const year = document.getElementById('rs-year-' + id).value;
+  const time = document.getElementById('rs-time-' + id).value;
+  if (!month || !day || !year || !time) { showToast('Please select a date and time.', 'error'); return; }
+  const preferred_date = month + ' ' + day + ', ' + year;
+  const btn = document.querySelector(`#reschedule-panel-${id} .btn-confirm-reschedule`);
+  if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+  const { error } = await sb.from('bookings').update({ preferred_date, preferred_time: time, status: 'rescheduled' }).eq('id', id);
+  if (error) { showToast('Error rescheduling.', 'error'); if (btn) { btn.disabled = false; btn.textContent = 'Confirm Reschedule'; } return; }
+  fetch(EDGE_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+    body: JSON.stringify({ booking_id: id, action: 'rescheduled' })
+  }).catch(console.error);
+  showToast('Booking rescheduled.', 'success');
+  loadBookings();
+}
+
+async function doSignIn() {
+  const email = document.getElementById('signin-email').value.trim();
+  const password = document.getElementById('signin-password').value;
+  const errEl = document.getElementById('signin-error');
+  const btn = document.getElementById('btn-signin');
+  errEl.style.display = 'none';
+  if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; errEl.style.display = ''; return; }
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = 'Sign In';
+  if (error) { errEl.textContent = error.message; errEl.style.display = ''; }
+}
+
+async function doRegister() {
+  const fn = document.getElementById('reg-firstname').value.trim();
+  const ln = document.getElementById('reg-lastname').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const pw = document.getElementById('reg-password').value;
+  const pw2 = document.getElementById('reg-confirm').value;
+  const errEl = document.getElementById('register-error');
+  const sucEl = document.getElementById('register-success');
+  const btn = document.getElementById('btn-register');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!fn || !ln || !email || !pw) { errEl.textContent = 'Please fill in all required fields.'; errEl.style.display = ''; return; }
+  if (pw !== pw2) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = ''; return; }
+  if (pw.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; errEl.style.display = ''; return; }
+  btn.disabled = true; btn.textContent = 'Creating account…';
+  const { error } = await sb.auth.signUp({
+    email, password: pw,
+    options: { data: { first_name: fn, last_name: ln, phone }, emailRedirectTo: window.location.origin + '/account/' }
+  });
+  btn.disabled = false; btn.textContent = 'Create Account';
+  if (error) { errEl.textContent = error.message; errEl.style.display = ''; }
+  else {
+    document.getElementById('register-form').style.display = 'none';
+    sucEl.textContent = 'Account created! Check your email to verify your account, then sign in.';
+    sucEl.style.display = '';
+  }
+}
+
+async function doForgot() {
+  const email = document.getElementById('forgot-email').value.trim();
+  const errEl = document.getElementById('forgot-error');
+  const sucEl = document.getElementById('forgot-success');
+  const btn = document.getElementById('btn-forgot');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!email) { errEl.textContent = 'Please enter your email address.'; errEl.style.display = ''; return; }
+  btn.disabled = true; btn.textContent = 'Sending…';
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/account/' });
+  btn.disabled = false; btn.textContent = 'Send Reset Link';
+  if (error) { errEl.textContent = error.message; errEl.style.display = ''; }
+  else { sucEl.textContent = 'Reset link sent! Check your inbox.'; sucEl.style.display = ''; }
+}
+
+async function doReset() {
+  const pw = document.getElementById('reset-password').value;
+  const pw2 = document.getElementById('reset-confirm').value;
+  const errEl = document.getElementById('reset-error');
+  const btn = document.getElementById('btn-reset');
+  errEl.style.display = 'none';
+  if (pw !== pw2) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = ''; return; }
+  if (pw.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; errEl.style.display = ''; return; }
+  btn.disabled = true; btn.textContent = 'Updating…';
+  const { error } = await sb.auth.updateUser({ password: pw });
+  btn.disabled = false; btn.textContent = 'Update Password';
+  if (error) { errEl.textContent = error.message; errEl.style.display = ''; }
+  else { showToast('Password updated! Redirecting…', 'success'); setTimeout(() => window.location.href = '/account/', 1500); }
+}
+
+async function doSignOut() {
+  await sb.auth.signOut();
+}
+
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    showView('view-reset');
+    document.getElementById('nav-right').innerHTML = '';
+    return;
+  }
+  if (session) {
+    currentUser = session.user;
+    showView('view-auth-user');
+    await loadProfile(currentUser.id);
+  } else {
+    currentUser = null;
+    showView('view-auth');
+    document.getElementById('nav-right').innerHTML = `<a href="/" style="font-size:0.88rem;color:var(--muted);">Back to site</a>`;
+  }
+});
+
+// Initial session check
+(async function() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    showView('view-auth');
+    document.getElementById('nav-right').innerHTML = `<a href="/" style="font-size:0.88rem;color:var(--muted);">Back to site</a>`;
+  }
+  // onAuthStateChange will handle the rest
+})();
+</script>
+</body>
+</html>
