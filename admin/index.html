@@ -139,6 +139,28 @@
     .detail-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
     .detail-value { font-size: 0.88rem; color: var(--white); }
 
+    /* EMAIL ACTIONS */
+    .ea-section{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);}
+    .ea-title{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.75rem;}
+    .ea-btns{display:flex;flex-wrap:wrap;gap:0.5rem;}
+    .ea-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:0.45rem 1rem;border-radius:8px;cursor:pointer;transition:opacity 0.18s,background 0.18s;}
+    .ea-btn:disabled{opacity:0.5;cursor:not-allowed;}
+    .ea-btn-red{background:rgba(245,78,78,0.12);color:#f54e4e;border:1px solid rgba(245,78,78,0.28);}
+    .ea-btn-red:hover:not(:disabled){background:rgba(245,78,78,0.22);}
+    .ea-btn-green{background:rgba(52,199,111,0.12);color:#34c76f;border:1px solid rgba(52,199,111,0.28);}
+    .ea-btn-green:hover:not(:disabled){background:rgba(52,199,111,0.22);}
+    .ea-btn-ghost{background:rgba(255,255,255,0.04);color:var(--off);border:1px solid var(--border);}
+    .ea-btn-ghost:hover:not(:disabled){background:rgba(255,255,255,0.09);color:var(--white);}
+    .ea-btn-cyan{background:var(--cyan-soft);color:var(--cyan);border:1px solid rgba(41,212,245,0.25);}
+    .ea-btn-cyan:hover:not(:disabled){background:rgba(41,212,245,0.2);}
+    .ea-panel{display:none;margin-top:0.75rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;}
+    .ea-panel.open{display:block;}
+    .ea-panel-row{display:flex;gap:0.6rem;align-items:flex-end;flex-wrap:wrap;}
+    .ea-field{display:flex;flex-direction:column;gap:0.2rem;}
+    .ea-label{font-size:0.75rem;color:var(--muted);}
+    .ea-input{background:var(--surface);border:1px solid var(--border);color:var(--white);padding:0.45rem 0.7rem;border-radius:6px;font-size:0.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.18s;}
+    .ea-input:focus{border-color:var(--cyan);}
+
     /* FOOTER */
     footer{border-top:1px solid var(--border);background:var(--surface);padding:3rem 2rem 2rem;margin-top:auto;}
     .footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);}
@@ -433,6 +455,7 @@ function renderBookingRow(b, tbody) {
         <div class="detail-label" style="margin-bottom:0.4rem;">Admin Notes</div>
         <div style="background:rgba(41,212,245,0.05);border:1px solid rgba(41,212,245,0.15);border-radius:8px;padding:0.75rem 1rem;font-size:0.85rem;color:var(--off);">${b.admin_notes}</div>
       </div>` : ''}
+      ${buildEmailActionsHtml(b)}
     </div>
   </td>`;
   tbody.appendChild(detailTr);
@@ -573,6 +596,146 @@ async function toggleCustomerBookings(uid, btn) {
       <div class="inner-booking-meta">${b.preferred_date} &middot; ${b.preferred_time} &middot; Booked ${new Date(b.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
       ${b.issue_description ? `<div style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem;line-height:1.4;">${b.issue_description}</div>` : ''}
     </div>`).join('');
+}
+
+// ── EMAIL ACTIONS ─────────────────────────────────────────────────────────────
+
+const EDGE_FN = 'https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-booking-email';
+
+function buildEmailActionsHtml(b) {
+  const isRemote = b.type !== 'inhome';
+  return `
+  <div class="ea-section">
+    <div class="ea-title">Email Actions</div>
+    <div class="ea-btns">
+      <button id="ea-cancel-${b.id}" class="ea-btn ea-btn-red" onclick="adminEmailCancel('${b.id}')">Cancel &amp; Notify Customer</button>
+      <button id="ea-complete-${b.id}" class="ea-btn ea-btn-green" onclick="adminEmailComplete('${b.id}')">Mark Complete + Review Email</button>
+      <button class="ea-btn ea-btn-ghost" onclick="togglePanel('ea-reschedule-panel-${b.id}')">Reschedule &amp; Notify</button>
+      ${isRemote ? `<button class="ea-btn ea-btn-cyan" onclick="togglePanel('ea-zoom-panel-${b.id}')">Send Zoom Link</button>` : ''}
+    </div>
+    <div class="ea-panel" id="ea-reschedule-panel-${b.id}">
+      <div class="ea-panel-row">
+        <div class="ea-field">
+          <span class="ea-label">New Date</span>
+          <input type="text" class="ea-input" id="ea-rdate-${b.id}" placeholder="e.g. June 15, 2026" value="${b.preferred_date}" style="width:160px;"/>
+        </div>
+        <div class="ea-field">
+          <span class="ea-label">New Time</span>
+          <input type="text" class="ea-input" id="ea-rtime-${b.id}" placeholder="e.g. 10:00 AM" style="width:130px;"/>
+        </div>
+        <button id="ea-reschedule-btn-${b.id}" class="ea-btn ea-btn-ghost" onclick="adminEmailReschedule('${b.id}')">Send Reschedule Email</button>
+      </div>
+    </div>
+    ${isRemote ? `
+    <div class="ea-panel" id="ea-zoom-panel-${b.id}">
+      <div class="ea-panel-row">
+        <div class="ea-field" style="flex:1;min-width:220px;">
+          <span class="ea-label">Zoom Meeting ID or Link</span>
+          <input type="text" class="ea-input" id="ea-zoom-input-${b.id}" placeholder="123 456 7890 or zoom.us/j/…" style="width:100%;"/>
+        </div>
+        <button id="ea-zoom-btn-${b.id}" class="ea-btn ea-btn-cyan" onclick="adminEmailZoom('${b.id}')">Send Zoom Link</button>
+      </div>
+    </div>` : ''}
+  </div>`;
+}
+
+function togglePanel(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+function setBtnState(btnId, state, text) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.disabled = state !== 'idle';
+  btn.textContent = text;
+  if (state === 'sent') btn.style.opacity = '0.6';
+  else btn.style.opacity = '';
+}
+
+async function callEmailFn(payload) {
+  const res = await fetch(EDGE_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+    body: JSON.stringify(payload),
+  });
+  if (res.status === 429) throw new Error('Rate limited: this email was already sent within the last 60 minutes.');
+  if (!res.ok) { const t = await res.text(); throw new Error('Email error ' + res.status + ': ' + t); }
+  return res.json();
+}
+
+async function adminEmailCancel(bookingId) {
+  const btnId = 'ea-cancel-' + bookingId;
+  setBtnState(btnId, 'loading', 'Sending…');
+  try {
+    const { error } = await sb.from('bookings').update({ status: 'cancelled' }).eq('id', bookingId);
+    if (error) throw new Error(error.message);
+    await callEmailFn({ booking_id: bookingId, action: 'admin_cancelled' });
+    setBtnState(btnId, 'sent', 'Cancelled & Notified ✓');
+    const b = allBookings.find(x => x.id === bookingId);
+    if (b) b.status = 'cancelled';
+    const sel = document.querySelector('#brow-' + bookingId + ' .status-select');
+    if (sel) sel.value = 'cancelled';
+    showToast('Booking cancelled and customer notified.', 'success');
+  } catch (err) {
+    setBtnState(btnId, 'idle', 'Cancel & Notify Customer');
+    showToast(err.message || 'Failed to send.', 'error');
+  }
+}
+
+async function adminEmailComplete(bookingId) {
+  const btnId = 'ea-complete-' + bookingId;
+  setBtnState(btnId, 'loading', 'Sending…');
+  try {
+    const { error } = await sb.from('bookings').update({ status: 'completed' }).eq('id', bookingId);
+    if (error) throw new Error(error.message);
+    await callEmailFn({ booking_id: bookingId, action: 'completed' });
+    setBtnState(btnId, 'sent', 'Completed & Sent ✓');
+    const b = allBookings.find(x => x.id === bookingId);
+    if (b) b.status = 'completed';
+    const sel = document.querySelector('#brow-' + bookingId + ' .status-select');
+    if (sel) sel.value = 'completed';
+    showToast('Marked complete. Review email sent to customer.', 'success');
+  } catch (err) {
+    setBtnState(btnId, 'idle', 'Mark Complete + Review Email');
+    showToast(err.message || 'Failed to send.', 'error');
+  }
+}
+
+async function adminEmailReschedule(bookingId) {
+  const btnId = 'ea-reschedule-btn-' + bookingId;
+  const newDate = document.getElementById('ea-rdate-' + bookingId)?.value?.trim();
+  const newTime = document.getElementById('ea-rtime-' + bookingId)?.value?.trim();
+  if (!newDate || !newTime) { showToast('Enter both a new date and time.', 'error'); return; }
+  setBtnState(btnId, 'loading', 'Sending…');
+  try {
+    const { error } = await sb.from('bookings').update({ status: 'rescheduled', preferred_date: newDate, preferred_time: newTime }).eq('id', bookingId);
+    if (error) throw new Error(error.message);
+    await callEmailFn({ booking_id: bookingId, action: 'admin_rescheduled', new_date: newDate, new_time: newTime });
+    setBtnState(btnId, 'sent', 'Rescheduled & Notified ✓');
+    const b = allBookings.find(x => x.id === bookingId);
+    if (b) { b.status = 'rescheduled'; b.preferred_date = newDate; b.preferred_time = newTime; }
+    const sel = document.querySelector('#brow-' + bookingId + ' .status-select');
+    if (sel) sel.value = 'rescheduled';
+    showToast('Booking rescheduled and customer notified.', 'success');
+  } catch (err) {
+    setBtnState(btnId, 'idle', 'Send Reschedule Email');
+    showToast(err.message || 'Failed to send.', 'error');
+  }
+}
+
+async function adminEmailZoom(bookingId) {
+  const btnId = 'ea-zoom-btn-' + bookingId;
+  const zoomCode = document.getElementById('ea-zoom-input-' + bookingId)?.value?.trim();
+  if (!zoomCode) { showToast('Enter a Zoom meeting ID or link.', 'error'); return; }
+  setBtnState(btnId, 'loading', 'Sending…');
+  try {
+    await callEmailFn({ booking_id: bookingId, action: 'zoom_link', zoom_code: zoomCode });
+    setBtnState(btnId, 'sent', 'Zoom Link Sent ✓');
+    showToast('Zoom link sent to customer.', 'success');
+  } catch (err) {
+    setBtnState(btnId, 'idle', 'Send Zoom Link');
+    showToast(err.message || 'Failed to send.', 'error');
+  }
 }
 
 // Bootstrap
