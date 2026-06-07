@@ -1770,8 +1770,10 @@ estItems.forEach(item => {
         recent.push(now);
         localStorage.setItem(key, JSON.stringify(recent));
 
+        // keepalive: true ensures the request completes even after page navigation
         fetch('https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-booking-email', {
           method: 'POST',
+          keepalive: true,
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4'

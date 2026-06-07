@@ -570,9 +570,10 @@ async function doCancel(id) {
   if (error) { showToast('Error cancelling booking.', 'error'); return; }
   fetch(EDGE_FN, {
     method: 'POST',
+    keepalive: true,
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
     body: JSON.stringify({ booking_id: id, action: 'cancelled' })
-  }).catch(console.error);
+  }).then(r => { if (!r.ok) r.text().then(t => console.error('email error', r.status, t)); }).catch(console.error);
   showToast('Booking cancelled.', 'success');
   loadBookings();
 }
@@ -624,9 +625,10 @@ async function doReschedule(id) {
   if (error) { showToast('Error rescheduling.', 'error'); if (btn) { btn.disabled = false; btn.textContent = 'Confirm Reschedule'; } return; }
   fetch(EDGE_FN, {
     method: 'POST',
+    keepalive: true,
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
     body: JSON.stringify({ booking_id: id, action: 'rescheduled' })
-  }).catch(console.error);
+  }).then(r => { if (!r.ok) r.text().then(t => console.error('email error', r.status, t)); }).catch(console.error);
   showToast('Booking rescheduled.', 'success');
   loadBookings();
 }
