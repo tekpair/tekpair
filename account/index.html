@@ -443,16 +443,20 @@ function setNavUser(name, email) {
 }
 
 async function loadProfile(uid) {
-  const { data } = await sb.from('profiles').select('*').eq('id', uid).single();
-  currentProfile = data || {};
+  try {
+    const { data } = await sb.from('profiles').select('*').eq('id', uid).single();
+    currentProfile = data || {};
+  } catch (_) {
+    currentProfile = {};
+  }
   document.getElementById('profile-firstname').value = currentProfile.first_name || '';
   document.getElementById('profile-lastname').value = currentProfile.last_name || '';
-  document.getElementById('profile-email').value = currentUser.email || '';
+  document.getElementById('profile-email').value = currentUser?.email || '';
   document.getElementById('profile-phone').value = currentProfile.phone || '';
   document.getElementById('profile-address').value = currentProfile.address || '';
-  const emailPrefix = currentUser.email.split('@')[0];
+  const emailPrefix = (currentUser?.email || '').split('@')[0];
   const name = (currentProfile.first_name || '').trim() || emailPrefix;
-  setNavUser(name, currentUser.email);
+  if (currentUser) setNavUser(name, currentUser.email);
 }
 
 async function saveProfile() {
@@ -475,7 +479,7 @@ async function saveProfile() {
     errEl.style.display = '';
   } else {
     currentProfile = { ...currentProfile, ...updates };
-    setNavUser(updates.first_name || currentUser.email, currentUser.email);
+    setNavUser(updates.first_name || currentUser.email.split('@')[0], currentUser.email);
     showToast('Profile saved.', 'success');
   }
 }
@@ -487,7 +491,11 @@ async function loadBookings() {
   listEl.innerHTML = '';
   loadEl.style.display = 'flex';
   try {
-    const { data, error } = await sb.from('bookings').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 15000));
+    const { data, error } = await Promise.race([
+      sb.from('bookings').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false }),
+      timeout
+    ]);
     loadEl.style.display = 'none';
     if (error || !data || data.length === 0) {
       listEl.innerHTML = `<div class="empty-state">
@@ -686,45 +694,38 @@ async function doSignOut() {
   await sb.auth.signOut();
 }
 
-// onAuthStateChange handles only real events after page load
+async function _signedIn(user) {
+  currentUser = user;
+  showView('view-auth-user');
+  setNavUser(user.email.split('@')[0], user.email);
+  await loadProfile(user.id);
+}
+
+function _signedOut() {
+  currentUser = null;
+  showView('view-auth');
+  document.getElementById('nav-right').innerHTML = '';
+}
+
+// INITIAL_SESSION fires once on every page load with the real session state.
+// Handling it here (instead of a separate getSession() IIFE) avoids any
+// race between two async paths both trying to set the UI.
 sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'INITIAL_SESSION') return; // handled by IIFE below
+  if (event === 'INITIAL_SESSION') {
+    if (session?.user) { await _signedIn(session.user); } else { _signedOut(); }
+    return;
+  }
+  if (event === 'SIGNED_IN')        { await _signedIn(session.user); return; }
+  if (event === 'SIGNED_OUT')       { _signedOut(); return; }
   if (event === 'PASSWORD_RECOVERY') {
     showView('view-reset');
     document.getElementById('nav-right').innerHTML = '';
     return;
   }
-  if (event === 'SIGNED_IN') {
+  if (event === 'TOKEN_REFRESHED' && session?.user) {
     currentUser = session.user;
-    showView('view-auth-user');
-    setNavUser(session.user.email.split('@')[0], session.user.email);
-    await loadProfile(currentUser.id);
-    return;
-  }
-  if (event === 'SIGNED_OUT') {
-    currentUser = null;
-    showView('view-auth');
-    document.getElementById('nav-right').innerHTML = '';
-    return;
-  }
-  if (event === 'TOKEN_REFRESHED' && session) {
-    currentUser = session.user; // update silently, no re-render
   }
 });
-
-// Primary auth check on page load (reads local storage, no network needed)
-(async function() {
-  const { data: { session } } = await sb.auth.getSession();
-  if (session) {
-    currentUser = session.user;
-    showView('view-auth-user');
-    setNavUser(session.user.email.split('@')[0], session.user.email);
-    await loadProfile(currentUser.id);
-  } else {
-    showView('view-auth');
-    document.getElementById('nav-right').innerHTML = '';
-  }
-})();
 </script>
 </body>
 </html>
