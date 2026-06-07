@@ -707,13 +707,22 @@ function _signedOut() {
   document.getElementById('nav-right').innerHTML = '';
 }
 
-// INITIAL_SESSION fires once on page load. The session it carries may have an
-// expired access token — getSession() is the only call that guarantees the
-// token is refreshed before we hand it to DB queries.
+// INITIAL_SESSION fires once on page load. The token it carries may be expired —
+// getSession() just reads memory and does NOT refresh. refreshSession() actually
+// exchanges the refresh_token for a new access_token, ensuring DB queries work.
+// We show the user view immediately (no blank screen) then refresh behind the scenes.
 sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'INITIAL_SESSION') {
-    const { data: { session: s } } = await sb.auth.getSession();
-    if (s?.user) { await _signedIn(s.user); } else { _signedOut(); }
+    if (!session?.user) { _signedOut(); return; }
+    // Show UI immediately so user isn't staring at a loading spinner
+    currentUser = session.user;
+    showView('view-auth-user');
+    setNavUser(session.user.email.split('@')[0], session.user.email);
+    // Now get a guaranteed-fresh token before hitting the database
+    const { data: { session: fresh }, error } = await sb.auth.refreshSession();
+    if (error || !fresh) { _signedOut(); return; }
+    currentUser = fresh.user;
+    await loadProfile(currentUser.id);
     return;
   }
   if (event === 'SIGNED_IN')        { await _signedIn(session.user); return; }
