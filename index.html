@@ -403,6 +403,14 @@
     }
     .form-input:focus { border-color: var(--cyan); }
     .form-input option { background: var(--card); }
+    .form-email-error {
+      display: flex; align-items: flex-start; gap: 0.45rem;
+      background: rgba(245,78,78,0.09); border: 1px solid rgba(245,78,78,0.28);
+      border-radius: 8px; padding: 0.6rem 0.8rem;
+      font-size: 0.82rem; color: #f87171; line-height: 1.5;
+    }
+    .form-email-error svg { flex-shrink: 0; margin-top: 2px; }
+    .form-email-error a { color: #fca5a5; text-underline-offset: 2px; }
     .form-submit {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
       background: var(--cyan); color: #0e1117;
@@ -1251,6 +1259,7 @@
   <div class="form-group">
     <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
     <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
+    <div class="form-email-error" style="display:none;"></div>
   </div>
 
   <div class="form-group">
@@ -1369,6 +1378,7 @@
   <div class="form-group">
     <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
     <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
+    <div class="form-email-error" style="display:none;"></div>
   </div>
 
   <div class="form-group">
@@ -1836,7 +1846,13 @@ estItems.forEach(item => {
             accountExists = !!linked;
           }
           if (accountExists) {
-            alert('An account already exists for ' + emailVal + '. Please sign in at tekpair.com/account/ to book — your details will be pre-filled and the booking will be linked to your account.');
+            const errDiv = form.querySelector('.form-email-error');
+            if (errDiv) {
+              errDiv.innerHTML = '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+                + ' An account already exists for <strong>' + emailVal + '</strong>. <a href="/account/">Sign in at tekpair.com/account/</a> to book — your details will be pre-filled automatically.';
+              errDiv.style.display = 'flex';
+              form.querySelector('input[name="Email"]').addEventListener('input', function() { errDiv.style.display = 'none'; }, { once: true });
+            }
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;
             return;
