@@ -42,8 +42,10 @@
       'border-top:1px solid rgba(255,255,255,0.07);' +
       'border-radius:18px 18px 0 0;' +
       'box-shadow:0 -6px 28px rgba(0,0,0,0.55);' +
-      'height:64px;' +
+      'height:calc(64px + env(safe-area-inset-bottom,0px));' +
       'padding-bottom:env(safe-area-inset-bottom,0px);' +
+      '-webkit-transform:translateZ(0);transform:translateZ(0);' +
+      'will-change:transform;' +
     '}' +
     '@media(max-width:640px){' +
       '#mnav{display:flex;}' +
