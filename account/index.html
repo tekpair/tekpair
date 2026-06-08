@@ -579,25 +579,15 @@ async function doCancel(id) {
 }
 
 function promptReschedule(id) {
+  const _today = new Date(); _today.setHours(0,0,0,0);
+  const _max = new Date(_today); _max.setMonth(_max.getMonth() + 2);
+  const _toISO = d => d.toISOString().split('T')[0];
   const el = document.getElementById('reschedule-panel-' + id);
   el.style.display = '';
   el.innerHTML = `<div class="reschedule-panel">
     <div class="reschedule-panel-title">Select a new date and time</div>
     <div class="date-selects">
-      <select class="form-input" id="rs-month-${id}" aria-label="Month">
-        <option value="" disabled selected>Month</option>
-        <option>January</option><option>February</option><option>March</option><option>April</option>
-        <option>May</option><option>June</option><option>July</option><option>August</option>
-        <option>September</option><option>October</option><option>November</option><option>December</option>
-      </select>
-      <select class="form-input" id="rs-day-${id}" aria-label="Day" style="max-width:80px;">
-        <option value="" disabled selected>Day</option>
-        ${Array.from({length:31},(_,i)=>`<option>${i+1}</option>`).join('')}
-      </select>
-      <select class="form-input" id="rs-year-${id}" aria-label="Year" style="max-width:90px;">
-        <option value="" disabled selected>Year</option>
-        <option>2026</option><option>2027</option>
-      </select>
+      <input type="date" class="form-input" id="rs-date-${id}" min="${_toISO(_today)}" max="${_toISO(_max)}" style="max-width:180px;"/>
     </div>
     <div class="reschedule-row">
       <select class="form-input" id="rs-time-${id}" aria-label="Time" style="max-width:150px;">
@@ -623,14 +613,12 @@ function validateApptDate(dateStr) {
 }
 
 async function doReschedule(id) {
-  const month = document.getElementById('rs-month-' + id).value;
-  const day = document.getElementById('rs-day-' + id).value;
-  const year = document.getElementById('rs-year-' + id).value;
+  const dateISO = document.getElementById('rs-date-' + id).value; // YYYY-MM-DD
   const time = document.getElementById('rs-time-' + id).value;
-  if (!month || !day || !year || !time) { showToast('Please select a date and time.', 'error'); return; }
-  const preferred_date = month + ' ' + day + ', ' + year;
-  const dateErr = validateApptDate(preferred_date);
-  if (dateErr) { showToast(dateErr, 'error'); return; }
+  if (!dateISO || !time) { showToast('Please select a date and time.', 'error'); return; }
+  const _MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const [yr, mo, dy] = dateISO.split('-').map(Number);
+  const preferred_date = _MONTHS[mo - 1] + ' ' + dy + ', ' + yr;
   const btn = document.querySelector(`#reschedule-panel-${id} .btn-confirm-reschedule`);
   if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
   const { error } = await sb.from('bookings').update({ preferred_date, preferred_time: time, status: 'rescheduled' }).eq('id', id);
