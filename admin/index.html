@@ -241,7 +241,7 @@
   <div id="view-admin" style="display:none;">
     <div class="page-tabs">
       <button class="page-tab active" id="tab-bookings" onclick="showTab('bookings')">Bookings</button>
-      <button class="page-tab" id="tab-customers" onclick="showTab('customers')">Customers</button>
+      <button class="page-tab" id="tab-customers" onclick="showTab('customers')">Clients</button>
     </div>
 
     <!-- BOOKINGS TAB -->
@@ -261,7 +261,7 @@
           <thead>
             <tr>
               <th>Date / Time</th>
-              <th>Customer</th>
+              <th>Client</th>
               <th>Type</th>
               <th>Service</th>
               <th>Status</th>
@@ -303,7 +303,7 @@
       <div class="emergency-zone-header">
         <div>
           <div class="emergency-zone-label">&#9888; Emergency Actions</div>
-          <div class="emergency-zone-desc">For use only in the event of a confirmed data breach. Sends an immediate security notice to all registered users and past customers.</div>
+          <div class="emergency-zone-desc">For use only in the event of a confirmed data breach. Sends an immediate security notice to all registered users and past clients.</div>
         </div>
         <button class="breach-trigger-btn" onclick="openBreachModal()">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -326,7 +326,7 @@
       </div>
       <div class="breach-title" id="breach-modal-title">Data Breach Notification</div>
       <div class="breach-warn">
-        This will send an immediate security email to <strong>every registered user and past customer</strong>. This action is logged and rate-limited to once per 24 hours. Only proceed if a genuine breach has occurred that requires customer notification under the NY SHIELD Act.
+        This will send an immediate security email to <strong>every registered user and past client</strong>. This action is logged and rate-limited to once per 24 hours. Only proceed if a genuine breach has occurred that requires client notification under the NY SHIELD Act.
       </div>
 
       <div class="breach-field">
@@ -334,7 +334,7 @@
         <textarea class="breach-textarea" id="breach-desc-input" rows="3" placeholder="Describe the nature of the security incident in plain language…"></textarea>
       </div>
       <div class="breach-field">
-        <label class="breach-label" for="breach-data-input">What customer information was involved? <span style="color:#f87171;">*</span></label>
+        <label class="breach-label" for="breach-data-input">What client information was involved? <span style="color:#f87171;">*</span></label>
         <textarea class="breach-textarea" id="breach-data-input" rows="3" placeholder="e.g. Names, email addresses, and phone numbers stored in booking records…"></textarea>
       </div>
       <div class="breach-field">
@@ -628,7 +628,7 @@ async function loadCustomers() {
   tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Loading…</td></tr>';
   const { data: profiles, error } = await sb.from('profiles').select('*').eq('is_admin', false).order('created_at', { ascending: false });
   if (error || !profiles) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Error loading customers.</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Error loading clients.</td></tr>';
     return;
   }
   // Pull email + count from bookings (profiles table has no email column)
@@ -643,7 +643,7 @@ async function loadCustomers() {
 
   tbody.innerHTML = '';
   if (!profiles.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No customers yet.</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No clients yet.</td></tr>';
     return;
   }
   profiles.forEach(p => {
@@ -716,7 +716,7 @@ function buildEmailActionsHtml(b) {
   <div class="ea-section">
     <div class="ea-title">Email Actions</div>
     <div class="ea-btns">
-      <button id="ea-cancel-${b.id}" class="ea-btn ea-btn-red" onclick="adminEmailCancel('${b.id}')">Cancel &amp; Notify Customer</button>
+      <button id="ea-cancel-${b.id}" class="ea-btn ea-btn-red" onclick="adminEmailCancel('${b.id}')">Cancel &amp; Notify Client</button>
       <button id="ea-complete-${b.id}" class="ea-btn ea-btn-green" onclick="adminEmailComplete('${b.id}')">Mark Complete + Review Email</button>
       <button class="ea-btn ea-btn-ghost" onclick="togglePanel('ea-reschedule-panel-${b.id}')">Reschedule &amp; Notify</button>
       ${isRemote ? `<button class="ea-btn ea-btn-cyan" onclick="togglePanel('ea-zoom-panel-${b.id}')">Send Zoom Link</button>` : ''}
@@ -783,7 +783,7 @@ async function adminEmailCancel(bookingId) {
     if (b) b.status = 'cancelled';
     const sel = document.querySelector('#brow-' + bookingId + ' .status-select');
     if (sel) sel.value = 'cancelled';
-    showToast('Booking cancelled and customer notified.', 'success');
+    showToast('Booking cancelled and client notified.', 'success');
   } catch (err) {
     setBtnState(btnId, 'idle', 'Cancel & Notify Customer');
     showToast(err.message || 'Failed to send.', 'error');
@@ -802,7 +802,7 @@ async function adminEmailComplete(bookingId) {
     if (b) b.status = 'completed';
     const sel = document.querySelector('#brow-' + bookingId + ' .status-select');
     if (sel) sel.value = 'completed';
-    showToast('Marked complete. Review email sent to customer.', 'success');
+    showToast('Marked complete. Review email sent to client.', 'success');
   } catch (err) {
     setBtnState(btnId, 'idle', 'Mark Complete + Review Email');
     showToast(err.message || 'Failed to send.', 'error');
@@ -837,7 +837,7 @@ async function adminEmailReschedule(bookingId) {
     if (b) { b.status = 'rescheduled'; b.preferred_date = newDate; b.preferred_time = newTime; }
     const sel = document.querySelector('#brow-' + bookingId + ' .status-select');
     if (sel) sel.value = 'rescheduled';
-    showToast('Booking rescheduled and customer notified.', 'success');
+    showToast('Booking rescheduled and client notified.', 'success');
   } catch (err) {
     setBtnState(btnId, 'idle', 'Send Reschedule Email');
     showToast(err.message || 'Failed to send.', 'error');
@@ -852,7 +852,7 @@ async function adminEmailZoom(bookingId) {
   try {
     await callEmailFn({ booking_id: bookingId, action: 'zoom_link', zoom_code: zoomCode });
     setBtnState(btnId, 'sent', 'Zoom Link Sent ✓');
-    showToast('Zoom link sent to customer.', 'success');
+    showToast('Zoom link sent to client.', 'success');
   } catch (err) {
     setBtnState(btnId, 'idle', 'Send Zoom Link');
     showToast(err.message || 'Failed to send.', 'error');
