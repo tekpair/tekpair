@@ -217,7 +217,7 @@ function emailAdminCancelled(b: Booking): string {
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Your Appointment Has Been Cancelled
+      Appointment Cancelled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
       Hi ${b.first_name || "there"}, unfortunately we've had to cancel your upcoming appointment. We apologize for the inconvenience — please feel free to rebook at a time that works for you, or reply to this email if you have questions.
@@ -225,7 +225,7 @@ function emailAdminCancelled(b: Booking): string {
     ${detailTable(rows)}
     <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book a New Appointment")}</p>`;
 
-  return emailShell("Your Appointment Has Been Cancelled — Tekpair", card);
+  return emailShell("Appointment Cancelled — Tekpair", card);
 }
 
 function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): string {
@@ -240,7 +240,7 @@ function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): 
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Your Appointment Has Been Rescheduled
+      Appointment Rescheduled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
       Hi ${b.first_name || "there"}, we've updated your appointment to a new date and time. The details are below. If this doesn't work for you, reply to this email or manage your booking online.
@@ -249,7 +249,7 @@ function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): 
     ${b.issue_description ? issueBlock(b.issue_description) : ""}
     <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</p>`;
 
-  return emailShell("Your Appointment Has Been Rescheduled — Tekpair", card);
+  return emailShell("Appointment Rescheduled — Tekpair", card);
 }
 
 function emailCompleted(b: Booking): string {
@@ -269,7 +269,7 @@ function emailCompleted(b: Booking): string {
           <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
             <tr>
               <td style="background-color:#29d4f5;border-radius:10px;">
-                <a href="https://g.page/r/tekpair/review" style="display:inline-block;padding:14px 32px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#0d0f14;text-decoration:none;border-radius:10px;">Leave a Google Review</a>
+                <a href="https://g.page/r/CUVyTls5ZotVEAE/review" style="display:inline-block;padding:14px 32px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#0d0f14;text-decoration:none;border-radius:10px;">Leave a Google Review</a>
               </td>
             </tr>
           </table>
@@ -517,11 +517,11 @@ serve(async (req) => {
         notifyAdmin = true;
         break;
       case "admin_cancelled":
-        customerSubject = `Your Tekpair Appointment Has Been Cancelled`;
+        customerSubject = `Appointment Cancelled`;
         customerHtml = emailAdminCancelled(booking);
         break;
       case "admin_rescheduled":
-        customerSubject = `Your Tekpair Appointment Has Been Rescheduled`;
+        customerSubject = `Appointment Rescheduled`;
         customerHtml = emailAdminRescheduled(booking, new_date, new_time);
         break;
       case "completed":
