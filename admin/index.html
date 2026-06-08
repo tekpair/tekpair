@@ -615,6 +615,11 @@ const EDGE_FN = 'https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-book
 
 function buildEmailActionsHtml(b) {
   const isRemote = b.type !== 'inhome';
+  const _today = new Date(); _today.setHours(0,0,0,0);
+  const _max = new Date(_today); _max.setMonth(_max.getMonth() + 2);
+  const _toISO = d => d.toISOString().split('T')[0];
+  const _minDate = _toISO(_today);
+  const _maxDate = _toISO(_max);
   return `
   <div class="ea-section">
     <div class="ea-title">Email Actions</div>
@@ -628,7 +633,7 @@ function buildEmailActionsHtml(b) {
       <div class="ea-panel-row">
         <div class="ea-field">
           <span class="ea-label">New Date</span>
-          <input type="text" class="ea-input" id="ea-rdate-${b.id}" placeholder="e.g. June 15, 2026" value="${b.preferred_date}" style="width:160px;"/>
+          <input type="date" class="ea-input" id="ea-rdate-${b.id}" min="${_minDate}" max="${_maxDate}" style="width:160px;"/>
         </div>
         <div class="ea-field">
           <span class="ea-label">New Time</span>
@@ -724,11 +729,12 @@ function validateApptDate(dateStr) {
 
 async function adminEmailReschedule(bookingId) {
   const btnId = 'ea-reschedule-btn-' + bookingId;
-  const newDate = document.getElementById('ea-rdate-' + bookingId)?.value?.trim();
+  const dateISO = document.getElementById('ea-rdate-' + bookingId)?.value?.trim(); // YYYY-MM-DD
   const newTime = document.getElementById('ea-rtime-' + bookingId)?.value?.trim();
-  if (!newDate || !newTime) { showToast('Enter both a new date and time.', 'error'); return; }
-  const dateErr = validateApptDate(newDate);
-  if (dateErr) { showToast(dateErr, 'error'); return; }
+  if (!dateISO || !newTime) { showToast('Enter both a new date and time.', 'error'); return; }
+  const _MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const [yr, mo, dy] = dateISO.split('-').map(Number);
+  const newDate = _MONTHS[mo - 1] + ' ' + dy + ', ' + yr;
   setBtnState(btnId, 'loading', 'Sending…');
   try {
     const { error } = await sb.from('bookings').update({ status: 'rescheduled', preferred_date: newDate, preferred_time: newTime }).eq('id', bookingId);

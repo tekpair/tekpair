@@ -1674,6 +1674,70 @@ estItems.forEach(item => {
     return null;
   }
 
+  // Constrain the month/day/year selects so only valid dates are selectable
+  function constrainDateSelects() {
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const today = new Date(); today.setHours(0,0,0,0);
+    const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
+
+    document.querySelectorAll('.date-select-row').forEach(function(row) {
+      var monthSel = row.querySelector('.date-month');
+      var daySel   = row.querySelector('.date-day');
+      var yearSel  = row.querySelector('.date-year');
+      var hidden   = row.querySelector('input[type="hidden"]');
+      if (!monthSel || !daySel || !yearSel) return;
+
+      function fillYears() {
+        yearSel.innerHTML = '<option value="" disabled selected>Year</option>';
+        var y = today.getFullYear();
+        while (new Date(y, 0, 1) <= maxDate) {
+          var o = document.createElement('option');
+          o.value = o.textContent = y++; yearSel.appendChild(o);
+        }
+      }
+
+      function fillMonths() {
+        var prev = monthSel.value;
+        var y = parseInt(yearSel.value) || today.getFullYear();
+        monthSel.innerHTML = '<option value="" disabled selected>Month</option>';
+        MONTHS.forEach(function(m, i) {
+          var first = new Date(y, i, 1); var last = new Date(y, i + 1, 0);
+          if (last < today || first > maxDate) return;
+          var o = document.createElement('option');
+          o.value = o.textContent = m; monthSel.appendChild(o);
+        });
+        if ([].some.call(monthSel.options, function(o){ return o.value === prev; })) monthSel.value = prev;
+        fillDays();
+      }
+
+      function fillDays() {
+        var prev = daySel.value;
+        var y = parseInt(yearSel.value) || today.getFullYear();
+        var mi = MONTHS.indexOf(monthSel.value);
+        daySel.innerHTML = '<option value="" disabled selected>Day</option>';
+        if (mi < 0) { if (hidden) hidden.value = ''; return; }
+        var daysInMonth = new Date(y, mi + 1, 0).getDate();
+        for (var d = 1; d <= daysInMonth; d++) {
+          var date = new Date(y, mi, d);
+          if (date < today || date > maxDate) continue;
+          var o = document.createElement('option');
+          o.value = o.textContent = d; daySel.appendChild(o);
+        }
+        if ([].some.call(daySel.options, function(o){ return o.value == prev; })) daySel.value = prev;
+        else daySel.selectedIndex = 0;
+        if (hidden) {
+          var m = monthSel.value; var dv = daySel.value;
+          hidden.value = (m && dv && y && !isNaN(parseInt(dv))) ? m + ' ' + dv + ', ' + y : '';
+        }
+      }
+
+      yearSel.addEventListener('change', fillMonths);
+      monthSel.addEventListener('change', fillDays);
+      fillYears(); fillMonths();
+    });
+  }
+  constrainDateSelects();
+
 // Supabase + form submission
   const { createClient } = supabase;
   const sb = createClient('https://lfsuntijzbdoswbremaw.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4');
@@ -1764,15 +1828,19 @@ estItems.forEach(item => {
 
         // Block booking with an email that already has an account (guest only)
         if (!user && emailVal) {
-          try {
-            const { data: emailTaken, error: rpcErr } = await sb.rpc('email_has_account', { p_email: emailVal });
-            if (!rpcErr && emailTaken) {
-              alert('An account already exists for ' + emailVal + '. Please sign in at tekpair.com/account/ to book — your details will be pre-filled and the booking will be linked to your account.');
-              submitBtn.disabled = false;
-              submitBtn.innerHTML = originalText;
-              return;
-            }
-          } catch (_) { /* RPC not set up yet — proceed */ }
+          const { data: emailTaken, error: rpcErr } = await sb.rpc('email_has_account', { p_email: emailVal });
+          let accountExists = !rpcErr && !!emailTaken;
+          if (rpcErr) {
+            // Fallback: check if any booking is linked to this email via an account
+            const { data: linked } = await sb.from('bookings').select('id').ilike('email', emailVal).not('user_id', 'is', null).limit(1).maybeSingle();
+            accountExists = !!linked;
+          }
+          if (accountExists) {
+            alert('An account already exists for ' + emailVal + '. Please sign in at tekpair.com/account/ to book — your details will be pre-filled and the booking will be linked to your account.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            return;
+          }
         }
 
         const bookingId = crypto.randomUUID();
@@ -1816,7 +1884,8 @@ estItems.forEach(item => {
           body: JSON.stringify({ booking_id: bookingId, action: 'created' })
         }).catch(console.error);
 
-        window.location.href = '/thank-you/?type=' + encodeURIComponent(isInhome ? 'In-Home Visit' : 'Remote Session');
+        const liParam = user ? '&loggedin=1' : '';
+        window.location.href = '/thank-you/?type=' + encodeURIComponent(isInhome ? 'In-Home Visit' : 'Remote Session') + liParam;
       } catch (err) {
         alert('Sorry — there was a network issue. Please try again or email connor@tekpair.com directly.');
         submitBtn.disabled = false;
