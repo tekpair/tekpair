@@ -161,6 +161,37 @@
     .ea-input{background:var(--surface);border:1px solid var(--border);color:var(--white);padding:0.45rem 0.7rem;border-radius:6px;font-size:0.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.18s;}
     .ea-input:focus{border-color:var(--cyan);}
 
+    /* BREACH MODAL */
+    .breach-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:900;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+    .breach-modal{background:#181b24;border:1px solid rgba(245,78,78,0.35);border-radius:16px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.6);}
+    .breach-bar{height:4px;background:#f54e4e;border-radius:16px 16px 0 0;}
+    .breach-body{padding:1.75rem 2rem 2rem;}
+    .breach-badge{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(245,78,78,0.14);color:#f87171;padding:0.2rem 0.6rem;border-radius:100px;margin-bottom:0.9rem;}
+    .breach-title{font-family:'DM Sans',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);margin-bottom:0.6rem;}
+    .breach-warn{font-size:0.84rem;color:var(--off);line-height:1.65;margin-bottom:1.4rem;padding:0.85rem 1rem;background:rgba(245,78,78,0.07);border:1px solid rgba(245,78,78,0.18);border-radius:8px;}
+    .breach-field{margin-bottom:1rem;}
+    .breach-label{display:block;font-size:0.78rem;font-weight:600;color:var(--off);margin-bottom:0.4rem;letter-spacing:0.02em;}
+    .breach-input,.breach-textarea{width:100%;background:var(--surface);border:1.5px solid var(--border-md);border-radius:8px;padding:0.65rem 0.9rem;font-size:0.88rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.18s;resize:vertical;}
+    .breach-input:focus,.breach-textarea:focus{border-color:rgba(245,78,78,0.5);}
+    .breach-confirm-note{font-size:0.78rem;color:var(--muted);margin-bottom:0.4rem;}
+    .breach-confirm-note strong{color:#f87171;}
+    .breach-actions{display:flex;gap:0.75rem;margin-top:1.5rem;justify-content:flex-end;}
+    .breach-cancel-btn{font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;padding:0.6rem 1.2rem;border-radius:8px;cursor:pointer;background:transparent;color:var(--off);border:1px solid var(--border);transition:color 0.18s,border-color 0.18s;}
+    .breach-cancel-btn:hover{color:var(--white);border-color:var(--off);}
+    .breach-send-btn{font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;padding:0.6rem 1.4rem;border-radius:8px;cursor:pointer;background:#f54e4e;color:#fff;border:none;transition:opacity 0.18s;}
+    .breach-send-btn:disabled{opacity:0.35;cursor:not-allowed;}
+    .breach-send-btn:not(:disabled):hover{opacity:0.85;}
+    .breach-status{margin-top:1rem;font-size:0.84rem;line-height:1.6;display:none;}
+    .breach-status.error{color:#f87171;}
+    .breach-status.success{color:#34c76f;}
+    /* Emergency zone */
+    .emergency-zone{margin:2.5rem 2rem 0;padding:1.25rem 1.5rem;background:rgba(245,78,78,0.05);border:1px solid rgba(245,78,78,0.2);border-radius:12px;}
+    .emergency-zone-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .emergency-zone-label{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:0.25rem;}
+    .emergency-zone-desc{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+    .breach-trigger-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;padding:0.55rem 1.1rem;border-radius:8px;cursor:pointer;background:rgba(245,78,78,0.12);color:#f54e4e;border:1px solid rgba(245,78,78,0.3);white-space:nowrap;transition:background 0.18s,border-color 0.18s;display:flex;align-items:center;gap:0.4rem;flex-shrink:0;}
+    .breach-trigger-btn:hover{background:rgba(245,78,78,0.2);border-color:rgba(245,78,78,0.5);}
+
     /* FOOTER */
     footer{border-top:1px solid var(--border);background:var(--surface);padding:3rem 2rem 2rem;margin-top:auto;}
     .footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);}
@@ -266,8 +297,68 @@
         </table>
       </div>
     </div>
+
+    <!-- EMERGENCY ZONE -->
+    <div class="emergency-zone" id="emergency-zone" style="display:none;">
+      <div class="emergency-zone-header">
+        <div>
+          <div class="emergency-zone-label">&#9888; Emergency Actions</div>
+          <div class="emergency-zone-desc">For use only in the event of a confirmed data breach. Sends an immediate security notice to all registered users and past customers.</div>
+        </div>
+        <button class="breach-trigger-btn" onclick="openBreachModal()">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Data Breach Notification
+        </button>
+      </div>
+    </div>
+
   </div>
 </main>
+
+<!-- BREACH NOTIFICATION MODAL -->
+<div class="breach-overlay" id="breach-overlay" style="display:none;" onclick="if(event.target===this)closeBreachModal()">
+  <div class="breach-modal" role="dialog" aria-modal="true" aria-labelledby="breach-modal-title">
+    <div class="breach-bar"></div>
+    <div class="breach-body">
+      <div class="breach-badge">
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Emergency Action
+      </div>
+      <div class="breach-title" id="breach-modal-title">Data Breach Notification</div>
+      <div class="breach-warn">
+        This will send an immediate security email to <strong>every registered user and past customer</strong>. This action is logged and rate-limited to once per 24 hours. Only proceed if a genuine breach has occurred that requires customer notification under the NY SHIELD Act.
+      </div>
+
+      <div class="breach-field">
+        <label class="breach-label" for="breach-desc-input">What happened? <span style="color:#f87171;">*</span></label>
+        <textarea class="breach-textarea" id="breach-desc-input" rows="3" placeholder="Describe the nature of the security incident in plain language…"></textarea>
+      </div>
+      <div class="breach-field">
+        <label class="breach-label" for="breach-data-input">What customer information was involved? <span style="color:#f87171;">*</span></label>
+        <textarea class="breach-textarea" id="breach-data-input" rows="3" placeholder="e.g. Names, email addresses, and phone numbers stored in booking records…"></textarea>
+      </div>
+      <div class="breach-field">
+        <label class="breach-label" for="breach-secret-input">Emergency passphrase <span style="color:#f87171;">*</span></label>
+        <input class="breach-input" type="password" id="breach-secret-input" placeholder="Enter the BREACH_NOTIFY_SECRET value…" autocomplete="off"/>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:0.35rem;">Set in Supabase → Edge Functions → send-booking-email → Secrets</div>
+      </div>
+      <div class="breach-field">
+        <div class="breach-confirm-note">Type <strong>NOTIFY ALL USERS</strong> to enable the send button:</div>
+        <input class="breach-input" type="text" id="breach-confirm-input" placeholder="NOTIFY ALL USERS" autocomplete="off" oninput="updateBreachSendBtn()"/>
+      </div>
+
+      <div class="breach-status" id="breach-status"></div>
+
+      <div class="breach-actions">
+        <button class="breach-cancel-btn" id="breach-cancel-btn" onclick="closeBreachModal()">Cancel</button>
+        <button class="breach-send-btn" id="breach-send-btn" onclick="sendBreachNotification()" disabled>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="margin-right:0.3rem;vertical-align:-1px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Notification to All Users
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -769,6 +860,74 @@ async function adminEmailZoom(bookingId) {
   }
 }
 
+// ── BREACH NOTIFICATION MODAL ─────────────────────────────────────────────────
+
+function openBreachModal() {
+  document.getElementById('breach-overlay').style.display = 'flex';
+  document.getElementById('breach-desc-input').value = '';
+  document.getElementById('breach-data-input').value = '';
+  document.getElementById('breach-secret-input').value = '';
+  document.getElementById('breach-confirm-input').value = '';
+  document.getElementById('breach-send-btn').disabled = true;
+  document.getElementById('breach-cancel-btn').disabled = false;
+  document.getElementById('breach-cancel-btn').textContent = 'Cancel';
+  document.getElementById('breach-send-btn').textContent = 'Send Notification to All Users';
+  const s = document.getElementById('breach-status');
+  s.style.display = 'none'; s.textContent = '';
+}
+
+function closeBreachModal() {
+  document.getElementById('breach-overlay').style.display = 'none';
+}
+
+function updateBreachSendBtn() {
+  const val = document.getElementById('breach-confirm-input').value;
+  document.getElementById('breach-send-btn').disabled = val !== 'NOTIFY ALL USERS';
+}
+
+async function sendBreachNotification() {
+  const desc = document.getElementById('breach-desc-input').value.trim();
+  const data = document.getElementById('breach-data-input').value.trim();
+  const secret = document.getElementById('breach-secret-input').value.trim();
+  const statusEl = document.getElementById('breach-status');
+  const sendBtn = document.getElementById('breach-send-btn');
+  const cancelBtn = document.getElementById('breach-cancel-btn');
+  if (!desc || !data || !secret) {
+    statusEl.textContent = 'All fields are required.';
+    statusEl.className = 'breach-status error';
+    statusEl.style.display = '';
+    return;
+  }
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending…';
+  cancelBtn.disabled = true;
+  statusEl.style.display = 'none';
+  try {
+    const res = await fetch(EDGE_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+      body: JSON.stringify({ action: 'breach_notification', breach_description: desc, affected_data: data, secret }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (res.status === 429) throw new Error('A breach notification was already sent within the last 24 hours.');
+    if (res.status === 403) throw new Error('Incorrect emergency passphrase.');
+    if (!res.ok) throw new Error(json.error || 'Failed to send (status ' + res.status + ').');
+    statusEl.textContent = '✓ Notification sent to ' + json.sent + ' recipient(s). This action has been logged.';
+    statusEl.className = 'breach-status success';
+    statusEl.style.display = '';
+    sendBtn.textContent = 'Sent ✓';
+    cancelBtn.disabled = false;
+    cancelBtn.textContent = 'Close';
+  } catch (err) {
+    statusEl.textContent = 'Error: ' + (err.message || 'Unknown error');
+    statusEl.className = 'breach-status error';
+    statusEl.style.display = '';
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send Notification to All Users';
+    cancelBtn.disabled = false;
+  }
+}
+
 // Bootstrap
 (async function() {
   const { data: { session } } = await sb.auth.getSession();
@@ -783,6 +942,7 @@ async function adminEmailZoom(bookingId) {
     return;
   }
   showView('view-admin');
+  document.getElementById('emergency-zone').style.display = '';
   document.getElementById('nav-right').innerHTML = `<span class="nav-user-email">${session.user.email}</span><button class="btn-signout" onclick="sb.auth.signOut().then(()=>window.location.href='/account/')">Sign Out</button>`;
   loadBookings();
 })();
