@@ -13,7 +13,8 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const ADMIN_EMAIL = "connor@tekpair.com";
 const FROM = "Tekpair <connor@tekpair.com>";
 
-const VALID_ACTIONS = ["created", "cancelled", "rescheduled", "admin_cancelled", "admin_rescheduled", "completed", "zoom_link"];
+const VALID_ACTIONS = ["created", "cancelled", "rescheduled", "admin_cancelled", "admin_rescheduled", "completed", "zoom_link", "breach_notification"];
+const BREACH_NOTIFY_SECRET = Deno.env.get("BREACH_NOTIFY_SECRET") ?? "";
 
 // deno-lint-ignore no-explicit-any
 type Booking = Record<string, any>;
@@ -332,6 +333,71 @@ function emailZoomLink(b: Booking, zoomUrl: string): string {
   return emailShell("Your Zoom Link — Tekpair Remote Session", card);
 }
 
+// ── BREACH NOTIFICATION EMAIL ─────────────────────────────────────────────────
+
+function emailBreachNotification(description: string, affectedData: string): string {
+  const card = `
+    <!-- Red accent bar -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:-40px -40px 32px;width:calc(100% + 80px);">
+      <tr><td style="background:#f54e4e;height:4px;font-size:0;line-height:0;">&nbsp;</td></tr>
+    </table>
+
+    <!-- Warning badge -->
+    <p style="margin:0 0 16px;">
+      <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;background:rgba(245,78,78,0.15);color:#f87171;padding:3px 10px;border-radius:100px;letter-spacing:0.06em;text-transform:uppercase;">&#9888; Security Notice</span>
+    </p>
+
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Important Security Notice
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      We are writing to inform you of a security incident that may have affected information you have provided to Tekpair. We take your privacy seriously and want to be fully transparent about what happened.
+    </p>
+
+    <!-- What happened -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(245,78,78,0.2);border-radius:10px;overflow:hidden;margin-bottom:14px;">
+      <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">What Happened</td></tr>
+      <tr><td style="padding:14px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">${description}</td></tr>
+    </table>
+
+    <!-- What was affected -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(245,78,78,0.2);border-radius:10px;overflow:hidden;margin-bottom:28px;">
+      <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">What Information Was Involved</td></tr>
+      <tr><td style="padding:14px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">${affectedData}</td></tr>
+    </table>
+
+    <!-- What to do -->
+    <h2 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#eef1f8;">What You Should Do</h2>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;margin-bottom:28px;">
+      <tr>
+        <td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.7;border-bottom:1px solid rgba(255,255,255,0.06);">
+          &#x2022; &nbsp;<strong style="color:#eef1f8;">Change your Tekpair account password</strong> immediately if you have an account.
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.7;border-bottom:1px solid rgba(255,255,255,0.06);">
+          &#x2022; &nbsp;If you use the same password elsewhere, change it on those accounts as well.
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.7;">
+          &#x2022; &nbsp;Monitor your email and financial accounts for any suspicious activity.
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 20px;">${ctaBtn("https://tekpair.com/account/", "Update Your Password")}</p>
+
+    <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.7;">
+      If you have any questions or concerns, please contact us directly at
+      <a href="mailto:connor@tekpair.com" style="color:#29d4f5;text-decoration:none;">connor@tekpair.com</a>
+      or call <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
+      We sincerely apologize for this incident and any inconvenience it may cause.
+    </p>`;
+
+  return emailShell("Important Security Notice — Tekpair", card);
+}
+
 // ── ADMIN NOTIFICATION ────────────────────────────────────────────────────────
 
 function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string; newTime?: string; zoomUrl?: string } = {}): string {
@@ -470,21 +536,84 @@ serve(async (req) => {
   }
 
   try {
-    const { booking_id, action, new_date, new_time, zoom_code } = await req.json();
+    const body = await req.json();
+    const { booking_id, action, new_date, new_time, zoom_code } = body;
 
-    if (!booking_id || !action) {
-      return new Response(JSON.stringify({ error: "Missing booking_id or action" }), {
-        status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
-      });
-    }
-
-    if (!VALID_ACTIONS.includes(action)) {
-      return new Response(JSON.stringify({ error: "Invalid action" }), {
+    if (!action || !VALID_ACTIONS.includes(action)) {
+      return new Response(JSON.stringify({ error: "Invalid or missing action" }), {
         status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       });
     }
 
     const sb = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // ── BREACH NOTIFICATION (handled separately — no booking_id) ─────────────
+    if (action === "breach_notification") {
+      const { breach_description, affected_data, secret } = body;
+
+      if (!BREACH_NOTIFY_SECRET || secret !== BREACH_NOTIFY_SECRET) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 403, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      if (!breach_description || !affected_data) {
+        return new Response(JSON.stringify({ error: "breach_description and affected_data are required" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      // Rate limit: once per 24 hours globally
+      const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { data: recentBreach } = await sb
+        .from("breach_notification_log")
+        .select("id")
+        .gte("sent_at", since24h)
+        .limit(1);
+      if (recentBreach && recentBreach.length > 0) {
+        return new Response(JSON.stringify({ error: "A breach notification was already sent within the last 24 hours." }), {
+          status: 429, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      // Collect all unique recipient emails
+      const allEmails = new Set<string>();
+
+      // Registered users via auth admin API
+      const { data: authData } = await sb.auth.admin.listUsers({ perPage: 1000 });
+      authData?.users?.forEach((u) => { if (u.email) allEmails.add(u.email.toLowerCase()); });
+
+      // Guest bookings (no linked account)
+      const { data: guestBookings } = await sb
+        .from("bookings")
+        .select("email")
+        .is("user_id", null);
+      guestBookings?.forEach((b) => { if (b.email) allEmails.add(b.email.toLowerCase()); });
+
+      const emailList = Array.from(allEmails).filter(Boolean);
+      if (emailList.length === 0) {
+        return new Response(JSON.stringify({ error: "No recipient emails found" }), {
+          status: 404, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      const html = emailBreachNotification(breach_description, affected_data);
+      await Promise.all(
+        emailList.map((email) => sendEmail(email, "⚠ Important Security Notice from Tekpair", html))
+      );
+
+      // Log the breach notification
+      await sb.from("breach_notification_log").insert({ breach_description, affected_data, recipient_count: emailList.length });
+
+      return new Response(JSON.stringify({ success: true, sent: emailList.length }), {
+        status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!booking_id) {
+      return new Response(JSON.stringify({ error: "Missing booking_id" }), {
+        status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
 
     const limited = await isRateLimited(sb, booking_id, action);
     if (limited) {
