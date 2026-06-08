@@ -13,7 +13,7 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const ADMIN_EMAIL = "connor@tekpair.com";
 const FROM = "Tekpair <connor@tekpair.com>";
 
-const VALID_ACTIONS = ["created", "cancelled", "rescheduled", "admin_cancelled", "admin_rescheduled", "completed", "zoom_link", "breach_notification"];
+const VALID_ACTIONS = ["created", "cancelled", "rescheduled", "admin_cancelled", "admin_rescheduled", "completed", "zoom_link", "breach_notification", "bulk_cancel"];
 const BREACH_NOTIFY_SECRET = Deno.env.get("BREACH_NOTIFY_SECRET") ?? "";
 
 // deno-lint-ignore no-explicit-any
@@ -333,6 +333,37 @@ function emailZoomLink(b: Booking, zoomUrl: string): string {
   return emailShell("Your Zoom Link — Tekpair Remote Session", card);
 }
 
+// ── BULK CANCELLATION EMAIL ───────────────────────────────────────────────────
+
+function emailBulkCancelled(b: Booking, reason?: string): string {
+  const rows: [string, string][] = [
+    ["Type", typeLabel(b)],
+    ["Service", b.service || "—"],
+    ["Date", b.preferred_date],
+    ["Time", b.preferred_time],
+    ["Status", "Cancelled"],
+  ];
+
+  const reasonBlock = reason ? `
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;background:#13161d;border:1px solid rgba(245,197,24,0.2);border-radius:10px;overflow:hidden;">
+      <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#f5c518;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">Message from Tekpair</td></tr>
+      <tr><td style="padding:14px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">${reason}</td></tr>
+    </table>` : "";
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Appointment Cancelled
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, unfortunately we need to cancel your upcoming appointment. We sincerely apologize for the inconvenience and will be in touch to rebook when we're available.
+    </p>
+    ${detailTable(rows)}
+    ${reasonBlock}
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book a New Appointment")}</p>`;
+
+  return emailShell("Appointment Cancelled — Tekpair", card);
+}
+
 // ── BREACH NOTIFICATION EMAIL ─────────────────────────────────────────────────
 
 function emailBreachNotification(description: string, affectedData: string): string {
@@ -599,6 +630,64 @@ serve(async (req) => {
       await sb.from("breach_notification_log").insert({ breach_description, affected_data, recipient_count: emailList.length });
 
       return new Response(JSON.stringify({ success: true, sent: emailList.length }), {
+        status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+
+    // ── BULK CANCEL (no booking_id) ──────────────────────────────────────────
+    if (action === "bulk_cancel") {
+      const { cancel_to, reason } = body;
+      if (!cancel_to) {
+        return new Response(JSON.stringify({ error: "cancel_to date is required" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      const { data: bookings, error: bErr } = await sb
+        .from("bookings")
+        .select("*")
+        .in("status", ["pending", "confirmed"]);
+      if (bErr) {
+        return new Response(JSON.stringify({ error: bErr.message }), {
+          status: 500, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      const MONTH_MAP: Record<string, number> = {
+        January:0, February:1, March:2, April:3, May:4, June:5,
+        July:6, August:7, September:8, October:9, November:10, December:11,
+      };
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const endDate = new Date(cancel_to + "T23:59:59");
+
+      const toCancel = (bookings || []).filter((b) => {
+        const m = (b.preferred_date || "").match(/^(\w+)\s+(\d+),\s+(\d+)$/);
+        if (!m) return false;
+        const month = MONTH_MAP[m[1]];
+        if (month === undefined) return false;
+        const d = new Date(parseInt(m[3]), month, parseInt(m[2]));
+        return d >= today && d <= endDate;
+      });
+
+      if (toCancel.length === 0) {
+        return new Response(JSON.stringify({ success: true, cancelled: 0 }), {
+          status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      const ids = toCancel.map((b) => b.id);
+      const { error: updateErr } = await sb.from("bookings").update({ status: "cancelled" }).in("id", ids);
+      if (updateErr) {
+        return new Response(JSON.stringify({ error: updateErr.message }), {
+          status: 500, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+
+      await Promise.all(
+        toCancel.map((b) => sendEmail(b.email, "Appointment Cancelled — Tekpair", emailBulkCancelled(b, reason)))
+      );
+
+      return new Response(JSON.stringify({ success: true, cancelled: toCancel.length }), {
         status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       });
     }
