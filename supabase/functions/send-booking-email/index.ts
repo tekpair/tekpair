@@ -38,73 +38,89 @@ async function logSent(sb: ReturnType<typeof createClient>, bookingId: string, a
 
 // ── TEMPLATE HELPERS ──────────────────────────────────────────────────────────
 
-const LOGO = `<img src="https://tekpair.com/logo-email.png" width="220" height="48" alt="Tekpair" style="display:block;border:0;margin:0 auto;"/>`;
+const LOGO = `<img src="https://tekpair.com/logo-email.png" width="220" height="48" alt="Tekpair" style="display:block;border:0;" />`;
 
-function emailShell(cardHtml: string): string {
+function emailShell(title: string, cardInner: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
-<body style="margin:0;padding:0;background:#0d0f14;font-family:Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0d0f14;padding:40px 16px;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
-        <tr><td align="center" style="padding-bottom:24px;">${LOGO}</td></tr>
-        <tr>
-          <td style="background:#181b24;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;">
-            ${cardHtml}
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:24px 0 0;">
-            <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;">&copy; 2026 Tekpair &middot; Cohoes, NY &middot; Capital Region</p>
-            <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;">
-              <a href="mailto:connor@tekpair.com" style="color:#8a95b0;text-decoration:none;">connor@tekpair.com</a>
-              &nbsp;&middot;&nbsp;
-              <a href="tel:+15182796823" style="color:#8a95b0;text-decoration:none;">(518) 279-6823</a>
-            </p>
-          </td>
-        </tr>
-      </table>
-    </td></tr>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0d0f14;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0d0f14;">
+    <tr>
+      <td align="center" style="padding:48px 20px 40px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom:28px;">
+              ${LOGO}
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#181b24;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:40px 40px 36px;">
+              ${cardInner}
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:28px 0 0;">
+              <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;line-height:1.7;">
+                &copy; 2026 Tekpair &middot; Cohoes, NY &middot; Capital Region
+              </p>
+              <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;line-height:1.7;">
+                <a href="mailto:connor@tekpair.com" style="color:#8a95b0;text-decoration:none;">connor@tekpair.com</a>
+                &nbsp;&middot;&nbsp;
+                <a href="tel:+15182796823" style="color:#8a95b0;text-decoration:none;">(518) 279-6823</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
   </table>
 </body>
 </html>`;
 }
 
-function detailTable(rows: [string, string][]): string {
-  const inner = rows.map(([label, value]) => `
-    <tr>
-      <td style="padding:10px 20px;color:#8a95b0;font-size:13px;font-family:Arial,sans-serif;border-bottom:1px solid rgba(255,255,255,0.06);white-space:nowrap;width:130px;">${label}</td>
-      <td style="padding:10px 20px;color:#eef1f8;font-size:13px;font-family:Arial,sans-serif;border-bottom:1px solid rgba(255,255,255,0.06);">${value}</td>
-    </tr>`).join("");
-  return `<table width="100%" cellpadding="0" cellspacing="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">${inner}</table>`;
+function ctaBtn(url: string, label: string): string {
+  return `<table cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td style="background-color:#29d4f5;border-radius:10px;">
+      <a href="${url}" style="display:inline-block;padding:14px 32px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#0d0f14;text-decoration:none;border-radius:10px;">${label}</a>
+    </td>
+  </tr>
+</table>`;
 }
 
-function ctaBtn(url: string, text: string, bg = "#29d4f5", color = "#0d0f14"): string {
-  return `<table cellpadding="0" cellspacing="0" border="0">
-    <tr><td style="background:${bg};border-radius:10px;">
-      <a href="${url}" style="display:inline-block;padding:14px 32px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:${color};text-decoration:none;border-radius:10px;">${text}</a>
-    </td></tr>
-  </table>`;
+function detailTable(rows: [string, string][]): string {
+  const inner = rows.map(([label, value], i) => {
+    const isLast = i === rows.length - 1;
+    const border = isLast ? "" : "border-bottom:1px solid rgba(255,255,255,0.06);";
+    return `<tr>
+      <td style="padding:11px 16px;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;${border}white-space:nowrap;width:110px;vertical-align:top;">${label}</td>
+      <td style="padding:11px 16px;font-family:Arial,sans-serif;font-size:13px;color:#eef1f8;${border}line-height:1.5;">${value}</td>
+    </tr>`;
+  }).join("");
+  return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">${inner}</table>`;
 }
 
 function issueBlock(desc: string): string {
-  return `<table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
-    <tr><td style="padding:12px 20px;color:#8a95b0;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid rgba(255,255,255,0.06);">Issue Description</td></tr>
-    <tr><td style="padding:12px 20px;color:#eef1f8;font-size:13px;font-family:Arial,sans-serif;line-height:1.5;">${desc}</td></tr>
-  </table>`;
+  return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:12px;background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">
+  <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#7f8699;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">Issue Description</td></tr>
+  <tr><td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.6;">${desc}</td></tr>
+</table>`;
 }
 
-function cardBody(headingHtml: string, contentHtml: string): string {
-  return `<div style="padding:36px 40px;">${headingHtml}${contentHtml}</div>`;
-}
-
-function h1(text: string): string {
-  return `<h1 style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;">${text}</h1>`;
-}
-
-function p(text: string): string {
-  return `<p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;line-height:1.7;">${text}</p>`;
+function noteText(text: string): string {
+  return `<p style="margin:28px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.6;">${text}</p>`;
 }
 
 function typeLabel(b: Booking): string {
@@ -126,13 +142,22 @@ function emailCreated(b: Booking): string {
     ...(b.address ? [["Address", b.address] as [string, string]] : []),
     ["Status", statusLabel(b.status)],
   ];
-  return emailShell(cardBody(
-    h1("Booking Received!"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>We've received your booking request and will follow up to confirm your appointment. If you need to reach us directly, reply to this email or give us a call.`) +
-    detailTable(rows) +
-    (b.issue_description ? issueBlock(b.issue_description) : "") +
-    `<div style="margin-top:28px;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</div>`
-  ));
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      We've got you booked!
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, your request is in. We'll review it and follow up to confirm your appointment. Reply to this email or give us a call if you need anything in the meantime.
+    </p>
+    ${detailTable(rows)}
+    ${b.issue_description ? issueBlock(b.issue_description) : ""}
+    <p style="margin:28px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;line-height:1.7;">
+      Need to make changes? Visit your account page anytime.
+    </p>
+    <p style="margin:16px 0 0;">${ctaBtn("https://tekpair.com/account/", "View Your Booking")}</p>`;
+
+  return emailShell("Booking Confirmed — Tekpair", card);
 }
 
 function emailCancelled(b: Booking): string {
@@ -143,12 +168,18 @@ function emailCancelled(b: Booking): string {
     ["Time", b.preferred_time],
     ["Status", "Cancelled"],
   ];
-  return emailShell(cardBody(
-    h1("Booking Cancelled"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>Your booking has been cancelled as requested. If this was a mistake or you'd like to rebook, we're just a click away.`) +
-    detailTable(rows) +
-    `<div style="margin-top:28px;">${ctaBtn("https://tekpair.com/#booking", "Book Again")}</div>`
-  ));
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Booking Cancelled
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, your booking has been cancelled. If this was a mistake or you'd like to rebook, it only takes a minute.
+    </p>
+    ${detailTable(rows)}
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book Again")}</p>`;
+
+  return emailShell("Booking Cancelled — Tekpair", card);
 }
 
 function emailRescheduled(b: Booking): string {
@@ -160,13 +191,19 @@ function emailRescheduled(b: Booking): string {
     ...(b.address ? [["Address", b.address] as [string, string]] : []),
     ["Status", "Rescheduled"],
   ];
-  return emailShell(cardBody(
-    h1("Booking Rescheduled"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>Your appointment has been rescheduled. We'll confirm the new time shortly. Need to make further changes? Visit your account page.`) +
-    detailTable(rows) +
-    (b.issue_description ? issueBlock(b.issue_description) : "") +
-    `<div style="margin-top:28px;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</div>`
-  ));
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Booking Rescheduled
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, your new date and time are confirmed below. We'll reach out shortly to lock things in. Need to adjust again? Your account page is always open.
+    </p>
+    ${detailTable(rows)}
+    ${b.issue_description ? issueBlock(b.issue_description) : ""}
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</p>`;
+
+  return emailShell("Booking Rescheduled — Tekpair", card);
 }
 
 function emailAdminCancelled(b: Booking): string {
@@ -177,12 +214,18 @@ function emailAdminCancelled(b: Booking): string {
     ["Time", b.preferred_time],
     ["Status", "Cancelled"],
   ];
-  return emailShell(cardBody(
-    h1("Your Appointment Has Been Cancelled"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>We're sorry to inform you that your appointment has been cancelled by our team. We apologize for any inconvenience. Please feel free to rebook at your convenience or contact us with any questions.`) +
-    detailTable(rows) +
-    `<div style="margin-top:28px;">${ctaBtn("https://tekpair.com/#booking", "Book a New Appointment")}</div>`
-  ));
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Your Appointment Has Been Cancelled
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, unfortunately we've had to cancel your upcoming appointment. We apologize for the inconvenience — please feel free to rebook at a time that works for you, or reply to this email if you have questions.
+    </p>
+    ${detailTable(rows)}
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book a New Appointment")}</p>`;
+
+  return emailShell("Your Appointment Has Been Cancelled — Tekpair", card);
 }
 
 function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): string {
@@ -194,30 +237,50 @@ function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): 
     ...(b.address ? [["Address", b.address] as [string, string]] : []),
     ["Status", "Rescheduled"],
   ];
-  return emailShell(cardBody(
-    h1("Your Appointment Has Been Rescheduled"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>We've updated your appointment to a new date and time. See the details below. If this doesn't work for you, please contact us or manage your booking online.`) +
-    detailTable(rows) +
-    (b.issue_description ? issueBlock(b.issue_description) : "") +
-    `<div style="margin-top:28px;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</div>`
-  ));
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Your Appointment Has Been Rescheduled
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, we've updated your appointment to a new date and time. The details are below. If this doesn't work for you, reply to this email or manage your booking online.
+    </p>
+    ${detailTable(rows)}
+    ${b.issue_description ? issueBlock(b.issue_description) : ""}
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</p>`;
+
+  return emailShell("Your Appointment Has Been Rescheduled — Tekpair", card);
 }
 
 function emailCompleted(b: Booking): string {
-  const satisfactionBlock = `
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:24px;">
-      <tr><td style="padding:24px 20px;text-align:center;">
-        <p style="margin:0 0 12px;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;">We hope everything went smoothly!</p>
-        <p style="margin:0;font-size:28px;letter-spacing:6px;">&#11088;&#11088;&#11088;&#11088;&#11088;</p>
-      </td></tr>
-    </table>`;
-  return emailShell(cardBody(
-    h1("How Did We Do?"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>Thank you for choosing Tekpair! Your service has been completed. We'd love to hear about your experience — your feedback helps us continue serving the Capital Region.`) +
-    satisfactionBlock +
-    `<div style="margin-bottom:16px;">${ctaBtn("https://g.page/r/tekpair/review", "Leave a Google Review")}</div>` +
-    `<p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;text-align:center;">Need anything else? <a href="https://tekpair.com/#booking" style="color:#29d4f5;text-decoration:none;">Book another service</a></p>`
-  ));
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Thanks for choosing Tekpair
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, your session is complete. We hope everything went smoothly! If you have a moment, a quick Google review means the world to a local business — it really helps us out.
+    </p>
+    <!-- Review highlight box -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:28px;">
+      <tr>
+        <td style="padding:22px 20px;text-align:center;">
+          <p style="margin:0 0 10px;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;">How was your experience?</p>
+          <p style="margin:0 0 18px;font-family:Arial,sans-serif;font-size:26px;letter-spacing:4px;">&#11088;&#11088;&#11088;&#11088;&#11088;</p>
+          <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+            <tr>
+              <td style="background-color:#29d4f5;border-radius:10px;">
+                <a href="https://g.page/r/tekpair/review" style="display:inline-block;padding:14px 32px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#0d0f14;text-decoration:none;border-radius:10px;">Leave a Google Review</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.6;">
+      Need us again? <a href="https://tekpair.com/#booking" style="color:#29d4f5;text-decoration:none;">Book another service</a> anytime. We're always happy to help.
+    </p>`;
+
+  return emailShell("How Did We Do? — Tekpair", card);
 }
 
 function emailZoomLink(b: Booking, zoomUrl: string): string {
@@ -227,13 +290,26 @@ function emailZoomLink(b: Booking, zoomUrl: string): string {
     ["Time", b.preferred_time],
     ["Session Type", "Remote — Zoom"],
   ];
-  return emailShell(cardBody(
-    h1("Your Zoom Link is Ready"),
-    p(`Hi ${b.first_name || "there"},<br/><br/>Your remote session is confirmed and your Zoom link is ready. Click the button below to join at the scheduled time. Make sure Zoom is installed and your device is ready before the session.`) +
-    detailTable(rows) +
-    `<div style="margin-top:28px;">${ctaBtn(zoomUrl, "Join Zoom Meeting")}</div>` +
-    `<p style="margin:20px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;">Or copy this link into your browser: <span style="color:#29d4f5;word-break:break-all;">${zoomUrl}</span></p>`
-  ));
+
+  const card = `
+    <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+      Your Zoom Link is Ready
+    </h1>
+    <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+      Hi ${b.first_name || "there"}, everything is set for your remote session. Click the button below to join at the scheduled time. Make sure Zoom is installed and your device is ready before we start.
+    </p>
+    ${detailTable(rows)}
+    <!-- Big join button -->
+    <p style="margin:28px 0 16px;">${ctaBtn(zoomUrl, "Join Zoom Meeting")}</p>
+    <!-- Fallback link -->
+    <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;line-height:1.6;">
+      Or paste this link into your browser:
+    </p>
+    <p style="margin:4px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#29d4f5;line-height:1.6;word-break:break-all;">
+      ${zoomUrl}
+    </p>`;
+
+  return emailShell("Your Zoom Link — Tekpair Remote Session", card);
 }
 
 // ── ADMIN NOTIFICATION ────────────────────────────────────────────────────────
@@ -243,9 +319,9 @@ function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string;
     created: "New Booking",
     cancelled: "Customer Cancelled",
     rescheduled: "Customer Rescheduled",
-    admin_cancelled: "Admin Cancelled (customer notified)",
-    admin_rescheduled: "Admin Rescheduled (customer notified)",
-    completed: "Marked Complete (review email sent)",
+    admin_cancelled: "Admin Cancelled — Customer Notified",
+    admin_rescheduled: "Admin Rescheduled — Customer Notified",
+    completed: "Marked Complete — Review Email Sent",
     zoom_link: "Zoom Link Sent to Customer",
   };
   const accents: Record<string, string> = {
@@ -273,49 +349,77 @@ function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string;
     ...(extras.zoomUrl ? [["Zoom URL", extras.zoomUrl] as [string, string]] : []),
   ];
 
-  const rowsHtml = rows.map(([label, value]) => `
-    <tr>
-      <td style="padding:9px 20px;color:#8a95b0;font-size:13px;font-family:Arial,sans-serif;border-bottom:1px solid rgba(255,255,255,0.06);white-space:nowrap;width:130px;">${label}</td>
-      <td style="padding:9px 20px;color:#eef1f8;font-size:13px;font-family:Arial,sans-serif;border-bottom:1px solid rgba(255,255,255,0.06);">${value}</td>
-    </tr>`).join("");
+  const rowsHtml = rows.map(([label, value], i) => {
+    const isLast = i === rows.length - 1;
+    const border = isLast ? "" : "border-bottom:1px solid rgba(255,255,255,0.06);";
+    return `<tr>
+      <td style="padding:11px 16px;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;${border}white-space:nowrap;width:110px;vertical-align:top;">${label}</td>
+      <td style="padding:11px 16px;font-family:Arial,sans-serif;font-size:13px;color:#eef1f8;${border}line-height:1.5;word-break:break-all;">${value}</td>
+    </tr>`;
+  }).join("");
 
   return `<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
-<body style="margin:0;padding:0;background:#0d0f14;font-family:Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0d0f14;padding:40px 16px;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
-        <tr><td align="center" style="padding-bottom:24px;">${LOGO}</td></tr>
-        <tr>
-          <td style="background:#181b24;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;">
-            <div style="height:4px;background:${accent};border-radius:16px 16px 0 0;"></div>
-            <div style="padding:28px 40px 36px;">
-              <div style="margin-bottom:16px;">
-                <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;background:rgba(41,212,245,0.15);color:#29d4f5;padding:3px 10px;border-radius:100px;letter-spacing:0.05em;text-transform:uppercase;">Admin Notification</span>
-              </div>
-              <h1 style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:20px;font-weight:800;color:#eef1f8;">${actionLabel}</h1>
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">${rowsHtml}</table>
-              ${b.issue_description ? `
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
-                <tr><td style="padding:12px 20px;color:#8a95b0;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid rgba(255,255,255,0.06);">Issue Description</td></tr>
-                <tr><td style="padding:12px 20px;color:#eef1f8;font-size:13px;font-family:Arial,sans-serif;line-height:1.5;">${b.issue_description}</td></tr>
-              </table>` : ""}
-              <table cellpadding="0" cellspacing="0" border="0" style="margin-top:24px;">
-                <tr><td style="background:#29d4f5;border-radius:10px;">
-                  <a href="https://tekpair.com/admin/" style="display:inline-block;padding:12px 24px;font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#0d0f14;text-decoration:none;border-radius:10px;">Open Admin Panel</a>
-                </td></tr>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin: ${actionLabel}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0d0f14;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0d0f14;">
+    <tr>
+      <td align="center" style="padding:48px 20px 40px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom:28px;">
+              ${LOGO}
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#181b24;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;">
+              <!-- Accent bar -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td style="background:${accent};height:4px;font-size:0;line-height:0;">&nbsp;</td></tr>
               </table>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:24px 0 0;">
-            <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;">Tekpair Admin Notification &mdash; Do not share this email</p>
-          </td>
-        </tr>
-      </table>
-    </td></tr>
+              <div style="padding:32px 40px 36px;">
+                <!-- Admin badge -->
+                <p style="margin:0 0 16px;">
+                  <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;background:rgba(41,212,245,0.14);color:#29d4f5;padding:3px 10px;border-radius:100px;letter-spacing:0.06em;text-transform:uppercase;">Admin Notification</span>
+                </p>
+                <h1 style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:20px;font-weight:800;color:#eef1f8;line-height:1.3;">${actionLabel}</h1>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">${rowsHtml}</table>
+                ${b.issue_description ? `
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:12px;background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">
+                  <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#7f8699;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">Issue Description</td></tr>
+                  <tr><td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.6;">${b.issue_description}</td></tr>
+                </table>` : ""}
+                <table cellpadding="0" cellspacing="0" border="0" style="margin-top:24px;">
+                  <tr>
+                    <td style="background-color:#29d4f5;border-radius:10px;">
+                      <a href="https://tekpair.com/admin/" style="display:inline-block;padding:12px 24px;font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#0d0f14;text-decoration:none;border-radius:10px;">Open Admin Panel</a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:28px 0 0;">
+              <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#7f8699;line-height:1.7;">
+                Tekpair Admin Notification &mdash; Do not share this email
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
   </table>
 </body>
 </html>`;
@@ -392,7 +496,6 @@ serve(async (req) => {
     }
 
     const tLabel = booking.type === "inhome" ? "In-Home Visit" : "Remote Session";
-
     let customerSubject = "";
     let customerHtml = "";
     let notifyAdmin = false;
@@ -433,8 +536,11 @@ serve(async (req) => {
 
     const sends: Promise<void>[] = [sendEmail(booking.email, customerSubject, customerHtml)];
     if (notifyAdmin) {
-      sends.push(sendEmail(ADMIN_EMAIL, `[Admin] ${customerSubject}`,
-        buildAdminEmail(booking, action, { newDate: new_date, newTime: new_time, zoomUrl })));
+      sends.push(sendEmail(
+        ADMIN_EMAIL,
+        `[Admin] ${customerSubject}`,
+        buildAdminEmail(booking, action, { newDate: new_date, newTime: new_time, zoomUrl }),
+      ));
     }
 
     await Promise.all(sends);
