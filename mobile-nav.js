@@ -19,8 +19,6 @@
       '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
     policy:
       '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    faq:
-      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
     user:
       '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
   };
@@ -31,7 +29,6 @@
     { href: '/about/',    label: 'About',    ic: 'about'  },
     null,
     { href: '/policies/', label: 'Policies', ic: 'policy' },
-    { href: '/faq/',      label: 'FAQ',      ic: 'faq'    },
     { href: '/account/',  label: 'Account',  ic: 'user'   },
   ];
 
@@ -39,7 +36,7 @@
 
   var css =
     '#mnav{' +
-      'position:fixed;bottom:0;left:0;right:0;z-index:500;' +
+      'position:fixed;top:auto;bottom:0;left:0;right:0;z-index:500;' +
       'display:none;align-items:stretch;' +
       'background:' + BG + ';' +
       'border-top:1px solid rgba(255,255,255,0.07);' +
@@ -90,8 +87,9 @@
   s.textContent = css;
   document.head.appendChild(s);
 
-  var nav = document.createElement('nav');
+  var nav = document.createElement('div');
   nav.id = 'mnav';
+  nav.setAttribute('role', 'navigation');
   nav.setAttribute('aria-label', 'Main navigation');
 
   var row = document.createElement('div');
