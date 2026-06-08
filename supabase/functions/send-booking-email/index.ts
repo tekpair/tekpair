@@ -149,16 +149,15 @@ function emailCreated(b: Booking): string {
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;background:#13161d;border:1px solid rgba(245,197,24,0.3);border-radius:10px;overflow:hidden;">
       <tr>
         <td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#f5c518;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">
-          &#9888; Payment Required Before Session
+          &#9888; Payment for Remote Session
         </td>
       </tr>
       <tr>
         <td style="padding:14px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">
-          Remote sessions require payment in advance to secure your appointment. Your Zoom link will be sent once we confirm everything is ready — <strong style="color:#eef1f8;">if payment has not been received by that time, your session will be cancelled.</strong>
+          We'll send you a <strong style="color:#eef1f8;">Square payment link</strong> within 24 hours to the email address on this booking. Your Zoom link will be released once payment is confirmed.
         </td>
       </tr>
     </table>
-    <p style="margin:20px 0 0;">${ctaBtn("https://tekpair.com", "Complete Payment")}</p>
     <p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.6;text-align:center;">
       Questions about payment? Reply to this email or call <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
     </p>` : "";
