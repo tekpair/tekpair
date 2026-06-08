@@ -384,9 +384,8 @@ function emailBreachNotification(description: string, affectedData: string): str
     <p style="margin:0 0 20px;">${ctaBtn("https://tekpair.com/account/", "Update Your Password")}</p>
 
     <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.7;">
-      If you have any questions or concerns, please contact us directly at
-      <a href="mailto:connor@tekpair.com" style="color:#29d4f5;text-decoration:none;">connor@tekpair.com</a>
-      or call <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
+      If you have any questions or concerns, please call us at
+      <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
       We sincerely apologize for this incident and any inconvenience it may cause.
     </p>`;
 
@@ -398,12 +397,12 @@ function emailBreachNotification(description: string, affectedData: string): str
 function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string; newTime?: string; zoomUrl?: string } = {}): string {
   const labels: Record<string, string> = {
     created: "New Booking",
-    cancelled: "Customer Cancelled",
-    rescheduled: "Customer Rescheduled",
-    admin_cancelled: "Admin Cancelled — Customer Notified",
-    admin_rescheduled: "Admin Rescheduled — Customer Notified",
+    cancelled: "Client Cancelled",
+    rescheduled: "Client Rescheduled",
+    admin_cancelled: "Admin Cancelled — Client Notified",
+    admin_rescheduled: "Admin Rescheduled — Client Notified",
     completed: "Marked Complete — Review Email Sent",
-    zoom_link: "Zoom Link Sent to Customer",
+    zoom_link: "Zoom Link Sent to Client",
   };
   const accents: Record<string, string> = {
     created: "#29d4f5",
