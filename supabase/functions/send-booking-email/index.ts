@@ -337,11 +337,6 @@ function emailZoomLink(b: Booking, zoomUrl: string): string {
 
 function emailBreachNotification(description: string, affectedData: string): string {
   const card = `
-    <!-- Red accent bar -->
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:-40px -40px 32px;width:calc(100% + 80px);">
-      <tr><td style="background:#f54e4e;height:4px;font-size:0;line-height:0;">&nbsp;</td></tr>
-    </table>
-
     <!-- Warning badge -->
     <p style="margin:0 0 16px;">
       <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;background:rgba(245,78,78,0.15);color:#f87171;padding:3px 10px;border-radius:100px;letter-spacing:0.06em;text-transform:uppercase;">&#9888; Security Notice</span>
