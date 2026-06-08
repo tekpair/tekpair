@@ -185,12 +185,32 @@
     .breach-status.error{color:#f87171;}
     .breach-status.success{color:#34c76f;}
     /* Emergency zone */
-    .emergency-zone{margin:2.5rem 2rem 0;padding:1.25rem 1.5rem;background:rgba(245,78,78,0.05);border:1px solid rgba(245,78,78,0.2);border-radius:12px;}
+    .ea-wrap{margin:2.5rem 0 0;display:flex;flex-direction:column;gap:0.75rem;}
+    .emergency-zone{padding:1.25rem 1.5rem;background:rgba(245,78,78,0.05);border:1px solid rgba(245,78,78,0.2);border-radius:12px;}
+    .emergency-zone-yellow{padding:1.25rem 1.5rem;background:rgba(245,197,24,0.05);border:1px solid rgba(245,197,24,0.22);border-radius:12px;}
     .emergency-zone-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
     .emergency-zone-label{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:0.25rem;}
+    .emergency-zone-label-yellow{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f5c518;margin-bottom:0.25rem;}
     .emergency-zone-desc{font-size:0.82rem;color:var(--muted);line-height:1.5;}
     .breach-trigger-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;padding:0.55rem 1.1rem;border-radius:8px;cursor:pointer;background:rgba(245,78,78,0.12);color:#f54e4e;border:1px solid rgba(245,78,78,0.3);white-space:nowrap;transition:background 0.18s,border-color 0.18s;display:flex;align-items:center;gap:0.4rem;flex-shrink:0;}
     .breach-trigger-btn:hover{background:rgba(245,78,78,0.2);border-color:rgba(245,78,78,0.5);}
+    .bulk-trigger-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;padding:0.55rem 1.1rem;border-radius:8px;cursor:pointer;background:rgba(245,197,24,0.12);color:#f5c518;border:1px solid rgba(245,197,24,0.3);white-space:nowrap;transition:background 0.18s,border-color 0.18s;display:flex;align-items:center;gap:0.4rem;flex-shrink:0;}
+    .bulk-trigger-btn:hover{background:rgba(245,197,24,0.2);border-color:rgba(245,197,24,0.5);}
+    /* Bulk cancel modal */
+    .bulk-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:900;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+    .bulk-modal{background:#181b24;border:1px solid rgba(245,197,24,0.3);border-radius:16px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.6);}
+    .bulk-bar{height:4px;background:#f5c518;border-radius:16px 16px 0 0;}
+    .bulk-badge{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(245,197,24,0.14);color:#f5c518;padding:0.2rem 0.6rem;border-radius:100px;margin-bottom:0.9rem;}
+    .bulk-send-btn{font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;padding:0.6rem 1.4rem;border-radius:8px;cursor:pointer;background:#f5c518;color:#0d0f14;border:none;transition:opacity 0.18s;}
+    .bulk-send-btn:disabled{opacity:0.35;cursor:not-allowed;}
+    .bulk-send-btn:not(:disabled):hover{opacity:0.85;}
+    .bulk-preview-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:0.45rem 0.9rem;border-radius:8px;cursor:pointer;background:rgba(245,197,24,0.1);color:#f5c518;border:1px solid rgba(245,197,24,0.3);transition:background 0.18s;}
+    .bulk-preview-btn:disabled{opacity:0.5;cursor:not-allowed;}
+    .bulk-preview-btn:not(:disabled):hover{background:rgba(245,197,24,0.18);}
+    .bulk-preview-result{margin-top:0.6rem;font-size:0.84rem;line-height:1.6;display:none;padding:0.65rem 0.9rem;border-radius:8px;}
+    .bulk-status{margin-top:1rem;font-size:0.84rem;line-height:1.6;display:none;}
+    .bulk-status.error{color:#f87171;}
+    .bulk-status.success{color:#34c76f;}
 
     /* FOOTER */
     footer{border-top:1px solid var(--border);background:var(--surface);padding:3rem 2rem 2rem;margin-top:auto;}
@@ -299,21 +319,79 @@
     </div>
 
     <!-- EMERGENCY ZONE -->
-    <div class="emergency-zone" id="emergency-zone" style="display:none;">
-      <div class="emergency-zone-header">
-        <div>
-          <div class="emergency-zone-label">&#9888; Emergency Actions</div>
-          <div class="emergency-zone-desc">For use only in the event of a confirmed data breach. Sends an immediate security notice to all registered users and past clients.</div>
+    <div class="ea-wrap" id="emergency-zone" style="display:none;">
+      <!-- Bulk Cancel (yellow) -->
+      <div class="emergency-zone-yellow">
+        <div class="emergency-zone-header">
+          <div>
+            <div class="emergency-zone-label-yellow">&#9888; Operational Emergency</div>
+            <div class="emergency-zone-desc">Cancel all pending and confirmed bookings up to a chosen date and notify each client. Use for unexpected closures, illness, or scheduling emergencies.</div>
+          </div>
+          <button class="bulk-trigger-btn" onclick="openBulkCancelModal()">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="18"/><line x1="14" y1="14" x2="10" y2="18"/></svg>
+            Bulk Cancel Bookings
+          </button>
         </div>
-        <button class="breach-trigger-btn" onclick="openBreachModal()">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Data Breach Notification
-        </button>
+      </div>
+      <!-- Data Breach (red) -->
+      <div class="emergency-zone">
+        <div class="emergency-zone-header">
+          <div>
+            <div class="emergency-zone-label">&#9888; Security Emergency</div>
+            <div class="emergency-zone-desc">For use only in the event of a confirmed data breach. Sends an immediate security notice to all registered users and past clients.</div>
+          </div>
+          <button class="breach-trigger-btn" onclick="openBreachModal()">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Data Breach Notification
+          </button>
+        </div>
       </div>
     </div>
 
   </div>
 </main>
+
+<!-- BULK CANCEL MODAL -->
+<div class="bulk-overlay" id="bulk-overlay" style="display:none;" onclick="if(event.target===this)closeBulkCancelModal()">
+  <div class="bulk-modal" role="dialog" aria-modal="true" aria-labelledby="bulk-modal-title">
+    <div class="bulk-bar"></div>
+    <div class="breach-body">
+      <div class="bulk-badge">
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Bulk Action
+      </div>
+      <div class="breach-title" id="bulk-modal-title">Bulk Cancel Upcoming Bookings</div>
+      <div class="breach-warn" style="border-color:rgba(245,197,24,0.25);background:rgba(245,197,24,0.07);">
+        This will cancel all <strong>pending and confirmed</strong> bookings up to the selected date and send each client a cancellation email. This cannot be undone — only use during genuine emergencies.
+      </div>
+
+      <div class="breach-field">
+        <label class="breach-label" for="bulk-date-input">Cancel all bookings up to: <span style="color:#f87171;">*</span></label>
+        <input class="breach-input" type="date" id="bulk-date-input" oninput="onBulkDateChange()"/>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:0.35rem;">All pending &amp; confirmed bookings on or before this date will be cancelled.</div>
+      </div>
+      <div class="breach-field">
+        <label class="breach-label" for="bulk-reason-input">Message to clients <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <textarea class="breach-textarea" id="bulk-reason-input" rows="2" placeholder="e.g. Due to a personal emergency I need to cancel upcoming appointments. I'll be in touch to rebook…"></textarea>
+      </div>
+      <div class="breach-field">
+        <button class="bulk-preview-btn" id="bulk-preview-btn" onclick="previewBulkCancel()" disabled>Preview Affected Bookings</button>
+        <div class="bulk-preview-result" id="bulk-preview-result"></div>
+      </div>
+      <div class="breach-field">
+        <div class="breach-confirm-note">Type <strong style="color:#f5c518;">CANCEL ALL BOOKINGS</strong> to enable the send button:</div>
+        <input class="breach-input" type="text" id="bulk-confirm-input" placeholder="CANCEL ALL BOOKINGS" autocomplete="off" oninput="updateBulkCancelSendBtn()"/>
+      </div>
+
+      <div class="bulk-status" id="bulk-status"></div>
+
+      <div class="breach-actions">
+        <button class="breach-cancel-btn" id="bulk-dismiss-btn" onclick="closeBulkCancelModal()">Cancel</button>
+        <button class="bulk-send-btn" id="bulk-send-btn" onclick="sendBulkCancel()" disabled>Cancel Bookings &amp; Notify Clients</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- BREACH NOTIFICATION MODAL -->
 <div class="breach-overlay" id="breach-overlay" style="display:none;" onclick="if(event.target===this)closeBreachModal()">
@@ -856,6 +934,123 @@ async function adminEmailZoom(bookingId) {
   } catch (err) {
     setBtnState(btnId, 'idle', 'Send Zoom Link');
     showToast(err.message || 'Failed to send.', 'error');
+  }
+}
+
+// ── BULK CANCEL MODAL ─────────────────────────────────────────────────────────
+
+const MONTHS_IDX = { January:0, February:1, March:2, April:3, May:4, June:5, July:6, August:7, September:8, October:9, November:10, December:11 };
+
+function parsePrefDate(dateStr) {
+  const m = (dateStr || '').match(/^(\w+)\s+(\d+),\s+(\d+)$/);
+  if (!m) return null;
+  const month = MONTHS_IDX[m[1]];
+  if (month === undefined) return null;
+  return new Date(parseInt(m[3]), month, parseInt(m[2]));
+}
+
+function openBulkCancelModal() {
+  const today = new Date().toISOString().split('T')[0];
+  const maxD = new Date(); maxD.setMonth(maxD.getMonth() + 2);
+  const inp = document.getElementById('bulk-date-input');
+  inp.min = today; inp.max = maxD.toISOString().split('T')[0]; inp.value = '';
+  document.getElementById('bulk-reason-input').value = '';
+  document.getElementById('bulk-confirm-input').value = '';
+  document.getElementById('bulk-send-btn').disabled = true;
+  document.getElementById('bulk-send-btn').textContent = 'Cancel Bookings & Notify Clients';
+  document.getElementById('bulk-dismiss-btn').disabled = false;
+  document.getElementById('bulk-dismiss-btn').textContent = 'Cancel';
+  document.getElementById('bulk-preview-btn').disabled = true;
+  const pr = document.getElementById('bulk-preview-result');
+  pr.style.display = 'none'; pr.textContent = '';
+  const st = document.getElementById('bulk-status');
+  st.style.display = 'none'; st.textContent = '';
+  document.getElementById('bulk-overlay').style.display = 'flex';
+}
+
+function closeBulkCancelModal() {
+  document.getElementById('bulk-overlay').style.display = 'none';
+}
+
+function onBulkDateChange() {
+  const val = document.getElementById('bulk-date-input').value;
+  document.getElementById('bulk-preview-btn').disabled = !val;
+  const pr = document.getElementById('bulk-preview-result');
+  pr.style.display = 'none'; pr.textContent = '';
+  updateBulkCancelSendBtn();
+}
+
+async function previewBulkCancel() {
+  const cancelTo = document.getElementById('bulk-date-input').value;
+  if (!cancelTo) return;
+  const previewEl = document.getElementById('bulk-preview-result');
+  const previewBtn = document.getElementById('bulk-preview-btn');
+  previewBtn.disabled = true;
+  previewEl.textContent = 'Loading…';
+  previewEl.style.cssText = 'display:block;padding:0.65rem 0.9rem;border-radius:8px;font-size:0.84rem;line-height:1.6;';
+  try {
+    const { data, error } = await sb.from('bookings').select('id,preferred_date,status').in('status', ['pending', 'confirmed']);
+    if (error) throw new Error(error.message);
+    const today = new Date(); today.setHours(0,0,0,0);
+    const endDate = new Date(cancelTo + 'T23:59:59');
+    const affected = (data || []).filter(b => {
+      const d = parsePrefDate(b.preferred_date);
+      return d && d >= today && d <= endDate;
+    });
+    if (affected.length === 0) {
+      previewEl.textContent = '✓ No pending or confirmed bookings found in this range.';
+      previewEl.style.cssText += 'background:rgba(52,199,111,0.07);border:1px solid rgba(52,199,111,0.2);color:#34c76f;';
+    } else {
+      previewEl.textContent = '⚠ ' + affected.length + ' booking' + (affected.length === 1 ? '' : 's') + ' will be cancelled and clients notified.';
+      previewEl.style.cssText += 'background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.2);color:#f5c518;';
+    }
+  } catch (err) {
+    previewEl.textContent = 'Error: ' + (err.message || 'Unknown');
+    previewEl.style.cssText += 'color:#f87171;';
+  } finally {
+    previewBtn.disabled = false;
+  }
+}
+
+function updateBulkCancelSendBtn() {
+  const val = document.getElementById('bulk-confirm-input').value;
+  const date = document.getElementById('bulk-date-input').value;
+  document.getElementById('bulk-send-btn').disabled = !(val === 'CANCEL ALL BOOKINGS' && date);
+}
+
+async function sendBulkCancel() {
+  const cancelTo = document.getElementById('bulk-date-input').value;
+  const reason = document.getElementById('bulk-reason-input').value.trim();
+  const statusEl = document.getElementById('bulk-status');
+  const sendBtn = document.getElementById('bulk-send-btn');
+  const dismissBtn = document.getElementById('bulk-dismiss-btn');
+  if (!cancelTo) { statusEl.textContent = 'Please select a date.'; statusEl.className = 'bulk-status error'; statusEl.style.display = ''; return; }
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Cancelling…';
+  dismissBtn.disabled = true;
+  statusEl.style.display = 'none';
+  try {
+    const res = await fetch(EDGE_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+      body: JSON.stringify({ action: 'bulk_cancel', cancel_to: cancelTo, ...(reason && { reason }) }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || 'Failed (status ' + res.status + ').');
+    statusEl.textContent = '✓ ' + json.cancelled + ' booking' + (json.cancelled === 1 ? '' : 's') + ' cancelled and clients notified.';
+    statusEl.className = 'bulk-status success';
+    statusEl.style.display = '';
+    sendBtn.textContent = 'Cancelled ✓';
+    dismissBtn.disabled = false;
+    dismissBtn.textContent = 'Close';
+    loadBookings();
+  } catch (err) {
+    statusEl.textContent = 'Error: ' + (err.message || 'Unknown error');
+    statusEl.className = 'bulk-status error';
+    statusEl.style.display = '';
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Cancel Bookings & Notify Clients';
+    dismissBtn.disabled = false;
   }
 }
 
