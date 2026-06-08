@@ -712,11 +712,23 @@ async function adminEmailComplete(bookingId) {
   }
 }
 
+function validateApptDate(dateStr) {
+  const d = new Date(dateStr);
+  if (!dateStr || isNaN(d.getTime())) return 'Please enter a valid date.';
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
+  if (d < today) return 'Appointment date cannot be in the past.';
+  if (d > maxDate) return 'Appointments can only be scheduled up to 2 months in advance.';
+  return null;
+}
+
 async function adminEmailReschedule(bookingId) {
   const btnId = 'ea-reschedule-btn-' + bookingId;
   const newDate = document.getElementById('ea-rdate-' + bookingId)?.value?.trim();
   const newTime = document.getElementById('ea-rtime-' + bookingId)?.value?.trim();
   if (!newDate || !newTime) { showToast('Enter both a new date and time.', 'error'); return; }
+  const dateErr = validateApptDate(newDate);
+  if (dateErr) { showToast(dateErr, 'error'); return; }
   setBtnState(btnId, 'loading', 'Sending…');
   try {
     const { error } = await sb.from('bookings').update({ status: 'rescheduled', preferred_date: newDate, preferred_time: newTime }).eq('id', bookingId);

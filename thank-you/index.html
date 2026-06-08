@@ -35,6 +35,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/></noscript>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -207,15 +208,25 @@
       </div>
     </div>
 
-    <div class="actions">
-      <a href="/" class="btn-primary">
+    <div class="actions" id="ty-actions">
+      <a href="/" class="btn-primary" id="ty-btn-primary">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Back to Home
       </a>
-      <a href="/faq/" class="btn-outline">
+      <a href="/faq/" class="btn-outline" id="ty-btn-secondary">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         Read our FAQ
       </a>
+    </div>
+
+    <!-- Shown only for guests — prompts account creation -->
+    <div id="ty-account-promo" style="display:none;margin-top:1.4rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.4rem;text-align:left;">
+      <div class="next-steps-title" style="margin-bottom:0.5rem;">Track &amp; manage your booking</div>
+      <p style="font-size:0.88rem;color:var(--off);line-height:1.65;margin-bottom:1rem;">Create a free Tekpair account to view your booking status, reschedule, or cancel directly on tekpair.com — no need to call or email.</p>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+        <a href="/account/" class="btn-primary" style="font-size:0.88rem;padding:0.65rem 1.2rem;">Create an Account</a>
+        <a href="/account/" class="btn-outline" style="font-size:0.88rem;padding:0.65rem 1.2rem;">Already have one? Sign in</a>
+      </div>
     </div>
 
     <div class="contact-line">
@@ -229,5 +240,30 @@
   © 2026 Tekpair · Cohoes, NY · Capital Region
 </footer>
 
+<script>
+(async function() {
+  if (typeof supabase === 'undefined') return;
+  const sb = supabase.createClient(
+    'https://lfsuntijzbdoswbremaw.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4'
+  );
+  const { data: { session } } = await sb.auth.getSession();
+  const primary = document.getElementById('ty-btn-primary');
+  const secondary = document.getElementById('ty-btn-secondary');
+  if (session) {
+    if (primary) {
+      primary.href = '/account/';
+      primary.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Manage Your Bookings';
+    }
+    if (secondary) {
+      secondary.href = '/#booking';
+      secondary.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Book Another Service';
+    }
+  } else {
+    const promo = document.getElementById('ty-account-promo');
+    if (promo) promo.style.display = '';
+  }
+})();
+</script>
 </body>
 </html>

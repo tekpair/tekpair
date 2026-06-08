@@ -612,6 +612,16 @@ function promptReschedule(id) {
   </div>`;
 }
 
+function validateApptDate(dateStr) {
+  const d = new Date(dateStr);
+  if (!dateStr || isNaN(d.getTime())) return 'Please select a valid date.';
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
+  if (d < today) return 'Appointment date cannot be in the past.';
+  if (d > maxDate) return 'Appointments can only be rescheduled up to 2 months in advance.';
+  return null;
+}
+
 async function doReschedule(id) {
   const month = document.getElementById('rs-month-' + id).value;
   const day = document.getElementById('rs-day-' + id).value;
@@ -619,6 +629,8 @@ async function doReschedule(id) {
   const time = document.getElementById('rs-time-' + id).value;
   if (!month || !day || !year || !time) { showToast('Please select a date and time.', 'error'); return; }
   const preferred_date = month + ' ' + day + ', ' + year;
+  const dateErr = validateApptDate(preferred_date);
+  if (dateErr) { showToast(dateErr, 'error'); return; }
   const btn = document.querySelector(`#reschedule-panel-${id} .btn-confirm-reschedule`);
   if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
   const { error } = await sb.from('bookings').update({ preferred_date, preferred_time: time, status: 'rescheduled' }).eq('id', id);
