@@ -1849,7 +1849,7 @@ estItems.forEach(item => {
             const errDiv = form.querySelector('.form-email-error');
             if (errDiv) {
               errDiv.innerHTML = '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-                + ' An account already exists for <strong>' + emailVal + '</strong>. <a href="/account/">Sign in at tekpair.com/account/</a> to book — your details will be pre-filled automatically.';
+                + '<span>An account already exists for <strong>' + emailVal + '</strong>. <a href="/account/">Sign in at tekpair.com/account/</a> to book — your details will be pre-filled automatically.</span>';
               errDiv.style.display = 'flex';
               form.querySelector('input[name="Email"]').addEventListener('input', function() { errDiv.style.display = 'none'; }, { once: true });
             }
