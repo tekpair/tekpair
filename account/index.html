@@ -246,6 +246,12 @@
               <label class="form-label">Confirm Password</label>
               <input type="password" id="reg-confirm" class="form-input" placeholder="Re-enter password" autocomplete="new-password"/>
             </div>
+            <div style="display:flex;align-items:flex-start;gap:0.6rem;margin-top:0.25rem;">
+              <input type="checkbox" id="reg-agree" style="margin-top:3px;flex-shrink:0;accent-color:#29d4f5;cursor:pointer;width:15px;height:15px;"/>
+              <label for="reg-agree" style="font-size:0.83rem;color:#9aa3b8;line-height:1.55;cursor:pointer;">
+                I agree to Tekpair's <a href="/policies/" style="color:#29d4f5;text-decoration:none;" target="_blank">Policies &amp; Terms</a> and <a href="/privacy/" style="color:#29d4f5;text-decoration:none;" target="_blank">Privacy Policy</a>.
+              </label>
+            </div>
             <button class="btn-primary" id="btn-register" onclick="doRegister()">Create Account</button>
           </div>
         </div>
@@ -661,6 +667,7 @@ async function doRegister() {
   if (!fn || !ln || !email || !pw) { errEl.textContent = 'Please fill in all required fields.'; errEl.style.display = ''; return; }
   if (pw !== pw2) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = ''; return; }
   if (pw.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; errEl.style.display = ''; return; }
+  if (!document.getElementById('reg-agree').checked) { errEl.textContent = 'You must agree to the Policies & Terms and Privacy Policy to create an account.'; errEl.style.display = ''; return; }
   btn.disabled = true; btn.textContent = 'Creating account…';
   const { error } = await sb.auth.signUp({
     email, password: pw,
