@@ -77,13 +77,37 @@ language plpgsql
 security definer
 as $$
 begin
-  insert into public.profiles (id, first_name, last_name)
+  -- Create profile, pulling phone from signup metadata if provided
+  insert into public.profiles (id, first_name, last_name, phone)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'first_name', ''),
-    coalesce(new.raw_user_meta_data->>'last_name', '')
+    coalesce(new.raw_user_meta_data->>'last_name', ''),
+    coalesce(new.raw_user_meta_data->>'phone', '')
   )
   on conflict (id) do nothing;
+
+  -- Link any prior guest bookings that share the same email
+  update public.bookings
+  set user_id = new.id
+  where lower(email) = lower(new.email)
+    and user_id is null;
+
+  -- Backfill address (and phone if still empty) from the most recent linked booking
+  update public.profiles p
+  set
+    phone   = case when p.phone   = '' then coalesce(b.phone,   '') else p.phone   end,
+    address = case when p.address = '' then coalesce(b.address, '') else p.address end
+  from (
+    select phone, address
+    from   public.bookings
+    where  user_id = new.id
+      and  (phone is not null or address is not null)
+    order  by created_at desc
+    limit  1
+  ) b
+  where p.id = new.id;
+
   return new;
 end;
 $$;
