@@ -722,6 +722,8 @@ async function _signedIn(user) {
   currentUser = user;
   showView('view-auth-user');
   setNavUser(user.email.split('@')[0], user.email);
+  // Link any guest bookings made before this account existed, then load profile/bookings
+  await sb.rpc('claim_guest_bookings');
   await loadProfile(user.id);
 }
 
