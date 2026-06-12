@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tekpair Guides — Home Tech, Explained Without the Jargon</title>
+  <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
+  <meta name="description" content="Plain-English guides to home tech: Wi-Fi and mesh networks, smart home, security cameras, streaming, computers, and printers. Practical fixes and honest buying advice."/>
+  <meta property="og:title" content="Tekpair Guides — Home Tech, Explained Without the Jargon"/>
+  <meta property="og:description" content="Practical, no-nonsense guides to setting up and fixing your home tech."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tekpair.com/guides/"/>
+  <meta name="theme-color" content="#111318"/>
+  <link rel="canonical" href="https://tekpair.com/guides/"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/></noscript>
+
+  <!-- ============================================================
+       GOOGLE ADSENSE — auto-ads / verification loader
+       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  ============================================================ -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; }
+
+    :root {
+      --bg:        #111318;
+      --surface:   #191c23;
+      --card:      #1b1e26;
+      --border:    rgba(255,255,255,0.08);
+      --border-md: rgba(255,255,255,0.14);
+      --cyan:      #29d4f5;
+      --cyan-dim:  rgba(41,212,245,0.55);
+      --cyan-soft: rgba(41,212,245,0.10);
+      --white:     #eef1f8;
+      --off:       #9aa3b8;
+      --muted:     #767f92;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .skip-link {
+      position: absolute; top: -50px; left: 1rem;
+      background: var(--cyan); color: #0e1117;
+      padding: 0.5rem 1rem; font-weight: 600; font-size: 0.85rem;
+      text-decoration: none; z-index: 9999; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0.6rem; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── KICKER (the homepage's cyan-rule label motif, carried over) ── */
+    .kicker {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cyan);
+    }
+    .kicker::before {
+      content: ''; width: 20px; height: 2px; background: var(--cyan); flex-shrink: 0;
+    }
+    .kicker.bare::before { display: none; }
+
+    /* ── EDITORIAL LINK (replaces buttons) ── */
+    .elink {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--cyan); font-weight: 600; font-size: 0.9rem;
+      text-decoration: none;
+    }
+    .elink svg { transition: transform 0.2s; }
+    .elink:hover svg { transform: translateX(3px); }
+
+    /* ════════════ MASTHEAD ════════════ */
+    .masthead {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .masthead-inner {
+      max-width: 1180px; margin: 0 auto; padding: 1.4rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    }
+    .masthead-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .masthead-logo img { height: 30px; width: auto; }
+    .masthead-right { display: flex; align-items: center; gap: 1.4rem; }
+    .m-search {
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1.5px solid var(--border-md);
+      padding: 0.3rem 0.2rem 0.3rem 0; transition: border-color 0.18s; width: 220px;
+    }
+    .m-search:focus-within { border-color: var(--cyan); }
+    .m-search svg { color: var(--muted); flex-shrink: 0; }
+    .m-search input {
+      flex: 1; background: none; border: none; outline: none; color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; min-width: 0;
+    }
+    .m-search input::placeholder { color: var(--muted); }
+    .m-help {
+      font-size: 0.88rem; font-weight: 600; color: var(--off);
+      text-decoration: none; white-space: nowrap; transition: color 0.18s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .m-help:hover { color: var(--cyan); }
+    .m-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .m-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: transform 0.25s, opacity 0.25s; }
+    .m-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .m-toggle.open span:nth-child(2) { opacity: 0; }
+    .m-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .m-panel { display: none; flex-direction: column; gap: 1rem; padding: 0 2rem 1.4rem; border-bottom: 1px solid var(--border); }
+    .m-panel.open { display: flex; }
+    .m-panel .m-search { width: 100%; }
+    .m-panel .m-help { font-size: 1rem; }
+
+    /* ════════════ SECTION BAR (magazine contents) ════════════ */
+    .sections {
+      position: sticky; top: 0; z-index: 150;
+      background: rgba(17,19,24,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .sections-inner {
+      max-width: 1180px; margin: 0 auto; padding: 0 2rem;
+      display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+    }
+    .sections-inner::-webkit-scrollbar { display: none; }
+    .section-tab {
+      font-size: 0.86rem; font-weight: 500; white-space: nowrap;
+      color: var(--off); background: none; border: none; cursor: pointer;
+      padding: 0.95rem 1.1rem; position: relative; transition: color 0.18s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .section-tab:first-child { padding-left: 0; }
+    .section-tab:hover { color: var(--white); }
+    .section-tab.active { color: var(--white); }
+    .section-tab.active::after {
+      content: ''; position: absolute; left: 1.1rem; right: 1.1rem; bottom: -1px; height: 2px; background: var(--cyan);
+    }
+    .section-tab:first-child.active::after { left: 0; }
+
+    /* ════════════ LEAD STORY ════════════ */
+    .lead { padding: 4rem 0 0; }
+    .lead-rule { height: 1px; background: var(--border); margin-bottom: 2.2rem; }
+    .lead-kicker { margin-bottom: 1.4rem; }
+    .lead-title {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(2.1rem, 5.2vw, 3.5rem); line-height: 1.04;
+      letter-spacing: -0.025em; color: var(--white);
+      max-width: 16ch; margin-bottom: 1.3rem;
+    }
+    .lead-excerpt {
+      font-size: 1.18rem; color: var(--off); line-height: 1.65;
+      max-width: 60ch; margin-bottom: 1.6rem;
+    }
+    .lead-foot { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .lead-meta { font-size: 0.86rem; color: var(--muted); display: flex; align-items: center; gap: 0.7rem; }
+    .lead-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+
+    /* ════════════ AD SLOT (editorial, labeled) ════════════ */
+    .ad { margin: 3.5rem 0; text-align: center; }
+    .ad-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;
+      display: block; text-align: left;
+    }
+    .ad-area {
+      min-height: 110px; display: flex; align-items: center; justify-content: center;
+      background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      font-size: 0.82rem; color: var(--muted);
+    }
+
+    /* ════════════ FEED ════════════ */
+    .feed-head {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      margin: 4rem 0 1.8rem;
+    }
+    .feed-head h2 {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 700;
+      font-size: 1.05rem; letter-spacing: 0.02em; color: var(--white);
+    }
+    .feed-count { font-size: 0.84rem; color: var(--muted); }
+
+    .feed {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0; border-top: 1px solid var(--border);
+    }
+    .post {
+      display: flex; flex-direction: column;
+      min-width: 0; overflow-wrap: break-word;
+      padding: 1.8rem 1.6rem 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      text-decoration: none; color: inherit; position: relative;
+      transition: background 0.2s;
+    }
+    .post::before {
+      content: ''; position: absolute; top: -1px; left: 0; width: 0; height: 2px;
+      background: var(--cyan); transition: width 0.25s ease;
+    }
+    .post:hover::before { width: 56px; }
+    /* right padding inside content while keeping the divider full-height */
+    .feed .post { padding-left: 1.6rem; }
+    .feed .post:nth-child(3n+1) { padding-left: 0; }
+    .feed .post:nth-child(3n) { border-right: none; padding-right: 0; }
+
+    .post-kicker {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--cyan-dim); margin-bottom: 0.85rem;
+    }
+    .post-title {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 700;
+      font-size: 1.22rem; line-height: 1.22; letter-spacing: -0.015em;
+      color: var(--white); margin-bottom: 0.7rem; transition: color 0.18s;
+    }
+    .post:hover .post-title { color: var(--cyan); }
+    .post-ex { font-size: 0.92rem; color: var(--off); line-height: 1.6; margin-bottom: 1.3rem; flex: 1; }
+    .post-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .post-read { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--cyan-dim); font-weight: 600; transition: color 0.18s; }
+    .post:hover .post-read { color: var(--cyan); }
+
+    .feed-empty {
+      grid-column: 1 / -1; padding: 3.5rem 1rem; text-align: center;
+      color: var(--muted); font-size: 0.95rem;
+    }
+
+    /* in-feed ad spanning the grid row */
+    .post-ad { grid-column: 1 / -1; border-bottom: 1px solid var(--border); padding: 1.6rem 0; }
+    .post-ad .ad { margin: 0; }
+
+    /* ════════════ HELP (editorial callout, no buttons) ════════════ */
+    .help { margin: 5rem 0 1rem; padding-top: 2.6rem; border-top: 1px solid var(--border); }
+    .help-kicker { margin-bottom: 1.2rem; }
+    .help h2 {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em;
+      color: var(--white); margin-bottom: 0.8rem; line-height: 1.12; max-width: 18ch;
+    }
+    .help-intro { font-size: 1.02rem; color: var(--off); line-height: 1.65; max-width: 56ch; margin-bottom: 2.2rem; }
+    .help-links { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; border-top: 1px solid var(--border); }
+    .help-link {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      padding: 1.8rem 2rem 1.8rem 0; text-decoration: none; color: inherit;
+      border-bottom: 1px solid var(--border); position: relative; transition: padding-left 0.2s;
+    }
+    .help-link + .help-link { border-left: 1px solid var(--border); padding-left: 2rem; }
+    .help-link::before {
+      content: ''; position: absolute; top: -1px; left: 0; width: 0; height: 2px; background: var(--cyan); transition: width 0.25s;
+    }
+    .help-link + .help-link::before { left: 2rem; }
+    .help-link:hover::before { width: 48px; }
+    .help-where { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); }
+    .help-what {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 1.15rem;
+      color: var(--white); display: inline-flex; align-items: center; gap: 0.45rem; transition: color 0.18s;
+    }
+    .help-link:hover .help-what { color: var(--cyan); }
+    .help-what svg { transition: transform 0.2s; }
+    .help-link:hover .help-what svg { transform: translateX(3px); }
+    .help-desc { font-size: 0.9rem; color: var(--off); line-height: 1.6; }
+
+    /* ════════════ FOOTER ════════════ */
+    footer { border-top: 1px solid var(--border); background: var(--surface); margin-top: 5rem; padding: 3rem 0 2rem; }
+    .f-top { display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .f-brand img { height: 28px; width: auto; margin-bottom: 0.9rem; }
+    .f-brand p { font-size: 0.9rem; color: var(--off); line-height: 1.65; max-width: 34ch; }
+    .f-nav { display: flex; gap: 3.5rem; }
+    .f-col h3 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem; }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .f-col a { font-size: 0.88rem; color: var(--off); text-decoration: none; transition: color 0.18s; cursor: pointer; }
+    .f-col a:hover { color: var(--cyan); }
+    .f-disclosure { font-size: 0.78rem; color: var(--muted); line-height: 1.6; padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+    .f-disclosure strong { color: var(--off); }
+    .f-disclosure a { color: var(--cyan-dim); text-decoration: none; }
+    .f-disclosure a:hover { color: var(--cyan); }
+    .f-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.4rem; font-size: 0.82rem; color: var(--muted); }
+    .f-bottom a { color: var(--off); text-decoration: none; }
+    .f-bottom a:hover { color: var(--cyan); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .feed { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feed .post { padding-left: 1.6rem; }
+      .feed .post:nth-child(3n+1) { padding-left: 1.6rem; }
+      .feed .post:nth-child(3n) { border-right: 1px solid var(--border); padding-right: 1.6rem; }
+      .feed .post:nth-child(2n+1) { padding-left: 0; }
+      .feed .post:nth-child(2n) { border-right: none; padding-right: 0; }
+    }
+    @media (max-width: 760px) {
+      .masthead-right .m-search, .masthead-right .m-help { display: none; }
+      .m-toggle { display: flex; }
+      .help-links { grid-template-columns: 1fr; }
+      .help-link, .help-link + .help-link { padding: 1.6rem 0; border-left: none; }
+      .help-link + .help-link::before { left: 0; }
+      .f-top { flex-direction: column; gap: 2rem; }
+      .f-nav { gap: 2.5rem; }
+    }
+    @media (max-width: 560px) {
+      .wrap, .masthead-inner, .sections-inner { padding-left: 1.3rem; padding-right: 1.3rem; }
+      .feed { grid-template-columns: 1fr; }
+      .feed .post, .feed .post:nth-child(n) { padding: 1.6rem 0; border-right: none; }
+      .lead { padding-top: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ════════════ MASTHEAD ════════════ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="/guides/" class="masthead-logo" aria-label="Tekpair Guides home">
+      <img src="/newtekpairguideslogo.svg" alt="Tekpair Guides" width="108" height="30"/>
+    </a>
+    <div class="masthead-right">
+      <label class="m-search" for="guide-search">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="guide-search" placeholder="Search guides…" aria-label="Search guides"/>
+      </label>
+      <a href="/" class="m-help">Need help? Hire us
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="m-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="m-panel" id="m-panel">
+    <label class="m-search" for="guide-search-m">
+      <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="guide-search-m" placeholder="Search guides…" aria-label="Search guides"/>
+    </label>
+    <a href="/" class="m-help">Need help? Hire us →</a>
+  </div>
+</header>
+
+<!-- ════════════ SECTION BAR ════════════ -->
+<nav class="sections" aria-label="Guide categories">
+  <div class="sections-inner" id="sections">
+    <button class="section-tab active" data-cat="all">All</button>
+    <button class="section-tab" data-cat="wifi">Wi-Fi &amp; Network</button>
+    <button class="section-tab" data-cat="smart-home">Smart Home</button>
+    <button class="section-tab" data-cat="cameras">Security Cameras</button>
+    <button class="section-tab" data-cat="streaming">Streaming &amp; TV</button>
+    <button class="section-tab" data-cat="printers">Printers</button>
+    <button class="section-tab" data-cat="computers">Computers</button>
+    <button class="section-tab" data-cat="buying">Buying &amp; Getting Started</button>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+
+    <!-- ════════════ LEAD STORY ════════════ -->
+    <a href="/guides/best-mesh-wifi-2-story-house/" class="lead" data-cat="wifi" data-title="best mesh wifi systems 2 story house eero orbi deco" style="text-decoration:none;color:inherit;display:block;">
+      <div class="lead-rule"></div>
+      <span class="kicker lead-kicker">Featured · Wi-Fi &amp; Network</span>
+      <h1 class="lead-title">Best mesh Wi-Fi systems for a 2-story house in 2026</h1>
+      <p class="lead-excerpt">Dead zones upstairs? A single router rarely covers a multi-floor home. We compare Eero, Orbi, and TP-Link Deco on real-world coverage, speed, and price — and tell you which one to skip.</p>
+      <div class="lead-foot">
+        <span class="elink">Read the guide
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+        <span class="lead-meta"><span>Updated 2026</span><span class="dot"></span><span>11 min read</span></span>
+      </div>
+    </a>
+
+    <!-- AD: leaderboard -->
+    <!-- ============================================================
+         GOOGLE ADSENSE SLOT — leaderboard. Replace .ad-area contents
+         with responsive display unit after approval. Keep the label.
+    ============================================================ -->
+    <div class="ad reveal" aria-label="Advertisement">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-area">Ad slot — paste AdSense leaderboard unit here.</div>
+    </div>
+
+    <!-- ════════════ FEED ════════════ -->
+    <div class="feed-head reveal">
+      <h2 id="feed-title">Latest guides</h2>
+      <span class="feed-count" id="feed-count"></span>
+    </div>
+
+    <div class="feed" id="feed">
+
+      <a href="/guides/fix-slow-wifi-one-room/" class="post" data-cat="wifi" data-title="why is my wifi slow in one room dead zone fix">
+        <span class="post-kicker">Wi-Fi</span>
+        <h3 class="post-title">Why your Wi-Fi is slow in one room (and how to fix it)</h3>
+        <p class="post-ex">Before you buy anything, run these checks. Most single-room dead zones come down to placement, interference, or one cheap fix.</p>
+        <div class="post-meta"><span>7 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/security-camera-system-no-subscription/" class="post" data-cat="cameras" data-title="security camera system without subscription monthly fee">
+        <span class="post-kicker">Security Cameras</span>
+        <h3 class="post-title">How to set up a security camera system without a subscription</h3>
+        <p class="post-ex">You don't have to pay monthly to record footage. Here's how local storage works and which cameras let you skip the fees.</p>
+        <div class="post-meta"><span>9 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/wired-vs-wifi-security-cameras/" class="post" data-cat="cameras" data-title="wired vs wifi security cameras which to buy">
+        <span class="post-kicker">Security Cameras</span>
+        <h3 class="post-title">Wired vs Wi-Fi security cameras: which should you buy?</h3>
+        <p class="post-ex">Battery, plug-in, or hardwired — each has a real trade-off in reliability and effort. Here's how to pick for your home.</p>
+        <div class="post-meta"><span>8 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <!-- AD: in-feed -->
+      <!-- ============================================================
+           GOOGLE ADSENSE SLOT — in-feed. Replace with an in-feed/fluid unit.
+      ============================================================ -->
+      <div class="post-ad" aria-label="Advertisement">
+        <div class="ad">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-area">Ad slot — paste your AdSense in-feed unit here.</div>
+        </div>
+      </div>
+
+      <a href="/guides/smart-home-setup-beginners/" class="post" data-cat="smart-home" data-title="how to set up a smart home from scratch beginners alexa google">
+        <span class="post-kicker">Smart Home</span>
+        <h3 class="post-title">How to set up a smart home from scratch: a beginner's walkthrough</h3>
+        <p class="post-ex">Start here before you buy a single smart bulb. We cover the hub decision, the ecosystem trap, and the order to add things in.</p>
+        <div class="post-meta"><span>12 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/roku-vs-fire-stick-vs-google-tv/" class="post" data-cat="streaming" data-title="roku vs fire stick vs google tv which streaming device">
+        <span class="post-kicker">Streaming &amp; TV</span>
+        <h3 class="post-title">Roku vs Fire Stick vs Google TV: which is right for you?</h3>
+        <p class="post-ex">They all stream Netflix. The real differences are the interface, the ads, and how locked-in each one tries to make you.</p>
+        <div class="post-meta"><span>8 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/printer-not-showing-on-network/" class="post" data-cat="printers" data-title="printer not showing up on network wireless wont connect">
+        <span class="post-kicker">Printers</span>
+        <h3 class="post-title">How to connect a printer that won't show up on your network</h3>
+        <p class="post-ex">The fix is almost never the printer. Work through these network and driver steps in order and it'll appear.</p>
+        <div class="post-meta"><span>7 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/real-cost-smart-home-setup/" class="post" data-cat="smart-home" data-title="real cost of a smart home setup how much does it cost">
+        <span class="post-kicker">Smart Home</span>
+        <h3 class="post-title">The real cost of a smart home setup (what nobody tells you)</h3>
+        <p class="post-ex">The devices are the cheap part. Here's the honest budget breakdown including the recurring costs people forget.</p>
+        <div class="post-meta"><span>9 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/extend-wifi-to-garage/" class="post" data-cat="wifi" data-title="how to extend wifi to garage detached building shed">
+        <span class="post-kicker">Wi-Fi</span>
+        <h3 class="post-title">How to extend Wi-Fi to a garage or detached building</h3>
+        <p class="post-ex">Extender, mesh node, or a wired access point? The right answer depends on distance and walls — here's how to choose.</p>
+        <div class="post-meta"><span>10 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <a href="/guides/hire-vs-diy-tech-setup/" class="post" data-cat="buying" data-title="should you hire someone to set up tech or diy it">
+        <span class="post-kicker">Getting Started</span>
+        <h3 class="post-title">Should you hire someone to set up your tech, or DIY it?</h3>
+        <p class="post-ex">An honest look at when doing it yourself saves money and when it costs you a weekend. No hard sell either way.</p>
+        <div class="post-meta"><span>6 min read</span><span class="post-read">Read <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+
+      <div class="feed-empty" id="feed-empty" style="display:none;">No guides match that yet — try another section or search term.</div>
+    </div>
+
+    <!-- ════════════ HELP (editorial, dual local/remote) ════════════ -->
+    <section class="help reveal" aria-labelledby="help-h">
+      <span class="kicker help-kicker">Rather not DIY?</span>
+      <h2 id="help-h">Want it done for you instead?</h2>
+      <p class="help-intro">Every guide here is free and built to be done yourself. If you'd rather hand it off, that's our day job — two ways, depending on where you are.</p>
+      <div class="help-links">
+        <a href="/#booking" class="help-link">
+          <span class="help-where">Capital Region, NY</span>
+          <span class="help-what">In-home visit
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+          <span class="help-desc">We come to you within ~35 miles of Cohoes. Flat rates, same or next-day, pay when it's done.</span>
+        </a>
+        <a href="/#booking" class="help-link">
+          <span class="help-where">Anywhere</span>
+          <span class="help-what">Remote screen-share
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+          <span class="help-desc">Outside the area? Book a 15–30 min video session and we'll walk you through the fix live — you stay in control of your device.</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <img src="/newtekpairguideslogo.svg" alt="Tekpair Guides" width="93" height="28"/>
+        <p>Practical home-tech guides from Tekpair — the local tech-setup team in Cohoes, NY. We write what we actually do on the job.</p>
+      </div>
+      <div class="f-nav">
+        <div class="f-col">
+          <h3>Guides</h3>
+          <ul>
+            <li><a data-cat="wifi">Wi-Fi &amp; Network</a></li>
+            <li><a data-cat="smart-home">Smart Home</a></li>
+            <li><a data-cat="cameras">Security Cameras</a></li>
+            <li><a data-cat="streaming">Streaming &amp; TV</a></li>
+            <li><a data-cat="computers">Computers &amp; Printers</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h3>Tekpair</h3>
+          <ul>
+            <li><a href="/">Home &amp; Services</a></li>
+            <li><a href="/#booking">Book a Job</a></li>
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/disclaimer/">Affiliate Disclosure</a></li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="f-disclosure">
+      <strong>Disclosure:</strong> Some links in these guides are affiliate links, including the Amazon Associates program. As an Amazon Associate, Tekpair earns from qualifying purchases — at no extra cost to you, and it never changes which products we recommend. See our full <a href="/disclaimer/">affiliate disclosure</a>.
+    </p>
+
+    <div class="f-bottom">
+      <span>© 2026 Tekpair · Cohoes, NY · Capital Region</span>
+      <span><a href="/privacy/">Privacy</a> &nbsp;·&nbsp; <a href="/disclaimer/">Disclosure</a> &nbsp;·&nbsp; <a href="/">Main site</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var panel = document.getElementById('m-panel');
+  var toggle = document.querySelector('.m-toggle');
+  if (toggle && panel) {
+    toggle.addEventListener('click', function () {
+      var open = panel.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+  }
+
+  // reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(function (el) { obs.observe(el); });
+  } else { revealEls.forEach(function (el) { el.classList.add('in'); }); }
+
+  // filtering + search
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.post, .lead'));
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.section-tab'));
+  var inputs = Array.prototype.slice.call(document.querySelectorAll('#guide-search, #guide-search-m'));
+  var emptyEl = document.getElementById('feed-empty');
+  var feedTitle = document.getElementById('feed-title');
+  var feedCount = document.getElementById('feed-count');
+  var postAd = document.querySelector('.post-ad');
+
+  var LABELS = {
+    'all': 'Latest guides', 'wifi': 'Wi-Fi & Network', 'smart-home': 'Smart Home',
+    'cameras': 'Security Cameras', 'streaming': 'Streaming & TV',
+    'printers': 'Printers', 'computers': 'Computers', 'buying': 'Buying & Getting Started'
+  };
+
+  var activeCat = 'all', query = '';
+
+  function apply() {
+    var visible = 0;
+    cards.forEach(function (card) {
+      var cat = card.getAttribute('data-cat') || '';
+      var title = (card.getAttribute('data-title') || '').toLowerCase();
+      var show = (activeCat === 'all' || cat === activeCat) && (!query || title.indexOf(query) !== -1);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (postAd) postAd.style.display = (activeCat === 'all' && !query) ? '' : 'none';
+    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    if (feedTitle) feedTitle.textContent = query ? ('Results for \u201C' + query + '\u201D') : (LABELS[activeCat] || 'Latest guides');
+    if (feedCount) feedCount.textContent = visible + (visible === 1 ? ' guide' : ' guides');
+  }
+
+  function setCat(cat) {
+    activeCat = cat;
+    tabs.forEach(function (t) { t.classList.toggle('active', t.getAttribute('data-cat') === cat); });
+    apply();
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { setCat(tab.getAttribute('data-cat')); });
+  });
+
+  // footer category links route into filter
+  document.querySelectorAll('.f-col a[data-cat]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      setCat(link.getAttribute('data-cat'));
+      var bar = document.querySelector('.sections');
+      if (bar) window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  inputs.forEach(function (input) {
+    input.addEventListener('input', function () {
+      query = input.value.trim().toLowerCase();
+      inputs.forEach(function (o) { if (o !== input) o.value = input.value; });
+      apply();
+    });
+  });
+
+  apply();
+})();
+</script>
+
+</body>
+</html>
