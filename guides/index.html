@@ -89,11 +89,8 @@
       max-width: 1180px; margin: 0 auto; padding: 1.4rem 2rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
     }
-    .masthead-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; flex-shrink: 0; }
-    .masthead-logo img { height: 34px; width: auto; flex-shrink: 0; }
-    .logo-text { display: flex; flex-direction: column; }
-    .logo-brand { font-family: 'Instrument Sans', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--white); line-height: 1.1; }
-    .logo-sub { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; color: var(--cyan); line-height: 1.2; align-self: flex-end; }
+    .masthead-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .masthead-logo img { height: 40px; width: auto; flex-shrink: 0; }
     .masthead-right { display: flex; align-items: center; gap: 1.4rem; }
     .m-search {
       display: flex; align-items: center; gap: 0.5rem;
@@ -279,10 +276,8 @@
     /* ════════════ FOOTER ════════════ */
     footer { border-top: 1px solid var(--border); background: var(--surface); margin-top: 5rem; padding: 3rem 0 2rem; }
     .f-top { display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-    .f-brand-logo { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
-    .f-brand-logo img { height: 28px; width: auto; display: block; flex-shrink: 0; }
-    .f-brand-logo .logo-brand { font-size: 0.92rem; }
-    .f-brand-logo .logo-sub { font-size: 0.54rem; }
+    .f-brand-logo { margin-bottom: 0.9rem; }
+    .f-brand-logo img { height: 34px; width: auto; display: block; }
     .f-brand p { font-size: 0.9rem; color: var(--off); line-height: 1.65; max-width: 34ch; }
     .f-social { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
     .f-social a { width: 36px; height: 36px; border-radius: 8px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--off); text-decoration: none; transition: border-color 0.18s, color 0.18s; }
@@ -339,12 +334,8 @@
 <header class="masthead">
   <div class="masthead-inner">
     <a href="/guides/" class="masthead-logo" aria-label="Tekpair Guides home">
-    <img src="/logo-icon.svg" alt="" aria-hidden="true"/>
-    <span class="logo-text">
-      <span class="logo-brand">TEKPAIR</span>
-      <span class="logo-sub">guides</span>
-    </span>
-  </a>
+      <img src="/newtekpairguideslogo.svg" alt="Tekpair Guides"/>
+    </a>
     <div class="masthead-right">
       <label class="m-search" for="guide-search">
         <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -523,11 +514,7 @@
     <div class="f-top">
       <div class="f-brand">
         <div class="f-brand-logo">
-          <img src="/logo-icon.svg" alt="" aria-hidden="true"/>
-          <span class="logo-text">
-            <span class="logo-brand">TEKPAIR</span>
-            <span class="logo-sub">guides</span>
-          </span>
+          <img src="/newtekpairguideslogo.svg" alt="Tekpair Guides"/>
         </div>
         <p>Practical home-tech guides from Tekpair — the local tech-setup team in Cohoes, NY. We write what we actually do on the job.</p>
         <div class="f-social">
