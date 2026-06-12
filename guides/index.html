@@ -520,10 +520,12 @@
   } else { revealEls.forEach(function (el) { el.classList.add('in'); }); }
 
   // filtering + search
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.post, .lead'));
+  var leadCards = Array.prototype.slice.call(document.querySelectorAll('.lead'));
+  var postCards = Array.prototype.slice.call(document.querySelectorAll('.post'));
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.section-tab'));
   var inputs = Array.prototype.slice.call(document.querySelectorAll('#guide-search, #guide-search-m'));
   var emptyEl = document.getElementById('feed-empty');
+  var feedHeadEl = document.querySelector('.feed-head');
   var feedTitle = document.getElementById('feed-title');
   var feedCount = document.getElementById('feed-count');
   var postAd = document.querySelector('.post-ad');
@@ -536,12 +538,10 @@
 
   var activeCat = 'all', query = '';
 
-  var feedPostEls = Array.prototype.slice.call(document.querySelectorAll('#feed a.post'));
-
   function applyColClasses() {
     var cols = window.innerWidth <= 560 ? 1 : window.innerWidth <= 900 ? 2 : 3;
     var vi = 0;
-    feedPostEls.forEach(function(p) {
+    postCards.forEach(function(p) {
       p.classList.remove('is-col1', 'is-coln');
       if (p.style.display !== 'none') {
         var col = (vi % cols) + 1;
@@ -554,8 +554,16 @@
   window.addEventListener('resize', applyColClasses);
 
   function apply() {
+    // Filter lead story (show/hide only \u2014 not counted in feed)
+    leadCards.forEach(function (card) {
+      var cat = card.getAttribute('data-cat') || '';
+      var title = (card.getAttribute('data-title') || '').toLowerCase();
+      var show = (activeCat === 'all' || cat === activeCat) && (!query || title.indexOf(query) !== -1);
+      card.style.display = show ? 'block' : 'none';
+    });
+    // Filter post cards and count
     var visible = 0;
-    cards.forEach(function (card) {
+    postCards.forEach(function (card) {
       var cat = card.getAttribute('data-cat') || '';
       var title = (card.getAttribute('data-title') || '').toLowerCase();
       var show = (activeCat === 'all' || cat === activeCat) && (!query || title.indexOf(query) !== -1);
@@ -563,6 +571,8 @@
       if (show) visible++;
     });
     if (postAd) postAd.style.display = (activeCat === 'all' && !query) ? '' : 'none';
+    // Hide the feed section header entirely when no post cards are visible
+    if (feedHeadEl) feedHeadEl.style.display = visible > 0 ? '' : 'none';
     if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
     if (feedTitle) feedTitle.textContent = query ? ('Results for \u201C' + query + '\u201D') : (LABELS[activeCat] || 'Latest guides');
     if (feedCount) feedCount.textContent = visible + (visible === 1 ? ' guide' : ' guides');
