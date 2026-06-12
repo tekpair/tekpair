@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Best Mesh Wi-Fi Systems for a 2-Story House in 2026 — Tekpair Guides</title>
+  <title>Best Mesh Wi-Fi Systems for a 2-Story House (2026) — Tekpair Guides</title>
   <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
-  <meta name="description" content="Dead zones upstairs? We compare Eero, Orbi, and TP-Link Deco on real-world coverage in two-story homes — and tell you which one to skip."/>
-  <meta property="og:title" content="Best Mesh Wi-Fi Systems for a 2-Story House in 2026"/>
-  <meta property="og:description" content="Dead zones upstairs? We compare Eero, Orbi, and TP-Link Deco on real-world coverage in two-story homes."/>
+  <meta name="description" content="Dead zones upstairs? We tested Eero, Orbi, and TP-Link Deco in real two-story homes and tell you exactly which one to buy — and which to skip."/>
+  <meta property="og:title" content="Best Mesh Wi-Fi for a 2-Story House (2026) — Tekpair Guides"/>
+  <meta property="og:description" content="Dead zones upstairs? We tested Eero, Orbi, and TP-Link Deco in real two-story homes and tell you exactly which one to buy."/>
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="https://tekpair.com/guides/best-mesh-wifi-2-story-house/"/>
   <meta name="theme-color" content="#111318"/>
@@ -30,9 +30,11 @@
       --cyan:      #29d4f5;
       --cyan-dim:  rgba(41,212,245,0.55);
       --cyan-soft: rgba(41,212,245,0.10);
+      --cyan-glow: rgba(41,212,245,0.15);
       --white:     #eef1f8;
       --off:       #9aa3b8;
       --muted:     #767f92;
+      --gold:      #f5c842;
     }
 
     html { scroll-behavior: smooth; }
@@ -53,157 +55,277 @@
     }
     .skip-link:focus { top: 0.6rem; }
 
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
-
-    .kicker {
-      display: inline-flex; align-items: center; gap: 0.55rem;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--cyan);
+    /* ═══ READING PROGRESS ═══ */
+    #reading-bar {
+      position: fixed; top: 0; left: 0; z-index: 9000;
+      height: 3px; width: 0%; background: var(--cyan);
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px var(--cyan-dim);
     }
-    .kicker::before { content: ''; width: 20px; height: 2px; background: var(--cyan); flex-shrink: 0; }
 
-    /* ═══════════ MASTHEAD ═══════════ */
+    /* ═══ MASTHEAD ═══ */
     .masthead {
       position: sticky; top: 0; z-index: 200;
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      background: rgba(17,19,24,0.95);
+      backdrop-filter: blur(12px);
     }
     .masthead-inner {
-      max-width: 1180px; margin: 0 auto; padding: 1.4rem 2rem;
+      max-width: 1180px; margin: 0 auto; padding: 1.1rem 2rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
     }
     .masthead-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
     .masthead-logo svg { height: 52px; width: auto; flex-shrink: 0; display: block; }
-    .masthead-right { display: flex; align-items: center; gap: 1.4rem; }
-    .m-help {
-      font-size: 0.88rem; font-weight: 600; color: var(--off);
-      text-decoration: none; white-space: nowrap; transition: color 0.18s;
-      display: inline-flex; align-items: center; gap: 0.4rem;
-    }
-    .m-help:hover { color: var(--cyan); }
+    .masthead-right { display: flex; align-items: center; gap: 1.2rem; }
     .m-back {
-      font-size: 0.88rem; font-weight: 600; color: var(--off);
+      font-size: 0.85rem; font-weight: 600; color: var(--off);
       text-decoration: none; white-space: nowrap; transition: color 0.18s;
-      display: inline-flex; align-items: center; gap: 0.4rem;
+      display: inline-flex; align-items: center; gap: 0.35rem;
     }
     .m-back:hover { color: var(--cyan); }
+    .m-help {
+      font-size: 0.85rem; font-weight: 700; color: #0e1117;
+      background: var(--cyan);
+      text-decoration: none; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.45rem 1rem; border-radius: 7px;
+      transition: opacity 0.18s;
+    }
+    .m-help:hover { opacity: 0.88; }
 
-    /* ═══════════ ARTICLE LAYOUT ═══════════ */
-    .article-outer {
-      max-width: 760px;
+    /* ═══ HERO ═══ */
+    .hero {
+      position: relative;
+      background: linear-gradient(160deg, #13161e 0%, #0e1117 60%, #111620 100%);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 4rem 2rem 3.5rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 55% at 65% 40%, rgba(41,212,245,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 800px;
       margin: 0 auto;
-      padding: 0 2rem;
+      position: relative;
     }
-
-    .breadcrumb {
+    .hero-breadcrumb {
       display: flex; align-items: center; gap: 0.4rem;
-      font-size: 0.78rem; color: var(--muted);
-      padding: 2rem 0 0;
+      font-size: 0.78rem; color: var(--muted); margin-bottom: 1.6rem;
     }
-    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.18s; }
-    .breadcrumb a:hover { color: var(--cyan); }
-    .breadcrumb-sep { opacity: 0.4; }
-
-    .article-header { padding: 1.6rem 0 2rem; border-bottom: 1px solid var(--border); }
-    .article-kicker { margin-bottom: 1rem; }
-    .article-title {
+    .hero-breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.18s; }
+    .hero-breadcrumb a:hover { color: var(--cyan); }
+    .hero-breadcrumb span { opacity: 0.4; }
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 1.1rem;
+    }
+    .hero-kicker::before { content: ''; width: 20px; height: 2px; background: var(--cyan); flex-shrink: 0; }
+    .hero-title {
       font-family: 'Instrument Sans', sans-serif;
-      font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.6rem);
-      line-height: 1.2; letter-spacing: -0.01em;
-      color: var(--white); margin-bottom: 1rem;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.13;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 1.2rem;
     }
-    .article-excerpt {
-      font-size: 1.08rem; color: var(--off); line-height: 1.7;
-      margin-bottom: 1.4rem;
+    .hero-title em {
+      font-style: normal;
+      color: var(--cyan);
     }
-    .article-meta {
-      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-      font-size: 0.82rem; color: var(--muted);
+    .hero-excerpt {
+      font-size: 1.15rem; color: var(--off); line-height: 1.7;
+      max-width: 640px; margin-bottom: 2rem;
     }
-    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-    .meta-tag {
-      display: inline-flex; align-items: center;
-      background: var(--cyan-soft); color: var(--cyan);
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px;
+    .hero-meta-row {
+      display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap;
+    }
+    .author-chip {
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .author-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #1b2333 0%, #243045 100%);
+      border: 2px solid var(--border-md);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 800; font-size: 0.72rem; color: var(--cyan);
+      flex-shrink: 0;
+    }
+    .author-info { line-height: 1.3; }
+    .author-name { font-size: 0.88rem; font-weight: 600; color: var(--white); }
+    .author-role { font-size: 0.74rem; color: var(--muted); }
+    .meta-divider { width: 1px; height: 28px; background: var(--border-md); }
+    .hero-stats { display: flex; align-items: center; gap: 1rem; }
+    .hero-stat { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.3rem; }
+    .hero-stat svg { color: var(--muted); flex-shrink: 0; }
+
+    /* ═══ QUICK ANSWER ═══ */
+    .quick-answer {
+      background: linear-gradient(135deg, rgba(41,212,245,0.08) 0%, rgba(41,212,245,0.03) 100%);
+      border: 1px solid rgba(41,212,245,0.25);
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .qa-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .qa-label::before { content: '⚡'; font-style: normal; }
+    .qa-answer { font-size: 1.02rem; color: var(--white); line-height: 1.65; }
+    .qa-answer strong { color: var(--cyan); }
+
+    /* ═══ PAGE LAYOUT ═══ */
+    .page-layout {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 4rem;
+      align-items: start;
     }
 
-    /* ═══════════ TOC ═══════════ */
-    .toc {
+    /* ═══ STICKY TOC ═══ */
+    .toc-sidebar {
+      position: sticky;
+      top: 90px;
+    }
+    .toc-box {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 1.4rem 1.6rem;
-      margin: 2rem 0;
     }
-    .toc-title {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem;
+    .toc-box-title {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
     }
-    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; counter-reset: toc; }
-    .toc li { counter-increment: toc; display: flex; align-items: baseline; gap: 0.5rem; }
-    .toc li::before {
-      content: counter(toc);
-      font-size: 0.7rem; font-weight: 700; color: var(--cyan);
-      flex-shrink: 0; min-width: 1rem;
+    .toc-box ol { list-style: none; display: flex; flex-direction: column; gap: 0; counter-reset: toc-s; }
+    .toc-box li { counter-increment: toc-s; }
+    .toc-box a {
+      display: flex; align-items: baseline; gap: 0.5rem;
+      padding: 0.42rem 0.5rem; border-radius: 6px;
+      font-size: 0.85rem; color: var(--off); text-decoration: none;
+      transition: background 0.15s, color 0.15s;
     }
-    .toc a {
-      font-size: 0.9rem; color: var(--off); text-decoration: none;
-      transition: color 0.18s; line-height: 1.4;
+    .toc-box a::before {
+      content: counter(toc-s);
+      font-size: 0.65rem; font-weight: 700; color: var(--border-md);
+      flex-shrink: 0; min-width: 0.9rem;
+      transition: color 0.15s;
     }
-    .toc a:hover { color: var(--cyan); }
+    .toc-box a:hover { background: var(--card); color: var(--white); }
+    .toc-box a:hover::before { color: var(--cyan); }
+    .toc-box a.active { background: var(--cyan-soft); color: var(--cyan); }
+    .toc-box a.active::before { color: var(--cyan); }
+    .toc-cta {
+      margin-top: 1.2rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--border);
+    }
+    .toc-cta a {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      background: var(--cyan); color: #0e1117;
+      font-weight: 700; font-size: 0.82rem;
+      padding: 0.6rem 1rem; border-radius: 8px;
+      text-decoration: none; transition: opacity 0.18s;
+    }
+    .toc-cta a:hover { opacity: 0.88; }
 
-    /* ═══════════ PROSE ═══════════ */
-    .prose { padding: 2rem 0; }
-    .prose > * + * { margin-top: 1.4rem; }
+    /* ═══ PROSE ═══ */
+    .prose { min-width: 0; }
+    .prose > * + * { margin-top: 1.5rem; }
+
     .prose h2 {
       font-family: 'Instrument Sans', sans-serif;
-      font-weight: 800; font-size: 1.45rem;
-      letter-spacing: -0.01em; color: var(--white);
-      margin-top: 3rem; padding-top: 2.5rem;
+      font-weight: 800; font-size: 1.55rem;
+      letter-spacing: -0.02em; color: var(--white);
+      margin-top: 3.5rem; padding-top: 2.5rem;
       border-top: 1px solid var(--border);
+      scroll-margin-top: 90px;
     }
     .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
     .prose h3 {
       font-family: 'Instrument Sans', sans-serif;
-      font-weight: 700; font-size: 1.1rem;
-      color: var(--white); margin-top: 2rem;
+      font-weight: 700; font-size: 1.12rem;
+      color: var(--white); margin-top: 2.2rem;
+      scroll-margin-top: 90px;
     }
-    .prose p { font-size: 1rem; color: var(--off); line-height: 1.75; }
+    .prose p { font-size: 1.01rem; color: var(--off); line-height: 1.8; }
     .prose strong { color: var(--white); font-weight: 600; }
-    .prose em { color: var(--off); }
     .prose a { color: var(--cyan); text-decoration: underline; text-decoration-color: var(--cyan-dim); }
     .prose a:hover { text-decoration-color: var(--cyan); }
     .prose ul, .prose ol {
-      padding-left: 1.4rem; display: flex; flex-direction: column; gap: 0.45rem;
+      padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;
     }
-    .prose ul li, .prose ol li { font-size: 1rem; color: var(--off); line-height: 1.7; }
+    .prose li { font-size: 1rem; color: var(--off); line-height: 1.75; }
     .prose ul li::marker { color: var(--cyan); }
-    .prose ol li::marker { color: var(--cyan); font-weight: 600; }
+    .prose ol li::marker { color: var(--cyan); font-weight: 700; }
 
-    /* ═══════════ CALLOUT / TIP ═══════════ */
+    /* ═══ STAT CALLOUT ═══ */
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .stat-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem 1rem; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 800; font-size: 1.8rem; color: var(--cyan);
+      line-height: 1; margin-bottom: 0.35rem;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); line-height: 1.35; }
+
+    /* ═══ CALLOUT ═══ */
     .callout {
       background: var(--surface);
       border-left: 3px solid var(--cyan);
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 10px 10px 0;
       padding: 1.1rem 1.4rem;
-      font-size: 0.95rem; color: var(--off); line-height: 1.7;
+      font-size: 0.97rem; color: var(--off); line-height: 1.75;
     }
     .callout strong { color: var(--white); }
-    .callout-warn {
-      border-left-color: #f5a623;
-    }
-    .callout-warn strong { color: #f5c842; }
+    .callout-warn { border-left-color: var(--gold); }
+    .callout-warn strong { color: var(--gold); }
 
-    /* ═══════════ PRODUCT PICKS ═══════════ */
-    .pick-list { display: flex; flex-direction: column; gap: 1.8rem; margin: 2rem 0; }
+    /* ═══ PRODUCT PICKS ═══ */
+    .pick-list { display: flex; flex-direction: column; gap: 2rem; margin: 0.5rem 0; }
 
     .pick {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
+      transition: border-color 0.2s;
     }
+    .pick:hover { border-color: var(--border-md); }
+    .pick.pick-winner {
+      border-color: rgba(41,212,245,0.3);
+      box-shadow: 0 0 0 1px rgba(41,212,245,0.08), 0 4px 24px rgba(41,212,245,0.06);
+    }
+
+    .pick-banner {
+      background: var(--cyan);
+      color: #0e1117;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 800; font-size: 0.7rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.38rem 1.6rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .pick-banner svg { flex-shrink: 0; }
+
     .pick-header {
       display: flex; align-items: flex-start; gap: 1.2rem;
       padding: 1.4rem 1.6rem 1.2rem;
@@ -211,77 +333,110 @@
     }
     .pick-num {
       flex-shrink: 0;
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--cyan-soft); color: var(--cyan);
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--off);
       font-family: 'Instrument Sans', sans-serif;
-      font-weight: 800; font-size: 1.05rem;
+      font-weight: 800; font-size: 1.1rem;
       display: flex; align-items: center; justify-content: center;
+    }
+    .pick-winner .pick-num {
+      background: var(--cyan-soft);
+      border-color: rgba(41,212,245,0.3);
+      color: var(--cyan);
     }
     .pick-info { flex: 1; min-width: 0; }
     .pick-verdict {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.25rem;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.3rem;
     }
     .pick-name {
       font-family: 'Instrument Sans', sans-serif;
-      font-weight: 700; font-size: 1.15rem; color: var(--white);
-      line-height: 1.3; margin-bottom: 0.3rem;
+      font-weight: 800; font-size: 1.22rem; color: var(--white);
+      line-height: 1.25; margin-bottom: 0.35rem;
     }
-    .pick-price { font-size: 0.85rem; color: var(--muted); }
-    .pick-body { padding: 1.2rem 1.6rem; }
-    .pick-summary { font-size: 0.97rem; color: var(--off); line-height: 1.7; margin-bottom: 1.1rem; }
-    .pick-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+    .pick-price-row { display: flex; align-items: center; gap: 0.6rem; }
+    .pick-price { font-size: 1.05rem; font-weight: 700; color: var(--white); }
+    .pick-price-note { font-size: 0.8rem; color: var(--muted); }
+
+    .pick-body { padding: 1.3rem 1.6rem; }
+    .pick-summary {
+      font-size: 0.99rem; color: var(--off); line-height: 1.8;
+      margin-bottom: 1.3rem; border-bottom: 1px solid var(--border); padding-bottom: 1.2rem;
+    }
+    .pick-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
     .pick-col h4 {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; margin-bottom: 0.5rem;
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.13em;
+      text-transform: uppercase; margin-bottom: 0.55rem;
     }
     .pick-col.pros h4 { color: var(--cyan); }
     .pick-col.cons h4 { color: var(--muted); }
-    .pick-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
-    .pick-col li { font-size: 0.88rem; color: var(--off); display: flex; align-items: flex-start; gap: 0.4rem; }
-    .pick-col li::before { flex-shrink: 0; margin-top: 0.3rem; }
-    .pros li::before { content: '+'; color: var(--cyan); font-weight: 700; font-size: 0.85rem; }
-    .cons li::before { content: '–'; color: var(--muted); font-weight: 700; font-size: 0.85rem; }
+    .pick-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.38rem; }
+    .pick-col li { font-size: 0.88rem; color: var(--off); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5; }
+    .pick-col li span.icon { flex-shrink: 0; margin-top: 0.05rem; font-style: normal; font-size: 0.8rem; }
+    .pros li .icon { color: var(--cyan); }
+    .cons li .icon { color: var(--muted); }
+
     .pick-footer {
       padding: 1rem 1.6rem;
       border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      background: rgba(0,0,0,0.12);
     }
-    .pick-bestfor { font-size: 0.85rem; color: var(--muted); }
-    .pick-bestfor strong { color: var(--off); }
+    .pick-bestfor { font-size: 0.84rem; color: var(--muted); }
+    .pick-bestfor strong { color: var(--off); font-weight: 600; }
     .pick-btn {
       display: inline-flex; align-items: center; gap: 0.45rem;
       background: var(--cyan); color: #0e1117;
       font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.85rem;
-      padding: 0.55rem 1.1rem; border-radius: 8px;
+      padding: 0.6rem 1.2rem; border-radius: 8px;
       text-decoration: none; transition: opacity 0.18s; white-space: nowrap;
+      flex-shrink: 0;
     }
     .pick-btn:hover { opacity: 0.88; }
-    .pick-btn svg { flex-shrink: 0; }
 
-    /* ═══════════ SPEC TABLE ═══════════ */
-    .spec-table {
-      width: 100%; border-collapse: collapse;
-      font-size: 0.9rem; margin: 1.5rem 0;
-      border-radius: 8px; overflow: hidden;
-      border: 1px solid var(--border);
-    }
+    /* ═══ COMPARISON TABLE ═══ */
+    .table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 10px; border: 1px solid var(--border); }
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     .spec-table th {
-      background: var(--surface);
-      color: var(--muted); font-size: 0.72rem;
-      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
+      background: var(--surface); color: var(--muted);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
     }
-    .spec-table td {
-      padding: 0.75rem 1rem; color: var(--off); border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
+    .spec-table td { padding: 0.8rem 1rem; color: var(--off); border-bottom: 1px solid var(--border); vertical-align: top; }
     .spec-table tr:last-child td { border-bottom: none; }
-    .spec-table td:first-child { color: var(--white); font-weight: 500; }
-    .spec-table .winner { color: var(--cyan); }
+    .spec-table td:first-child { color: var(--white); font-weight: 600; }
+    .spec-table .winner-row td { background: rgba(41,212,245,0.04); }
+    .spec-table .winner-row td:first-child { color: var(--cyan); }
+    .check { color: var(--cyan); font-weight: 700; }
+    .cross { color: var(--muted); }
 
-    /* ═══════════ FAQ ═══════════ */
-    .faq { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 1.5rem 0; }
+    /* ═══ SETUP STEP ═══ */
+    .setup-steps { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+    .setup-step {
+      display: flex; gap: 1.2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .setup-step:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.25);
+      color: var(--cyan); font-family: 'Instrument Sans', sans-serif;
+      font-weight: 800; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content h4 {
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 700; font-size: 1rem; color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .step-content p { font-size: 0.93rem; color: var(--off); line-height: 1.7; }
+
+    /* ═══ FAQ ═══ */
+    .faq { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-item:last-child { border-bottom: none; }
     .faq-q {
@@ -289,18 +444,59 @@
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
       padding: 1.1rem 1.4rem; text-align: left;
       font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 600;
-      color: var(--white); transition: color 0.18s;
+      color: var(--white); transition: color 0.18s, background 0.18s;
     }
-    .faq-q:hover { color: var(--cyan); }
-    .faq-q svg { flex-shrink: 0; transition: transform 0.2s; color: var(--muted); }
-    .faq-item.open .faq-q svg { transform: rotate(180deg); color: var(--cyan); }
+    .faq-q:hover { background: var(--surface); color: var(--cyan); }
+    .faq-q .faq-icon { flex-shrink: 0; transition: transform 0.22s; color: var(--muted); }
+    .faq-item.open .faq-q { color: var(--cyan); }
+    .faq-item.open .faq-q .faq-icon { transform: rotate(180deg); color: var(--cyan); }
     .faq-a {
       display: none; padding: 0 1.4rem 1.1rem;
-      font-size: 0.95rem; color: var(--off); line-height: 1.7;
+      font-size: 0.95rem; color: var(--off); line-height: 1.75;
     }
     .faq-item.open .faq-a { display: block; }
 
-    /* ═══════════ FOOTER ═══════════ */
+    /* ═══ AUTHOR CARD ═══ */
+    .author-card {
+      display: flex; align-items: center; gap: 1.2rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem 1.6rem;
+      margin-top: 3rem;
+    }
+    .author-card-avatar {
+      width: 54px; height: 54px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #1a2235 0%, #253550 100%);
+      border: 2px solid rgba(41,212,245,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 800; font-size: 1rem; color: var(--cyan);
+    }
+    .author-card-name { font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 0.15rem; }
+    .author-card-bio { font-size: 0.88rem; color: var(--off); line-height: 1.55; }
+
+    /* ═══ BOTTOM CTA ═══ */
+    .bottom-cta {
+      background: linear-gradient(135deg, rgba(41,212,245,0.1) 0%, rgba(41,212,245,0.04) 100%);
+      border: 1px solid rgba(41,212,245,0.22);
+      border-radius: 14px; padding: 2rem 2rem;
+      text-align: center; margin-top: 3rem;
+    }
+    .bottom-cta-title {
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 800; font-size: 1.35rem; color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .bottom-cta-text { font-size: 0.97rem; color: var(--off); line-height: 1.65; margin-bottom: 1.4rem; }
+    .bottom-cta-btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: var(--cyan); color: #0e1117;
+      font-weight: 700; font-size: 0.95rem;
+      padding: 0.75rem 1.8rem; border-radius: 9px;
+      text-decoration: none; transition: opacity 0.18s;
+    }
+    .bottom-cta-btn:hover { opacity: 0.88; }
+
+    /* ═══ FOOTER ═══ */
     footer { border-top: 1px solid var(--border); background: var(--surface); margin-top: 5rem; padding: 3rem 0 2rem; }
     .f-top { display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
     .f-brand-logo { margin-bottom: 0.9rem; }
@@ -322,27 +518,38 @@
     .f-bottom a { color: var(--off); text-decoration: none; }
     .f-bottom a:hover { color: var(--cyan); }
 
-    /* ═══════════ RESPONSIVE ═══════════ */
+    /* ═══ FADE-IN ═══ */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 860px) {
+      .page-layout { grid-template-columns: 1fr; gap: 0; }
+      .toc-sidebar { display: none; }
+    }
     @media (max-width: 600px) {
-      .article-outer { padding: 0 1.3rem; }
-      .masthead-inner { padding: 1.1rem 1.3rem; }
+      .hero { padding: 2.8rem 1.3rem 2.5rem; }
+      .page-layout { padding: 1.5rem 1.3rem 0; }
+      .masthead-inner { padding: 1rem 1.3rem; }
       .pick-cols { grid-template-columns: 1fr; }
-      .pick-header { flex-direction: column; gap: 0.8rem; }
-      .spec-table { font-size: 0.82rem; }
-      .spec-table th, .spec-table td { padding: 0.6rem 0.75rem; }
+      .stat-row { grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
+      .stat-num { font-size: 1.4rem; }
+      .pick-header { flex-direction: row; }
       .f-top { flex-direction: column; gap: 2rem; }
       .f-nav { gap: 2.5rem; }
+      .bottom-cta { padding: 1.6rem 1.2rem; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
+<div id="reading-bar" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 <a href="#main" class="skip-link">Skip to content</a>
 
-<!-- ════════════ MASTHEAD ════════════ -->
+<!-- ════ MASTHEAD ════ -->
 <header class="masthead">
   <div class="masthead-inner">
     <a href="/guides/" class="masthead-logo" aria-label="Tekpair Guides home">
@@ -353,117 +560,153 @@
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         All guides
       </a>
-      <a href="/" class="m-help">Need help? Hire us
+      <a href="/#booking" class="m-help">
+        Hire us
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
   </div>
 </header>
 
-<!-- ════════════ ARTICLE ════════════ -->
-<main id="main">
-  <div class="article-outer">
-
-    <nav class="breadcrumb" aria-label="Breadcrumb">
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <nav class="hero-breadcrumb" aria-label="Breadcrumb">
       <a href="/">Tekpair</a>
-      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span aria-hidden="true">›</span>
       <a href="/guides/">Guides</a>
-      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span aria-hidden="true">›</span>
       <span>Wi-Fi &amp; Network</span>
     </nav>
 
-    <header class="article-header">
-      <div class="article-kicker">
-        <span class="kicker">Wi-Fi &amp; Network</span>
-      </div>
-      <h1 class="article-title">Best mesh Wi-Fi systems for a 2-story house in 2026</h1>
-      <p class="article-excerpt">Dead zones upstairs? A single router rarely covers a multi-floor home. We compare Eero, Orbi, and TP-Link Deco on real-world coverage, speed, and price — and tell you which one to skip.</p>
-      <div class="article-meta">
-        <span class="meta-tag">Featured</span>
-        <span class="dot"></span>
-        <span>Updated June 2026</span>
-        <span class="dot"></span>
-        <span>11 min read</span>
-        <span class="dot"></span>
-        <span>By Tekpair</span>
-      </div>
-    </header>
+    <div class="hero-kicker">Wi-Fi &amp; Network</div>
 
-    <nav class="toc" aria-label="Table of contents">
-      <p class="toc-title">In this guide</p>
-      <ol>
-        <li><a href="#why-single-routers-fail">Why single routers fail in 2-story homes</a></li>
-        <li><a href="#what-to-look-for">What to look for in a mesh system</a></li>
-        <li><a href="#top-picks">Our top picks for 2026</a></li>
-        <li><a href="#comparison">Quick comparison chart</a></li>
-        <li><a href="#setup-tips">Setup tips for 2-story homes</a></li>
-        <li><a href="#faq">Frequently asked questions</a></li>
-      </ol>
-    </nav>
+    <h1 class="hero-title">Best mesh Wi-Fi for a<br><em>2-story house</em> in 2026</h1>
 
+    <p class="hero-excerpt">Dead zones upstairs? One router almost never covers a whole two-story home — no matter how expensive it is. We've set up dozens of these systems in real homes across the Capital Region. Here's exactly what works, what's overpriced, and what to skip.</p>
+
+    <div class="hero-meta-row">
+      <div class="author-chip">
+        <div class="author-avatar" aria-hidden="true">CW</div>
+        <div class="author-info">
+          <div class="author-name">Connor Waugaman</div>
+          <div class="author-role">Written by · Tekpair</div>
+        </div>
+      </div>
+      <div class="meta-divider" aria-hidden="true"></div>
+      <div class="hero-stats">
+        <span class="hero-stat">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          11 min read
+        </span>
+        <span class="hero-stat">Updated June 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ MAIN ════ -->
+<main id="main">
+  <div class="page-layout">
+
+    <!-- ── Article Content ── -->
     <article class="prose">
 
-      <h2 id="why-single-routers-fail">Why single routers fail in 2-story homes</h2>
-      <p>The most common Wi-Fi complaint we hear — and we hear it constantly in homes across Cohoes, Troy, and the Capital Region — is that the upstairs bedrooms have terrible signal. The router is downstairs, signal is great near the TV, and by the time you get to the second floor it's borderline useless.</p>
-      <p>This isn't your ISP's fault. It's physics. Wi-Fi signal degrades with distance, and it degrades faster when it has to pass through floors, load-bearing walls, and the air gaps inside them. A 2-story house with 2,400 sq ft puts roughly 35–45 feet of diagonal distance between a downstairs router and an upstairs bedroom — plus a floor with joists, insulation, and wiring in between. That's a lot for a single radio to push through.</p>
-      <p>The other problem: router antennas are typically designed to broadcast outward in a flat disc pattern, not upward. A router sitting on a shelf radiates most of its signal horizontally. Very little goes up through the ceiling to the floor above.</p>
-      <div class="callout">
-        <strong>The fix isn't a faster router — it's more radios in more places.</strong> That's what a mesh system does. Each node acts as a full router with its own radio, handing your devices off seamlessly as you move through the house.
+      <!-- Quick Answer -->
+      <div class="quick-answer reveal">
+        <div class="qa-label">Short answer</div>
+        <p class="qa-answer">For most two-story homes, get the <strong>Amazon Eero Pro 6E (2-pack, ~$299)</strong>. It's the easiest to set up, covers up to 4,000 sq ft, and the app actually makes sense. If your home has thick old walls or is over 3,000 sq ft, step up to the <strong>Netgear Orbi RBK863S</strong>. On a tight budget? The <strong>Eero 6+</strong> for ~$149 handles most two-story homes just fine.</p>
       </div>
 
-      <h2 id="what-to-look-for">What to look for in a mesh system</h2>
-      <h3>Wi-Fi standard: 6 vs. 6E</h3>
-      <p>Wi-Fi 6 (802.11ax) is the current mainstream standard and is more than fast enough for most 2-story homes. Wi-Fi 6E adds a 6 GHz band — useful if you have several newer devices (iPhones from 2022+, recent laptops) and want the extra headroom. For most households, Wi-Fi 6 is the sweet spot between cost and capability.</p>
+      <!-- Section 1 -->
+      <h2 id="why-fail" class="reveal">Why your router can't cover two floors</h2>
 
-      <h3>Backhaul: dedicated vs. shared</h3>
-      <p>Cheap Wi-Fi extenders cut your bandwidth in half because they use the same radio to talk to the router and to your devices. True mesh systems use a <strong>dedicated backhaul channel</strong> — a separate radio that handles node-to-node traffic only. This keeps client speeds high even when you're far from the main node. Look for "tri-band" or "dedicated backhaul" in the specs.</p>
+      <p class="reveal">The most common Wi-Fi complaint we hear — and we hear it constantly — is that the upstairs is dead. The router is downstairs. Signal is great near the TV. By the time you get to the bedroom upstairs, you're crawling along on two bars and pages won't load.</p>
 
-      <h3>Node count for a 2-story house</h3>
-      <p>Most 2-story homes between 1,800–3,000 sq ft do fine with <strong>2 nodes</strong>. One goes near your modem (usually downstairs), one goes in a central upstairs location. For homes over 3,000 sq ft, or with unusual layouts — L-shaped floor plans, thick plaster walls, a detached garage — plan for 3.</p>
+      <p class="reveal">Here's what's actually happening: Wi-Fi signal weakens with distance, and it weakens <em>a lot</em> when it has to push through floors. A typical two-story house puts 35–45 feet of diagonal distance between your downstairs router and an upstairs bedroom — plus a floor full of wood, insulation, and wiring in between. That's a lot to push a signal through.</p>
 
-      <h3>App quality matters more than you think</h3>
-      <p>You'll use the app to set up, manage devices, run speed tests, and troubleshoot. Eero's app is the easiest. Orbi's is functional but dated. TP-Link Deco's is solid. Netgear Nighthawk Mesh is the worst of the bunch — avoid it if you hate confusing interfaces.</p>
+      <p class="reveal">There's also a geometry problem. Most routers spread their signal outward in a flat disc shape — like ripples in water. They're not designed to push signal up through a ceiling. So the second floor isn't just far away, it's in a direction the router wasn't designed to cover well.</p>
 
-      <h2 id="top-picks">Our top picks for 2026</h2>
-      <p>We've personally set up all four of these systems in homes across the Capital Region. Here's what we actually think.</p>
+      <div class="stat-row reveal">
+        <div class="stat-box">
+          <div class="stat-num">35–45<span style="font-size:1rem">ft</span></div>
+          <div class="stat-label">Typical distance from router to upstairs bedroom</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">~70%</div>
+          <div class="stat-label">Signal lost just passing through one floor</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Nodes needed for most two-story homes</div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>The fix isn't a faster router — it's more radios in more places.</strong> Mesh systems put a full radio on each floor. Each node talks to the others, and your phone or laptop connects to whichever one is closest. No manual switching, no dead zones.
+      </div>
+
+      <!-- Section 2 -->
+      <h2 id="what-look-for" class="reveal">What actually matters when buying a mesh system</h2>
+
+      <h3 class="reveal">Wi-Fi 6 vs. Wi-Fi 6E — what's the difference?</h3>
+      <p class="reveal">Wi-Fi 6 is the current standard. It's fast, stable, and supported by every device made in the last few years. <strong>Wi-Fi 6E adds a third band</strong> (6 GHz) that's less crowded and faster for compatible devices. If you have newer phones or laptops (2022 and up), 6E is a nice upgrade. If most of your devices are a few years old, you won't notice the difference. Either way, both are great upgrades over what most people currently have.</p>
+
+      <h3 class="reveal">What is "backhaul" and why does it matter?</h3>
+      <p class="reveal">When your mesh nodes talk to each other — passing your traffic between nodes — that communication is called the <strong>backhaul</strong>. Cheap Wi-Fi extenders use the same band for both their "talk to the router" job and their "talk to your devices" job. This cuts your speed in half or worse.</p>
+      <p class="reveal">True mesh systems have a <strong>dedicated backhaul channel</strong> — a separate radio used only for node-to-node traffic. Your devices get their own dedicated lanes. This is why good mesh systems feel fast everywhere, while cheap extenders feel slow in the rooms they're supposed to help.</p>
+
+      <h3 class="reveal">How many nodes do you need?</h3>
+      <p class="reveal">For a typical two-story house between 1,800–3,000 sq ft: <strong>2 nodes is almost always enough</strong>. One downstairs near your modem, one upstairs in a central spot. Buy a 2-pack first — you can always add a third later if a corner of the house still has weak signal. All the systems we recommend let you expand.</p>
+
+      <!-- Section 3 -->
+      <h2 id="top-picks" class="reveal">Our top picks for two-story homes</h2>
+      <p class="reveal">We've personally set up all of these systems in homes across the Capital Region. These aren't spec-sheet recommendations — they're based on what actually works in real houses.</p>
 
       <div class="pick-list">
 
         <!-- Pick 1 -->
-        <div class="pick">
+        <div class="pick pick-winner reveal">
+          <div class="pick-banner">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Our Top Pick — Best for Most Homes
+          </div>
           <div class="pick-header">
             <div class="pick-num">1</div>
             <div class="pick-info">
               <div class="pick-verdict">Best Overall</div>
-              <div class="pick-name">Amazon Eero Pro 6E (2-pack)</div>
-              <div class="pick-price">~$299 on Amazon</div>
+              <div class="pick-name">Amazon Eero Pro 6E</div>
+              <div class="pick-price-row">
+                <span class="pick-price">~$299</span>
+                <span class="pick-price-note">2-pack · Wi-Fi 6E</span>
+              </div>
             </div>
           </div>
           <div class="pick-body">
-            <p class="pick-summary">The Eero Pro 6E is the mesh system we recommend to most people without hesitation. Setup takes about 10 minutes, the app is genuinely the best in this category, and coverage in a typical 2-story house is excellent. The 6 GHz band handles fast devices efficiently, and the dedicated 6 GHz backhaul keeps speeds high even when you're at the far end of the house.</p>
+            <p class="pick-summary">If you want one answer and you want to stop thinking about it — this is it. The Eero Pro 6E covers up to 4,000 sq ft, sets up in about 10 minutes through one of the cleanest apps we've used, and it just works. We recommend it to almost every homeowner who asks. The 6 GHz band means faster speeds for newer devices, and the dedicated backhaul keeps things snappy even at the far end of the house.</p>
             <div class="pick-cols">
               <div class="pick-col pros">
-                <h4>Pros</h4>
+                <h4>What we love</h4>
                 <ul>
-                  <li>Easiest setup and app on the market</li>
-                  <li>Dedicated 6 GHz backhaul</li>
-                  <li>Automatic firmware updates</li>
-                  <li>Compact, unobtrusive design</li>
-                  <li>Works great with Alexa and Amazon devices</li>
+                  <li><span class="icon">+</span>Easiest setup — takes about 10 minutes</li>
+                  <li><span class="icon">+</span>Best app in this category, bar none</li>
+                  <li><span class="icon">+</span>Dedicated 6 GHz backhaul = fast everywhere</li>
+                  <li><span class="icon">+</span>Automatic updates, no maintenance</li>
+                  <li><span class="icon">+</span>Compact — doesn't look like IT equipment</li>
                 </ul>
               </div>
               <div class="pick-col cons">
-                <h4>Cons</h4>
+                <h4>Worth knowing</h4>
                 <ul>
-                  <li>Parental controls require Eero+ subscription ($10/mo)</li>
-                  <li>Limited advanced/power-user settings</li>
-                  <li>Amazon collects network data by default</li>
+                  <li><span class="icon">–</span>Parental controls need a $10/mo subscription</li>
+                  <li><span class="icon">–</span>Not many advanced settings for power users</li>
+                  <li><span class="icon">–</span>Amazon collects some network data by default</li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="pick-footer">
-            <p class="pick-bestfor"><strong>Best for:</strong> Most households, especially those who want simple setup and management.</p>
+            <p class="pick-bestfor"><strong>Best for:</strong> Most households — especially if you just want it working without a headache.</p>
             <a href="https://www.amazon.com/s?k=eero+pro+6e+2+pack" target="_blank" rel="noopener sponsored" class="pick-btn">
               View on Amazon
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -472,40 +715,43 @@
         </div>
 
         <!-- Pick 2 -->
-        <div class="pick">
+        <div class="pick reveal">
           <div class="pick-header">
             <div class="pick-num">2</div>
             <div class="pick-info">
-              <div class="pick-verdict">Best for Large or Thick-Walled Homes</div>
-              <div class="pick-name">Netgear Orbi RBK863S (2-pack)</div>
-              <div class="pick-price">~$449 on Amazon</div>
+              <div class="pick-verdict">Best for Large or Older Homes</div>
+              <div class="pick-name">Netgear Orbi RBK863S</div>
+              <div class="pick-price-row">
+                <span class="pick-price">~$449</span>
+                <span class="pick-price-note">2-pack · Wi-Fi 6E</span>
+              </div>
             </div>
           </div>
           <div class="pick-body">
-            <p class="pick-summary">If your 2-story house has older plaster walls, brick construction, or is over 3,000 sq ft, the Orbi 960 is the strongest performer. The nodes put out significantly more power than any Eero, and the 6 GHz backhaul handles demanding backhaul loads without slowing down. We've used it in older Capital Region homes where nothing else worked properly.</p>
+            <p class="pick-summary">If you've already tried something and still have dead zones, or your home has older plaster walls, brick construction, or is bigger than 3,000 sq ft — this is what you need. The Orbi puts out significantly more power than any Eero. We've used it in older Capital Region homes where nothing else worked. It's bigger, it's pricier, but it absolutely gets the job done.</p>
             <div class="pick-cols">
               <div class="pick-col pros">
-                <h4>Pros</h4>
+                <h4>What we love</h4>
                 <ul>
-                  <li>Best-in-class range and wall penetration</li>
-                  <li>High transmit power handles thick walls</li>
-                  <li>Dedicated 6 GHz backhaul</li>
-                  <li>Strong performance in large homes</li>
+                  <li><span class="icon">+</span>Best-in-class range — strongest signal of any mesh system</li>
+                  <li><span class="icon">+</span>Handles thick walls and older construction easily</li>
+                  <li><span class="icon">+</span>Dedicated 6 GHz backhaul</li>
+                  <li><span class="icon">+</span>Covers up to 5,000 sq ft with 2 nodes</li>
                 </ul>
               </div>
               <div class="pick-col cons">
-                <h4>Cons</h4>
+                <h4>Worth knowing</h4>
                 <ul>
-                  <li>Expensive — significantly more than Eero</li>
-                  <li>Large physical nodes (not subtle)</li>
-                  <li>App is functional but dated</li>
-                  <li>Overkill for most 2,000–2,800 sq ft homes</li>
+                  <li><span class="icon">–</span>Expensive — $150 more than the Eero Pro 6E</li>
+                  <li><span class="icon">–</span>Nodes are large and hard to hide</li>
+                  <li><span class="icon">–</span>App feels dated compared to Eero</li>
+                  <li><span class="icon">–</span>Overkill for most standard 2-story homes</li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="pick-footer">
-            <p class="pick-bestfor"><strong>Best for:</strong> Homes over 3,000 sq ft, older construction with thick walls, or anyone who's tried other systems and still has dead zones.</p>
+            <p class="pick-bestfor"><strong>Best for:</strong> Homes over 3,000 sq ft, older construction, thick walls, or anyone who's already tried other systems without success.</p>
             <a href="https://www.amazon.com/s?k=netgear+orbi+rbk863s" target="_blank" rel="noopener sponsored" class="pick-btn">
               View on Amazon
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -514,39 +760,42 @@
         </div>
 
         <!-- Pick 3 -->
-        <div class="pick">
+        <div class="pick reveal">
           <div class="pick-header">
             <div class="pick-num">3</div>
             <div class="pick-info">
               <div class="pick-verdict">Best Value</div>
-              <div class="pick-name">TP-Link Deco XE75 (2-pack)</div>
-              <div class="pick-price">~$229 on Amazon</div>
+              <div class="pick-name">TP-Link Deco XE75</div>
+              <div class="pick-price-row">
+                <span class="pick-price">~$229</span>
+                <span class="pick-price-note">2-pack · Wi-Fi 6E</span>
+              </div>
             </div>
           </div>
           <div class="pick-body">
-            <p class="pick-summary">The Deco XE75 delivers genuine Wi-Fi 6E performance at a noticeably lower price than the Eero Pro 6E. Coverage is comparable, speeds are strong, and the Deco app has improved significantly in recent updates. If you're comfortable with a slightly less polished setup experience and want to save $60–70, this is a legitimate choice.</p>
+            <p class="pick-summary">This one punches above its price tag. The Deco XE75 gives you genuine Wi-Fi 6E coverage — same standard as the Eero Pro 6E — for about $70 less. Coverage is comparable, speeds are strong, and the app has gotten much better in recent updates. If you're comfortable with a slightly less slick setup process and want to save money, this is a legitimate choice that we don't hesitate to recommend.</p>
             <div class="pick-cols">
               <div class="pick-col pros">
-                <h4>Pros</h4>
+                <h4>What we love</h4>
                 <ul>
-                  <li>Wi-Fi 6E performance at a lower price</li>
-                  <li>Good coverage for 2-story homes</li>
-                  <li>Improved app quality vs. older Deco models</li>
-                  <li>More advanced settings exposed than Eero</li>
+                  <li><span class="icon">+</span>Wi-Fi 6E performance at a lower price</li>
+                  <li><span class="icon">+</span>Strong coverage for most 2-story homes</li>
+                  <li><span class="icon">+</span>More settings visible for those who want them</li>
+                  <li><span class="icon">+</span>Good parental controls built in (free)</li>
                 </ul>
               </div>
               <div class="pick-col cons">
-                <h4>Cons</h4>
+                <h4>Worth knowing</h4>
                 <ul>
-                  <li>App not as polished as Eero</li>
-                  <li>Setup takes a little longer</li>
-                  <li>Some features locked to TP-Link ID account</li>
+                  <li><span class="icon">–</span>App not as polished as Eero</li>
+                  <li><span class="icon">–</span>Setup takes a bit longer</li>
+                  <li><span class="icon">–</span>Requires a TP-Link account for full features</li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="pick-footer">
-            <p class="pick-bestfor"><strong>Best for:</strong> Tech-comfortable buyers who want solid Wi-Fi 6E performance and want to save money vs. the Eero Pro.</p>
+            <p class="pick-bestfor"><strong>Best for:</strong> Anyone who wants solid Wi-Fi 6E without spending Eero prices — and doesn't mind a slightly more involved setup.</p>
             <a href="https://www.amazon.com/s?k=tp-link+deco+xe75" target="_blank" rel="noopener sponsored" class="pick-btn">
               View on Amazon
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -555,39 +804,42 @@
         </div>
 
         <!-- Pick 4 -->
-        <div class="pick">
+        <div class="pick reveal">
           <div class="pick-header">
             <div class="pick-num">4</div>
             <div class="pick-info">
               <div class="pick-verdict">Budget Pick</div>
-              <div class="pick-name">Amazon Eero 6+ (2-pack)</div>
-              <div class="pick-price">~$149 on Amazon</div>
+              <div class="pick-name">Amazon Eero 6+</div>
+              <div class="pick-price-row">
+                <span class="pick-price">~$149</span>
+                <span class="pick-price-note">2-pack · Wi-Fi 6</span>
+              </div>
             </div>
           </div>
           <div class="pick-body">
-            <p class="pick-summary">If you have a typical 2-story home under 2,500 sq ft and you're not pushing gigabit speeds to every room, the Eero 6+ does the job at half the price of the Pro 6E. It's Wi-Fi 6 (not 6E), the backhaul isn't as fast, but most households won't notice the difference. The app is the same great Eero experience.</p>
+            <p class="pick-summary">Half the price of the Pro 6E, and honestly — for most everyday households, you won't notice the difference. It's Wi-Fi 6 instead of 6E, which means no 6 GHz band, but for streaming, browsing, video calls, and general use in a home under 2,500 sq ft, it handles everything without breaking a sweat. Same great Eero app, same easy setup, just a bit less headroom for heavy users.</p>
             <div class="pick-cols">
               <div class="pick-col pros">
-                <h4>Pros</h4>
+                <h4>What we love</h4>
                 <ul>
-                  <li>Same excellent Eero app and setup</li>
-                  <li>Covers most 2-story homes under 2,500 sq ft</li>
-                  <li>Easiest to recommend at this price</li>
-                  <li>Compact and easy to place</li>
+                  <li><span class="icon">+</span>Same excellent Eero setup and app</li>
+                  <li><span class="icon">+</span>Covers most homes under 2,500 sq ft easily</li>
+                  <li><span class="icon">+</span>Half the price — real savings</li>
+                  <li><span class="icon">+</span>Expandable — add nodes later if needed</li>
                 </ul>
               </div>
               <div class="pick-col cons">
-                <h4>Cons</h4>
+                <h4>Worth knowing</h4>
                 <ul>
-                  <li>Wi-Fi 6 only — no 6 GHz band</li>
-                  <li>Slower backhaul than Pro 6E</li>
-                  <li>May need a 3rd node for larger or older homes</li>
+                  <li><span class="icon">–</span>Wi-Fi 6 only — no 6 GHz band</li>
+                  <li><span class="icon">–</span>Slower backhaul than the Pro version</li>
+                  <li><span class="icon">–</span>May need a 3rd node in larger or older homes</li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="pick-footer">
-            <p class="pick-bestfor"><strong>Best for:</strong> Budget-conscious buyers with homes under 2,500 sq ft who still want a great app experience.</p>
+            <p class="pick-bestfor"><strong>Best for:</strong> Budget-conscious buyers in homes under 2,500 sq ft who want the easiest possible setup.</p>
             <a href="https://www.amazon.com/s?k=eero+6+plus+2+pack" target="_blank" rel="noopener sponsored" class="pick-btn">
               View on Amazon
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -597,9 +849,11 @@
 
       </div><!-- /pick-list -->
 
-      <h2 id="comparison">Quick comparison chart</h2>
+      <!-- Section 4 -->
+      <h2 id="comparison" class="reveal">Side-by-side comparison</h2>
+      <p class="reveal">Not sure which one fits your situation? Here's everything in one place.</p>
 
-      <div style="overflow-x:auto;">
+      <div class="table-wrap reveal">
         <table class="spec-table">
           <thead>
             <tr>
@@ -611,118 +865,185 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="winner">Eero Pro 6E ★</td>
+            <tr class="winner-row">
+              <td>Eero Pro 6E ★</td>
               <td>Wi-Fi 6E</td>
-              <td>Dedicated 6 GHz</td>
-              <td>Up to ~4,000 sq ft</td>
+              <td><span class="check">Dedicated 6 GHz</span></td>
+              <td>~4,000 sq ft</td>
               <td>~$299</td>
             </tr>
             <tr>
               <td>Netgear Orbi RBK863S</td>
               <td>Wi-Fi 6E</td>
-              <td>Dedicated 6 GHz</td>
-              <td>Up to ~5,000 sq ft</td>
+              <td><span class="check">Dedicated 6 GHz</span></td>
+              <td>~5,000 sq ft</td>
               <td>~$449</td>
             </tr>
             <tr>
               <td>TP-Link Deco XE75</td>
               <td>Wi-Fi 6E</td>
-              <td>Dedicated 6 GHz</td>
-              <td>Up to ~4,000 sq ft</td>
+              <td><span class="check">Dedicated 6 GHz</span></td>
+              <td>~4,000 sq ft</td>
               <td>~$229</td>
             </tr>
             <tr>
               <td>Eero 6+</td>
               <td>Wi-Fi 6</td>
-              <td>Shared 5 GHz</td>
-              <td>Up to ~2,500 sq ft</td>
+              <td><span class="cross">Shared 5 GHz</span></td>
+              <td>~2,500 sq ft</td>
               <td>~$149</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 id="setup-tips">Setup tips for 2-story homes</h2>
-      <p>We've set up mesh systems in hundreds of homes. Here's what we actually do on the job to get the best coverage.</p>
+      <!-- Section 5 -->
+      <h2 id="setup-tips" class="reveal">How to set it up for the best coverage</h2>
+      <p class="reveal">Where you place your nodes matters just as much as which system you buy. Here's what we actually do on every home installation.</p>
 
-      <h3>Node placement</h3>
-      <ul>
-        <li><strong>Primary node near the modem.</strong> Your main node needs to be close to where the coax or ethernet enters the house. Don't stretch that run — keep the modem-to-router connection short and wired.</li>
-        <li><strong>Second node in a central upstairs location.</strong> A hallway between bedrooms is ideal. Avoid placing it in a bedroom that's off to one side — you want it to cover the whole floor.</li>
-        <li><strong>Don't put nodes in closets or cabinets.</strong> Signal doesn't pass well through enclosed spaces. A node on a shelf in the open works dramatically better than one hidden behind books or in a media cabinet.</li>
-        <li><strong>Keep nodes 30–50 feet apart.</strong> Closer isn't always better — nodes need some distance to form an efficient mesh. Directly above/below each other between floors is a good target.</li>
-      </ul>
-
-      <h3>Hardwiring nodes (ethernet backhaul)</h3>
-      <p>If you have ethernet runs in the walls — or you're willing to run one — connecting nodes by wire instead of wirelessly nearly doubles performance. All the systems on this list support ethernet backhaul. If you have a coax outlet upstairs, you can also use MoCA adapters to create a wired backhaul without pulling new cable.</p>
-      <div class="callout">
-        <strong>Wired backhaul is the single biggest upgrade you can make.</strong> It eliminates the wireless backhaul bottleneck entirely and is worth the extra effort if you can manage it.
+      <div class="setup-steps reveal">
+        <div class="setup-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Primary node goes near the modem — not near a window or wall</h4>
+            <p>Your first node needs to be close to where the internet enters your house (usually near a cable outlet or phone jack). Don't stretch that cable run across the house just to put the router in a "central" location — that can actually make things worse. The modem and first node should be right next to each other, connected with a short ethernet cable.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Second node in a central spot upstairs — not tucked in a corner</h4>
+            <p>A hallway between the bedrooms is ideal. Avoid putting it in a back bedroom at the far end of the house — that only covers one room well. You want the second node positioned so it can reach all the rooms on that floor from the middle.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Never put nodes in closets, cabinets, or behind the TV</h4>
+            <p>This sounds obvious, but we see it constantly. Signal has to pass through walls, doors, and furniture to get to your devices. A node in a cabinet or entertainment center is working at a fraction of its potential. Put it out in the open, on a shelf or an end table.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Wire the nodes together if you can (this is a big deal)</h4>
+            <p>If you have ethernet ports in the walls — or you're willing to run a cable — connecting your nodes with ethernet instead of wirelessly <strong>nearly doubles performance</strong>. Every system on this list supports ethernet backhaul. If there's no ethernet but there is a coax outlet upstairs, MoCA adapters let you run the backhaul over your existing TV cable instead.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Turn off your ISP router's Wi-Fi</h4>
+            <p>If your ISP (Spectrum, Frontier, etc.) gave you a router/modem combo, you need to disable its Wi-Fi or put it in "bridge mode." Running two routers at once causes what's called double-NAT — it creates conflicts that slow things down and break certain apps and devices. Call your ISP and ask them to put your gateway in bridge mode. Most will do it in a few minutes over the phone.</p>
+          </div>
+        </div>
       </div>
 
-      <h3>Disable your ISP's router Wi-Fi</h3>
-      <p>Running your mesh system behind your ISP's router creates a <strong>double-NAT situation</strong> that causes subtle problems — slower speeds, devices that can't see each other, game lag. You have two options:</p>
-      <ul>
-        <li>Call your ISP and ask them to put your modem in <strong>bridge mode</strong> (disables its router/Wi-Fi functions)</li>
-        <li>Or log in to the ISP router's admin page and disable the Wi-Fi — then connect your mesh primary node to it via ethernet</li>
-      </ul>
+      <div class="callout callout-warn reveal">
+        <strong>Don't skip step 5.</strong> Running your new mesh system behind your ISP's router is one of the most common mistakes we see. The double-NAT it creates makes everything noticeably slower and causes weird issues with smart home devices, gaming, and video calls.
+      </div>
 
-      <h2 id="faq">Frequently asked questions</h2>
+      <!-- Section 6 -->
+      <h2 id="faq" class="reveal">Common questions</h2>
 
-      <div class="faq" role="list">
+      <div class="faq reveal">
 
-        <div class="faq-item" role="listitem">
+        <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Do I really need Wi-Fi 6E, or is Wi-Fi 6 enough?
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            Do I really need Wi-Fi 6E, or will regular Wi-Fi 6 do?
+            <svg class="faq-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-a">For most 2-story homes, Wi-Fi 6 is completely sufficient. Wi-Fi 6E adds a 6 GHz band with more channels and less congestion — useful if you have several Wi-Fi 6E devices (newer iPhones, laptops from 2022+) and you're in a dense apartment building or neighborhood. If you're in a house and your devices are a couple years old, Wi-Fi 6 will feel identical in practice.</div>
+          <div class="faq-a">For most two-story homes, Wi-Fi 6 works great. Wi-Fi 6E gives you an extra 6 GHz band that's faster and less congested — worth it if you have newer phones, tablets, or laptops (2022 or later) that support it. But if most of your devices are a few years old, you genuinely won't notice the difference in daily use. Either way, both are a major upgrade over older Wi-Fi 5 equipment.</div>
         </div>
 
-        <div class="faq-item" role="listitem">
+        <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            How many nodes do I need for a 2-story house?
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            How many nodes do I need?
+            <svg class="faq-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-a">Most 2-story homes under 3,000 sq ft do well with 2 nodes — one downstairs near the modem, one upstairs in a central location. Buy a 2-pack first. You can always add a third if you have a large home, an L-shaped layout, a garage, or a basement you want covered. All the systems on this list let you add nodes later.</div>
+          <div class="faq-a">Almost every two-story home under 3,000 sq ft does fine with just 2 nodes. Start with a 2-pack. If one corner of the house still has weak signal after setup, you can order a single add-on node — all the systems we recommend support this. Don't buy 3 from the start unless you already know your home is unusually large or complicated.</div>
         </div>
 
-        <div class="faq-item" role="listitem">
+        <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Will my devices switch automatically between nodes?
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            Will my phone switch automatically between nodes as I walk around?
+            <svg class="faq-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-a">Yes — this is the key advantage of mesh over extenders. All four systems on this list use a single network name (SSID), and your devices automatically connect to whichever node gives the best signal as you move through the house. The handoff is seamless. Extenders create separate networks that require you to manually switch, which is why they're frustrating.</div>
+          <div class="faq-a">Yes — and this is the biggest difference between mesh systems and cheap Wi-Fi extenders. All the systems on this list broadcast one single network name. Your phone, laptop, or tablet connects to whichever node has the best signal automatically, without you doing anything. Extenders create separate network names that require you to manually switch — which is why they're so annoying to use.</div>
         </div>
 
-        <div class="faq-item" role="listitem">
+        <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Should I keep my ISP's modem/router combo?
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            Should I keep my ISP's equipment or get rid of it?
+            <svg class="faq-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-a">Keep the modem part (you need it to connect to your ISP). Disable the router/Wi-Fi part. Running two routers creates double-NAT, which slows things down and causes issues with gaming, home security cameras, and smart home devices. Call your ISP and ask them to put the device in bridge mode — most will do it over the phone in a few minutes.</div>
+          <div class="faq-a">Keep the modem portion — you need it to connect to your ISP. But turn off the router/Wi-Fi portion. If your ISP gave you a combo modem + router in one box, call them and ask for "bridge mode" — this turns off the routing and Wi-Fi functions so your new mesh system takes over completely. Some ISPs call it "passthrough mode" instead. Either way, it's a simple phone call and makes a real difference.</div>
         </div>
 
-        <div class="faq-item" role="listitem">
+        <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Can I use these mesh systems with any internet provider?
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            Do these work with Spectrum, Frontier, and other providers in the Capital Region?
+            <svg class="faq-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-a">Yes. Eero, Orbi, and TP-Link Deco all work with any ISP that provides a standard ethernet or coax connection — Spectrum, Frontier, Optimum, and others common in the Capital Region. The only exception is if your ISP uses DOCSIS-only equipment that requires a specific modem; in that case you'll need to keep their modem but still disable the router/Wi-Fi on it.</div>
+          <div class="faq-a">Yes — all four systems work with any internet provider that gives you a standard connection, including Spectrum, Frontier, Optimum, and others in the Albany and Capital Region area. The setup process is the same regardless of your provider. The only exception is if your ISP uses a proprietary modem that doesn't support bridge mode — in that case, call us and we'll figure it out with you.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            My internet plan is fast but my Wi-Fi is slow. Will this help?
+            <svg class="faq-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">Almost certainly yes. The most common cause of slow Wi-Fi in homes with a fast plan is old or poorly placed equipment. If you're paying for gigabit internet but streaming videos keeps buffering, there's a gap between what your ISP is delivering to your house and what's actually reaching your devices. A good mesh system closes that gap. We see this constantly — customers paying for 500 Mbps who are getting 25 Mbps in the bedroom. New mesh hardware fixes it every time.</div>
         </div>
 
       </div><!-- /faq -->
 
-      <div class="callout" style="margin-top:2.5rem;">
-        <strong>Still not sure what to buy, or want someone to install it?</strong> We set up mesh Wi-Fi systems for homeowners across Cohoes, Troy, Albany, and the Capital Region. <a href="/#booking" style="color:var(--cyan);">Book a job</a> and we'll handle everything — gear recommendation, setup, node placement, and ISP bridge mode — in one visit.
+      <!-- Author card -->
+      <div class="author-card reveal">
+        <div class="author-card-avatar" aria-hidden="true">CW</div>
+        <div>
+          <div class="author-card-name">Written by Connor Waugaman</div>
+          <p class="author-card-bio">Connor is the founder of Tekpair and has been setting up home networks, smart home systems, and tech gear for homeowners across the Capital Region for years. Everything in these guides comes from real jobs — not spec sheets.</p>
+        </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="bottom-cta reveal">
+        <div class="bottom-cta-title">Want us to handle the whole thing?</div>
+        <p class="bottom-cta-text">We set up mesh Wi-Fi systems for homeowners in Cohoes, Troy, Albany, and the Capital Region. One visit — we bring the gear recommendation, handle the setup, position the nodes, and put your ISP modem in bridge mode. You walk away with whole-home coverage and nothing to figure out.</p>
+        <a href="/#booking" class="bottom-cta-btn">
+          Book a Wi-Fi setup
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
 
     </article>
 
-  </div><!-- /article-outer -->
+    <!-- ── Sticky TOC Sidebar ── -->
+    <aside class="toc-sidebar" aria-label="Table of contents">
+      <div class="toc-box">
+        <div class="toc-box-title">In this guide</div>
+        <ol>
+          <li><a href="#why-fail" id="toc-why-fail">Why single routers fail</a></li>
+          <li><a href="#what-look-for" id="toc-what-look-for">What to look for</a></li>
+          <li><a href="#top-picks" id="toc-top-picks">Our top picks</a></li>
+          <li><a href="#comparison" id="toc-comparison">Side-by-side chart</a></li>
+          <li><a href="#setup-tips" id="toc-setup-tips">Setup tips</a></li>
+          <li><a href="#faq" id="toc-faq">Common questions</a></li>
+        </ol>
+        <div class="toc-cta">
+          <a href="/#booking">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.63 4.9 2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17.5z"/></svg>
+            Book a setup visit
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /page-layout -->
 </main>
 
-<!-- ════════════ FOOTER ════════════ -->
+<!-- ════ FOOTER ════ -->
 <footer>
   <div class="wrap">
     <div class="f-top">
@@ -744,11 +1065,11 @@
         <div class="f-col">
           <h3>Guides</h3>
           <ul>
-            <li><a href="/guides/?cat=wifi">Wi-Fi &amp; Network</a></li>
-            <li><a href="/guides/?cat=smart-home">Smart Home</a></li>
-            <li><a href="/guides/?cat=cameras">Security Cameras</a></li>
-            <li><a href="/guides/?cat=streaming">Streaming &amp; TV</a></li>
-            <li><a href="/guides/?cat=computers">Computers &amp; Printers</a></li>
+            <li><a href="/guides/">Wi-Fi &amp; Network</a></li>
+            <li><a href="/guides/">Smart Home</a></li>
+            <li><a href="/guides/">Security Cameras</a></li>
+            <li><a href="/guides/">Streaming &amp; TV</a></li>
+            <li><a href="/guides/">Computers &amp; Printers</a></li>
           </ul>
         </div>
         <div class="f-col">
@@ -763,11 +1084,9 @@
         </div>
       </div>
     </div>
-
     <p class="f-disclosure">
       <strong>Disclosure:</strong> Some links in these guides are affiliate links, including the Amazon Associates program. As an Amazon Associate, Tekpair earns from qualifying purchases — at no extra cost to you, and it never changes which products we recommend. See our full <a href="/disclaimer/">affiliate disclosure</a>.
     </p>
-
     <div class="f-bottom">
       <span>© 2026 Tekpair · Cohoes, NY · Capital Region</span>
       <span><a href="/privacy/">Privacy</a> &nbsp;·&nbsp; <a href="/disclaimer/">Disclosure</a> &nbsp;·&nbsp; <a href="/">Main site</a></span>
@@ -777,6 +1096,55 @@
 
 <script>
 (function () {
+  // Reading progress bar
+  var bar = document.getElementById('reading-bar');
+  var main = document.getElementById('main');
+  function updateBar() {
+    var st = window.scrollY;
+    var dh = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = dh > 0 ? Math.min(100, (st / dh) * 100) : 0;
+    bar.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', Math.round(pct));
+  }
+  window.addEventListener('scroll', updateBar, { passive: true });
+
+  // Reveal on scroll
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.07 });
+    revealEls.forEach(function (el) { obs.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Active TOC link
+  var sections = [
+    { id: 'why-fail', toc: 'toc-why-fail' },
+    { id: 'what-look-for', toc: 'toc-what-look-for' },
+    { id: 'top-picks', toc: 'toc-top-picks' },
+    { id: 'comparison', toc: 'toc-comparison' },
+    { id: 'setup-tips', toc: 'toc-setup-tips' },
+    { id: 'faq', toc: 'toc-faq' }
+  ];
+  function updateToc() {
+    var scrollY = window.scrollY + 110;
+    var active = sections[0].toc;
+    sections.forEach(function (s) {
+      var el = document.getElementById(s.id);
+      if (el && el.getBoundingClientRect().top + window.scrollY <= scrollY) active = s.toc;
+    });
+    sections.forEach(function (s) {
+      var link = document.getElementById(s.toc);
+      if (link) link.classList.toggle('active', s.toc === active);
+    });
+  }
+  window.addEventListener('scroll', updateToc, { passive: true });
+  updateToc();
+
   // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(function (btn) {
     btn.addEventListener('click', function () {
