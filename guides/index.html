@@ -401,7 +401,7 @@ html.tk-ok{overflow:auto}
   </div>
 </nav>
 
-<main id="main">
+<main id="main" hidden aria-hidden="true" style="display:none">
   <div class="wrap">
 
     <!-- ════════════ LEAD STORY ════════════ -->
@@ -709,7 +709,14 @@ html.tk-ok{overflow:auto}
 <script>
 (function(){
   var h=document.documentElement;
-  function pass(){if(h.className.indexOf('tk-ok')<0)h.className+=' tk-ok';}
+  function pass(){
+    if(h.className.indexOf('tk-ok')<0)h.className+=' tk-ok';
+    // Reveal the article only once ads are confirmed. It starts hidden so
+    // Reader View's parser (which skips hidden/inline-display:none nodes)
+    // can't extract the text and bypass the gate.
+    var m=document.getElementById('main');
+    if(m){m.removeAttribute('hidden');m.removeAttribute('aria-hidden');m.style.display='';}
+  }
   // Ad blockers replace the ad script with a stub that fakes
   // window.adsbygoogle.loaded and the <ins> status attribute, so those
   // can't be trusted. Cosmetic filtering is independent of that stub:
