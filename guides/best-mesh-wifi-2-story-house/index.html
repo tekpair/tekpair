@@ -1250,12 +1250,20 @@ html.tk-ok{overflow:auto}
 <p id="tk-note">After allowing ads, reload the page.<br><strong>Ctrl+Shift+R</strong> (Win/Linux) &nbsp; <strong>Cmd+Shift+R</strong> (Mac)</p>
 </div>
 </div>
-<script async src="/ads/unit.js"></script>
 <script>
 (function(){
   var h=document.documentElement;
   function pass(){if(h.className.indexOf('tk-ok')<0)h.className+=' tk-ok';}
-  setTimeout(function(){if(window._adsOk===1){pass();}},1500);
+  // The real Google ad script stamps each processed <ins> with a
+  // data-ad...status attribute. uBlock's neutered stub provides only a
+  // no-op push() and never touches the DOM, so this attribute appears
+  // only when ads are genuinely allowed to load.
+  function ok(){
+    var s=document.getElementsByTagName('ins'),k='data-ad'+'sbygoogle-status';
+    for(var i=0;i<s.length;i++){if(s[i].getAttribute(k))return true;}
+    return false;
+  }
+  var n=0,iv=setInterval(function(){n++;if(ok()){clearInterval(iv);pass();}else if(n>=60)clearInterval(iv);},150);
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='tk-btn')location.reload();});
 })();
 </script>
