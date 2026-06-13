@@ -2,14 +2,12 @@
   'use strict';
 
   /* ── Detection ─────────────────────────────────────────────────────────────
-   * Two-method check:
-   * 1. Fetch the AdSense script URL — uBlock Origin / Brave block this at the
-   *    network level, causing a TypeError (Failed to fetch). A real browser
-   *    with no-cors returns an opaque response and resolves, never throws.
-   * 2. DOM bait — catches cosmetic-filtering blockers that hide ad elements.
+   * uBlock Origin uses $script type network filters, NOT $fetch/$xhr filters.
+   * So fetch() requests to ad URLs can resolve even when ads are blocked.
+   * Fix: load the ad URL as a real <script> element — uBlock's $script filter
+   * cancels it, the browser fires onerror, we catch it and show the overlay.
+   * DOM bait covers cosmetic-filter blockers (AdBlock Plus element hiding).
    * ───────────────────────────────────────────────────────────────────────── */
-  var ADSENSE_URL = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-  var FETCH_TIMEOUT_MS = 4000;
 
   function domBaitBlocked() {
     var bait = document.createElement('div');
@@ -24,22 +22,33 @@
   }
 
   function isBlocked(callback) {
-    // Fast path: cosmetic filter check
-    if (domBaitBlocked()) { callback(true); return; }
-
-    // Network-level check (catches uBlock Origin, Brave Shields, etc.)
     var done = false;
-    var tid = setTimeout(function () {
-      if (!done) { done = true; callback(true); }
-    }, FETCH_TIMEOUT_MS);
+    function result(blocked) {
+      if (done) return;
+      done = true;
+      callback(blocked);
+    }
 
-    fetch(ADSENSE_URL, { method: 'HEAD', mode: 'no-cors', cache: 'no-store' })
-      .then(function () {
-        if (!done) { done = true; clearTimeout(tid); callback(false); }
-      })
-      .catch(function () {
-        if (!done) { done = true; clearTimeout(tid); callback(true); }
-      });
+    // Method 1: DOM bait (catches cosmetic / element-hiding filters)
+    if (domBaitBlocked()) { result(true); return; }
+
+    // Method 2: <script> element load — uBlock cancels $script requests and
+    // the browser fires onerror. fetch() won't work because uBlock's EasyList
+    // filters use $script type, not $fetch.
+    var bait = document.createElement('script');
+    bait.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?check=' + Date.now();
+    bait.onload = function () {
+      if (bait.parentNode) bait.parentNode.removeChild(bait);
+      result(false);
+    };
+    bait.onerror = function () {
+      if (bait.parentNode) bait.parentNode.removeChild(bait);
+      result(true);
+    };
+    document.head.appendChild(bait);
+
+    // Timeout — if neither fires within 5s treat as blocked
+    setTimeout(function () { result(true); }, 5000);
   }
 
   /* ── Styles ─────────────────────────────────────────────────────────────── */
@@ -73,10 +82,7 @@
       'color:#eef1f8;',
       'margin:0 0 0.6rem;line-height:1.25;',
     '}',
-    '.tk-ab-sub{',
-      'font-size:0.92rem;color:#9aa3b8;',
-      'line-height:1.6;margin:0 0 1.8rem;',
-    '}',
+    '.tk-ab-sub{font-size:0.92rem;color:#9aa3b8;line-height:1.6;margin:0 0 1.8rem;}',
     '#tk-ab-steps{',
       'text-align:left;',
       'background:rgba(255,255,255,0.04);',
@@ -92,15 +98,8 @@
     '}',
     '.tk-ab-blocker{margin-bottom:1rem;}',
     '.tk-ab-blocker:last-child{margin-bottom:0;}',
-    '.tk-ab-blocker-name{',
-      'font-size:0.8rem;font-weight:700;',
-      'color:#eef1f8;margin-bottom:0.3rem;',
-    '}',
-    '.tk-ab-blocker ol{',
-      'margin:0;padding-left:1.25rem;',
-      'font-size:0.83rem;color:#9aa3b8;',
-      'line-height:1.6;',
-    '}',
+    '.tk-ab-blocker-name{font-size:0.8rem;font-weight:700;color:#eef1f8;margin-bottom:0.3rem;}',
+    '.tk-ab-blocker ol{margin:0;padding-left:1.25rem;font-size:0.83rem;color:#9aa3b8;line-height:1.6;}',
     '.tk-ab-divider{height:1px;background:rgba(255,255,255,0.07);margin:0.9rem 0;}',
     '#tk-ab-btn{',
       'display:block;width:100%;',
@@ -168,7 +167,7 @@
       '</div>',
       '<button id="tk-ab-btn" type="button">I\'ve disabled my ad blocker — let me in</button>',
       '<p id="tk-ab-note">Already disabled it? Click the button above to check again.<br>',
-        'Full reload may help: <strong>Ctrl+Shift+R</strong> (Windows) / <strong>Cmd+Shift+R</strong> (Mac)</p>',
+        'Full reload may help: <strong>Ctrl+Shift+R</strong> (Windows/Linux) / <strong>Cmd+Shift+R</strong> (Mac)</p>',
     '</div>'
   ].join('');
 
@@ -179,7 +178,6 @@
     style.id = 'tk-ab-style';
     style.textContent = CSS;
     document.head.appendChild(style);
-
     var overlay = document.createElement('div');
     overlay.id = 'tk-ab-overlay';
     overlay.innerHTML = OVERLAY_HTML;
@@ -188,14 +186,13 @@
   }
 
   function hideOverlay() {
-    var overlay = document.getElementById('tk-ab-overlay');
-    if (overlay) overlay.remove();
-    var style = document.getElementById('tk-ab-style');
-    if (style) style.remove();
+    var el = document.getElementById('tk-ab-overlay');
+    if (el) el.remove();
+    var st = document.getElementById('tk-ab-style');
+    if (st) st.remove();
     document.documentElement.style.overflow = '';
   }
 
-  /* ── Check ───────────────────────────────────────────────────────────────── */
   function check(onComplete) {
     isBlocked(function (blocked) {
       if (blocked) { showOverlay(); } else { hideOverlay(); }
@@ -203,7 +200,7 @@
     });
   }
 
-  /* ── Button re-check ─────────────────────────────────────────────────────── */
+  /* ── Re-check button ─────────────────────────────────────────────────────── */
   document.addEventListener('click', function (e) {
     if (!e.target || e.target.id !== 'tk-ab-btn') return;
     var btn = e.target;
@@ -218,9 +215,7 @@
   });
 
   /* ── Init ────────────────────────────────────────────────────────────────── */
-  function init() {
-    setTimeout(check, 500);
-  }
+  function init() { setTimeout(check, 500); }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
