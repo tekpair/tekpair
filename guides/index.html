@@ -678,16 +678,24 @@ html.tk-ok{overflow:auto}
 (function(){
   var h=document.documentElement;
   function pass(){if(h.className.indexOf('tk-ok')<0)h.className+=' tk-ok';}
-  // The real Google ad script stamps each processed <ins> with a
-  // data-ad...status attribute. uBlock's neutered stub provides only a
-  // no-op push() and never touches the DOM, so this attribute appears
-  // only when ads are genuinely allowed to load.
-  function ok(){
-    var s=document.getElementsByTagName('ins'),k='data-ad'+'sbygoogle-status';
-    for(var i=0;i<s.length;i++){if(s[i].getAttribute(k))return true;}
-    return false;
+  // Ad blockers replace the ad script with a stub that fakes
+  // window.adsbygoogle.loaded and the <ins> status attribute, so those
+  // can't be trusted. Cosmetic filtering is independent of that stub:
+  // the blocker force-hides any element carrying ad-like class names.
+  // We drop a probe with those classes (NO !important, so the blocker's
+  // hide rule wins) and only lift the gate while the probe stays visible.
+  var bait=document.createElement('div');
+  bait.className='pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBanner ad-banner ads adsbox ad-placement carbon-ads';
+  bait.style.cssText='position:absolute;left:-9999px;top:-9999px;width:10px;height:10px;line-height:10px;overflow:hidden';
+  bait.innerHTML='&nbsp;';
+  (document.body||h).appendChild(bait);
+  function shown(){
+    if(bait.offsetHeight<1||bait.offsetParent===null)return false;
+    var cs=window.getComputedStyle&&getComputedStyle(bait);
+    if(cs&&(cs.display==='none'||cs.visibility==='hidden'||cs.opacity==='0'))return false;
+    return true;
   }
-  var n=0,iv=setInterval(function(){n++;if(ok()){clearInterval(iv);pass();}else if(n>=60)clearInterval(iv);},150);
+  var n=0,iv=setInterval(function(){n++;if(shown()){clearInterval(iv);pass();}else if(n>=40)clearInterval(iv);},150);
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='tk-btn')location.reload();});
 })();
 </script>
