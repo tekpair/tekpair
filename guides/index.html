@@ -674,18 +674,12 @@ html.tk-ok{overflow:auto}
 <p id="tk-note">After allowing ads, reload the page.<br><strong>Ctrl+Shift+R</strong> (Win/Linux) &nbsp; <strong>Cmd+Shift+R</strong> (Mac)</p>
 </div>
 </div>
+<script async src="/ads/unit.js"></script>
 <script>
 (function(){
   var h=document.documentElement;
   function pass(){if(h.className.indexOf('tk-ok')<0)h.className+=' tk-ok';}
-  function ok(){
-    var k='ads'+'by'+'google',a=window[k];
-    if(a&&a.loaded)return true;
-    var s=document.getElementsByTagName('ins');
-    for(var i=0;i<s.length;i++){if(s[i].childElementCount>0)return true;}
-    return false;
-  }
-  var n=0,iv=setInterval(function(){n++;if(ok()){clearInterval(iv);pass();}else if(n>=40)clearInterval(iv);},150);
+  setTimeout(function(){if(window._adsOk===1){pass();}},1500);
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='tk-btn')location.reload();});
 })();
 </script>
