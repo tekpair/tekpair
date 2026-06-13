@@ -654,16 +654,30 @@
     return r;
   }
 
-  function detect(cb){
-    var done=false;
-    function res(v){if(!done){done=true;cb(v);}}
-    if(baitDom()){res(true);return;}
+  function detect(cb,recheck){
+    var settled=false;
+    var pid=null;
+    function fin(v){if(!settled){settled=true;if(pid)clearInterval(pid);cb(v);}}
+    if(baitDom()){fin(true);return;}
+    // Fast path: script onerror fires in Chrome and most browsers
     var s=document.createElement('script');
-    s.src=_u+'?x='+Date.now();
-    s.onload=function(){if(s.parentNode)s.parentNode.removeChild(s);res(false);};
-    s.onerror=function(){if(s.parentNode)s.parentNode.removeChild(s);res(true);};
+    s.src=_u+'?t='+Date.now();
+    s.onload=function(){
+      if(s.parentNode)s.parentNode.removeChild(s);
+      // Re-check only: script loaded = uBlock disabled, let them through
+      if(recheck)fin(false);
+      // Initial check: onload can fire even with uBlock (empty redirect) — let poll decide
+    };
+    s.onerror=function(){if(s.parentNode)s.parentNode.removeChild(s);fin(true);};
     document.head.appendChild(s);
-    setTimeout(function(){res(true);},5000);
+    // Polling fallback: AdSense replaces adsbygoogle.push when it initializes;
+    // if still Array.prototype.push after timeout, AdSense never loaded = blocked
+    var elapsed=0,step=300,maxWait=recheck?4000:7000;
+    pid=setInterval(function(){
+      var ags=window.adsbygoogle;
+      if(ags&&ags.push!==Array.prototype.push){fin(false);}
+      else if((elapsed+=step)>=maxWait){fin(true);}
+    },step);
   }
 
   function show(){
@@ -677,12 +691,12 @@
     var st=document.getElementById('tk-ab-st');if(st)st.remove();
     document.documentElement.style.overflow='';
   }
-  function check(cb){detect(function(b){b?show():hide();if(cb)cb(b);});}
+  function check(cb,recheck){detect(function(b){b?show():hide();if(cb)cb(b);},recheck);}
 
   document.addEventListener('click',function(e){
     if(!e.target||e.target.id!=='tk-btn')return;
     var btn=e.target;btn.disabled=true;btn.textContent='Checking…';
-    check(function(b){if(b){btn.disabled=false;btn.textContent='Still blocked — try again';}});
+    check(function(b){if(b){btn.disabled=false;btn.textContent='Still blocked — try again';}},true);
   });
 
   if(document.readyState==='loading'){
