@@ -549,8 +549,13 @@
     }
   </style>
 <style id="tk-s">
-#tk-gate{display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(17,19,24,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:1.5rem;font-family:"DM Sans","Helvetica Neue",Arial,sans-serif}
-#tk-gate[data-v]{display:flex}
+/* Fail-closed ad gate: overlay is visible by DEFAULT. JS removes it only
+   after confirming ads are not blocked. If an ad blocker kills the script,
+   the overlay simply stays up. */
+#tk-gate{position:fixed;inset:0;z-index:2147483647;background:rgba(17,19,24,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1.5rem;font-family:"DM Sans","Helvetica Neue",Arial,sans-serif}
+html.tk-ok #tk-gate{display:none}
+html.tk-ok{overflow:auto}
+#tk-bait{position:absolute;left:-9999px;top:-9999px;width:300px;height:250px;pointer-events:none}
 #tk-gate-c{background:#1b1e26;border:1px solid rgba(255,255,255,.1);border-radius:18px;max-width:540px;width:100%;padding:2.4rem 2.4rem 2rem;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.6)}
 .tk-ico{width:52px;height:52px;background:rgba(41,212,245,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.3rem}
 #tk-gate-c h2{font-size:1.35rem;font-weight:700;color:#eef1f8;margin:0 0 .6rem;line-height:1.25}
@@ -1227,6 +1232,7 @@
   });
 })();
 </script>
+<div id="tk-bait" class="adsbox ad-banner ad-placement banner_ads sponsor textads ad ads pub_300x250"></div>
 <div id="tk-gate">
 <div id="tk-gate-c">
 <div class="tk-ico"><svg width="24" height="24" fill="none" stroke="#29d4f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
@@ -1243,16 +1249,22 @@
 <div class="tk-b"><div class="tk-bn">Other ad blockers</div><ol><li>Click your ad blocker icon in the toolbar</li><li>Look for "Disable for this site", "Pause", or "Whitelist"</li><li>Reload the page</li></ol></div>
 </div>
 <button id="tk-btn" type="button">I've disabled my ad blocker — reload to verify</button>
-<p id="tk-note">uBlock will prompt you to reload automatically.<br><strong>Ctrl+Shift+R</strong> (Win/Linux) &nbsp; <strong>Cmd+Shift+R</strong> (Mac)</p>
+<p id="tk-note">After allowing ads, reload the page.<br><strong>Ctrl+Shift+R</strong> (Win/Linux) &nbsp; <strong>Cmd+Shift+R</strong> (Mac)</p>
 </div>
 </div>
 <script>
 (function(){
-  function open(){var g=document.getElementById('tk-gate');if(g){g.setAttribute('data-v','');document.documentElement.style.overflow='hidden';}}
+  var h=document.documentElement;
+  function pass(){if(h.className.indexOf('tk-ok')<0)h.className+=' tk-ok';}
+  function ok(){
+    var b=document.getElementById('tk-bait');
+    if(b&&b.offsetParent!==null&&b.offsetHeight>10&&b.clientHeight>10)return true;
+    var s=document.getElementsByTagName('ins');
+    for(var i=0;i<s.length;i++){if(s[i].childElementCount>0)return true;}
+    return false;
+  }
+  var n=0,iv=setInterval(function(){n++;if(ok()){clearInterval(iv);pass();}else if(n>=30)clearInterval(iv);},200);
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='tk-btn')location.reload();});
-  function check(){var ins=document.querySelector('ins');if(!ins||ins.children.length===0)open();}
-  if(document.readyState==='complete')setTimeout(check,4000);
-  else window.addEventListener('load',function(){setTimeout(check,4000);});
 })();
 </script>
 </body>
