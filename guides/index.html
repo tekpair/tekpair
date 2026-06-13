@@ -638,6 +638,7 @@
 (function(){
   /* Ad-gate — inline so URL-based filters cannot block this file */
   var _u=atob('aHR0cHM6Ly9wYWdlYWQyLmdvb2dsZXN5bmRpY2F0aW9uLmNvbS9wYWdlYWQvanMvYWRzYnlnb29nbGUuanM=');
+  var _a=atob('YWRzYnlnb29nbGU=');
 
   var CSS='#tk-ab{position:fixed;inset:0;z-index:2147483647;background:rgba(17,19,24,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1.5rem;font-family:"DM Sans","Helvetica Neue",Arial,sans-serif}#tk-ab-c{background:#1b1e26;border:1px solid rgba(255,255,255,.1);border-radius:18px;max-width:540px;width:100%;padding:2.4rem 2.4rem 2rem;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.6)}.tk-ico{width:52px;height:52px;background:rgba(41,212,245,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.3rem}#tk-ab-c h2{font-size:1.35rem;font-weight:700;color:#eef1f8;margin:0 0 .6rem;line-height:1.25}.tk-sub{font-size:.92rem;color:#9aa3b8;line-height:1.6;margin:0 0 1.8rem}#tk-steps{text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.6rem}#tk-steps h3{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#29d4f5;margin:0 0 1rem}.tk-b{margin-bottom:1rem}.tk-b:last-child{margin-bottom:0}.tk-bn{font-size:.8rem;font-weight:700;color:#eef1f8;margin-bottom:.3rem}.tk-b ol{margin:0;padding-left:1.25rem;font-size:.83rem;color:#9aa3b8;line-height:1.6}.tk-div{height:1px;background:rgba(255,255,255,.07);margin:.9rem 0}#tk-btn{display:block;width:100%;background:#29d4f5;color:#0e1117;font-family:inherit;font-size:.95rem;font-weight:700;border:none;border-radius:10px;padding:.85rem 1.5rem;cursor:pointer;transition:opacity .18s}#tk-btn:hover{opacity:.88}#tk-btn:disabled{opacity:.5;cursor:default}#tk-note{font-size:.78rem;color:#767f92;margin-top:.85rem;line-height:1.5}';
 
@@ -645,7 +646,7 @@
 
   function baitDom(){
     var d=document.createElement('div');
-    d.className='ad ads adsense adsbygoogle pub_300x250 pub_728x90 banner-ad advertisement';
+    d.className='ad ads adsense '+_a+' pub_300x250 pub_728x90 banner-ad advertisement';
     d.style.cssText='width:1px;height:1px;position:fixed;top:0;left:-9999px;pointer-events:none;';
     document.body.appendChild(d);
     var cs=window.getComputedStyle(d);
@@ -670,11 +671,9 @@
     };
     s.onerror=function(){if(s.parentNode)s.parentNode.removeChild(s);fin(true);};
     document.head.appendChild(s);
-    // Polling fallback: AdSense replaces adsbygoogle.push when it initializes;
-    // if still Array.prototype.push after timeout, AdSense never loaded = blocked
     var elapsed=0,step=300,maxWait=recheck?4000:7000;
     pid=setInterval(function(){
-      var ags=window.adsbygoogle;
+      var ags=window[_a];
       if(ags&&ags.push!==Array.prototype.push){fin(false);}
       else if((elapsed+=step)>=maxWait){fin(true);}
     },step);
