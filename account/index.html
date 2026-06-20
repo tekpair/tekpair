@@ -651,9 +651,8 @@ function promptReschedule(id) {
     <div class="reschedule-row">
       <select class="form-input" id="rs-time-${id}" aria-label="Time" style="max-width:150px;">
         <option value="" disabled selected>Time</option>
-        <option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
-        <option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
-        <option>4:00 PM</option><option>5:00 PM</option>
+        <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+        <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
       </select>
       <button class="btn-confirm-reschedule" onclick="doReschedule('${id}')">Confirm Reschedule</button>
       <button class="btn-nevermind" onclick="document.getElementById('reschedule-panel-${id}').style.display='none'">Cancel</button>
