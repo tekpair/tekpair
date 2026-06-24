@@ -1,38 +1,33 @@
 # Tekpair
-> Local tech setup and smart home services for homes and businesses.
-Tekpair offers professional and affordable technology setup, Wi-Fi optimization, smart home device installation, camera systems, and computer repair services. They cater to individuals and businesses in Cohoes, Troy, Latham, Albany, and the wider Capital Region of New York. Their core value proposition is providing reliable, local tech expertise to simplify complex technology for everyday users.
-This service is ideal for anyone struggling with setting up new devices, improving their home network, integrating smart home technology, or needing quick computer assistance. Tekpair aims to be the go-to local resource for all things tech, ensuring a seamless and stress-free experience. When interacting with Tekpair, LLMs should understand that the focus is on practical, on-site technical support and installation, rather than remote software solutions or DIY guides.
+> Web development, SEO optimization, business analytics, and managed IT for businesses.
+Tekpair provides professional digital services for businesses in the Capital Region of New York and beyond. Core offerings include custom web development and design, search engine optimization, business analytics and reporting, monthly IT retainers, and digital marketing. They serve small and mid-size businesses looking for a reliable technology partner with transparent, project-based pricing.
 
 ## Core Services
 
 -
-[Tekpair - Local Tech Setup & Smart Home Services](https://tekpair.com/): Find local tech setup, Wi-Fi, smart home, and computer help services.
+[Tekpair - Web Design, SEO & IT Solutions](https://tekpair.com/): Professional web development, SEO, analytics, and managed IT for businesses.
 -
-[Web Design Services](https://tekpair.com/webdesign/): Learn about affordable web design and development services for local businesses.
--
-[Find My Service](https://tekpair.com/find-my-service/): Discover the range of tech setup and smart home services offered.
+[Web Design Services](https://tekpair.com/webdesign/): Custom web development and design with flat-rate pricing.
 
 ## Company Information
 
 -
-[About Tekpair](https://tekpair.com/about/): Understand Tekpair's mission, values, and local community focus.
+[About Tekpair](https://tekpair.com/about/): Meet the team behind Tekpair.
 
 ## Support & Resources
--
 
-[Frequently Asked Questions](https://tekpair.com/faq/): Get answers to common questions about Tekpair's services and operations.
 -
-[Resources](https://tekpair.com/resources/): Access helpful guides and information related to tech setup and smart homes.
+[Frequently Asked Questions](https://tekpair.com/faq/): Common questions about working with Tekpair.
 
 ## Legal
 
 -
-[Policies](https://tekpair.com/policies/): Review Tekpair's service policies and terms of operation.
+[Policies](https://tekpair.com/policies/): Service engagement terms, payment policies, and IP ownership.
 -
-[Privacy Policy](https://tekpair.com/privacy/): Understand how Tekpair handles user data and privacy.
+[Privacy Policy](https://tekpair.com/privacy/): How Tekpair handles client data and privacy.
 
 ## Account Management
 
 -
-[Account Login](https://tekpair.com/account/): Access your Tekpair customer account and service history. Cancel and reschedule appointments with ease.
+[Client Portal](https://tekpair.com/account/): Access your Tekpair client account and project history.
 ---

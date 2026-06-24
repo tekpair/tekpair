@@ -27,9 +27,9 @@
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Booking Received — Tekpair</title>
+  <title>Inquiry Received — Tekpair</title>
   <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
-  <meta name="description" content="Your Tekpair booking has been received. We'll confirm your appointment within 24 hours."/>
+  <meta name="description" content="Your Tekpair project inquiry has been received. We'll review your details and follow up within a few hours."/>
   <meta name="robots" content="noindex,nofollow"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -186,63 +186,48 @@
       </svg>
     </div>
 
-    <h1>You're all set!</h1>
+    <h1>Inquiry Received!</h1>
     <p class="lead">
-      Your booking request has been received. We'll review the details and confirm your appointment within 24 hours.
+      Your project inquiry has been received. We'll review the details and follow up with you shortly.
     </p>
 
     <div class="next-steps">
       <div class="next-steps-title">What happens next</div>
       <div class="step">
         <div class="step-num">1</div>
-        <div><strong style="color:var(--white);">We review your request</strong> — usually within a few hours.</div>
+        <div><strong style="color:var(--white);">We review your inquiry</strong> — usually within a few hours.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div><strong style="color:var(--white);">We confirm your appointment</strong> by email with a flat-rate quote.</div>
+        <div><strong style="color:var(--white);">We schedule a discovery call</strong> to discuss your project scope and goals.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div><strong style="color:var(--white);">We show up on time</strong> and get the job done. Payment after.</div>
+        <div><strong style="color:var(--white);">We send a proposal</strong> with a clear scope and flat-rate quote.</div>
       </div>
     </div>
 
-    <!-- Shown only for guests — prompts account creation -->
-    <div id="ty-account-promo" style="display:none;margin-top:1.4rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.4rem;text-align:left;">
-      <div class="next-steps-title" style="margin-bottom:0.5rem;">Track &amp; manage your booking</div>
-      <p style="font-size:0.88rem;color:var(--off);line-height:1.65;margin-bottom:1rem;">Create a free Tekpair account to view your booking status, reschedule, or cancel directly on tekpair.com — no need to call or email.</p>
-      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
-        <a href="/account/" class="btn-primary" style="font-size:0.88rem;padding:0.65rem 1.2rem;">Create an Account</a>
-        <a href="/account/" class="btn-outline" style="font-size:0.88rem;padding:0.65rem 1.2rem;">Already have one? Sign in</a>
-      </div>
+    <div class="actions">
+      <a href="/" class="btn-primary">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to Home
+      </a>
+      <a href="/about/" class="btn-outline">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        Learn More About Us
+      </a>
     </div>
-    
+
+    <div class="contact-line">
+      Questions in the meantime? Email <a href="mailto:connor@tekpair.com">connor@tekpair.com</a>
+    </div>
+  </div>
 </main>
 
 <footer>
-  © 2026 Tekpair · Cohoes, NY · Capital Region
+  &copy; 2026 Tekpair &middot; Cohoes, NY
 </footer>
 
-<script>
-(function() {
-  const isLoggedIn = new URLSearchParams(location.search).get('loggedin') === '1';
-  const primary = document.getElementById('ty-btn-primary');
-  const secondary = document.getElementById('ty-btn-secondary');
-  if (isLoggedIn) {
-    if (primary) {
-      primary.href = '/account/';
-      primary.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Manage Your Bookings';
-    }
-    if (secondary) {
-      secondary.href = '/#booking';
-      secondary.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Book Another Service';
-    }
-  } else {
-    const promo = document.getElementById('ty-account-promo');
-    if (promo) promo.style.display = '';
-  }
-})();
-</script>
 <script src="/cookie-banner.js"></script>
 <script src="/mobile-nav.js"></script>
 </body>
