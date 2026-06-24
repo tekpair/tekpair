@@ -91,6 +91,43 @@
       transition: opacity 0.18s, box-shadow 0.18s;
     }
     .nav-book:hover { opacity: 0.88; box-shadow: 0 0 20px var(--cyan-glow); }
+    .nav-cta-group { display: flex; align-items: center; gap: 0.85rem; flex-shrink: 0; }
+    .nav-account {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 8px;
+      color: var(--off); border: 1.5px solid var(--border-md);
+      text-decoration: none; flex-shrink: 0;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .nav-account:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ANNOUNCEMENT BANNER */
+    .site-banner {
+      position: relative; margin-top: 66px;
+      background: linear-gradient(90deg, rgba(41,212,245,0.10), rgba(41,212,245,0.03));
+      border-top: 1px solid rgba(41,212,245,0.2);
+      border-bottom: 1px solid rgba(41,212,245,0.2);
+    }
+    .site-banner-inner {
+      max-width: 1140px; margin: 0 auto;
+      padding: 0.85rem 2rem;
+      display: flex; align-items: center; gap: 0.85rem;
+    }
+    .site-banner-icon { color: var(--cyan); flex-shrink: 0; display: flex; }
+    .site-banner p { font-size: 0.9rem; color: var(--off); line-height: 1.5; margin: 0; }
+    .site-banner p strong { color: var(--white); font-weight: 700; }
+    .site-banner-close {
+      margin-left: auto; background: none; border: none; color: var(--muted);
+      font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0 0.3rem;
+      flex-shrink: 0; transition: color 0.18s;
+    }
+    .site-banner-close:hover { color: var(--white); }
+    body.has-banner .hero { padding-top: 3rem; }
+    @media (max-width: 640px) {
+      .site-banner-inner { padding: 0.75rem 1.25rem; gap: 0.6rem; }
+      .site-banner p { font-size: 0.8rem; }
+      .site-banner-icon svg { width: 18px; height: 18px; }
+    }
 
     .nav-toggle {
       display: none; flex-direction: column; gap: 5px;
@@ -423,6 +460,7 @@
       .nav-inner { padding: 0.75rem 1.25rem; }
       .nav-links { display: none; }
       .nav-book { display: none; }
+      .nav-account { display: none; }
       .nav-toggle { display: flex; }
       .hero { min-height: 0; padding: 5.5rem 1.25rem 3rem; }
       .hero-sub { max-width: 100%; }
@@ -454,11 +492,17 @@
     <ul class="nav-links" role="list">
       <li><a href="#services">Services</a></li>
       <li><a href="/webdesign/">Web Design</a></li>
+      <li><a href="/it-retainers/">IT Retainers</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="/about/">About</a></li>
       <li><a href="/faq/">FAQ</a></li>
     </ul>
-    <a href="#contact" class="nav-book">Get in Touch</a>
+    <div class="nav-cta-group">
+      <a href="/account/" class="nav-account" aria-label="My Account" title="My Account">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a href="#contact" class="nav-book">Get in Touch</a>
+    </div>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -466,13 +510,25 @@
   <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile menu">
     <a href="#services">Services</a>
     <a href="/webdesign/">Web Design</a>
+    <a href="/it-retainers/">IT Retainers</a>
     <a href="#how">How It Works</a>
     <a href="/about/">About</a>
     <a href="/faq/">FAQ</a>
     <a href="/policies/">Policies</a>
+    <a href="/account/">My Account</a>
     <a href="#contact">Get in Touch →</a>
   </div>
 </nav>
+
+<div class="site-banner" id="site-banner" role="region" aria-label="Company announcement">
+  <div class="site-banner-inner">
+    <span class="site-banner-icon" aria-hidden="true">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+    </span>
+    <p><strong>Tekpair has evolved.</strong> We've transitioned from residential tech support to full commercial services — web development, SEO, analytics, and managed IT built for businesses. Same trusted team, a bigger mission. <a href="/about/" style="color:var(--cyan);text-decoration:none;font-weight:600;white-space:nowrap;">Read our story →</a></p>
+    <button class="site-banner-close" id="site-banner-close" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
 
 <main id="main">
 <section class="hero" aria-labelledby="hero-heading">
@@ -610,13 +666,13 @@
         <div class="sc-desc">Google Analytics setup, conversion tracking, custom dashboards, and reporting. Know exactly what's working and where to invest next.</div>
       </div>
 
-      <div class="service-card reveal">
+      <a href="/it-retainers/" class="service-card reveal" style="text-decoration:none;color:inherit;cursor:pointer;">
         <div class="sc-icon">
           <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="sc-name">Monthly IT Retainers</div>
-        <div class="sc-desc">Ongoing website maintenance, security updates, performance monitoring, and priority support — all on a predictable monthly plan.</div>
-      </div>
+        <div class="sc-desc">Your dedicated IT department on a monthly retainer — priority support, proactive monitoring, networking, and on-site help. Three simple plans.</div>
+      </a>
 
       <div class="service-card reveal">
         <div class="sc-icon">
@@ -899,7 +955,7 @@
         <li><a href="/webdesign/">Web Development</a></li>
         <li><a href="/#services">SEO Optimization</a></li>
         <li><a href="/#services">Business Analytics</a></li>
-        <li><a href="/#services">IT Retainers</a></li>
+        <li><a href="/it-retainers/">IT Retainers</a></li>
         <li><a href="/#services">Digital Marketing</a></li>
         <li><a href="/#services">Custom Solutions</a></li>
       </ul>
@@ -1030,7 +1086,7 @@ setTimeout(function() {
 
       const booking = {
         id: bookingId,
-        type: 'inquiry',
+        type: 'remote',
         first_name: formData.get('First Name') || '',
         last_name: formData.get('Last Name') || '',
         email: formData.get('Email') || '',
@@ -1076,6 +1132,22 @@ setTimeout(function() {
   });
 
 }, 0);
+</script>
+<script>
+  (function () {
+    var banner = document.getElementById('site-banner');
+    if (!banner) return;
+    var dismissed = false;
+    try { dismissed = localStorage.getItem('tkp_banner_dismissed') === '1'; } catch (e) {}
+    if (dismissed) { banner.parentNode.removeChild(banner); return; }
+    document.body.classList.add('has-banner');
+    var close = document.getElementById('site-banner-close');
+    close.addEventListener('click', function () {
+      banner.style.display = 'none';
+      document.body.classList.remove('has-banner');
+      try { localStorage.setItem('tkp_banner_dismissed', '1'); } catch (e) {}
+    });
+  }());
 </script>
 <script src="/cookie-banner.js"></script>
 <script src="/mobile-nav.js"></script>

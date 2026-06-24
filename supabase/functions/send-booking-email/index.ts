@@ -135,7 +135,34 @@ function statusLabel(s: string): string {
 // ── CUSTOMER EMAILS ───────────────────────────────────────────────────────────
 
 function emailCreated(b: Booking): string {
-  const isRemote = b.type !== "inhome";
+  const isInquiry = b.type !== "inhome";
+
+  // ── Commercial inquiry flow (web, SEO, analytics, IT retainers, etc.) ──
+  if (isInquiry) {
+    const rows: [string, string][] = [
+      ["Service", b.service || "—"],
+      ...(b.address ? [["Business", b.address] as [string, string]] : []),
+      ["Status", "New Inquiry"],
+    ];
+
+    const card = `
+      <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
+        We've received your inquiry!
+      </h1>
+      <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
+        Hi ${b.first_name || "there"}, thanks for reaching out to Tekpair. Your inquiry is in, and we'll review it right away. Expect a follow-up from our team to schedule a quick discovery call and talk through your goals, scope, and next steps. Reply to this email anytime if you'd like to add more detail.
+      </p>
+      ${detailTable(rows)}
+      ${b.issue_description ? issueBlock(b.issue_description) : ""}
+      <p style="margin:28px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;line-height:1.7;">
+        Questions in the meantime? Reply to this email or call <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
+      </p>
+      <p style="margin:16px 0 0;">${ctaBtn("https://tekpair.com/account/", "View Your Inquiry")}</p>`;
+
+    return emailShell("Inquiry Received — Tekpair", card);
+  }
+
+  // ── Legacy in-home appointment flow ──
   const rows: [string, string][] = [
     ["Type", typeLabel(b)],
     ["Service", b.service || "—"],
@@ -144,23 +171,6 @@ function emailCreated(b: Booking): string {
     ...(b.address ? [["Address", b.address] as [string, string]] : []),
     ["Status", statusLabel(b.status)],
   ];
-
-  const paymentBlock = isRemote ? `
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;background:#13161d;border:1px solid rgba(245,197,24,0.3);border-radius:10px;overflow:hidden;">
-      <tr>
-        <td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#f5c518;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">
-          &#9888; Payment for Remote Session
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:14px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">
-          We'll send you a <strong style="color:#eef1f8;">Square payment link</strong> within 24 hours to the email address on this booking. Your Zoom link will be released once payment is confirmed.
-        </td>
-      </tr>
-    </table>
-    <p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.6;text-align:center;">
-      Questions about payment? Reply to this email or call <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
-    </p>` : "";
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
@@ -171,7 +181,6 @@ function emailCreated(b: Booking): string {
     </p>
     ${detailTable(rows)}
     ${b.issue_description ? issueBlock(b.issue_description) : ""}
-    ${paymentBlock}
     <p style="margin:28px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;line-height:1.7;">
       Need to make changes? Visit your account page anytime.
     </p>
