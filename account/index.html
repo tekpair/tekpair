@@ -357,7 +357,7 @@
           <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           Danger Zone
         </div>
-        <p class="danger-zone-desc">Permanently delete your account and all associated profile data. Your scheduled bookings will remain on file so services are not disrupted, but your account access will be gone forever.</p>
+        <p class="danger-zone-desc">Permanently delete your account and all associated profile data. Your existing projects will remain on file so services are not disrupted, but your account access will be gone forever.</p>
         <button class="btn-delete-account" onclick="openDeleteModal()">Delete My Account</button>
       </div>
     </div>
@@ -380,7 +380,7 @@
       <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
     <div class="delete-modal-title" id="delete-modal-title">Delete Your Account?</div>
-    <p class="delete-modal-desc">This will permanently delete your account and profile. Any existing bookings will remain on file so scheduled services are not disrupted, but your login and personal data will be gone forever.</p>
+    <p class="delete-modal-desc">This will permanently delete your account and profile. Any existing projects will remain on file so scheduled services are not disrupted, but your login and personal data will be gone forever.</p>
     <p class="delete-modal-confirm-label">Type <strong>DELETE</strong> to confirm</p>
     <input type="text" id="delete-confirm-input" class="form-input" placeholder="DELETE" autocomplete="off" spellcheck="false"/>
     <div id="delete-modal-error" class="form-error" style="display:none;margin-top:0.5rem;"></div>
@@ -555,7 +555,7 @@ async function loadBookings() {
     data.forEach(b => renderBookingCard(b, listEl));
   } catch (err) {
     loadEl.style.display = 'none';
-    listEl.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem 0;">Unable to load bookings. Please refresh the page.</p>';
+    listEl.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem 0;">Unable to load projects. Please refresh the page.</p>';
   }
 }
 
@@ -603,14 +603,14 @@ function promptCancel(id) {
 
 async function doCancel(id) {
   const { error } = await sb.from('bookings').update({ status: 'cancelled' }).eq('id', id);
-  if (error) { showToast('Error cancelling booking.', 'error'); return; }
+  if (error) { showToast('Error cancelling project.', 'error'); return; }
   fetch(EDGE_FN, {
     method: 'POST',
     keepalive: true,
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
     body: JSON.stringify({ booking_id: id, action: 'cancelled' })
   }).then(r => { if (!r.ok) r.text().then(t => console.error('email error', r.status, t)); }).catch(console.error);
-  showToast('Booking cancelled.', 'success');
+  showToast('Project cancelled.', 'success');
   loadBookings();
 }
 
@@ -642,8 +642,8 @@ function validateApptDate(dateStr) {
   if (!dateStr || isNaN(d.getTime())) return 'Please select a valid date.';
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
-  if (d < today) return 'Appointment date cannot be in the past.';
-  if (d > maxDate) return 'Appointments can only be rescheduled up to 2 months in advance.';
+  if (d < today) return 'Date cannot be in the past.';
+  if (d > maxDate) return 'Projects can only be rescheduled up to 2 months in advance.';
   return null;
 }
 
@@ -664,7 +664,7 @@ async function doReschedule(id) {
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
     body: JSON.stringify({ booking_id: id, action: 'rescheduled' })
   }).then(r => { if (!r.ok) r.text().then(t => console.error('email error', r.status, t)); }).catch(console.error);
-  showToast('Booking rescheduled.', 'success');
+  showToast('Project rescheduled.', 'success');
   loadBookings();
 }
 
@@ -792,7 +792,7 @@ async function _signedIn(user) {
   currentUser = user;
   showView('view-auth-user');
   setNavUser(user.email.split('@')[0], user.email);
-  // Link any guest bookings made before this account existed, then load profile/bookings
+  // Link any guest projects made before this account existed, then load profile/projects
   await sb.rpc('claim_guest_bookings');
   await loadProfile(user.id);
 }

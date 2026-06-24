@@ -125,7 +125,7 @@ function noteText(text: string): string {
 }
 
 function typeLabel(b: Booking): string {
-  return b.type === "inhome" ? "In-Home Visit" : "Remote Session";
+  return b.type === "inhome" ? "Project" : "Inquiry";
 }
 
 function statusLabel(s: string): string {
@@ -162,13 +162,13 @@ function emailCreated(b: Booking): string {
     return emailShell("Inquiry Received — Tekpair", card);
   }
 
-  // ── Legacy in-home appointment flow ──
+  // ── Legacy in-home project flow ──
   const rows: [string, string][] = [
     ["Type", typeLabel(b)],
     ["Service", b.service || "—"],
     ["Date", b.preferred_date],
     ["Time", b.preferred_time],
-    ...(b.address ? [["Address", b.address] as [string, string]] : []),
+    ...(b.address ? [["Business", b.address] as [string, string]] : []),
     ["Status", statusLabel(b.status)],
   ];
 
@@ -177,38 +177,38 @@ function emailCreated(b: Booking): string {
       We've got you booked!
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, your request is in. We'll review it and follow up to confirm your appointment. Reply to this email or give us a call if you need anything in the meantime.
+      Hi ${b.first_name || "there"}, your request is in. We'll review it and follow up to confirm the details. Reply to this email or give us a call if you need anything in the meantime.
     </p>
     ${detailTable(rows)}
     ${b.issue_description ? issueBlock(b.issue_description) : ""}
     <p style="margin:28px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#8a95b0;line-height:1.7;">
       Need to make changes? Visit your account page anytime.
     </p>
-    <p style="margin:16px 0 0;">${ctaBtn("https://tekpair.com/account/", "View Your Booking")}</p>`;
+    <p style="margin:16px 0 0;">${ctaBtn("https://tekpair.com/account/", "View Your Project")}</p>`;
 
-  return emailShell("Booking Confirmed — Tekpair", card);
+  return emailShell("Project Confirmed — Tekpair", card);
 }
 
 function emailCancelled(b: Booking): string {
   const rows: [string, string][] = [
     ["Type", typeLabel(b)],
     ["Service", b.service || "—"],
-    ["Date", b.preferred_date],
-    ["Time", b.preferred_time],
+    ...(b.preferred_date ? [["Date", b.preferred_date] as [string, string]] : []),
+    ...(b.preferred_time ? [["Time", b.preferred_time] as [string, string]] : []),
     ["Status", "Cancelled"],
   ];
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Booking Cancelled
+      Request Cancelled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, your booking has been cancelled. If this was a mistake or you'd like to rebook, it only takes a minute.
+      Hi ${b.first_name || "there"}, your request has been cancelled. If this was a mistake or you'd like to submit a new inquiry, it only takes a minute.
     </p>
     ${detailTable(rows)}
-    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book Again")}</p>`;
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#contact", "Submit a New Inquiry")}</p>`;
 
-  return emailShell("Booking Cancelled — Tekpair", card);
+  return emailShell("Request Cancelled — Tekpair", card);
 }
 
 function emailRescheduled(b: Booking): string {
@@ -217,44 +217,44 @@ function emailRescheduled(b: Booking): string {
     ["Service", b.service || "—"],
     ["Date", b.preferred_date],
     ["Time", b.preferred_time],
-    ...(b.address ? [["Address", b.address] as [string, string]] : []),
+    ...(b.address ? [["Business", b.address] as [string, string]] : []),
     ["Status", "Rescheduled"],
   ];
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Booking Rescheduled
+      Project Rescheduled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
       Hi ${b.first_name || "there"}, your new date and time are confirmed below. We'll reach out shortly to lock things in. Need to adjust again? Your account page is always open.
     </p>
     ${detailTable(rows)}
     ${b.issue_description ? issueBlock(b.issue_description) : ""}
-    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</p>`;
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Project")}</p>`;
 
-  return emailShell("Booking Rescheduled — Tekpair", card);
+  return emailShell("Project Rescheduled — Tekpair", card);
 }
 
 function emailAdminCancelled(b: Booking): string {
   const rows: [string, string][] = [
     ["Type", typeLabel(b)],
     ["Service", b.service || "—"],
-    ["Date", b.preferred_date],
-    ["Time", b.preferred_time],
+    ...(b.preferred_date ? [["Date", b.preferred_date] as [string, string]] : []),
+    ...(b.preferred_time ? [["Time", b.preferred_time] as [string, string]] : []),
     ["Status", "Cancelled"],
   ];
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Appointment Cancelled
+      Project Cancelled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, unfortunately we've had to cancel your upcoming appointment. We apologize for the inconvenience — please feel free to rebook at a time that works for you, or reply to this email if you have questions.
+      Hi ${b.first_name || "there"}, unfortunately we've had to cancel your project. We apologize for the inconvenience — please feel free to submit a new inquiry, or reply to this email if you have questions.
     </p>
     ${detailTable(rows)}
-    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book a New Appointment")}</p>`;
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#contact", "Submit a New Inquiry")}</p>`;
 
-  return emailShell("Appointment Cancelled — Tekpair", card);
+  return emailShell("Project Cancelled — Tekpair", card);
 }
 
 function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): string {
@@ -263,22 +263,22 @@ function emailAdminRescheduled(b: Booking, newDate?: string, newTime?: string): 
     ["Service", b.service || "—"],
     ["New Date", newDate || b.preferred_date],
     ["New Time", newTime || b.preferred_time],
-    ...(b.address ? [["Address", b.address] as [string, string]] : []),
+    ...(b.address ? [["Business", b.address] as [string, string]] : []),
     ["Status", "Rescheduled"],
   ];
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Appointment Rescheduled
+      Project Rescheduled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, we've updated your appointment to a new date and time. The details are below. If this doesn't work for you, reply to this email or manage your booking online.
+      Hi ${b.first_name || "there"}, we've updated your project to a new date and time. The details are below. If this doesn't work for you, reply to this email or manage your project online.
     </p>
     ${detailTable(rows)}
     ${b.issue_description ? issueBlock(b.issue_description) : ""}
-    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Booking")}</p>`;
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/account/", "Manage Your Project")}</p>`;
 
-  return emailShell("Appointment Rescheduled — Tekpair", card);
+  return emailShell("Project Rescheduled — Tekpair", card);
 }
 
 function emailCompleted(b: Booking): string {
@@ -287,7 +287,7 @@ function emailCompleted(b: Booking): string {
       Thanks for choosing Tekpair
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, your session is complete. We hope everything went smoothly! If you have a moment, a quick Google review means the world to a local business — it really helps us out.
+      Hi ${b.first_name || "there"}, your project is complete. We hope everything went smoothly! If you have a moment, a quick Google review means the world to our business — it really helps us out.
     </p>
     <!-- Review highlight box -->
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:28px;">
@@ -306,7 +306,7 @@ function emailCompleted(b: Booking): string {
       </tr>
     </table>
     <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.6;">
-      Need us again? <a href="https://tekpair.com/#booking" style="color:#29d4f5;text-decoration:none;">Book another service</a> anytime. We're always happy to help.
+      Need us again? <a href="https://tekpair.com/#contact" style="color:#29d4f5;text-decoration:none;">Start a new project</a> anytime. We're always happy to help.
     </p>`;
 
   return emailShell("How Did We Do? — Tekpair", card);
@@ -315,9 +315,9 @@ function emailCompleted(b: Booking): string {
 function emailZoomLink(b: Booking, zoomUrl: string): string {
   const rows: [string, string][] = [
     ["Service", b.service || "—"],
-    ["Date", b.preferred_date],
-    ["Time", b.preferred_time],
-    ["Session Type", "Remote — Zoom"],
+    ...(b.preferred_date ? [["Date", b.preferred_date] as [string, string]] : []),
+    ...(b.preferred_time ? [["Time", b.preferred_time] as [string, string]] : []),
+    ["Meeting Type", "Remote — Zoom"],
   ];
 
   const card = `
@@ -325,7 +325,7 @@ function emailZoomLink(b: Booking, zoomUrl: string): string {
       Your Zoom Link is Ready
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, everything is set for your remote session. Click the button below to join at the scheduled time. Make sure Zoom is installed and your device is ready before we start.
+      Hi ${b.first_name || "there"}, everything is set for your meeting. Click the button below to join at the scheduled time. Make sure Zoom is installed and your device is ready before we start.
     </p>
     ${detailTable(rows)}
     <!-- Big join button -->
@@ -338,7 +338,7 @@ function emailZoomLink(b: Booking, zoomUrl: string): string {
       ${zoomUrl}
     </p>`;
 
-  return emailShell("Your Zoom Link — Tekpair Remote Session", card);
+  return emailShell("Your Zoom Link — Tekpair", card);
 }
 
 // ── BULK CANCELLATION EMAIL ───────────────────────────────────────────────────
@@ -347,8 +347,8 @@ function emailBulkCancelled(b: Booking, reason?: string): string {
   const rows: [string, string][] = [
     ["Type", typeLabel(b)],
     ["Service", b.service || "—"],
-    ["Date", b.preferred_date],
-    ["Time", b.preferred_time],
+    ...(b.preferred_date ? [["Date", b.preferred_date] as [string, string]] : []),
+    ...(b.preferred_time ? [["Time", b.preferred_time] as [string, string]] : []),
     ["Status", "Cancelled"],
   ];
 
@@ -360,16 +360,16 @@ function emailBulkCancelled(b: Booking, reason?: string): string {
 
   const card = `
     <h1 style="margin:0 0 14px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">
-      Appointment Cancelled
+      Project Cancelled
     </h1>
     <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-      Hi ${b.first_name || "there"}, unfortunately we need to cancel your upcoming appointment. We sincerely apologize for the inconvenience and will be in touch to rebook when we're available.
+      Hi ${b.first_name || "there"}, unfortunately we need to cancel your project. We sincerely apologize for the inconvenience and will be in touch when we're available.
     </p>
     ${detailTable(rows)}
     ${reasonBlock}
-    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#booking", "Book a New Appointment")}</p>`;
+    <p style="margin:28px 0 0;">${ctaBtn("https://tekpair.com/#contact", "Submit a New Inquiry")}</p>`;
 
-  return emailShell("Appointment Cancelled — Tekpair", card);
+  return emailShell("Project Cancelled — Tekpair", card);
 }
 
 // ── BREACH NOTIFICATION EMAIL ─────────────────────────────────────────────────
@@ -435,7 +435,7 @@ function emailBreachNotification(description: string, affectedData: string): str
 
 function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string; newTime?: string; zoomUrl?: string } = {}): string {
   const labels: Record<string, string> = {
-    created: "New Booking",
+    created: "New Inquiry",
     cancelled: "Client Cancelled",
     rescheduled: "Client Rescheduled",
     admin_cancelled: "Admin Cancelled — Client Notified",
@@ -450,7 +450,7 @@ function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string;
     completed: "#34c76f",
     zoom_link: "#29d4f5",
   };
-  const actionLabel = labels[action] || "Booking Update";
+  const actionLabel = labels[action] || "Project Update";
   const accent = accents[action] || "#f5c518";
 
   const rows: [string, string][] = [
@@ -461,10 +461,10 @@ function buildAdminEmail(b: Booking, action: string, extras: { newDate?: string;
     ["Service", b.service || "—"],
     ...(extras.newDate ? [["New Date", extras.newDate] as [string, string]] : [["Date", b.preferred_date] as [string, string]]),
     ...(extras.newTime ? [["New Time", extras.newTime] as [string, string]] : [["Time", b.preferred_time] as [string, string]]),
-    ...(b.address ? [["Address", b.address] as [string, string]] : []),
+    ...(b.address ? [["Business", b.address] as [string, string]] : []),
     ["Status", statusLabel(b.status)],
     ...(b.referral_source ? [["Referral", b.referral_source] as [string, string]] : []),
-    ["Booking ID", b.id],
+    ["Project ID", b.id],
     ...(extras.zoomUrl ? [["Zoom URL", extras.zoomUrl] as [string, string]] : []),
   ];
 
@@ -692,7 +692,7 @@ serve(async (req) => {
       }
 
       await Promise.all(
-        toCancel.map((b) => sendEmail(b.email, "Appointment Cancelled — Tekpair", emailBulkCancelled(b, reason)))
+        toCancel.map((b) => sendEmail(b.email, "Project Cancelled — Tekpair", emailBulkCancelled(b, reason)))
       );
 
       return new Response(JSON.stringify({ success: true, cancelled: toCancel.length }), {
@@ -735,33 +735,33 @@ serve(async (req) => {
       zoomUrl = zoom_code.startsWith("http") ? zoom_code : `https://zoom.us/j/${zoom_code.replace(/\D/g, "")}`;
     }
 
-    const tLabel = booking.type === "inhome" ? "In-Home Visit" : "Remote Session";
+    const tLabel = booking.type === "inhome" ? "Project" : "Inquiry";
     let customerSubject = "";
     let customerHtml = "";
     let notifyAdmin = false;
 
     switch (action) {
       case "created":
-        customerSubject = `Booking Confirmed — Your ${tLabel}`;
+        customerSubject = booking.type === "inhome" ? `Project Confirmed — Tekpair` : `Inquiry Received — Tekpair`;
         customerHtml = emailCreated(booking);
         notifyAdmin = true;
         break;
       case "cancelled":
-        customerSubject = `Booking Cancelled — Your ${tLabel}`;
+        customerSubject = `Request Cancelled — Tekpair`;
         customerHtml = emailCancelled(booking);
         notifyAdmin = true;
         break;
       case "rescheduled":
-        customerSubject = `Booking Rescheduled — Your ${tLabel}`;
+        customerSubject = `Project Rescheduled — Tekpair`;
         customerHtml = emailRescheduled(booking);
         notifyAdmin = true;
         break;
       case "admin_cancelled":
-        customerSubject = `Appointment Cancelled`;
+        customerSubject = `Project Cancelled — Tekpair`;
         customerHtml = emailAdminCancelled(booking);
         break;
       case "admin_rescheduled":
-        customerSubject = `Appointment Rescheduled`;
+        customerSubject = `Project Rescheduled — Tekpair`;
         customerHtml = emailAdminRescheduled(booking, new_date, new_time);
         break;
       case "completed":
@@ -769,7 +769,7 @@ serve(async (req) => {
         customerHtml = emailCompleted(booking);
         break;
       case "zoom_link":
-        customerSubject = `Your Zoom Link — Tekpair Remote Session`;
+        customerSubject = `Your Zoom Link — Tekpair`;
         customerHtml = emailZoomLink(booking, zoomUrl);
         break;
     }
