@@ -589,8 +589,8 @@ function statusBadge(s) {
 
 function typeBadge(t) {
   return t === 'inhome'
-    ? `<span class="badge badge-inhome">In-Home</span>`
-    : `<span class="badge badge-remote">Remote</span>`;
+    ? `<span class="badge badge-inhome">Project</span>`
+    : `<span class="badge badge-remote">Inquiry</span>`;
 }
 
 function renderBookingCard(b, container) {
@@ -602,7 +602,7 @@ function renderBookingCard(b, container) {
     <div class="booking-card-top">
       <div class="booking-badges">${typeBadge(b.type)}${statusBadge(b.status)}</div>
     </div>
-    <div class="booking-service">${b.service || (b.type === 'inhome' ? 'In-Home Visit' : 'Remote Session')}</div>
+    <div class="booking-service">${b.service || (b.type === 'inhome' ? 'Project' : 'Inquiry')}</div>
     <div class="booking-meta">${b.preferred_date} &middot; ${b.preferred_time}</div>
     ${b.issue_description ? `<div class="booking-issue">${b.issue_description}</div>` : ''}
     ${canAct ? `<div class="booking-actions">
