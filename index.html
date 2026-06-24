@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tekpair — Local Tech Setup & Smart Home Services | Cohoes, NY</title>
+  <title>Tekpair — Web Design, SEO & IT Solutions for Businesses | Cohoes, NY</title>
   <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
-  <meta name="description" content="Tekpair provides affordable tech setup, Wi-Fi, smart home, camera installation and computer help in Cohoes, Troy, Latham, Albany and the Capital Region."/>
-  <meta property="og:title" content="Tekpair — Local Tech Setup & Smart Home Services"/>
-  <meta property="og:description" content="Wi-Fi setup, smart home installs, security cameras, and computer help. Flat rates, same-day service, Capital Region NY."/>
+  <meta name="description" content="Tekpair builds custom websites, optimizes search rankings, and provides managed IT for businesses. Professional results, transparent pricing. Cohoes, NY."/>
+  <meta property="og:title" content="Tekpair — Web Design, SEO & IT Solutions for Businesses"/>
+  <meta property="og:description" content="Custom web development, SEO optimization, business analytics, and managed IT — built for businesses ready to grow."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://tekpair.com"/>
   <meta name="theme-color" content="#29d4f5"/>
@@ -16,11 +16,9 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/></noscript>
   <style>
-    /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     img, svg { display: block; max-width: 100%; }
 
-    /* ── TOKENS ── */
     :root {
       --bg:        #111318;
       --surface:   #191c23;
@@ -37,7 +35,6 @@
       --radius-sm: 8px;
     }
 
-    /* ── BASE ── */
     html { scroll-behavior: smooth; font-size: 15px; }
     body {
       background: var(--bg);
@@ -48,7 +45,6 @@
       overflow-x: hidden;
     }
 
-    /* ── SKIP LINK ── */
     .skip-link {
       position: absolute; top: -40px; left: 1rem;
       background: var(--cyan); color: #111;
@@ -59,11 +55,7 @@
     }
     .skip-link:focus { top: 0.5rem; }
 
-    .nav-logo-img {
-      height: 28px; width: auto;
-      display: block;
-    }
-    /* ── NAV ── */
+    .nav-logo-img { height: 28px; width: auto; display: block; }
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       background: rgba(17,19,24,0.94);
@@ -73,21 +65,16 @@
     .nav-inner {
       max-width: 1140px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2rem;
-      gap: 1.5rem;
+      padding: 1rem 2rem; gap: 1.5rem;
     }
     .nav-logo {
       font-family: 'Instrument Sans', sans-serif; font-weight: 800;
       font-size: 1.5rem; letter-spacing: -0.01em;
       color: var(--white); text-decoration: none;
-      display: flex; align-items: center; gap: 0.45rem;
-      flex-shrink: 0;
+      display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0;
     }
     .nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); flex-shrink:0; }
-    .nav-links {
-      display: flex; gap: 0.25rem; list-style: none;
-      align-items: center;
-    }
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
     .nav-links a {
       font-size: 0.95rem; font-weight: 500;
       color: var(--off); text-decoration: none;
@@ -105,7 +92,6 @@
     }
     .nav-book:hover { opacity: 0.88; box-shadow: 0 0 20px var(--cyan-glow); }
 
-    /* hamburger */
     .nav-toggle {
       display: none; flex-direction: column; gap: 5px;
       background: none; border: none; cursor: pointer;
@@ -119,14 +105,10 @@
     .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
     .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
     .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 1rem 2rem 1.5rem;
-      gap: 0.25rem;
+      display: none; flex-direction: column;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 1rem 2rem 1.5rem; gap: 0.25rem;
     }
     .mobile-menu a {
       font-size: 1.1rem; font-weight: 500; color: var(--off);
@@ -136,7 +118,6 @@
     .mobile-menu a:last-child { border-bottom: none; color: var(--cyan); font-weight: 600; }
     .mobile-menu.open { display: flex; }
 
-    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex; align-items: center;
@@ -199,7 +180,6 @@
     }
     .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-1px); }
 
-    /* hero card */
     .hero-card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 20px; padding: 2.2rem;
@@ -228,17 +208,15 @@
     }
     .hci-text { flex: 1; }
     .hci-label { font-weight: 600; font-size: 0.95rem; color: var(--white); }
-    .hci-price { font-size: 0.82rem; color: var(--cyan); font-weight: 600; margin-top: 0.1rem; }
+    .hci-sub { font-size: 0.82rem; color: var(--muted); margin-top: 0.1rem; }
 
-    /* ── TRUST BAR ── */
     .trust-bar {
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       background: var(--surface);
     }
     .trust-bar-inner {
       max-width: 1140px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
     }
     .trust-item {
       padding: 2rem 1.5rem; text-align: center;
@@ -253,7 +231,6 @@
     }
     .trust-label { font-size: 0.88rem; color: var(--off); line-height: 1.4; }
 
-    /* ── SECTION BASE ── */
     .section { padding: 5.5rem 2rem; }
     .section-surface { background: var(--surface); }
     .container { max-width: 1140px; margin: 0 auto; }
@@ -272,13 +249,9 @@
       color: var(--white); margin-bottom: 0.8rem;
     }
     .section-desc { font-size: 1rem; color: var(--off); max-width: 560px; line-height: 1.7; }
-  
 
-
-    /* ── SERVICES ── */
     .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
     }
     .service-card {
       background: var(--card); border: 1.5px solid var(--border);
@@ -298,67 +271,25 @@
       color: var(--cyan); margin-bottom: 1.3rem;
     }
     .sc-name { font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 0.5rem; }
-    .sc-desc { font-size: 0.92rem; color: var(--off); line-height: 1.65; margin-bottom: 1.2rem; }
-    .sc-price { font-size: 0.9rem; font-weight: 600; color: var(--cyan); }
-    .sc-cta {
-      position: absolute; bottom: 1.8rem; right: 1.8rem;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--cyan); transition: background 0.18s;
-    }
-    .service-card:hover .sc-cta { background: var(--cyan); color: #0e1117; }
+    .sc-desc { font-size: 0.92rem; color: var(--off); line-height: 1.65; }
 
-    /* contact card in grid */
-    .service-card.contact-card {
-      background: linear-gradient(135deg, #1a1d24, #1e2029);
-      border-color: rgba(41,212,245,0.18);
-      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-    }
-
-    /* ── AREA ── */
-    .area-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center;
-    }
-    .area-towns {
-      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem;
-    }
-    .area-town {
-      font-size: 0.88rem; font-weight: 500; color: var(--off);
-      background: var(--card); border: 1px solid var(--border);
-      padding: 0.45rem 1rem; border-radius: 100px;
-      transition: border-color 0.18s, color 0.18s;
-    }
-    .area-town:hover { border-color: var(--cyan); color: var(--cyan); }
-    .area-visual {
-      min-height: 380px;
-      position: relative;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
-    }
-    /* ── HOW IT WORKS ── */
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
     .step {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.6rem;
-      position: relative;
+      border-radius: var(--radius); padding: 1.6rem; position: relative;
     }
     .step-num {
       font-family: 'Instrument Sans', sans-serif; font-size: 3rem; font-weight: 800;
-      color: rgba(41,212,245,0.15); line-height: 1;
-      margin-bottom: 0.8rem;
+      color: rgba(41,212,245,0.15); line-height: 1; margin-bottom: 0.8rem;
     }
     .step-title { font-weight: 600; font-size: 0.98rem; color: var(--white); margin-bottom: 0.4rem; }
     .step-desc { font-size: 0.88rem; color: var(--off); line-height: 1.6; }
     .step-arrow {
-      display: none;
-      position: absolute; right: -1.1rem; top: 50%; transform: translateY(-50%);
-      color: var(--border-md); z-index: 2;
+      display: none; position: absolute; right: -1.1rem; top: 50%;
+      transform: translateY(-50%); color: var(--border-md); z-index: 2;
     }
     .step:not(:last-child) .step-arrow { display: flex; }
 
-    /* ── WHY US ── */
     .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
     .why-card {
       background: var(--card); border: 1px solid var(--border);
@@ -375,20 +306,6 @@
     .why-title { font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 0.35rem; }
     .why-desc { font-size: 0.88rem; color: var(--off); line-height: 1.65; }
 
-    /* ── BOOKING ── */
-    /* ── BOOKING FORM ── */
-    .booking-type-btn {
-      background: var(--card); border: 1.5px solid var(--border);
-      border-radius: var(--radius); padding: 1.6rem 1.4rem;
-      cursor: pointer; text-align: left;
-      display: flex; flex-direction: column; gap: 0.5rem;
-      color: var(--white); transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
-    }
-    .booking-type-btn:hover { border-color: rgba(41,212,245,0.4); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
-    .booking-type-btn.active { border-color: var(--cyan); background: rgba(41,212,245,0.05); }
-    .booking-type-btn svg { color: var(--cyan); }
-    .booking-type-label { font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 1rem; }
-    .booking-type-sub { font-size: 0.8rem; color: var(--muted); }
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
     .form-label { font-size: 0.82rem; font-weight: 600; color: var(--off); display:flex; align-items:center; gap:0.35rem; }
     .form-label svg { color: var(--muted); flex-shrink:0; }
@@ -398,19 +315,12 @@
       font-size: 0.9rem; color: var(--white);
       font-family: 'DM Sans', sans-serif;
       outline: none; transition: border-color 0.18s;
-      width: 100%;
-      color-scheme: dark;
+      width: 100%; color-scheme: dark;
     }
     .form-input:focus { border-color: var(--cyan); }
     .form-input option { background: var(--card); }
-    .form-email-error {
-      display: flex; align-items: flex-start; gap: 0.45rem;
-      background: rgba(245,78,78,0.09); border: 1px solid rgba(245,78,78,0.28);
-      border-radius: 8px; padding: 0.6rem 0.8rem;
-      font-size: 0.82rem; color: #f87171; line-height: 1.5;
-    }
-    .form-email-error svg { flex-shrink: 0; margin-top: 2px; }
-    .form-email-error a { color: #fca5a5; text-underline-offset: 2px; }
+    .form-card { position:relative; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; max-width:680px; }
+    .form-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--cyan),rgba(41,212,245,0.2)); }
     .form-submit {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
       background: var(--cyan); color: #0e1117;
@@ -418,127 +328,10 @@
       padding: 0.8rem 1.6rem; border-radius: 9px;
       border: none; cursor: pointer;
       transition: opacity 0.18s, box-shadow 0.18s, transform 0.18s;
-      font-family: 'DM Sans', sans-serif;
-      margin-top: 0.4rem;
+      font-family: 'DM Sans', sans-serif; margin-top: 0.4rem;
     }
     .form-submit:hover { opacity: 0.88; box-shadow: 0 4px 24px var(--cyan-glow); transform: translateY(-1px); }
-    @media(max-width:640px){
-      #booking-selector { grid-template-columns: 1fr !important; }
-      .form-group + .form-group { margin-top: 0; }
-      #form-inhome, #form-remote { scroll-margin-top: 5.5rem; }
-    }
-    @media(max-width:480px){
-      .form-date-row { grid-template-columns: 1fr !important; }
-    }
-    @media(max-width:600px){
-      .form-date-row { grid-template-columns: 1fr !important; }
-    }
-    /* Form card with cyan top accent */
-    .form-card { position:relative; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; max-width:680px; }
-    .form-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--cyan),rgba(41,212,245,0.2)); }
-    /* Collapsible policy block */
-    .form-policies { margin:1.2rem 1.6rem 0; border-radius:10px; overflow:hidden; border:1px solid rgba(41,212,245,0.2); }
-    .form-policies-summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:0.5rem; padding:0.7rem 1rem; background:var(--cyan-soft); font-size:0.8rem; color:var(--off); user-select:none; -webkit-user-select:none; }
-    .form-policies-summary::-webkit-details-marker { display:none; }
-    .form-policies-summary strong { color:var(--white); }
-    .policy-chevron { margin-left:auto; transition:transform 0.2s; flex-shrink:0; }
-    .form-policies[open] .policy-chevron { transform:rotate(180deg); }
-    .form-policies-body { background:var(--surface); padding:0.75rem 1rem 0.9rem; display:flex; flex-direction:column; gap:0.55rem; }
-    .fp-item { display:flex; align-items:flex-start; gap:0.55rem; font-size:0.79rem; color:var(--off); line-height:1.55; }
-    .fp-item svg { color:var(--cyan); flex-shrink:0; margin-top:1px; }
-    .fp-item strong { color:var(--white); }
-    /* Date dropdowns (cross-browser, replaces <input type=date>) */
-    .date-select-row { display:grid; grid-template-columns:5fr 2fr 2fr; gap:0.5rem; }
-    @media(max-width:500px) { .date-select-row { grid-template-columns:1fr 1fr; } .date-select-row .date-month { grid-column:1/-1; } }
-    .booking-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .booking-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.8rem 0 2.2rem; }
-    .bc-item { display: flex; align-items: center; gap: 0.9rem; font-size: 0.96rem; color: var(--off); }
-    .bc-check { color: var(--cyan); flex-shrink: 0; }
-    .booking-box {
-      background: var(--card); border: 1.5px solid var(--border);
-      border-radius: 20px; padding: 2.5rem;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 1.2rem;
-    }
-    .booking-box-icon { color: var(--cyan); }
-    .booking-box-title { font-family:'Instrument Sans',sans-serif; font-weight:800; font-size:1.3rem; color:var(--white); }
-    .booking-box-desc { font-size:0.9rem; color:var(--off); line-height:1.65; max-width:320px; }
-    .booking-box-steps { display:flex; flex-direction:column; gap:0.6rem; width:100%; text-align:left; }
-    .bbs-step {
-      display:flex; align-items:center; gap:0.75rem;
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:9px; padding:0.75rem 1rem;
-      font-size:0.87rem; color:var(--off);
-    }
-    .bbs-num {
-      width:24px;height:24px;border-radius:50%;flex-shrink:0;
-      background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.25);
-      display:flex;align-items:center;justify-content:center;
-      font-size:0.72rem;font-weight:700;color:var(--cyan);
-    }
-    .booking-divider {
-      display:flex;align-items:center;gap:0.75rem;width:100%;
-      color:var(--muted);font-size:0.82rem;
-    }
-    .booking-divider::before, .booking-divider::after {
-      content:'';flex:1;height:1px;background:var(--border);
-    }
 
-  /* ESTIMATOR */
-.est-group{margin-bottom:1.4rem;}
-.est-group-label{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
-.est-items{display:flex;flex-direction:column;gap:0.4rem;}
-.est-item{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 1rem;background:var(--card);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color 0.15s;user-select:none;}
-.est-item:hover{border-color:rgba(41,212,245,0.2);}
-.est-item.checked{border-color:var(--cyan);background:rgba(41,212,245,0.06);}
-.est-cb{width:16px;height:16px;border:1.5px solid var(--border-md);border-radius:4px;background:var(--surface);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background 0.15s,border-color 0.15s;}
-.est-item.checked .est-cb{background:var(--cyan);border-color:var(--cyan);}
-.est-cb svg{opacity:0;transition:opacity 0.15s;}
-.est-item.checked .est-cb svg{opacity:1;}
-.est-info{flex:1;}
-.est-name{font-size:0.86rem;font-weight:500;color:var(--white);line-height:1.3;}
-.est-sub{font-size:0.74rem;color:var(--muted);margin-top:0.1rem;}
-.est-price{font-size:0.84rem;font-weight:600;color:var(--cyan);white-space:nowrap;flex-shrink:0;}
-.est-line{display:flex;justify-content:space-between;align-items:baseline;gap:0.5rem;}
-.est-line-name{font-size:0.78rem;color:var(--off);flex:1;line-height:1.3;}
-.est-line-price{font-size:0.78rem;color:var(--cyan);font-weight:600;white-space:nowrap;}
-@media(max-width:760px){.est-outer{grid-template-columns:1fr!important;}.est-outer>div:last-child{position:static!important;}}
-
-    /* ── ACCORDION ── */
-    .est-group summary.est-group-label { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; }
-    .est-group summary.est-group-label::after { content:'＋'; font-size:0.9rem; color:var(--cyan); transition:transform 0.2s; }
-    .est-group[open] summary.est-group-label::after { content:'−'; }
-    .est-group summary.est-group-label::-webkit-details-marker { display:none; }
-    .est-group .est-items { padding-top:0.5rem; }
-
-    /* ── PAYMENT ── */
-    .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.5rem; }
-    .pay-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.4rem;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 0.7rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .pay-card:hover { border-color: rgba(41,212,245,0.25); transform: translateY(-2px); }
-    .pay-icon { color: var(--cyan); }
-    .pay-name { font-weight: 600; font-size: 0.96rem; color: var(--white); }
-    .pay-note { font-size: 0.82rem; color: var(--off); line-height: 1.5; }
-    .pay-badge {
-      font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px;
-      background: var(--cyan-soft); color: var(--cyan);
-      border: 1px solid rgba(41,212,245,0.2);
-    }
-    .pay-note-box {
-      margin-top: 1.8rem; padding: 1.3rem 1.6rem;
-      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
-      border-radius: var(--radius);
-      display: flex; align-items: flex-start; gap: 1rem;
-      font-size: 0.9rem; color: var(--off); line-height: 1.65;
-    }
-    .pay-note-box svg { flex-shrink: 0; color: var(--cyan); margin-top: 0.1rem; }
-
-    /* ── CTA ── */
     .cta-section { padding: 6rem 2rem; text-align: center; }
     .cta-box {
       max-width: 680px; margin: 0 auto;
@@ -548,7 +341,7 @@
     }
     .cta-box::before {
       content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
-      width:360px;height:360px;
+      width:360px; height:360px;
       background:radial-gradient(circle, rgba(41,212,245,0.06), transparent 65%);
       pointer-events:none;
     }
@@ -556,7 +349,6 @@
     .cta-box p { font-size: 1rem; color: var(--off); margin-bottom: 2.2rem; line-height: 1.7; }
     .cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 
-    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border); background: var(--surface);
       padding: 3rem 2rem 2rem;
@@ -594,14 +386,12 @@
     .footer-bottom a { color:var(--off); text-decoration:none; }
     .footer-bottom a:hover { color:var(--cyan); }
 
-    /* ── REVEAL ── */
     .reveal {
       opacity: 0; transform: translateY(22px);
       transition: opacity 0.55s ease, transform 0.55s ease;
     }
     .reveal.in { opacity: 1; transform: none; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(18px); }
       to   { opacity:1; transform:none; }
@@ -610,13 +400,11 @@
       0%,100% { opacity:1; transform:scale(1); }
       50%      { opacity:0.4; transform:scale(0.6); }
     }
-    /* LCP fix: h1 slides in without starting at opacity:0 */
     @keyframes heroSlideUp {
       from { transform: translateY(18px); }
       to   { transform: none; }
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       .hero-inner { grid-template-columns: 1fr; }
       .hero-card { display: none; }
@@ -624,12 +412,9 @@
       .trust-item:nth-child(2) { border-right: none; }
       .trust-item:nth-child(3), .trust-item:nth-child(4) { border-top: 1px solid var(--border); }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .area-inner { grid-template-columns: 1fr; }
       .steps { grid-template-columns: repeat(2, 1fr); }
       .step-arrow { display:none !important; }
       .why-grid { grid-template-columns: 1fr; }
-      .booking-inner { grid-template-columns: 1fr; }
-      .payment-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .footer-inner > :first-child { grid-column: 1 / -1; }
     }
@@ -647,45 +432,12 @@
       .services-grid { grid-template-columns: 1fr; }
       .trust-bar-inner { grid-template-columns: repeat(2,1fr); }
       .steps { grid-template-columns: 1fr; }
-      .payment-grid { grid-template-columns: 1fr 1fr; }
       .cta-box { padding: 2.5rem 1.25rem; }
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
-      /* Prevent iOS zoom on form focus (requires 16px minimum) */
       .form-input { font-size: 1rem; }
-      /* Faster tap response on touch devices */
-      .btn-primary, .btn-outline, .nav-book, .form-submit,
-      .booking-type-btn, .nav-toggle, .est-item { touch-action: manipulation; }
+      .btn-primary, .btn-outline, .nav-book, .form-submit, .nav-toggle { touch-action: manipulation; }
     }
-    /* ── PROMO BANNER ── */
-    .promo-banner {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 210;
-      background: linear-gradient(90deg, #0a6e82, #29d4f5 50%, #0a6e82);
-      background-size: 200% 100%;
-      animation: banner-shine 6s ease infinite;
-      padding: 0.6rem 3rem;
-      display: flex; align-items: center; justify-content: center;
-      gap: 0.75rem; flex-wrap: wrap; text-align: center;
-    }
-    .promo-banner-text {
-      font-size: 0.82rem; font-weight: 600; color: #07080d; line-height: 1.4;
-    }
-    .promo-banner-text span { font-weight: 700; }
-    .promo-sep {
-      width: 4px; height: 4px; border-radius: 50%; background: rgba(0,0,0,0.25); flex-shrink: 0;
-    }
-    .promo-close {
-      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-      background: none; border: none; cursor: pointer;
-      color: rgba(0,0,0,0.45); font-size: 1rem; line-height: 1;
-      padding: 0.3rem; transition: color 0.18s;
-    }
-    .promo-close:hover { color: #07080d; }
-    @keyframes banner-shine {
-      0%,100% { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
-    }
-    /* when banner is visible, push nav below it */
     nav { transition: top 0.2s; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -694,41 +446,34 @@
 
 <a href="#main" class="skip-link">Skip to main content</a>
 
-<!-- NAV -->
 <nav aria-label="Main navigation">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="Tekpair home">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
     </a>
     <ul class="nav-links" role="list">
-      <li><a href="/webdesign/">Website Design</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="/find-my-service/">Find My Service</a></li>
-      <li><a href="#area">Service Area</a></li>
+      <li><a href="/webdesign/">Web Design</a></li>
+      <li><a href="#how">How It Works</a></li>
       <li><a href="/about/">About</a></li>
-      <li><a href="/policies/">Policies</a></li>
       <li><a href="/faq/">FAQ</a></li>
-      <li><a href="/account/" id="nav-account-link" aria-label="My Account" style="display:flex;align-items:center;padding:0.4rem 0.6rem;border-radius:8px;transition:background 0.18s;"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a></li>
     </ul>
-    <a href="#booking" class="nav-book">Book a Job</a>
+    <a href="#contact" class="nav-book">Get in Touch</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile menu">
-    <a href="/webdesign/">Website Design</a>
     <a href="#services">Services</a>
-    <a href="/find-my-service/">Find My Service</a>
-    <a href="#area">Service Area</a>
+    <a href="/webdesign/">Web Design</a>
+    <a href="#how">How It Works</a>
     <a href="/about/">About</a>
-    <a href="/policies/">Policies</a>
     <a href="/faq/">FAQ</a>
-    <a href="/account/">My Account</a>
-    <a href="#booking">Book a Job →</a>
+    <a href="/policies/">Policies</a>
+    <a href="#contact">Get in Touch →</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <main id="main">
 <section class="hero" aria-labelledby="hero-heading">
   <div class="hero-glow" aria-hidden="true"></div>
@@ -736,123 +481,97 @@
     <div class="hero-text">
       <div class="hero-badge">
         <div class="hero-badge-dot"></div>
-        Serving the Capital Region, NY
+        Now serving businesses across New York
       </div>
       <h1 class="hero-title" id="hero-heading">
-        Your local<br/><em>trusted technicians.</em>
+        Technology that<br/><em>grows your business.</em>
       </h1>
       <p class="hero-sub">
-        Wi-Fi setup, computer help, printer troubleshooting, security cameras, and more — all at flat rates with no hidden fees. And rest assured, we come directly to you.
+        Custom web development, SEO, business analytics, and managed IT — built for companies that want real results without the enterprise price tag.
       </p>
-<div class="hero-actions">
-  <a href="#booking" class="btn-primary">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    Book a Job
-  </a>
-  <a href="#services" class="btn-outline">
-    See Our Services
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </a>
-</div>
-<div style="margin-top:1rem;animation:fadeUp 0.5s 0.32s ease both;">
-  <a href="/find-my-service/" style="display:inline-flex;align-items:center;gap:0.45rem;font-size:0.92rem;color:var(--off);text-decoration:none;font-weight:500;transition:color 0.18s;" onmouseover="this.style.color='var(--cyan)';" onmouseout="this.style.color='var(--off)';">
-    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    Not sure what fits? Take our 60-second quiz →
-  </a>
-</div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Get Started
+        </a>
+        <a href="#services" class="btn-outline">
+          Our Services
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
     </div>
-<div class="hero-card" aria-hidden="true">
-  <div class="hero-card-title">Popular Services</div>
-  <div class="hero-card-item">
-    <div class="hci-icon">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-title">What We Build</div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">Web Development &amp; Design</div>
+          <div class="hci-sub">Custom-coded, fully owned</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">SEO Optimization</div>
+          <div class="hci-sub">Rank higher, get found</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">Business Analytics</div>
+          <div class="hci-sub">Data-driven decisions</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="hci-text">
+          <div class="hci-label">Managed IT &amp; Retainers</div>
+          <div class="hci-sub">Ongoing support &amp; maintenance</div>
+        </div>
+      </div>
     </div>
-    <div class="hci-text">
-      <div class="hci-label">Wi-Fi & Router Setup</div>
-      <div class="hci-price">From $75</div>
-    </div>
-  </div>
-  <div class="hero-card-item">
-    <div class="hci-icon">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-    </div>
-    <div class="hci-text">
-      <div class="hci-label">Computer Setup & Cleanup</div>
-      <div class="hci-price">From $79</div>
-    </div>
-  </div>
-  <div class="hero-card-item">
-    <div class="hci-icon">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-    </div>
-    <div class="hci-text">
-      <div class="hci-label">Printer Setup & Troubleshooting</div>
-      <div class="hci-price">From $59</div>
-    </div>
-  </div>
-  <div class="hero-card-item">
-    <div class="hci-icon">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 7 16 12 23 17V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-    </div>
-    <div class="hci-text">
-      <div class="hci-label">Smart TV & Streaming</div>
-      <div class="hci-price">From $49</div>
-    </div>
-  </div>
-</div>
   </div>
 </section>
-
-  <!-- REVIEW STRIP -->
-<div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.2rem 2rem;">
-  <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;justify-content:center;text-align:center;">
-    <div style="display:flex;gap:3px;">
-      <span style="color:#f5c842;font-size:1rem;">★★★★★</span>
-    </div>
-    <div style="font-size:0.92rem;color:var(--off);font-style:italic;max-width:520px;">
-      "Connor &amp; Kamryn are knowledgeable and went above and beyond to fix my computer issues. They made sure everything was working correctly, explained and answered all questions. Highly recommend them!"
-    </div>
-    <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0;">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.2);display:flex;align-items:center;justify-content:center;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:0.75rem;color:var(--cyan);">SC</div>
-      <div>
-        <div style="font-size:0.82rem;font-weight:600;color:var(--white);">Sue C.</div>
-        <div style="font-size:0.72rem;color:var(--muted);">Google Review · Halfmoon, NY</div>
-      </div>
-      <svg style="margin-left:0.3rem;" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-    </div>
-  </div>
-</div>
 
 <!-- TRUST BAR -->
 <div class="trust-bar" role="complementary" aria-label="Key facts">
   <div class="trust-bar-inner">
     <div class="trust-item reveal">
       <div class="trust-icon">
-        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       </div>
-      <div class="trust-value">Same Day</div>
-      <div class="trust-label">or next‑day availability</div>
+      <div class="trust-value">Custom</div>
+      <div class="trust-label">every project from scratch</div>
     </div>
     <div class="trust-item reveal">
       <div class="trust-icon">
         <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       </div>
-      <div class="trust-value">Flat Rates</div>
-      <div class="trust-label">no hourly surprises</div>
-    </div>
-    <div class="trust-item reveal">
-      <div class="trust-icon">
-        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <div class="trust-value">Local Team</div>
-      <div class="trust-label">Connor &amp; Kamryn, Cohoes NY</div>
+      <div class="trust-value">Transparent</div>
+      <div class="trust-label">clear scope and pricing</div>
     </div>
     <div class="trust-item reveal">
       <div class="trust-icon">
         <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
-      <div class="trust-value">7-Day</div>
-      <div class="trust-label">satisfaction guarantee</div>
+      <div class="trust-value">Yours</div>
+      <div class="trust-label">full code ownership</div>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">
+        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="trust-value">Direct</div>
+      <div class="trust-label">work with real people</div>
     </div>
   </div>
 </div>
@@ -862,183 +581,112 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-label"><div class="section-label-line"></div>What We Do</div>
-      <h2 class="section-title" id="services-heading">Our Services</h2>
-      <p class="section-desc">All jobs are flat-rate, priced upfront. We come to your home or small business anywhere in the Capital Region.</p>
+      <h2 class="section-title" id="services-heading">Services Built for Business</h2>
+      <p class="section-desc">Every engagement is scoped upfront with clear deliverables, timelines, and pricing. No surprises.</p>
     </div>
     <div class="services-grid">
 
+      <a href="/webdesign/" class="service-card reveal" style="text-decoration:none;color:inherit;cursor:pointer;">
+        <div class="sc-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="sc-name">Web Development &amp; Design</div>
+        <div class="sc-desc">Custom-coded websites, web apps, and e-commerce — built from scratch. No templates, no page builders, no monthly platform fees. You own the code.</div>
+      </a>
+
       <div class="service-card reveal">
         <div class="sc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
-        <div class="sc-name">Wi-Fi &amp; Network Setup</div>
-        <div class="sc-desc">Router and modem installation, Wi-Fi troubleshooting, signal extenders, and mesh systems. We get you fully connected and fast.</div>
-        <div class="sc-price">From $75</div>
-        <div class="sc-cta" aria-hidden="true">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
+        <div class="sc-name">SEO Optimization</div>
+        <div class="sc-desc">Technical SEO, keyword strategy, on-page optimization, and content planning. We help your business get found on Google and stay there.</div>
       </div>
 
       <div class="service-card reveal">
         <div class="sc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
         </div>
-        <div class="sc-name">Smart Home Devices</div>
-        <div class="sc-desc">Alexa, Google Home, smart bulbs, plugs, and thermostats — set up, linked to your app, and working exactly as they should.</div>
-        <div class="sc-price">From $49</div>
-        <div class="sc-cta" aria-hidden="true">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
+        <div class="sc-name">Business Analytics</div>
+        <div class="sc-desc">Google Analytics setup, conversion tracking, custom dashboards, and reporting. Know exactly what's working and where to invest next.</div>
       </div>
 
       <div class="service-card reveal">
         <div class="sc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 7 16 12 23 17V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="sc-name">Smart TV &amp; Streaming</div>
-        <div class="sc-desc">Firestick, Roku, Apple TV, or built-in smart TV setup. Apps installed, accounts connected, Wi-Fi linked. Cord-cutting help included.</div>
-        <div class="sc-price">From $49</div>
-        <div class="sc-cta" aria-hidden="true">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
+        <div class="sc-name">Monthly IT Retainers</div>
+        <div class="sc-desc">Ongoing website maintenance, security updates, performance monitoring, and priority support — all on a predictable monthly plan.</div>
       </div>
 
       <div class="service-card reveal">
         <div class="sc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
-        <div class="sc-name">Security Cameras &amp; Doorbells</div>
-        <div class="sc-desc">Ring, Blink, Wyze, Eufy — mounted securely, connected to your Wi-Fi, configured with motion alerts and app access from day one.</div>
-        <div class="sc-price">From $69 per device</div>
-        <div class="sc-cta" aria-hidden="true">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
+        <div class="sc-name">Digital Marketing</div>
+        <div class="sc-desc">Google Ads management, social media strategy, email campaigns, and lead generation — all tailored to your business and measured against results.</div>
       </div>
 
       <div class="service-card reveal">
         <div class="sc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
-        <div class="sc-name">Computer Setup &amp; Cleanup</div>
-        <div class="sc-desc">New computer setup, virus removal, speed improvements, software installs, and data transfer. Windows and Mac both covered.</div>
-        <div class="sc-price">From $79</div>
-        <div class="sc-cta" aria-hidden="true">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
+        <div class="sc-name">Custom Solutions</div>
+        <div class="sc-desc">API integrations, workflow automation, internal tools, and bespoke software. If your business has a unique problem, we build the solution.</div>
       </div>
-
-<div class="service-card reveal">
-  <div class="sc-icon">
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-  </div>
-  <div class="sc-name">Printer Setup &amp; Troubleshooting</div>
-  <div class="sc-desc">HP, Epson, Brother, Canon — wireless setup, driver installs, ink and connection issues fixed. Working from your phone, computer, or both.</div>
-  <div class="sc-price">From $59</div>
-  <div class="sc-cta" aria-hidden="true">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </div>
-</div>
-      
-<div class="service-card reveal">
-  <div class="sc-icon">
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-  </div>
-  <div class="sc-name">Website Design</div>
-  <div class="sc-desc">Hand-coded sites built from scratch. No Wix, no templates, no monthly builder fees. You own it outright.</div>
-  <div class="sc-price">From $150</div>
-  <a href="/webdesign/" class="sc-cta" aria-label="Learn more about Website Design">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </a>
-</div>
 
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="section" id="how" aria-labelledby="how-heading">
+<section class="section section-surface" id="how" aria-labelledby="how-heading">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-label"><div class="section-label-line"></div>Simple Process</div>
-      <h2 class="section-title" id="how-heading">How It Works</h2>
-      <p class="section-desc">Four easy steps from first contact to job done. No tech knowledge needed on your end.</p>
+      <div class="section-label"><div class="section-label-line"></div>Our Process</div>
+      <h2 class="section-title" id="how-heading">How We Work</h2>
+      <p class="section-desc">A clear, structured process from first conversation to ongoing support.</p>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="step-num">01</div>
-        <div class="step-title">Reach Out</div>
-        <div class="step-desc">Book directly on our website. Tell us what's going on — we do not judge nor jabber.</div>
+        <div class="step-title">Discovery</div>
+        <div class="step-desc">Tell us about your business, your goals, and what's not working. We listen first, then ask the right questions.</div>
         <div class="step-arrow" aria-hidden="true">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
       </div>
       <div class="step reveal">
         <div class="step-num">02</div>
-        <div class="step-title">Get a Quote</div>
-        <div class="step-desc">We'll confirm the flat rate before we show up. You will know exactly what to pay. No hidden fees.</div>
+        <div class="step-title">Proposal</div>
+        <div class="step-desc">We deliver a clear plan with defined deliverables, timeline, and pricing. You know exactly what you're getting before we start.</div>
         <div class="step-arrow" aria-hidden="true">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
       </div>
       <div class="step reveal">
         <div class="step-num">03</div>
-        <div class="step-title">We Come to You</div>
-        <div class="step-desc">We travel to your home or business anywhere within 35 miles of Cohoes. Usually same or next day.</div>
+        <div class="step-title">Build &amp; Iterate</div>
+        <div class="step-desc">We build, you review, we refine. Revisions are part of the process — not an add-on or an afterthought.</div>
         <div class="step-arrow" aria-hidden="true">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
       </div>
       <div class="step reveal">
         <div class="step-num">04</div>
-        <div class="step-title">Job Done, Pay On-Site</div>
-        <div class="step-desc">We finish the job, walk you through what we did, and collect payment on the spot.</div>
+        <div class="step-title">Launch &amp; Support</div>
+        <div class="step-desc">We launch your project and offer ongoing retainers to keep everything running, updated, and growing.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICE AREA -->
-<section class="section section-surface" id="area" aria-labelledby="area-heading">
-  <div class="container">
-    <div class="area-inner">
-      <div>
-        <div class="section-header reveal">
-          <div class="section-label"><div class="section-label-line"></div>Where We Work</div>
-          <h2 class="section-title" id="area-heading">Capital Region Coverage</h2>
-          <p class="section-desc">Based in Cohoes, NY. We serve homes and small businesses within 35 miles — covering most of the Capital Region.</p>
-        </div>
-        <div class="area-towns reveal">
-          <span class="area-town">Cohoes</span>
-          <span class="area-town">Troy</span>
-          <span class="area-town">Latham</span>
-          <span class="area-town">Watervliet</span>
-          <span class="area-town">Green Island</span>
-          <span class="area-town">Albany</span>
-          <span class="area-town">Colonie</span>
-          <span class="area-town">Schenectady</span>
-          <span class="area-town">Clifton Park</span>
-          <span class="area-town">Saratoga Springs</span>
-        </div>
-        <div style="margin-top:2rem;" class="reveal">
-          <p style="font-size:0.9rem;color:var(--off);">Not sure if we cover your area? <a href="mailto:connor@tekpair.com?subject=Tekpair%20Coverage%20Inquiry" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:500;">Email us</a> — we'll let you know.</p>
-        </div>
-      </div>
-      <div class="area-visual reveal" id="map-container" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193000!2d-73.8!3d42.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89de0b4231e77cf7%3A0xaf27f1c29eddeb21!2sCohoes%2C%20NY!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus">
-        <div id="map-placeholder" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--card);">
-          <svg width="32" height="32" fill="none" stroke="var(--border-md)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY NOT THE BIG GUYS -->
-<section class="section" id="compare" aria-labelledby="compare-heading">
+<!-- WHY TEKPAIR -->
+<section class="section" id="why" aria-labelledby="why-heading">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-label"><div class="section-label-line"></div>The Difference</div>
-      <h2 class="section-title" id="compare-heading">Why not the big guys?</h2>
-      <p class="section-desc">Big box store tech services exist. So why do people keep choosing us instead?</p>
+      <h2 class="section-title" id="why-heading">Why businesses choose Tekpair</h2>
+      <p class="section-desc">We're not an agency. We're builders who work directly with you.</p>
     </div>
     <div class="why-grid reveal">
       <div class="why-card">
@@ -1046,8 +694,8 @@
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <div>
-          <div class="why-title">They charge $100–$200+ per visit</div>
-          <div class="why-desc">And that's before the mandatory membership fees. Our flat rates start at $49 — you know exactly what you're paying before we show up.</div>
+          <div class="why-title">Agencies charge $10k+ for the same work</div>
+          <div class="why-desc">We deliver the same quality without the overhead. No bloated teams, no account managers taking a cut — just skilled people getting it done.</div>
         </div>
       </div>
       <div class="why-card">
@@ -1055,17 +703,17 @@
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div>
-          <div class="why-title">You never know who's showing up</div>
-          <div class="why-desc">Big services send whoever's available. With Tekpair, it's Connor and Kamryn — every time. Same faces, same accountability.</div>
+          <div class="why-title">You work directly with us</div>
+          <div class="why-desc">No project coordinators, no handoffs. The people building your project are the people you talk to. That means faster turnarounds and fewer miscommunications.</div>
         </div>
       </div>
       <div class="why-card">
         <div class="why-icon">
-          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <div>
-          <div class="why-title">They book weeks out</div>
-          <div class="why-desc">National chains have long waitlists and rigid scheduling. We're local — most jobs happen same day or next day.</div>
+          <div class="why-title">Everything is hand-coded</div>
+          <div class="why-desc">No WordPress, no Squarespace, no templates. Every line of code is written for your business. You own the code, you own the design — no monthly platform fees.</div>
         </div>
       </div>
       <div class="why-card">
@@ -1073,383 +721,126 @@
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div>
-          <div class="why-title">Good luck reaching a real person</div>
-          <div class="why-desc">Call centers, ticket queues, automated replies. Message Tekpair and you're talking directly to us — no middleman, no runaround.</div>
+          <div class="why-title">We actually respond</div>
+          <div class="why-desc">Direct email, direct phone. No ticket systems, no chatbots, no auto-replies. When you reach out, you get a real answer from a real person — fast.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ESTIMATOR -->
-<section class="section section-surface" id="estimator" aria-labelledby="estimator-heading">
+<!-- CONTACT -->
+<section class="section section-surface" id="contact" aria-labelledby="contact-heading">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-label"><div class="section-label-line"></div>Pricing</div>
-      <h2 class="section-title" id="estimator-heading">What will my visit cost?</h2>
-      <p class="section-desc">Check everything you need. Your estimate updates in real time.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 280px;gap:2rem;align-items:start;" class="est-outer reveal">
-
-<!-- SERVICE CHECKBOXES -->
-      <div>
-        <details class="est-group" open>
-          <summary class="est-group-label">Wi-Fi &amp; Network</summary>
-          <div class="est-items">
-            <div class="est-item" data-price="75" data-name="Basic Router Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Basic Router Setup</div><div class="est-sub">Install and configure a single router</div></div><div class="est-price">$75</div></div>
-            <div class="est-item" data-price="89" data-name="Modem + Router Combo"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Modem + Router Combo Setup</div><div class="est-sub">Full setup of both modem and router</div></div><div class="est-price">$89</div></div>
-            <div class="est-item" data-price="75" data-name="Wi-Fi Troubleshooting"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Wi-Fi Troubleshooting &amp; Optimization</div><div class="est-sub">Diagnose slow speeds, drops, or dead zones</div></div><div class="est-price">$75</div></div>
-            <div class="est-item" data-price="65" data-name="Wi-Fi Extender Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Wi-Fi Extender / Booster Setup</div><div class="est-sub">Install and configure a range extender</div></div><div class="est-price">$65</div></div>
-            <div class="est-item" data-price="120" data-name="Mesh Network Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Mesh Network Setup (2–3 nodes)</div><div class="est-sub">Full mesh system with placement strategy</div></div><div class="est-price">$120</div></div>
-          </div>
-        </details>
-        <details class="est-group">
-          <summary class="est-group-label">Smart Home Devices</summary>
-          <div class="est-items">
-            <div class="est-item" data-price="49" data-name="Smart Bulb Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart Bulb Setup (up to 4)</div><div class="est-sub">Pair bulbs to app or voice assistant</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="49" data-name="Smart Plug Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart Plug Setup (up to 4)</div><div class="est-sub">Configure schedules and voice control</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="89" data-name="Smart Thermostat Installation"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart Thermostat Installation</div><div class="est-sub">Remove old, install new, configure app</div></div><div class="est-price">$89</div></div>
-            <div class="est-item" data-price="49" data-name="Alexa / Echo Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Alexa / Echo Device Setup</div><div class="est-sub">Connect to Wi-Fi, link Amazon account</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="49" data-name="Google Home / Nest Hub Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Google Home / Nest Hub Setup</div><div class="est-sub">Link accounts, connect devices, routines</div></div><div class="est-price">$49</div></div>
-          </div>
-        </details>
-        <details class="est-group">
-          <summary class="est-group-label">Smart TV &amp; Streaming</summary>
-          <div class="est-items">
-            <div class="est-item" data-price="49" data-name="Smart TV Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Smart TV Initial Setup</div><div class="est-sub">Wi-Fi, streaming accounts, apps, walkthrough</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="49" data-name="Streaming Device Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Streaming Device Setup</div><div class="est-sub">Fire Stick, Roku, Apple TV, or Chromecast</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="75" data-name="Cord-Cutting Consultation"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Cord-Cutting Consultation &amp; Setup</div><div class="est-sub">Review cable bill, recommend and set up replacement</div></div><div class="est-price">$75</div></div>
-          </div>
-        </details>
-        <details class="est-group">
-          <summary class="est-group-label">Security Cameras &amp; Doorbells</summary>
-          <div class="est-items">
-            <div class="est-item" data-price="69" data-name="Single Camera Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Single Camera Setup</div><div class="est-sub">Mount, connect, configure alerts and app</div></div><div class="est-price">$69</div></div>
-            <div class="est-item" data-price="110" data-name="2-Camera System"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">2-Camera System</div><div class="est-sub">Full setup, mounting, app configuration</div></div><div class="est-price">$110</div></div>
-            <div class="est-item" data-price="149" data-name="3-Camera System"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">3-Camera System</div><div class="est-sub">Front, back, and side coverage</div></div><div class="est-price">$149</div></div>
-            <div class="est-item" data-price="69" data-name="Video Doorbell Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Video Doorbell Setup</div><div class="est-sub">Ring, Nest, or Eufy — full configuration</div></div><div class="est-price">$69</div></div>
-          </div>
-        </details>
-        <details class="est-group">
-          <summary class="est-group-label">Computer Setup &amp; Cleanup</summary>
-          <div class="est-items">
-            <div class="est-item" data-price="79" data-name="New Computer Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">New Computer Setup</div><div class="est-sub">Unbox, configure, Wi-Fi, account, updates</div></div><div class="est-price">$79</div></div>
-            <div class="est-item" data-price="79" data-name="Computer Tune-Up"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Computer Tune-Up &amp; Speed Optimization</div><div class="est-sub">Clean up startup, junk files, update drivers</div></div><div class="est-price">$79</div></div>
-            <div class="est-item" data-price="89" data-name="Data Transfer"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Data Transfer (old to new computer)</div><div class="est-sub">Move files, photos, documents, browser data</div></div><div class="est-price">$89</div></div>
-            <div class="est-item" data-price="59" data-name="Printer Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Printer Setup &amp; Driver Install</div><div class="est-sub">Connect, install drivers, test print</div></div><div class="est-price">$59</div></div>
-            <div class="est-item" data-price="59" data-name="Printer Troubleshooting & Repair"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Printer Troubleshooting &amp; Repair</div><div class="est-sub">Blank pages, poor quality, clogged printheads, cartridge errors — diagnosed and fixed</div></div><div class="est-price">$59</div></div>
-            <div class="est-item" data-price="59" data-name="Software Installation"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Software Installation</div><div class="est-sub">Install and configure up to 5 programs</div></div><div class="est-price">$59</div></div>
-            <div class="est-item" data-price="49" data-name="Email Account Setup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Email Account Setup</div><div class="est-sub">Gmail, Outlook, Yahoo — includes contacts sync</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="49" data-name="Password Reset"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Password Reset &amp; Account Recovery</div><div class="est-sub">Windows, Mac, Google, or Microsoft accounts</div></div><div class="est-price">$49</div></div>
-            <div class="est-item" data-price="79" data-name="Hard Drive Backup"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Hard Drive Backup</div><div class="est-sub">Back up files to external drive or cloud</div></div><div class="est-price">$79</div></div>
-          </div>
-        </details>
-        <details class="est-group">
-          <summary class="est-group-label">Extras</summary>
-          <div class="est-items">
-            <div class="est-item" data-price="50" data-name="Out-of-Area Travel Fee (35–50 mi)"><div class="est-cb"><svg width="10" height="10" fill="none" stroke="#0e1117" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="est-info"><div class="est-name">Out-of-Area Travel Fee</div><div class="est-sub">For locations 35–50 miles from Cohoes — added at our discretion</div></div><div class="est-price">$50</div></div>
-          </div>
-        </details>
-      </div>
-
-      <!-- SIDEBAR -->
-      <div style="position:sticky;top:5.5rem;display:flex;flex-direction:column;gap:1rem;">
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-          <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);background:var(--surface);">
-            <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:0.9rem;color:var(--white);">Your Estimate</div>
-          </div>
-          <div id="est-selected" style="padding:0.75rem 1.2rem;min-height:60px;display:flex;flex-direction:column;gap:0.35rem;border-bottom:1px solid var(--border);">
-            <div id="est-empty" style="font-size:0.8rem;color:var(--muted);font-style:italic;padding:0.3rem 0;">No services selected yet.</div>
-          </div>
-          <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);">
-            <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">Estimated Total</div>
-            <div id="est-total" style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.6rem;color:var(--cyan);line-height:1;">$0</div>
-            <div style="font-size:0.7rem;color:var(--muted);margin-top:0.3rem;">Starting rate</div>
-          </div>
-          <div id="est-discount" style="display:none;padding:0.6rem 1rem;background:rgba(52,199,111,0.1);border-top:1px solid rgba(52,199,111,0.15);">
-            <div id="est-discount-msg" style="font-size:0.76rem;color:#34c76f;"></div>
-          </div>
-          <div style="padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.6rem;">
-            <a href="#booking" style="display:flex;align-items:center;justify-content:center;gap:0.45rem;background:var(--cyan);color:#0e1117;font-size:0.86rem;font-weight:600;padding:0.7rem 1.2rem;border-radius:8px;text-decoration:none;">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Book a Job
-            </a>
-            <a href="mailto:connor@tekpair.com?subject=Tekpair%20Estimate%20Inquiry" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:0.45rem;background:transparent;color:var(--off);font-size:0.86rem;font-weight:500;padding:0.7rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border-md);">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              Email Us
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING -->
-<section class="section" id="booking" aria-labelledby="booking-heading">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label"><div class="section-label-line"></div>Schedule a Job</div>
-      <h2 class="section-title" id="booking-heading">Book Your Appointment</h2>
-      <p class="section-desc">Choose how you'd like to work with us, fill out the form, and we'll confirm within 24 hours.</p>
+      <div class="section-label"><div class="section-label-line"></div>Get Started</div>
+      <h2 class="section-title" id="contact-heading">Tell us about your project</h2>
+      <p class="section-desc">Fill out the form below and we'll get back to you within one business day with a plan.</p>
     </div>
 
-    <!-- STEP 1: TYPE SELECTOR -->
-    <div id="booking-selector" class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:600px;margin-bottom:2.5rem;">
-      <button onclick="showBookingForm('inhome')" class="booking-type-btn" id="btn-inhome">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <div class="booking-type-label">In-Home Visit</div>
-        <div class="booking-type-sub">We come to you — same or next day</div>
-      </button>
-      <button onclick="showBookingForm('remote')" class="booking-type-btn" id="btn-remote">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        <div class="booking-type-label">Remote Session</div>
-        <div class="booking-type-sub">Screen share support — 15 to 30 min</div>
-      </button>
-    </div>
-
-    <!-- IN-HOME FORM -->
-    <div id="form-inhome" style="display:none;" class="reveal">
+    <div class="reveal">
       <div class="form-card">
-        <div style="padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-          <div>
-            <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);">In-Home Visit Request</div>
-            <div style="font-size:0.78rem;color:var(--muted);margin-top:0.15rem;">We'll confirm your appointment within 24 hours.</div>
-          </div>
-          <button onclick="resetBookingForm()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.82rem;display:flex;align-items:center;gap:0.3rem;transition:color 0.18s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--muted)'">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            Change
-          </button>
+        <div style="padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);">
+          <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);">Project Inquiry</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.15rem;">We'll respond within one business day.</div>
         </div>
 
-        <!-- POLICIES -->
-<details class="form-policies">
-  <summary class="form-policies-summary">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-    <strong>Policies</strong> &mdash; tap to review before booking
-    <svg class="policy-chevron" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-  </summary>
-  <div class="form-policies-body">
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span><strong>Payment:</strong> Due on-site when complete. Card, cash, Zelle, Cash App, or Apple Pay.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span><strong>Cancellations:</strong> Same-day $15. No-shows without contact $25.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Service area:</strong> Within 35 mi of Cohoes. A travel fee may apply beyond that.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span><strong>Adult present:</strong> Someone 18 or older must be home during the visit.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span><strong>ISP issues:</strong> Not liable for problems caused by your internet or cable provider.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span><strong>Pre-existing damage:</strong> Not responsible for pre-existing hardware or software issues.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span><strong>Photos:</strong> We may photograph setups for marketing. Personal info is always blurred.</span></div>
-  </div>
-</details>
+        <form id="contact-form" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
+          <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
 
-<form id="form-inhome-submit" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
-  <input type="hidden" name="Type" value="In-Home Visit"/>
-  <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
-    <div class="form-group">
-      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>First Name *</label>
-      <input type="text" name="First Name" required class="form-input" placeholder="Jane"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Last Name *</label>
-      <input type="text" name="Last Name" required class="form-input" placeholder="Smith"/>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
-    <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
-    <div class="form-email-error" style="display:none;"></div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Phone Number *</label>
-    <input type="tel" name="Phone" required class="form-input" placeholder="(518) 000-0000"/>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Home Address *</label>
-    <input type="text" name="Address" required class="form-input" placeholder="123 Main St, Troy, NY 12180"/>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Service Needed *</label>
-    <select name="Service" required class="form-input">
-      <option value="" disabled selected>Select a service…</option>
-      <option>Wi-Fi &amp; Network</option>
-      <option>Smart Home Devices (Alexa, Google Home, etc.)</option>
-      <option>Smart TV or Streaming</option>
-      <option>Security Camera / Doorbells</option>
-      <option>Computer Setup or Cleanup</option>
-      <option>Printer Troubleshooting &amp; Repair</option>
-      <option>Other</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefly describe the issue *</label>
-    <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My Wi-Fi keeps dropping in the back of the house…" style="resize:vertical;"></textarea>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;" class="form-date-row">
-    <div class="form-group">
-      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Preferred Date *</label>
-      <div class="date-select-row">
-        <select class="form-input date-month" required aria-label="Month"><option value="" disabled selected>Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
-        <select class="form-input date-day" required aria-label="Day"><option value="" disabled selected>Day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
-        <select class="form-input date-year" required aria-label="Year"><option value="" disabled selected>Year</option><option>2026</option><option>2027</option></select>
-        <input type="hidden" name="Preferred Date"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Preferred Time *</label>
-      <select name="Preferred Time" required class="form-input">
-        <option value="" disabled selected>Select a time…</option>
-        <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Preferred Payment Method *</label>
-    <select name="Payment Method" required class="form-input">
-      <option value="" disabled selected>Select a method…</option>
-      <option>Cash</option><option>Card</option><option>Zelle</option><option>Cash App</option><option>Apple Pay</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>How did you hear about us?</label>
-    <select name="Referral Source" class="form-input">
-      <option value="" disabled selected>Select one…</option>
-      <option>Facebook</option><option>Word of Mouth</option><option>Instagram</option><option>Nextdoor</option><option>Google Search</option><option>Sweet Elevation Bakery</option><option>Other</option>
-    </select>
-  </div>
-
-  <button type="submit" class="form-submit">
-    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    Schedule
-  </button>
-</form>
-      </div>
-    </div>
-
-    <!-- REMOTE FORM -->
-    <div id="form-remote" style="display:none;" class="reveal">
-      <div class="form-card">
-        <div style="padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-          <div>
-            <div style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1rem;color:var(--white);">Remote Session Request</div>
-            <div style="font-size:0.78rem;color:var(--muted);margin-top:0.15rem;">We'll email you a payment link and meeting link to confirm.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
+            <div class="form-group">
+              <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>First Name *</label>
+              <input type="text" name="First Name" required class="form-input" placeholder="Jane"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Last Name *</label>
+              <input type="text" name="Last Name" required class="form-input" placeholder="Smith"/>
+            </div>
           </div>
-          <button onclick="resetBookingForm()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.82rem;display:flex;align-items:center;gap:0.3rem;transition:color 0.18s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--muted)'">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            Change
+
+          <div class="form-group">
+            <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
+            <input type="email" name="Email" required class="form-input" placeholder="jane@company.com"/>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;min-width:0;">
+            <div class="form-group">
+              <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Phone</label>
+              <input type="tel" name="Phone" class="form-input" placeholder="(518) 000-0000"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>Business Name</label>
+              <input type="text" name="Address" class="form-input" placeholder="Acme Corp"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Service Interested In *</label>
+            <select name="Service" required class="form-input">
+              <option value="" disabled selected>Select a service…</option>
+              <option>Web Development &amp; Design</option>
+              <option>SEO Optimization</option>
+              <option>Business Analytics</option>
+              <option>Monthly IT Retainer</option>
+              <option>Digital Marketing</option>
+              <option>Custom Solution</option>
+              <option>Not Sure Yet</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Tell us about your project *</label>
+            <textarea name="Issue Description" required class="form-input" rows="4" placeholder="What are you looking to build, fix, or improve? Any timeline or budget in mind?" style="resize:vertical;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>How did you hear about us?</label>
+            <select name="Referral Source" class="form-input">
+              <option value="" disabled selected>Select one…</option>
+              <option>Google Search</option>
+              <option>Referral</option>
+              <option>Social Media</option>
+              <option>Existing Client</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="form-submit">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Inquiry
           </button>
-        </div>
-
-        <!-- POLICIES -->
-<details class="form-policies">
-  <summary class="form-policies-summary">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-    <strong>Policies</strong> &mdash; tap to review before booking
-    <svg class="policy-chevron" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-  </summary>
-  <div class="form-policies-body">
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span><strong>Payment:</strong> Paid in full before the session starts. Session is cancelled if payment isn't received in time.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span><strong>Session length:</strong> 15–30 minutes with a hard 30-minute cutoff. Additional time requires a new session.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span><strong>Connection method:</strong> Video call only via Zoom. No remote desktop control.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span><strong>Passwords:</strong> You type any sensitive info yourself. We guide you — never ask for your credentials.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><strong>Requirements:</strong> Working internet, a smartphone or webcam, and the device you need help with.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span><strong>No refunds:</strong> Once a session begins, the payment is non-refundable.</span></div>
-    <div class="fp-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Cancellations:</strong> Full refund if you cancel 2+ hours before your session.</span></div>
-  </div>
-</details>
-
-<form id="form-remote-submit" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;">
-  <input type="hidden" name="Type" value="Remote Session"/>
-  <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off"/>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Full Name *</label>
-    <input type="text" name="Full Name" required class="form-input" placeholder="Jane Smith"/>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Address *</label>
-    <input type="email" name="Email" required class="form-input" placeholder="jane@example.com"/>
-    <div class="form-email-error" style="display:none;"></div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Briefly describe the issue *</label>
-    <textarea name="Issue Description" required class="form-input" rows="3" placeholder="My computer is running slow and keeps freezing…" style="resize:vertical;"></textarea>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="form-date-row">
-    <div class="form-group">
-      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Preferred Date *</label>
-      <div class="date-select-row">
-        <select class="form-input date-month" required aria-label="Month"><option value="" disabled selected>Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
-        <select class="form-input date-day" required aria-label="Day"><option value="" disabled selected>Day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
-        <select class="form-input date-year" required aria-label="Year"><option value="" disabled selected>Year</option><option>2026</option><option>2027</option></select>
-        <input type="hidden" name="Preferred Date"/>
+        </form>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Preferred Time *</label>
-      <select name="Preferred Time" required class="form-input">
-        <option value="" disabled selected>Select a time…</option>
-        <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
-      </select>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label class="form-label"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>How did you hear about us?</label>
-    <select name="Referral Source" class="form-input">
-      <option value="" disabled selected>Select one…</option>
-      <option>Facebook</option><option>Word of Mouth</option><option>Instagram</option><option>Nextdoor</option><option>Google Search</option><option>Sweet Elevation Bakery</option><option>Other</option>
-    </select>
-  </div>
-
-  <button type="submit" class="form-submit">
-    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    Schedule
-  </button>
-</form>
-      </div>
-    </div>
-
-    <div class="reveal" style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
-      <a href="mailto:connor@tekpair.com?subject=Tech%20Visit%20Inquiry" target="_blank" rel="noopener" class="btn-outline">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Prefer to email us instead?
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PAYMENT -->
-<section class="section section-surface" id="payment" aria-labelledby="payment-heading">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label"><div class="section-label-line"></div>How to Pay</div>
-      <h2 class="section-title" id="payment-heading">Accepted Payment Methods</h2>
-    </div>
-    <div class="reveal" style="margin-top:1rem;padding:1.2rem 1.6rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);font-size:0.95rem;color:var(--off);line-height:1.7;">
-      We currently accept <strong style="color:var(--white);">Cash</strong>, <strong style="color:var(--white);">Card</strong>, <strong style="color:var(--white);">Zelle</strong>, <strong style="color:var(--white);">Cash App</strong>, and <strong style="color:var(--white);">Apple Pay</strong>.
-    </div>
-    <div class="pay-note-box reveal">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <div>
-        <strong style="color:var(--white);display:block;margin-bottom:0.2rem;">How payment works</strong>
-        For in-home and on-site visits, payment is due when the job is complete — no invoices, no delayed payments. For remote sessions, we send you a Square payment link before your appointment. No payment is collected through this website. Need to cancel? Please give us 24 hours notice. See our <a href="/policies/" style="color:var(--cyan);text-decoration:none;font-weight:500;">full policies</a> for more details.
+      <div style="margin-top:1.5rem;">
+        <a href="mailto:connor@tekpair.com?subject=Business%20Inquiry" target="_blank" rel="noopener" class="btn-outline">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Prefer to email us directly?
+        </a>
       </div>
     </div>
   </div>
 </section>
 </main>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-box reveal">
+    <h2 class="section-title">Ready to get started?</h2>
+    <p>Whether you need a new website, better search rankings, or ongoing IT support — we're here to help your business grow.</p>
+    <div class="cta-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Get in Touch
+      </a>
+      <a href="mailto:connor@tekpair.com?subject=Business%20Inquiry" class="btn-outline">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Us
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1458,7 +849,7 @@
       <div class="footer-brand-logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
       </div>
-      <p class="footer-brand-desc">Local tech setup and smart home services in the Capital Region, NY. We come to you — flat rates, fast response, no fuss.</p>
+      <p class="footer-brand-desc">Web development, SEO, analytics, and managed IT for businesses. Professional results, transparent pricing.</p>
       <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.2rem;">
         <a href="mailto:connor@tekpair.com" style="font-size:0.88rem;color:var(--off);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.18s;">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1481,43 +872,39 @@
     <div class="footer-col">
       <h3>Services</h3>
       <ul>
-        <li><a href="/#services">Wi-Fi &amp; Network</a></li>
-        <li><a href="/#services">Smart Home</a></li>
-        <li><a href="/#services">Smart TV &amp; Streaming</a></li>
-        <li><a href="/#services">Security Cameras</a></li>
-        <li><a href="/#services">Computer Setup</a></li>
-        <li><a href="/webdesign/">Website Design</a></li>
+        <li><a href="/webdesign/">Web Development</a></li>
+        <li><a href="/#services">SEO Optimization</a></li>
+        <li><a href="/#services">Business Analytics</a></li>
+        <li><a href="/#services">IT Retainers</a></li>
+        <li><a href="/#services">Digital Marketing</a></li>
+        <li><a href="/#services">Custom Solutions</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h3>Company</h3>
       <ul>
-        <li><a href="/#booking">Book a Job</a></li>
-        <li><a href="/find-my-service/">Find My Service</a></li>
-        <li><a href="/#estimator">Pricing Estimator</a></li>
-        <li><a href="/#area">Service Area</a></li>
-        <li><a href="/#payment">Payment Options</a></li>
+        <li><a href="/#contact">Contact Us</a></li>
+        <li><a href="/#how">How We Work</a></li>
         <li><a href="/about/">About Us</a></li>
+        <li><a href="/faq/">FAQ</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h3>Resources</h3>
+      <h3>Legal</h3>
       <ul>
         <li><a href="/policies/">Policies &amp; Terms</a></li>
         <li><a href="/privacy/">Privacy Policy</a></li>
-        <li><a href="/faq/">Frequently Asked Questions</a></li>
-        <li><a href="/resources/">Resource Hub</a></li>
         <li><a href="mailto:connor@tekpair.com?subject=Tekpair%20Business%20Inquiry">Business Inquiries</a></li>
       </ul>
     </div>
   </div>
-<div class="footer-bottom">
-    <span>© 2026 Tekpair · Cohoes, NY · Capital Region</span>
-    <span><a href="/policies/">Policies &amp; Terms</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy Policy</a></span>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Tekpair &middot; Cohoes, NY</span>
+    <span><a href="/policies/">Policies &amp; Terms</a> &nbsp;&middot;&nbsp; <a href="/privacy/">Privacy Policy</a></span>
   </div>
 </footer>
 
-<!-- Google tag (gtag.js) — loaded after first paint -->
+<!-- Analytics -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -1543,28 +930,6 @@
 </script>
 <script>
 setTimeout(function() {
-  // Promo banner — position nav below it, adjust hero offset
-  const banner = document.getElementById('promo-banner');
-  const bannerClose = document.getElementById('promo-close');
-  const navEl = document.querySelector('nav');
-  const heroEl = document.querySelector('.hero');
-
-  function applyBannerOffset() {
-    const bh = banner.offsetHeight;
-    navEl.style.top = bh + 'px';
-    if (heroEl) heroEl.style.paddingTop = (bh + 80) + 'px';
-  }
-
-  if (banner && bannerClose) {
-    applyBannerOffset();
-    window.addEventListener('resize', applyBannerOffset);
-    bannerClose.addEventListener('click', () => {
-      banner.style.display = 'none';
-      navEl.style.top = '0';
-      if (heroEl) heroEl.style.paddingTop = '';
-    });
-  }
-
   // Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -1573,7 +938,6 @@ setTimeout(function() {
     toggle.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open);
   });
-  // Close mobile menu when a link is clicked
   mobileMenu.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
@@ -1594,7 +958,7 @@ setTimeout(function() {
   }, { threshold: 0.09 });
   revealEls.forEach(el => revealObs.observe(el));
 
-  // Active nav link highlight — cache offsetTop to avoid forced reflow on scroll
+  // Active nav link highlight
   const sections = document.querySelectorAll('section[id], div[id]');
   const navAs = document.querySelectorAll('.nav-links a');
   let sectionOffsets = [];
@@ -1614,383 +978,80 @@ setTimeout(function() {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
 
-// Estimator
-const estItems = document.querySelectorAll('.est-item');
-const estTotal = document.getElementById('est-total');
-const estSelected = document.getElementById('est-selected');
-const estEmpty = document.getElementById('est-empty');
-const estDiscountBanner = document.getElementById('est-discount');
-const estDiscountMsg = document.getElementById('est-discount-msg');
-
-function calcEstimator() {
-  let subtotal = 0, travelFee = 0, count = 0;
-  estSelected.querySelectorAll('.est-line').forEach(el => el.remove());
-
-  estItems.forEach(i => {
-    if (i.classList.contains('checked')) {
-      const price = parseInt(i.dataset.price);
-      const name = i.dataset.name;
-      if (name.includes('Out-of-Area')) {
-        travelFee += price;
-      } else {
-        subtotal += price;
-        count++;
-      }
-      const div = document.createElement('div');
-      div.className = 'est-line';
-      div.innerHTML = `<span class="est-line-name">${name}</span><span class="est-line-price">$${price}</span>`;
-      estSelected.appendChild(div);
-    }
-  });
-
-  estEmpty.style.display = (count === 0 && travelFee === 0) ? 'block' : 'none';
-  estTotal.textContent = '$' + (subtotal + travelFee).toLocaleString();
-
-  let msg = '';
-  if (subtotal >= 150) {
-    msg = '✓ Multi-service discount applied — 10% off (cannot combine with other offers)';
-    const discounted = Math.round(subtotal * 0.9) + travelFee;
-    estTotal.innerHTML = `<span style="text-decoration:line-through;opacity:0.4;font-size:1.1rem;margin-right:0.3rem;">$${subtotal + travelFee}</span>$${discounted}`;
-  } else if (count >= 2) {
-    msg = '✓ Multi-service visit — 10% discount unlocks at $150+';
-  }
-
-  estDiscountBanner.style.display = msg ? 'block' : 'none';
-  if (msg) estDiscountMsg.textContent = msg;
-}
-
-estItems.forEach(item => {
-  item.addEventListener('click', () => {
-    item.classList.toggle('checked');
-    calcEstimator();
-  });
-});
-
-// Set min date to today dynamically and enforce rate limit
-  function setMinDates() {
-    const today = new Date().toISOString().split('T')[0];
-    const inhomeDate = document.getElementById('inhome-date');
-    const remoteDate = document.getElementById('remote-date');
-    if (inhomeDate) inhomeDate.min = today;
-    if (remoteDate) remoteDate.min = today;
-  }
-  setMinDates();
-
-  function validateApptDate(dateStr) {
-    const d = new Date(dateStr);
-    if (!dateStr || isNaN(d.getTime())) return 'Please select a valid date.';
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
-    if (d < today) return 'Appointment date cannot be in the past.';
-    if (d > maxDate) return 'Appointments can only be booked up to 2 months in advance.';
-    return null;
-  }
-
-  // Constrain the month/day/year selects so only valid dates are selectable
-  function constrainDateSelects() {
-    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const today = new Date(); today.setHours(0,0,0,0);
-    const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
-
-    document.querySelectorAll('.date-select-row').forEach(function(row) {
-      var monthSel = row.querySelector('.date-month');
-      var daySel   = row.querySelector('.date-day');
-      var yearSel  = row.querySelector('.date-year');
-      var hidden   = row.querySelector('input[type="hidden"]');
-      if (!monthSel || !daySel || !yearSel) return;
-
-      function fillYears() {
-        yearSel.innerHTML = '<option value="" disabled selected>Year</option>';
-        var y = today.getFullYear();
-        while (new Date(y, 0, 1) <= maxDate) {
-          var o = document.createElement('option');
-          o.value = o.textContent = y++; yearSel.appendChild(o);
-        }
-      }
-
-      function fillMonths() {
-        var prev = monthSel.value;
-        var y = parseInt(yearSel.value) || today.getFullYear();
-        monthSel.innerHTML = '<option value="" disabled selected>Month</option>';
-        MONTHS.forEach(function(m, i) {
-          var first = new Date(y, i, 1); var last = new Date(y, i + 1, 0);
-          if (last < today || first > maxDate) return;
-          var o = document.createElement('option');
-          o.value = o.textContent = m; monthSel.appendChild(o);
-        });
-        if ([].some.call(monthSel.options, function(o){ return o.value === prev; })) monthSel.value = prev;
-        fillDays();
-      }
-
-      function fillDays() {
-        var prev = daySel.value;
-        var y = parseInt(yearSel.value) || today.getFullYear();
-        var mi = MONTHS.indexOf(monthSel.value);
-        daySel.innerHTML = '<option value="" disabled selected>Day</option>';
-        if (mi < 0) { if (hidden) hidden.value = ''; return; }
-        var daysInMonth = new Date(y, mi + 1, 0).getDate();
-        for (var d = 1; d <= daysInMonth; d++) {
-          var date = new Date(y, mi, d);
-          if (date < today || date > maxDate) continue;
-          var o = document.createElement('option');
-          o.value = o.textContent = d; daySel.appendChild(o);
-        }
-        if ([].some.call(daySel.options, function(o){ return o.value == prev; })) daySel.value = prev;
-        else daySel.selectedIndex = 0;
-        if (hidden) {
-          var m = monthSel.value; var dv = daySel.value;
-          hidden.value = (m && dv && y && !isNaN(parseInt(dv))) ? m + ' ' + dv + ', ' + y : '';
-        }
-      }
-
-      yearSel.addEventListener('change', fillMonths);
-      monthSel.addEventListener('change', fillDays);
-      fillYears(); fillMonths();
-    });
-  }
-  constrainDateSelects();
-
-// Supabase + form submission
+  // Contact form submission via Supabase
   const { createClient } = supabase;
   const sb = createClient('https://lfsuntijzbdoswbremaw.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4');
 
-  // Pre-fill form if user is logged in
-  (async function() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) return;
-    const uid = session.user.id;
-    const { data: profile } = await sb.from('profiles').select('*').eq('id', uid).single();
-    const email = session.user.email || '';
-    if (profile) {
-      const fn = profile.first_name || '';
-      const ln = profile.last_name || '';
-      const ph = profile.phone || '';
-      const addr = profile.address || '';
-      // in-home form
-      const ihFn = document.querySelector('#form-inhome-submit input[name="First Name"]');
-      const ihLn = document.querySelector('#form-inhome-submit input[name="Last Name"]');
-      const ihEmail = document.querySelector('#form-inhome-submit input[name="Email"]');
-      const ihPhone = document.querySelector('#form-inhome-submit input[name="Phone"]');
-      const ihAddr = document.querySelector('#form-inhome-submit input[name="Address"]');
-      if (ihFn) ihFn.value = fn;
-      if (ihLn) ihLn.value = ln;
-      if (ihEmail) ihEmail.value = email;
-      if (ihPhone) ihPhone.value = ph;
-      if (ihAddr) ihAddr.value = addr;
-      // remote form
-      const rmName = document.querySelector('#form-remote-submit input[name="Full Name"]');
-      const rmEmail = document.querySelector('#form-remote-submit input[name="Email"]');
-      if (rmName) rmName.value = (fn + ' ' + ln).trim();
-      if (rmEmail) rmEmail.value = email;
-    }
-    // Update nav link — keep icon, add green dot indicator
-    const navLink = document.getElementById('nav-account-link');
-    if (navLink) {
-      navLink.style.color = 'var(--cyan)';
-      navLink.style.position = 'relative';
-      if (!navLink.querySelector('.nav-signed-in-dot')) {
-        const dot = document.createElement('span');
-        dot.className = 'nav-signed-in-dot';
-        dot.setAttribute('aria-hidden', 'true');
-        dot.style.cssText = 'position:absolute;top:3px;right:3px;width:7px;height:7px;background:#34c76f;border-radius:50%;border:2px solid #0d0f14;';
-        navLink.appendChild(dot);
-      }
-    }
-  })();
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-  document.querySelectorAll('#form-inhome-submit, #form-remote-submit').forEach(form => {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
+    const key = 'tkp_last_submit';
+    const now = Date.now();
+    const stored = JSON.parse(localStorage.getItem(key) || '[]');
+    const recent = stored.filter(t => now - t < 3600000);
+    if (recent.length >= 2) {
+      alert("You've submitted too many requests recently. Please wait before submitting again, or email us directly at connor@tekpair.com.");
+      return;
+    }
 
-      // Rate limit — max 2 submissions per hour
-      const key = 'tkp_last_submit';
-      const now = Date.now();
-      const stored = JSON.parse(localStorage.getItem(key) || '[]');
-      const recent = stored.filter(t => now - t < 3600000);
-      if (recent.length >= 2) {
-        alert("You've submitted too many requests recently. Please wait before submitting again, or email us directly at connor@tekpair.com.");
+    const submitBtn = form.querySelector('.form-submit');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending…';
+
+    try {
+      const formData = new FormData(form);
+      const bookingId = crypto.randomUUID();
+
+      const booking = {
+        id: bookingId,
+        type: 'inquiry',
+        first_name: formData.get('First Name') || '',
+        last_name: formData.get('Last Name') || '',
+        email: formData.get('Email') || '',
+        phone: formData.get('Phone') || null,
+        address: formData.get('Address') || null,
+        service: formData.get('Service') || null,
+        issue_description: formData.get('Issue Description') || '',
+        preferred_date: '',
+        preferred_time: '',
+        payment_method: null,
+        referral_source: formData.get('Referral Source') || null,
+        user_id: null,
+      };
+
+      const { error } = await sb.from('bookings').insert(booking);
+
+      if (error) {
+        alert('Sorry — there was an issue sending your request. Please try again or email connor@tekpair.com directly.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
         return;
       }
 
-      const submitBtn = form.querySelector('.form-submit');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending…';
+      recent.push(now);
+      localStorage.setItem(key, JSON.stringify(recent));
 
-      try {
-        const formData = new FormData(form);
-        const isInhome = form.id === 'form-inhome-submit';
-        const fullName = formData.get('Full Name') || '';
-        const nameParts = fullName.split(' ');
+      fetch('https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-booking-email', {
+        method: 'POST',
+        keepalive: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4'
+        },
+        body: JSON.stringify({ booking_id: bookingId, action: 'created' })
+      }).catch(console.error);
 
-        const { data: { session: _sess } } = await sb.auth.getSession();
-        const user = _sess ? _sess.user : null;
-
-        const emailVal = (formData.get('Email') || '').trim();
-        const dateVal = formData.get('Preferred Date') || '';
-
-        // Date range validation
-        const dateErr = validateApptDate(dateVal);
-        if (dateErr) {
-          alert(dateErr);
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-          return;
-        }
-
-        // Block booking with an email that already has an account (guest only)
-        if (!user && emailVal) {
-          const { data: emailTaken, error: rpcErr } = await sb.rpc('email_has_account', { p_email: emailVal });
-          let accountExists = !rpcErr && !!emailTaken;
-          if (rpcErr) {
-            // Fallback: check if any booking is linked to this email via an account
-            const { data: linked } = await sb.from('bookings').select('id').ilike('email', emailVal).not('user_id', 'is', null).limit(1).maybeSingle();
-            accountExists = !!linked;
-          }
-          if (accountExists) {
-            const errDiv = form.querySelector('.form-email-error');
-            if (errDiv) {
-              errDiv.innerHTML = '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-                + '<span>An account already exists for <strong>' + emailVal + '</strong>. <a href="/account/">Sign in at tekpair.com/account/</a> to book — your details will be pre-filled automatically.</span>';
-              errDiv.style.display = 'flex';
-              form.querySelector('input[name="Email"]').addEventListener('input', function() { errDiv.style.display = 'none'; }, { once: true });
-            }
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
-            return;
-          }
-        }
-
-        const bookingId = crypto.randomUUID();
-        const booking = {
-          id: bookingId,
-          type: isInhome ? 'inhome' : 'remote',
-          first_name: formData.get('First Name') || nameParts[0] || '',
-          last_name: formData.get('Last Name') || (nameParts.slice(1).join(' ') || ''),
-          email: formData.get('Email') || '',
-          phone: formData.get('Phone') || null,
-          address: formData.get('Address') || null,
-          service: formData.get('Service') || null,
-          issue_description: formData.get('Issue Description') || '',
-          preferred_date: formData.get('Preferred Date') || '',
-          preferred_time: formData.get('Preferred Time') || '',
-          payment_method: formData.get('Payment Method') || null,
-          referral_source: formData.get('Referral Source') || null,
-          user_id: user ? user.id : null,
-        };
-
-        const { error } = await sb.from('bookings').insert(booking);
-
-        if (error) {
-          alert('Sorry — there was an issue sending your request. Please try again or email connor@tekpair.com directly.');
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-          return;
-        }
-
-        recent.push(now);
-        localStorage.setItem(key, JSON.stringify(recent));
-
-        // keepalive: true ensures the request completes even after page navigation
-        fetch('https://lfsuntijzbdoswbremaw.supabase.co/functions/v1/send-booking-email', {
-          method: 'POST',
-          keepalive: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc3VudGlqemJkb3N3YnJlbWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3OTA4MTMsImV4cCI6MjA5NjM2NjgxM30.2ppHoQ4nAsjeGl8PKL1eFFodkg0e-9JYeH0ANiG9ZY4'
-          },
-          body: JSON.stringify({ booking_id: bookingId, action: 'created' })
-        }).catch(console.error);
-
-        const liParam = user ? '&loggedin=1' : '';
-        window.location.href = '/thank-you/?type=' + encodeURIComponent(isInhome ? 'In-Home Visit' : 'Remote Session') + liParam;
-      } catch (err) {
-        alert('Sorry — there was a network issue. Please try again or email connor@tekpair.com directly.');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-      }
-    });
-  });
-
-// Booking form toggle — assigned to window so inline onclick handlers can reach them
-  window.showBookingForm = function(type) {
-    document.getElementById('form-inhome').style.display = type === 'inhome' ? 'block' : 'none';
-    document.getElementById('form-remote').style.display = type === 'remote' ? 'block' : 'none';
-    document.getElementById('btn-inhome').classList.toggle('active', type === 'inhome');
-    document.getElementById('btn-remote').classList.toggle('active', type === 'remote');
-    const formId = type === 'inhome' ? 'form-inhome' : 'form-remote';
-    setTimeout(() => {
-      document.getElementById(formId).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
-  };
-  window.resetBookingForm = function() {
-    document.getElementById('form-inhome').style.display = 'none';
-    document.getElementById('form-remote').style.display = 'none';
-    document.getElementById('btn-inhome').classList.remove('active');
-    document.getElementById('btn-remote').classList.remove('active');
-  };
-
-  // Combine date selects into hidden input for Formspree submission
-  document.querySelectorAll('.date-select-row').forEach(function(row) {
-    var sels = row.querySelectorAll('select');
-    var hidden = row.querySelector('input[type="hidden"]');
-    function syncDate() {
-      var vals = Array.from(sels).map(function(s){ return s.value; });
-      if (vals.every(function(v){ return v; })) hidden.value = vals[0] + ' ' + vals[1] + ', ' + vals[2];
+      window.location.href = '/thank-you/?type=Project%20Inquiry';
+    } catch (err) {
+      alert('Sorry — there was a network issue. Please try again or email connor@tekpair.com directly.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
     }
-    sels.forEach(function(s){ s.addEventListener('change', syncDate); });
   });
 
-// Pre-fill booking form from URL params (used by /find-my-service/)
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const service = params.get('service');
-  if (service) {
-    // Default to in-home form since that's the primary path
-    setTimeout(() => {
-      if (typeof showBookingForm === 'function') {
-        showBookingForm('inhome');
-      }
-      // Wait for form to render, then set the dropdown
-      setTimeout(() => {
-        const select = document.querySelector('#form-inhome-submit select[name="Service"]');
-        if (select) {
-          // Find matching option
-          for (const opt of select.options) {
-            if (opt.value === service || opt.textContent.trim() === service) {
-              select.value = opt.value;
-              select.dispatchEvent(new Event('change'));
-              break;
-            }
-          }
-        }
-      }, 100);
-    }, 50);
-  }
-})();
-}, 0); // end setTimeout — defers all init until after first paint
-</script>
-<script>
-  (function(){
-    var mc = document.getElementById('map-container');
-    if (!mc) return;
-    var src = mc.dataset.src;
-    var obs = new IntersectionObserver(function(entries){
-      if (entries[0].isIntersecting) {
-        var ph = document.getElementById('map-placeholder');
-        if (ph) ph.remove();
-        var f = document.createElement('iframe');
-        f.title = 'Tekpair service area — Capital Region, NY';
-        f.src = src;
-        f.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.9);';
-        f.allowFullscreen = true;
-        f.referrerPolicy = 'no-referrer-when-downgrade';
-        mc.appendChild(f);
-        obs.disconnect();
-      }
-    }, {rootMargin:'300px'});
-    obs.observe(mc);
-  })();
+}, 0);
 </script>
 <script src="/cookie-banner.js"></script>
 <script src="/mobile-nav.js"></script>

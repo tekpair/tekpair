@@ -215,7 +215,7 @@
     <div class="auth-card" id="auth-card-signin">
       <div class="auth-card-header">
         <div class="auth-card-title">My Account</div>
-        <div class="auth-card-sub">Sign in to manage your bookings and profile.</div>
+        <div class="auth-card-sub">Sign in to manage your projects and profile.</div>
         <div class="auth-tabs">
           <button class="auth-tab active" id="tab-signin" onclick="showAuthTab('signin')">Sign In</button>
           <button class="auth-tab" id="tab-register" onclick="showAuthTab('register')">Create Account</button>
@@ -320,7 +320,7 @@
   <div id="view-auth-user" style="display:none;">
     <div class="page-tabs">
       <button class="page-tab active" id="tab-profile" onclick="showTab('profile')">Profile</button>
-      <button class="page-tab" id="tab-bookings" onclick="showTab('bookings')">My Bookings</button>
+      <button class="page-tab" id="tab-bookings" onclick="showTab('bookings')">My Projects</button>
     </div>
 
     <!-- PROFILE TAB -->
@@ -364,7 +364,7 @@
 
     <!-- BOOKINGS TAB -->
     <div id="pane-bookings" style="display:none;">
-      <div class="section-title">My Bookings</div>
+      <div class="section-title">My Projects</div>
       <div id="bookings-loading" class="loading-wrap" style="min-height:120px;display:none;">
         <div class="spinner"></div>
       </div>
@@ -570,8 +570,8 @@ async function loadBookings() {
     if (error || !data || data.length === 0) {
       listEl.innerHTML = `<div class="empty-state">
         <svg class="empty-state-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <p>No bookings yet.</p>
-        <a href="/#booking" style="color:var(--cyan);">Book your first appointment &rarr;</a>
+        <p>No projects yet.</p>
+        <a href="/#contact" style="color:var(--cyan);">Start your first project &rarr;</a>
       </div>`;
       return;
     }
