@@ -45,15 +45,15 @@ function parsePrefDate(dateStr: string): Date | null {
 }
 
 function emailReminder(b: Booking): string {
-  const isRemote = b.type !== "inhome";
-  const typeLabel = isRemote ? "Remote Session" : "In-Home Visit";
+  const isProject = b.type === "inhome";
+  const typeLabel = isProject ? "Project" : "Inquiry";
 
   const rows: [string, string][] = [
     ["Service", b.service || "—"],
-    ["Date", b.preferred_date],
-    ["Time", b.preferred_time],
+    ...(b.preferred_date ? [["Date", b.preferred_date] as [string, string]] : []),
+    ...(b.preferred_time ? [["Time", b.preferred_time] as [string, string]] : []),
     ["Type", typeLabel],
-    ...(!isRemote && b.address ? [["Address", b.address] as [string, string]] : []),
+    ...(isProject && b.address ? [["Business", b.address] as [string, string]] : []),
   ];
 
   const rowsHtml = rows.map(([label, value], i) => {
@@ -64,10 +64,10 @@ function emailReminder(b: Booking): string {
     </tr>`;
   }).join("");
 
-  const remoteNote = isRemote ? `
+  const remoteNote = !isProject ? `
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;background:#13161d;border:1px solid rgba(41,212,245,0.2);border-radius:10px;overflow:hidden;">
-      <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#29d4f5;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">Remote Session</td></tr>
-      <tr><td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">If you haven't received your Zoom link yet, you'll get it shortly before your session. Make sure Zoom is installed and you're ready at the scheduled time.</td></tr>
+      <tr><td style="padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#29d4f5;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid rgba(255,255,255,0.06);">Remote Meeting</td></tr>
+      <tr><td style="padding:12px 16px;font-family:Arial,sans-serif;font-size:13px;color:#8a95b0;line-height:1.65;">If you haven't received your Zoom link yet, you'll get it shortly before your meeting. Make sure Zoom is installed and you're ready at the scheduled time.</td></tr>
     </table>` : "";
 
   return `<!DOCTYPE html>
@@ -75,7 +75,7 @@ function emailReminder(b: Booking): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appointment Reminder — Tekpair</title>
+  <title>Project Reminder — Tekpair</title>
 </head>
 <body style="margin:0;padding:0;background-color:#0d0f14;">
   <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0d0f14;">
@@ -85,15 +85,15 @@ function emailReminder(b: Booking): string {
           <tr><td align="center" style="padding-bottom:28px;">${LOGO}</td></tr>
           <tr>
             <td style="background-color:#181b24;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:40px 40px 36px;">
-              <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#7f8699;">Appointment Reminder</p>
-              <h1 style="margin:0 0 18px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">Your appointment is tomorrow</h1>
+              <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#7f8699;">Project Reminder</p>
+              <h1 style="margin:0 0 18px;font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:#eef1f8;line-height:1.3;">Your project is scheduled for tomorrow</h1>
               <p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:15px;color:#8a95b0;line-height:1.7;">
-                Hi ${b.first_name || "there"}, just a heads-up that your Tekpair appointment is scheduled for tomorrow. We look forward to seeing you!
+                Hi ${b.first_name || "there"}, just a heads-up that your Tekpair project is scheduled for tomorrow. We look forward to working with you!
               </p>
               <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#13161d;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;">${rowsHtml}</table>
               ${remoteNote}
               <p style="margin:24px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#7f8699;line-height:1.7;">
-                Need to reschedule or cancel? Please contact us at least 24 hours in advance to avoid a cancellation fee —
+                Need to reschedule or cancel? Please contact us at least 24 hours in advance —
                 reply to this email or call <a href="tel:+15182796823" style="color:#29d4f5;text-decoration:none;">(518) 279-6823</a>.
               </p>
             </td>
@@ -173,7 +173,7 @@ serve(async (_req) => {
       toRemind.map(async (b) => {
         await sendEmail(
           b.email,
-          `Reminder: Your Tekpair Appointment is Tomorrow`,
+          `Reminder: Your Tekpair Project is Tomorrow`,
           emailReminder(b),
         );
         await sb.from("booking_email_log").insert({ booking_id: b.id, action: "reminder" });
