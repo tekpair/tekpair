@@ -1,13 +1,15 @@
 # Tekpair
-> Web development, SEO optimization, business analytics, and managed IT for businesses.
-Tekpair provides professional digital services for businesses in the Capital Region of New York and beyond. Core offerings include custom web development and design, search engine optimization, business analytics and reporting, monthly IT retainers, and digital marketing. They serve small and mid-size businesses looking for a reliable technology partner with transparent, project-based pricing.
+> Web design, branding, SEO, digital marketing, analytics, and local IT support for growing businesses, creators, and local organizations.
+Tekpair is a technology and growth partner for growing businesses, creators, and local organizations in the Capital Region of New York and beyond. We help with anything technical and growth-related: web design and development, branding and design (sourced and coordinated on your behalf), search engine optimization, digital marketing, business analytics and reporting, and local IT support on a monthly retainer. Every engagement starts with a free quote and transparent pricing. To get started, clients email connor@tekpair.com or call (518) 279-6823.
 
 ## Core Services
 
 -
-[Tekpair - Web Design, SEO & IT Solutions](https://tekpair.com/): Professional web development, SEO, analytics, and managed IT for businesses.
+[Tekpair - Technology & Growth Partner](https://tekpair.com/): Web design, branding, SEO, marketing, analytics, and local IT support for growing businesses.
 -
-[Web Design Services](https://tekpair.com/webdesign/): Custom web development and design with flat-rate pricing.
+[Web Design & Development](https://tekpair.com/webdesign/): Custom or platform-based websites, built to be found and fully owned.
+-
+[Local IT & Support](https://tekpair.com/it-retainers/): Monthly IT retainers — your technical backup for support and emergencies.
 
 ## Company Information
 
@@ -25,9 +27,4 @@ Tekpair provides professional digital services for businesses in the Capital Reg
 [Policies](https://tekpair.com/policies/): Service engagement terms, payment policies, and IP ownership.
 -
 [Privacy Policy](https://tekpair.com/privacy/): How Tekpair handles client data and privacy.
-
-## Account Management
-
--
-[Client Portal](https://tekpair.com/account/): Access your Tekpair client account and project history.
 ---
