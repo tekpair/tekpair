@@ -1,6 +1,5 @@
 (function () {
   'use strict';
-  if (/^\/admin(\/|$)/.test(window.location.pathname)) return;
 
   var PATH = window.location.pathname.replace(/([^/])$/, '$1/');
 
@@ -19,17 +18,17 @@
       '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
     policy:
       '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    user:
-      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    faq:
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
   };
 
-  // null = Book FAB (center)
+  // null = Contact FAB (center)
   var ITEMS = [
     { href: '/',          label: 'Home',     ic: 'home'   },
     { href: '/about/',    label: 'About',    ic: 'about'  },
     null,
+    { href: '/faq/',      label: 'FAQ',      ic: 'faq'    },
     { href: '/policies/', label: 'Policies', ic: 'policy' },
-    { href: '/account/',  label: 'Account',  ic: 'user'   },
   ];
 
   var BG = '#13161d';
