@@ -86,9 +86,9 @@
     .incl-desc{font-size:0.82rem;color:var(--off);line-height:1.6;}
 
     /* PRICING */
-    .packages-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.2rem;align-items:start;}
-    .pkg-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.4rem;position:relative;overflow:hidden;transition:border-color 0.18s;display:flex;flex-direction:column;}
-    .pkg-card:hover{border-color:rgba(41,212,245,0.2);}
+    .packages-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.2rem;align-items:stretch;}
+    .pkg-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.4rem;position:relative;overflow:hidden;transition:border-color 0.18s,transform 0.18s,box-shadow 0.18s;display:flex;flex-direction:column;}
+    .pkg-card:hover{border-color:rgba(41,212,245,0.28);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.22);}
     .pkg-card.featured{border-color:rgba(41,212,245,0.35);background:linear-gradient(160deg,#1e2029,#1a2030);}
     .pkg-top-bar{height:3px;background:var(--cyan);position:absolute;top:0;left:0;right:0;border-radius:var(--radius) var(--radius) 0 0;}
     .pkg-badge{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:var(--cyan-soft);color:var(--cyan);border:1px solid rgba(41,212,245,0.25);border-radius:100px;padding:0.2rem 0.6rem;display:inline-block;margin-bottom:0.75rem;align-self:flex-start;}
@@ -188,9 +188,9 @@
 
   <!-- WHY A RETAINER / WHAT'S INCLUDED -->
   <div class="section reveal">
-    <div class="sec-label">Why a Retainer</div>
+    <div class="sec-label">What We Really Do</div>
     <div class="sec-title">What you get every month</div>
-    <p class="body-text" style="margin-bottom:1.4rem;">A retainer turns unpredictable, reactive IT into a steady, proactive relationship. Here's what that looks like in practice.</p>
+    <p class="body-text" style="margin-bottom:1.4rem;">At its core, it's troubleshooting, network, and hardware. We manage all the technology in your place of business — plus whatever you run online that needs to be maintained, updated, or fixed. A retainer turns unpredictable, reactive IT into a steady, proactive relationship. Here's what that looks like in practice.</p>
     <div class="included-grid">
 
       <div class="incl-card">
@@ -260,15 +260,15 @@
       <!-- ESSENTIAL -->
       <div class="pkg-card">
         <div class="pkg-name">Essential</div>
-        <div class="pkg-tagline">Reliable remote support for lean teams.</div>
+        <div class="pkg-tagline">A nice-to-have baseline, so you're not paying outrageous one-time fees every single time.</div>
         <div class="pkg-price">$99 <span>/mo</span></div>
         <div class="pkg-price-note">Billed monthly · no long contracts</div>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Remote support during business hours</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Business-hours response time</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Monthly check-in &amp; health review</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic system monitoring</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Remote &amp; phone support, 1–6 PM</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Email responses within business hours</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>2 monthly check-ins &amp; tech reviews</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic monitoring of your online tools</li>
           <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Software &amp; account troubleshooting</li>
         </ul>
         <a href="/#contact" class="pkg-cta ghost">Get Started</a>
@@ -279,17 +279,17 @@
         <div class="pkg-top-bar"></div>
         <div class="pkg-badge">Recommended</div>
         <div class="pkg-name">Standard</div>
-        <div class="pkg-tagline">Proactive coverage with on-site help included.</div>
+        <div class="pkg-tagline">Proactive coverage with after-hours response and active management.</div>
         <div class="pkg-price">$199 <span>/mo</span></div>
         <div class="pkg-price-note">Billed monthly · no long contracts</div>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
           <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Essential</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority response</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>On-site visits included (Capital Region)</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Network &amp; hardware management</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Proactive monitoring &amp; patching</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Backup &amp; security checks</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>After-hours response (as soon as we see it)</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>5 monthly check-ins &amp; tech reviews</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Networking &amp; hardware management</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Proactive monitoring &amp; management of your online tools</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 monthly backup &amp; security check (hardware + online)</li>
         </ul>
         <a href="/#contact" class="pkg-cta solid">Get Started</a>
       </div>
@@ -303,17 +303,16 @@
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
           <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Standard</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Fastest response SLA</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited remote support</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account contact</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Infrastructure &amp; vendor management</li>
-          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Quarterly strategy &amp; planning reviews</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>24/7 priority response via phone &amp; email</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited check-ins &amp; reviews (schedule permitting)</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account manager, reachable 24/7</li>
+          <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Quarterly strategy &amp; planning reviews (in-person or remote)</li>
         </ul>
         <a href="/#contact" class="pkg-cta ghost">Get Started</a>
       </div>
 
     </div>
-    <p class="pricing-foot">Custom plans are available for unique setups and larger teams. Final pricing is confirmed in your free quote, once we understand your environment and what you actually need.</p>
+    <p class="pricing-foot">Anything beyond a monthly plan is custom and scoped separately. Situations that fall outside your monthly plan are billed at an hourly rate of $65/hr, and Tekpair reserves the right to decline additional work outside a plan if needed. Custom plans are available for unique setups and larger teams — final pricing is confirmed in your free quote, once we understand your environment and what you actually need.</p>
   </div>
 
   <!-- CLOSING CTA -->
@@ -374,7 +373,7 @@
       <ul>
         <li><a href="/#contact">Contact Us</a></li>
         <li><a href="/#how">How We Work</a></li>
-        <li><a href="/about/">About Us</a></li>
+        <li><a href="/about/">About Tekpair</a></li>
         <li><a href="/faq/">Frequently Asked Questions</a></li>
       </ul>
     </div>
@@ -383,13 +382,11 @@
       <ul>
         <li><a href="/policies/">Policies &amp; Terms</a></li>
         <li><a href="/privacy/">Privacy Policy</a></li>
-        <li><a href="mailto:connor@tekpair.com?subject=Tekpair%20Business%20Inquiry">Business Inquiries</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span>&copy; 2026 Tekpair &middot; Cohoes, NY</span>
-    <span><a href="/policies/">Policies &amp; Terms</a> &nbsp;&middot;&nbsp; <a href="/privacy/">Privacy Policy</a></span>
   </div>
 </footer>
 
