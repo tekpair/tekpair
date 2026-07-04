@@ -371,6 +371,49 @@
     .why-title { font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 0.35rem; }
     .why-desc { font-size: 0.88rem; color: var(--off); line-height: 1.65; }
 
+    /* TESTIMONIAL */
+    .testi-card {
+      position: relative; overflow: hidden;
+      max-width: 720px; margin: 0 auto; text-align: center;
+      background: linear-gradient(165deg, #1f2331, #191c24);
+      border: 1px solid var(--border-md); border-radius: 22px;
+      padding: 2.8rem 2.6rem 2.4rem;
+    }
+    .testi-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+    .testi-logo {
+      width: 84px; height: 84px; margin: 0 auto 1.3rem;
+      border-radius: 18px; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .testi-logo img { width: 100%; height: 100%; object-fit: contain; padding: 0.4rem; }
+    .testi-logo-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; color: var(--muted); }
+    .testi-logo-ph span { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .testi-stars { display: flex; gap: 3px; justify-content: center; margin-bottom: 1rem; }
+    .testi-stars span { color: #f5c518; font-size: 0.95rem; }
+    .testi-quote {
+      font-family: 'Instrument Sans', sans-serif; font-weight: 600;
+      font-size: 1.25rem; line-height: 1.5; color: var(--white);
+      letter-spacing: -0.01em; margin: 0 auto 1.5rem; max-width: 560px;
+    }
+    .testi-name { font-weight: 700; font-size: 0.95rem; color: var(--white); }
+    .testi-meta { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+    .testi-work { margin-top: 1.8rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .testi-work-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .testi-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    .testi-tags span {
+      font-size: 0.76rem; font-weight: 500; color: var(--off);
+      background: var(--cyan-soft); border: 1px solid rgba(41,212,245,0.2);
+      color: var(--cyan); border-radius: 100px; padding: 0.35rem 0.85rem;
+    }
+    @media (max-width: 560px) {
+      .testi-card { padding: 2rem 1.4rem; border-radius: 18px; }
+      .testi-quote { font-size: 1.08rem; }
+    }
+
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
     .form-label { font-size: 0.82rem; font-weight: 600; color: var(--off); display:flex; align-items:center; gap:0.35rem; }
     .form-label svg { color: var(--muted); flex-shrink:0; }
@@ -865,6 +908,40 @@
         <div>
           <div class="why-title">Our incentives match yours</div>
           <div class="why-desc">At the end of the day, we're a business trying to do well too. So we won't do anything that hurts us — which means we won't do anything that hurts you.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section" id="testimonial" aria-labelledby="testi-heading">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label"><div class="section-label-line"></div>Client Story</div>
+      <h2 class="section-title" id="testi-heading">Trusted by local businesses</h2>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-logo">
+        <img src="/sweet-elevation-logo.png" alt="Sweet Elevation Bakery logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="testi-logo-ph" style="display:none;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Logo</span>
+        </div>
+      </div>
+      <div class="testi-stars" aria-label="5 out of 5 stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <blockquote class="testi-quote">"Designed our website and provided support in setting up our food delivery apps/service. Well done!"</blockquote>
+      <div class="testi-name">Jennifer</div>
+      <div class="testi-meta">Sweet Elevation Bakery · Latham, NY</div>
+      <div class="testi-work">
+        <div class="testi-work-label">What we've done for them</div>
+        <div class="testi-tags">
+          <span>Web Design &amp; Development</span>
+          <span>Food Delivery App Support</span>
+          <span>In-Person IT</span>
+          <span>Social Media</span>
+          <span>Analytics</span>
+          <span>Marketing</span>
         </div>
       </div>
     </div>
