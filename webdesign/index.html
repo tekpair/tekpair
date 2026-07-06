@@ -28,7 +28,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Website Design — Tekpair</title>
   <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
-  <meta name="description" content="Tekpair builds clean, hand-coded websites for local businesses in the Capital Region, NY. Flat rates, mobile-first, no subscriptions."/>
+  <meta name="description" content="Tekpair builds clean, hand-coded websites for local businesses and creators in the Capital Region, NY. Friendly, upfront pricing, mobile-first, you own every file, no subscriptions."/>
   <meta property="og:title" content="Website Design — Tekpair"/>
   <meta property="og:description" content="Clean, hand-coded websites for local businesses. Flat rates, mobile-first, no subscriptions. Capital Region, NY."/>
   <meta property="og:type" content="website"/>
@@ -107,6 +107,30 @@
     .ct-tag{display:block;font-size:0.68rem;font-weight:500;color:var(--muted);margin-top:0.15rem;}
     .ct-us .ct-tag{color:var(--cyan);opacity:0.85;}
     .compare-foot{font-size:0.72rem;color:var(--muted);margin-top:0.9rem;line-height:1.55;}
+
+    /* REASSURANCE STRIP */
+    .reassure{display:flex;flex-wrap:wrap;gap:0.55rem;margin-top:1.5rem;}
+    .reassure .r{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;font-weight:500;color:var(--off);
+      background:var(--card);border:1px solid var(--border);border-radius:100px;padding:0.5rem 0.95rem;}
+    .reassure .r svg{color:var(--green);flex-shrink:0;}
+
+    /* TESTIMONIAL */
+    .wd-testi{display:flex;gap:1.4rem;align-items:flex-start;margin-top:1.2rem;
+      background:linear-gradient(160deg,#1e2029,#191c24);border:1px solid var(--border-md);
+      border-radius:var(--radius);padding:1.8rem;}
+    .wd-testi-avatar{width:56px;height:56px;border-radius:14px;flex-shrink:0;
+      background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.25);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Instrument Sans',sans-serif;font-weight:700;color:var(--cyan);font-size:1.1rem;letter-spacing:0.02em;}
+    .wd-testi-body{min-width:0;}
+    .wd-stars{color:#f5c518;font-size:0.9rem;letter-spacing:2px;margin-bottom:0.55rem;}
+    .wd-testi blockquote{margin:0 0 0.85rem;font-size:1.05rem;line-height:1.55;color:var(--white);font-weight:500;}
+    .wd-testi-name{font-size:0.86rem;color:var(--white);font-weight:600;}
+    .wd-testi-name span{color:var(--muted);font-weight:400;}
+    .wd-testi-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.95rem;}
+    .wd-testi-tags span{font-size:0.72rem;color:var(--cyan);background:var(--cyan-soft);
+      border:1px solid rgba(41,212,245,0.2);border-radius:100px;padding:0.3rem 0.75rem;}
+    @media(max-width:560px){.wd-testi{flex-direction:column;gap:1rem;padding:1.4rem;}}
 
     /* ESTIMATOR */
     .estimator{background:var(--card);border:1px solid var(--border-md);border-radius:var(--radius);overflow:hidden;margin-top:1.2rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
@@ -237,7 +261,13 @@
   <div class="page-top">
     <div class="page-label">Tekpair · Web Design</div>
     <h1 class="page-title">Website Design</h1>
-    <p class="page-intro">Professional websites for small businesses and local organizations. Hand-built from scratch, fully yours to own, and no monthly builder fees eating into your budget.</p>
+    <p class="page-intro">Friendly, professional websites for local businesses and creators across the Capital Region. Hand-built from scratch, fully yours to own, no monthly builder fees — and you work directly with Connor and Kamryn, start to finish.</p>
+    <div class="reassure">
+      <span class="r"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free quote, no obligation</span>
+      <span class="r"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>One round of revisions included</span>
+      <span class="r"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>You own every file</span>
+      <span class="r"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No subscriptions, ever</span>
+    </div>
   </div>
 
   <!-- PACKAGES -->
@@ -360,6 +390,28 @@
       </table>
     </div>
     <p class="compare-foot">Agency and builder figures are typical industry ranges for comparable work — not exact quotes or a knock on anyone. Every Tekpair project is scoped and priced individually, and we'll always tell you honestly if another option is a better fit for your needs.</p>
+  </div>
+
+  <!-- REAL RESULTS / TESTIMONIAL -->
+  <div class="section reveal">
+    <div class="sec-label">Real Results</div>
+    <div class="sec-title">A local business we've helped</div>
+    <div class="wd-testi">
+      <div class="wd-testi-avatar">SE</div>
+      <div class="wd-testi-body">
+        <div class="wd-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"Designed our website and provided support in setting up our food delivery apps/service. Well done!"</blockquote>
+        <div class="wd-testi-name">Jennifer <span>— Sweet Elevation Bakery · Latham, NY</span></div>
+        <div class="wd-testi-tags">
+          <span>Web Design &amp; Development</span>
+          <span>Food Delivery App Support</span>
+          <span>In-Person IT</span>
+          <span>Social Media</span>
+          <span>Analytics</span>
+          <span>Marketing</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- DEMOS -->
