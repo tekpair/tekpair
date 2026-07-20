@@ -809,22 +809,6 @@
 </script>
 <script>
   (function () {
-    const toggle = document.querySelector('.nav-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (toggle && mobileMenu) {
-      toggle.addEventListener('click', () => {
-        const open = mobileMenu.classList.toggle('open');
-        toggle.classList.toggle('open', open);
-        toggle.setAttribute('aria-expanded', String(open));
-      });
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('open');
-          toggle.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
 
     // Desktop dropdown labels remain hover/focus only and never pin open on click.
     document.querySelectorAll('.nav-item').forEach(item => {
@@ -833,21 +817,6 @@
       item.addEventListener('mouseenter', () => trigger.setAttribute('aria-expanded', 'true'));
       item.addEventListener('mouseleave', () => trigger.setAttribute('aria-expanded', 'false'));
       trigger.addEventListener('click', event => { event.preventDefault(); trigger.blur(); });
-    });
-
-    document.querySelectorAll('.mobile-nav-trigger').forEach(button => {
-      button.addEventListener('click', () => {
-        const group = button.closest('.mobile-nav-group');
-        const willOpen = !group.classList.contains('is-open');
-        document.querySelectorAll('.mobile-nav-group').forEach(other => {
-          if (other === group) return;
-          other.classList.remove('is-open');
-          const otherButton = other.querySelector('.mobile-nav-trigger');
-          if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
-        });
-        group.classList.toggle('is-open', willOpen);
-        button.setAttribute('aria-expanded', String(willOpen));
-      });
     });
 
     const revealGroups = document.querySelectorAll('.principles-grid, .team-grid, .reviews-stack, .trust-rail-inner');
