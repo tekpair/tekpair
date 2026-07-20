@@ -1,317 +1,726 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-YBXCB2DFWV');
-    function _loadGtag() {
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV';
-      document.head.appendChild(s);
-    }
-    if ('requestIdleCallback' in window) { requestIdleCallback(_loadGtag, {timeout:4000}); }
-    else { setTimeout(_loadGtag, 3000); }
-    function _loadClarity() {
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window,document,"clarity","script","x2jgunqz83");
-    }
-    if ('requestIdleCallback' in window) { requestIdleCallback(_loadClarity, {timeout:4000}); }
-    else { setTimeout(_loadClarity, 3000); }
-  </script>
   <meta charset="UTF-8"/>
+  <script>document.documentElement.classList.add('js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us — Tekpair</title>
+  <title>About Tekpair — The People Behind the Work | Cohoes, NY</title>
   <link rel="icon" type="image/svg+xml" href="/logo-icon.svg"/>
-  <meta name="description" content="Tekpair is a technology and growth partner for growing businesses, creators, and local organizations — web design, branding, SEO, digital marketing, analytics, and local IT support. Based in Cohoes, NY."/>
-  <meta property="og:title" content="About Us — Tekpair"/>
+  <meta name="description" content="Meet Connor and Kamryn, the two people behind Tekpair — a direct, practical technology and growth partner serving businesses, creators, and organizations from Cohoes, NY."/>
+  <meta property="og:title" content="About Tekpair — The People Behind the Work"/>
+  <meta property="og:description" content="A smaller team with direct communication, practical expertise, and no layers between you and the people doing the work."/>
+  <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://tekpair.com/about/"/>
-  <meta name="theme-color" content="#29d4f5"/>
+  <meta name="theme-color" content="#4f9eae"/>
   <link rel="preload" as="image" href="/about/connor.webp" type="image/webp" fetchpriority="high"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/></noscript>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{
-      --bg:#111318;--surface:#191c23;--card:#1e2029;--card2:#22252f;
-      --border:rgba(255,255,255,0.09);--border-md:rgba(255,255,255,0.14);
-      --cyan:#29d4f5;--cyan-soft:rgba(41,212,245,0.13);--cyan-glow:rgba(41,212,245,0.28);
-      --white:#eef1f8;--off:#9aa3b8;--muted:#7e8899;
-      --green:#34c76f;--radius:14px;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img, svg { display: block; max-width: 100%; }
+
+    :root {
+      --bg: #0e1117;
+      --surface: #191c23;
+      --surface-deep: #151920;
+      --card: #1e222b;
+      --card-soft: rgba(255,255,255,.045);
+      --border: rgba(255,255,255,.09);
+      --border-md: rgba(255,255,255,.14);
+      --cyan: #63b7c4;
+      --cyan-bright: #72bfca;
+      --cyan-soft: rgba(99,183,196,.10);
+      --cyan-line: rgba(114,191,202,.22);
+      --white: #eef1f8;
+      --off: #a8b1c5;
+      --muted: #7f899c;
+      --shadow: 0 22px 60px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.07);
+      --radius: 18px;
+      --nav-height: 67px;
     }
-    html{scroll-behavior:smooth;font-size:15px;}
-    body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden;}
 
-    /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(17,19,24,0.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
-    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;}
-    .nav-back{font-size:0.88rem;font-weight:500;color:var(--off);text-decoration:none;display:flex;align-items:center;gap:0.45rem;transition:color 0.18s;}
-    .nav-back:hover{color:var(--cyan);}
-
-    .page{max-width:1100px;margin:0 auto;padding:7rem 2rem 6rem;}
-
-    /* SECTION STRUCTURE */
-    .page-top{padding-bottom:2.5rem;border-bottom:1px solid var(--border);}
-    .section{padding:2.5rem 0;border-bottom:1px solid var(--border);}
-    .section:last-of-type{border-bottom:none;}
-    .page-label{font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
-    .page-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-0.02em;line-height:1.1;color:var(--white);margin-bottom:0.9rem;}
-    .page-intro{font-size:0.95rem;color:var(--off);max-width:560px;line-height:1.8;}
-    .sec-label{font-size:0.7rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
-    .sec-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:1.2rem;}
-    .body-text{font-size:0.92rem;color:var(--off);line-height:1.85;margin-bottom:0.9rem;}
-    .body-text:last-child{margin-bottom:0;}
-
-    /* TEAM */
-    .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;align-items:start;}
-    .team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.18s;}
-    .team-card:hover{border-color:rgba(41,212,245,0.2);}
-    .team-photo{width:100%;height:auto;display:block;background:var(--surface);}
-    .team-card picture{display:block;width:100%;line-height:0;}
-    .team-photo-placeholder{width:100%;aspect-ratio:1;background:var(--surface);display:flex;align-items:center;justify-content:center;}
-    .team-info{padding:1.1rem 1.2rem;}
-    .team-name{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem;}
-    .team-role{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;}
-    .team-bio{font-size:0.82rem;color:var(--off);line-height:1.65;}
-
-    /* TESTIMONIALS */
-    .testimonials-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.4rem;}
-    .testimonial{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.5rem;position:relative;}
-    .testimonial-stars{display:flex;gap:3px;margin-bottom:0.75rem;}
-    .testimonial-stars span{color:#f5c842;font-size:0.85rem;}
-    .testimonial-text{font-size:0.9rem;color:var(--off);line-height:1.8;margin-bottom:1rem;font-style:italic;}
-    .testimonial-text::before{content:'\201C';font-size:1.4rem;color:var(--cyan);font-family:'Instrument Sans',sans-serif;line-height:0;vertical-align:-0.3rem;margin-right:2px;}
-    .testimonial-footer{display:flex;align-items:center;gap:0.75rem;}
-    .testimonial-avatar{width:36px;height:36px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(41,212,245,0.2);display:flex;align-items:center;justify-content:center;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:0.78rem;color:var(--cyan);flex-shrink:0;}
-    .testimonial-name{font-weight:600;font-size:0.85rem;color:var(--white);}
-    .testimonial-meta{font-size:0.75rem;color:var(--muted);}
-    .testimonial-source{position:absolute;top:1.1rem;right:1.2rem;}
-    .testimonial-source svg{color:var(--muted);opacity:0.5;}
-    .testimonial-placeholder{background:var(--card);border:1px dashed var(--border-md);border-radius:var(--radius);padding:1.4rem 1.5rem;text-align:center;}
-    .testimonial-placeholder p{font-size:0.83rem;color:var(--muted);line-height:1.7;}
-    .testimonial-placeholder a{color:var(--cyan);text-decoration:none;}
-
-    /* CTA ROW */
-    .cta-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding-top:2.5rem;}
-    .cta-row p{font-size:0.9rem;color:var(--off);}
-    .btn{display:inline-flex;align-items:center;gap:0.45rem;background:var(--cyan);color:#0e1117;font-size:0.88rem;font-weight:600;padding:0.65rem 1.3rem;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.18s,box-shadow 0.18s;}
-    .btn:hover{opacity:0.88;box-shadow:0 4px 18px var(--cyan-glow);}
-
-    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.45s ease,transform 0.45s ease;}
-    .reveal.in{opacity:1;transform:none;}
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border); background: var(--surface);
-      padding: 3rem 2rem 2rem;
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.65;
     }
-    .footer-inner {
-      max-width: 1140px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem; padding-bottom: 2.5rem;
-      border-bottom: 1px solid var(--border);
+    a { color: inherit; }
+    .skip-link {
+      position: fixed; top: -80px; left: 1rem; z-index: 1000;
+      padding: .65rem 1rem; border-radius: 8px;
+      background: var(--cyan); color: #0e1117; font-weight: 700;
+      transition: top .18s ease;
     }
-    .footer-brand-logo {
-      font-family:'Instrument Sans',sans-serif; font-weight:800; font-size:1.4rem;
-      color:var(--white); margin-bottom:0.8rem;
-      display:flex; align-items:center; gap:0.45rem;
-    }
-    .footer-brand-desc { font-size:0.9rem; color:var(--off); line-height:1.7; max-width:300px; margin-bottom:1.2rem; }
-    .footer-social { display:flex; gap:0.6rem; }
-    .footer-social a {
-      width:38px;height:38px;border-radius:9px;
-      background:var(--card);border:1px solid var(--border);
-      display:flex;align-items:center;justify-content:center;
-      color:var(--off);text-decoration:none;
-      transition:border-color 0.18s,color 0.18s;
-    }
-    .footer-social a:hover { border-color:var(--cyan); color:var(--cyan); }
-    .footer-col h3 { font-weight:600; font-size:0.92rem; color:var(--white); margin-bottom:1rem; }
-    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
-    .footer-col ul a { font-size:0.88rem; color:var(--off); text-decoration:none; transition:color 0.18s; }
-    .footer-col ul a:hover { color:var(--cyan); }
-    .footer-bottom {
-      max-width:1140px; margin:1.5rem auto 0;
-      display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
-      font-size:0.82rem; color:var(--muted);
-    }
-    .footer-bottom a { color:var(--off); text-decoration:none; }
-    .footer-bottom a:hover { color:var(--cyan); }
+    .skip-link:focus { top: .75rem; }
 
-@media(max-width:960px){
+    /* =========================================================
+       NAVIGATION — matched to the current homepage
+       ========================================================= */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: linear-gradient(180deg, rgba(17,19,24,.86), rgba(17,19,24,.70));
+      border-bottom: 1px solid rgba(255,255,255,.11);
+      box-shadow: 0 10px 35px rgba(0,0,0,.22), inset 0 -1px 0 rgba(255,255,255,.035);
+      -webkit-backdrop-filter: blur(22px) saturate(125%);
+      backdrop-filter: blur(22px) saturate(125%);
+    }
+    .nav-inner {
+      width: 100%; max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.1rem; padding: 1rem 2rem;
+    }
+    .nav-logo { flex-shrink: 0; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: .15rem; list-style: none; }
+    .nav-item { position: relative; list-style: none; }
+    .nav-trigger {
+      display: inline-flex; align-items: center; gap: .38rem;
+      padding: .5rem .72rem; border: 0; background: transparent;
+      color: var(--off); font: inherit; font-size: .91rem; font-weight: 600;
+      line-height: 1; cursor: pointer; transition: color .18s ease;
+    }
+    .nav-trigger:hover,
+    .nav-item:hover > .nav-trigger,
+    .nav-item:focus-within > .nav-trigger { color: var(--cyan-bright); }
+    .nav-trigger:focus-visible {
+      color: var(--cyan-bright); outline: 2px solid rgba(114,191,202,.45); outline-offset: 5px;
+    }
+    .nav-trigger svg { width: 13px; height: 13px; transition: transform .2s ease; }
+    .nav-item:hover > .nav-trigger svg,
+    .nav-item:focus-within > .nav-trigger svg { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 15px); left: 50%; z-index: 400;
+      width: 350px; padding: .7rem;
+      border: 1px solid rgba(255,255,255,.13); border-radius: 16px;
+      background: linear-gradient(145deg, rgba(28,32,40,.98), rgba(18,21,28,.98));
+      box-shadow: 0 24px 70px rgba(0,0,0,.46), inset 0 1px 0 rgba(255,255,255,.07);
+      -webkit-backdrop-filter: blur(24px) saturate(125%); backdrop-filter: blur(24px) saturate(125%);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transform: translate(-50%, -8px); transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+    }
+    .nav-dropdown::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav-item:hover > .nav-dropdown,
+    .nav-item:focus-within > .nav-dropdown {
+      opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0);
+    }
+    .nav-dropdown--services { width: min(650px, calc(100vw - 3rem)); transform: translate(-35%, -8px); }
+    .nav-item:hover > .nav-dropdown--services,
+    .nav-item:focus-within > .nav-dropdown--services { transform: translate(-35%, 0); }
+    .nav-dropdown--right { left: auto; right: 0; transform: translateY(-8px); }
+    .nav-item:hover > .nav-dropdown--right,
+    .nav-item:focus-within > .nav-dropdown--right { transform: translateY(0); }
+    .nav-dropdown-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .25rem; }
+    .nav-dropdown-list { display: grid; gap: .25rem; }
+    .nav-dropdown a.nav-dropdown-link {
+      display: grid; grid-template-columns: 40px minmax(0,1fr); gap: .75rem; align-items: center;
+      padding: .75rem; border: 1px solid transparent; border-radius: 11px;
+      color: inherit; text-decoration: none;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    }
+    .nav-dropdown a.nav-dropdown-link:hover,
+    .nav-dropdown a.nav-dropdown-link:focus-visible,
+    .nav-dropdown a.nav-dropdown-link[aria-current="page"] {
+      background: rgba(99,183,196,.075);
+      border-color: rgba(114,191,202,.18); outline: none;
+    }
+    .nav-dropdown a.nav-dropdown-link:hover { transform: translateY(-1px); }
+    .nav-dropdown-icon {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      border: 1px solid rgba(114,191,202,.18); border-radius: 10px;
+      background: rgba(99,183,196,.07); color: var(--cyan-bright);
+    }
+    .nav-dropdown-icon svg { width: 20px; height: 20px; }
+    .nav-dropdown-title {
+      display: block; margin-bottom: .08rem; color: var(--white);
+      font-family: 'Instrument Sans', sans-serif; font-size: .87rem; font-weight: 700; line-height: 1.25;
+    }
+    .nav-dropdown-desc { display: block; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+    .nav-cta-group { display: flex; align-items: center; flex-shrink: 0; }
+    .nav-book {
+      padding: .62rem 1.2rem; border: 1px solid rgba(255,255,255,.16); border-radius: 8px;
+      background: linear-gradient(135deg, #579fac, #447f8c); color: #f6fbfc;
+      box-shadow: 0 8px 22px rgba(51,111,124,.16), inset 0 1px 0 rgba(255,255,255,.18);
+      font-size: .9rem; font-weight: 700; text-decoration: none; white-space: nowrap;
+      transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    .nav-book:hover { background: linear-gradient(135deg, #61aab7, #4b8895); transform: translateY(-1px); }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: 6px;
+      border: 0; background: none; cursor: pointer;
+    }
+    .nav-toggle span { width: 24px; height: 2px; border-radius: 2px; background: var(--white); transition: transform .25s, opacity .25s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; flex-direction: column; padding: 1rem 2rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.11);
+      background: rgba(17,19,24,.95); box-shadow: 0 18px 36px rgba(0,0,0,.28);
+      -webkit-backdrop-filter: blur(24px) saturate(140%); backdrop-filter: blur(24px) saturate(140%);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-nav-group { border-bottom: 1px solid var(--border); }
+    .mobile-nav-group:last-of-type { border-bottom: none; }
+    .mobile-nav-trigger {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 0; border: 0; background: transparent;
+      color: var(--white); font: inherit; font-size: 1rem; font-weight: 650; text-align: left; cursor: pointer;
+    }
+    .mobile-nav-trigger svg { width: 16px; height: 16px; color: var(--muted); transition: transform .2s, color .2s; }
+    .mobile-nav-group.is-open .mobile-nav-trigger { color: var(--cyan-bright); }
+    .mobile-nav-group.is-open .mobile-nav-trigger svg { color: var(--cyan-bright); transform: rotate(180deg); }
+    .mobile-nav-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .22s ease; }
+    .mobile-nav-group.is-open .mobile-nav-panel { grid-template-rows: 1fr; }
+    .mobile-nav-panel-inner { min-height: 0; overflow: hidden; display: grid; gap: .15rem; }
+    .mobile-menu .mobile-nav-panel a {
+      display: grid; grid-template-columns: 32px minmax(0,1fr); gap: .65rem; align-items: center;
+      padding: .55rem .45rem; border-radius: 8px; color: var(--off); font-size: .9rem; text-decoration: none;
+    }
+    .mobile-menu .mobile-nav-panel a:hover,
+    .mobile-menu .mobile-nav-panel a:focus-visible,
+    .mobile-menu .mobile-nav-panel a[aria-current="page"] { background: rgba(99,183,196,.06); color: var(--white); outline: none; }
+    .mobile-nav-icon {
+      width: 32px; height: 32px; display: grid; place-items: center;
+      border: 1px solid rgba(114,191,202,.14); border-radius: 8px;
+      background: rgba(99,183,196,.07); color: var(--cyan-bright);
+    }
+    .mobile-nav-icon svg { width: 17px; height: 17px; }
+    .mobile-menu > .mobile-quote-link {
+      margin-top: .8rem; padding: .78rem 1rem; border: 1px solid rgba(255,255,255,.15); border-radius: 10px;
+      background: linear-gradient(135deg, #579fac, #447f8c); color: #f6fbfc; font-size: .95rem; font-weight: 700;
+      text-align: center; text-decoration: none;
+    }
+
+    /* =========================================================
+       ABOUT PAGE
+       ========================================================= */
+    .container { width: min(1140px, calc(100% - 4rem)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem; margin-bottom: 1rem;
+      color: var(--cyan-bright); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 2px; border-radius: 2px; background: var(--cyan-bright); }
+    .about-hero {
+      position: relative; overflow: hidden; min-height: 650px;
+      display: flex; align-items: center; padding: 10rem 0 6.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      background: linear-gradient(180deg, #11151c 0%, #0e1117 100%);
+    }
+    .about-hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .34;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.7) 58%, transparent 100%);
+    }
+    .about-hero-inner {
+      position: relative; z-index: 1;
+      display: block;
+    }
+    .about-title {
+      max-width: 980px; margin-bottom: 1.35rem;
+      font-family: 'Instrument Sans', sans-serif; font-size: clamp(2.6rem, 5.8vw, 5.3rem);
+      font-weight: 800; line-height: .98; letter-spacing: -.045em;
+    }
+    .about-title em { color: var(--cyan-bright); font-style: normal; }
+    .about-lede { max-width: 850px; color: var(--off); font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.8; }
+    .about-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.2rem; }
+    .button-primary, .button-secondary {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .85rem 1.35rem; border-radius: 10px; font-weight: 700; text-decoration: none;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .button-primary {
+      border: 1px solid rgba(255,255,255,.16); background: linear-gradient(135deg, #579fac, #447f8c); color: #fff;
+      box-shadow: 0 10px 28px rgba(51,111,124,.17), inset 0 1px 0 rgba(255,255,255,.17);
+    }
+    .button-secondary { border: 1px solid var(--border-md); background: rgba(255,255,255,.025); color: var(--white); }
+    .button-primary:hover, .button-secondary:hover { transform: translateY(-2px); }
+    .button-secondary:hover { border-color: rgba(114,191,202,.42); color: var(--cyan-bright); }
+
+    .trust-rail {
+      border-bottom: 1px solid rgba(255,255,255,.075);
+      background: #0f1319;
+    }
+
+    .trust-rail-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      min-height: 178px;
+      overflow: hidden;
+    }
+    .trust-proof {
+      position: relative;
+      display: grid;
+      grid-template-columns: 58px minmax(0,1fr);
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+      padding: 2.2rem 1.7rem;
+    }
+    .trust-proof + .trust-proof::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 26%;
+      bottom: 26%;
+      width: 1px;
+      background: linear-gradient(transparent, rgba(255,255,255,.13), transparent);
+    }
+    .trust-proof-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      color: var(--cyan-bright);
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.22));
+    }
+    .trust-proof-icon svg { width: 52px; height: 52px; }
+    .trust-proof strong {
+      display: block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.24rem;
+      line-height: 1.05;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -.025em;
+    }
+    .trust-proof span {
+      display: block;
+      margin-top: .42rem;
+      color: var(--off);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+
+    .section { padding: 7rem 0; }
+    .section-surface { background: #151920; border-top: 1px solid rgba(255,255,255,.045); border-bottom: 1px solid rgba(255,255,255,.045); }
+    .section-heading { max-width: 720px; margin-bottom: 3rem; }
+    .section-title {
+      font-family: 'Instrument Sans', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800;
+      letter-spacing: -.038em; line-height: 1.05;
+    }
+    .section-sub { max-width: 630px; margin-top: 1rem; color: var(--off); font-size: 1rem; line-height: 1.8; }
+
+    .story-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: 5rem; align-items: start; }
+    .story-aside { position: sticky; top: 105px; }
+    .story-art {
+      width: min(100%, 360px); margin-top: 2.3rem; color: var(--cyan-bright); opacity: .9;
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,.28));
+    }
+    .story-stack { display: grid; }
+    .story-chapter {
+      display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 1.35rem;
+      padding: 2rem 0; border-top: 1px solid rgba(255,255,255,.09);
+    }
+    .story-chapter:last-child { border-bottom: 1px solid rgba(255,255,255,.09); }
+    .story-number { color: var(--cyan-bright); font-family: 'Instrument Sans', sans-serif; font-size: .8rem; font-weight: 800; letter-spacing: .08em; }
+    .story-chapter h3 { margin-bottom: .65rem; font-family: 'Instrument Sans', sans-serif; font-size: 1.2rem; letter-spacing: -.02em; }
+    .story-chapter p { color: var(--off); font-size: .94rem; line-height: 1.82; }
+
+    .principles-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .principle {
+      position: relative; overflow: hidden; min-height: 260px; padding: 1.8rem;
+      border: 1px solid rgba(255,255,255,.11); border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      box-shadow: 0 18px 45px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .principle::after {
+      content: ''; position: absolute; right: -44px; bottom: -54px; width: 120px; height: 120px;
+      border: 1px solid rgba(114,191,202,.13); border-radius: 50%; box-shadow: 0 0 0 24px rgba(99,183,196,.02);
+    }
+    .principle-icon { width: 48px; height: 48px; color: var(--cyan-bright); }
+    .principle h3 { margin-top: 1.3rem; font-family: 'Instrument Sans', sans-serif; font-size: 1.12rem; }
+    .principle p { margin-top: .65rem; color: var(--off); font-size: .88rem; line-height: 1.75; }
+
+    .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.2rem; }
+    .team-card {
+      position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.018)), #171b22;
+      box-shadow: var(--shadow);
+    }
+    .team-photo-wrap { position: relative; aspect-ratio: 1.2 / 1; overflow: hidden; background: #181c24; }
+    .team-photo-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,20,27,.65), transparent 45%); pointer-events: none; }
+    .team-photo-wrap.photo-missing::before {
+      content: ''; position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; transform: translate(-50%,-50%);
+      border: 2px solid rgba(114,191,202,.28); border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, rgba(114,191,202,.32) 0 16%, transparent 17%), linear-gradient(to top, rgba(114,191,202,.22) 0 34%, transparent 35%);
+    }
+    .team-photo { width: 100%; height: 100%; object-fit: cover; }
+    .team-card:first-child .team-photo { object-position: center 30%; }
+    .team-card:nth-child(2) .team-photo { object-position: center 22%; }
+    .team-content { padding: 1.7rem 1.8rem 1.9rem; }
+    .team-role { color: var(--cyan-bright); font-size: .7rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .team-name { margin-top: .35rem; font-family: 'Instrument Sans', sans-serif; font-size: 1.55rem; font-weight: 800; letter-spacing: -.03em; }
+    .team-bio { margin-top: .75rem; color: var(--off); font-size: .9rem; line-height: 1.75; }
+    .team-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.1rem; }
+    .team-tags span { padding: .32rem .65rem; border: 1px solid rgba(114,191,202,.15); border-radius: 100px; background: rgba(99,183,196,.065); color: #a8d4da; font-size: .7rem; }
+
+    .reviews-layout { display: grid; grid-template-columns: 1.05fr .95fr; gap: 1rem; align-items: stretch; }
+    .review-featured, .review-small {
+      border: 1px solid rgba(255,255,255,.11); background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      box-shadow: 0 18px 44px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .review-featured { position: relative; overflow: hidden; min-height: 100%; padding: 2.4rem; border-radius: 20px; }
+    .review-featured::before { content: '“'; position: absolute; right: 1.5rem; top: -.65rem; color: rgba(114,191,202,.12); font-family: Georgia, serif; font-size: 10rem; line-height: 1; }
+    .review-stars { color: #f0c54a; letter-spacing: .12em; font-size: .86rem; }
+    .review-quote { position: relative; margin-top: 1.4rem; font-family: 'Instrument Sans', sans-serif; font-size: clamp(1.25rem, 2.4vw, 1.8rem); font-weight: 650; line-height: 1.5; letter-spacing: -.02em; }
+    .review-person { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.09); }
+    .review-person strong { display: block; font-size: .9rem; }
+    .review-person span { display: block; margin-top: .15rem; color: var(--muted); font-size: .76rem; }
+    .reviews-stack { display: grid; gap: 1rem; }
+    .review-small { padding: 1.35rem 1.45rem; border-radius: 15px; }
+    .review-small p { margin-top: .7rem; color: var(--off); font-size: .84rem; line-height: 1.7; }
+    .review-small footer { display: block; margin-top: .8rem; padding: 0; border: 0; background: none; color: var(--muted); font-size: .72rem; }
+
+    .contact-panel {
+      position: relative; overflow: hidden; display: grid; grid-template-columns: .72fr 1.28fr; gap: 2.5rem; align-items: center;
+      padding: 3rem; border: 1px solid rgba(255,255,255,.13); border-radius: 22px;
+      background: linear-gradient(145deg, rgba(255,255,255,.072), rgba(255,255,255,.018)), #171b22;
+      box-shadow: var(--shadow);
+    }
+    .contact-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, rgba(114,191,202,.8), transparent); }
+    .contact-icon { width: 170px; margin: 0 auto; color: var(--cyan-bright); }
+    .contact-copy h2 { font-family: 'Instrument Sans', sans-serif; font-size: clamp(1.8rem, 3.2vw, 2.8rem); letter-spacing: -.035em; line-height: 1.08; }
+    .contact-copy p { max-width: 600px; margin-top: .8rem; color: var(--off); line-height: 1.75; }
+    .contact-copy .button-primary { margin-top: 1.5rem; }
+
+    .reveal { opacity: 1; filter: none; transform: none; }
+    .js .reveal {
+      opacity: 0; filter: blur(5px); transform: translateY(22px) scale(.99);
+      transition: opacity .65s cubic-bezier(.2,.75,.25,1), transform .65s cubic-bezier(.2,.75,.25,1), filter .65s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    .js .reveal.in { opacity: 1; filter: none; transform: none; }
+
+    /* Footer — matched to homepage */
+    footer { border-top: 1px solid var(--border); background: rgba(17,19,24,.72); padding: 3rem 2rem 2rem; }
+    .footer-inner { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    .footer-brand-logo { margin-bottom: .8rem; display: flex; align-items: center; gap: .45rem; }
+    .footer-brand-desc { max-width: 300px; margin-bottom: 1.2rem; color: var(--off); font-size: .9rem; line-height: 1.7; }
+    .footer-social { display: flex; gap: .6rem; }
+    .footer-social a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.13); border-radius: 9px; background: rgba(255,255,255,.05); color: var(--off); text-decoration: none; transition: border-color .18s, color .18s; }
+    .footer-social a:hover { border-color: var(--cyan); color: var(--cyan); }
+    .footer-col h3 { margin-bottom: 1rem; color: var(--white); font-size: .92rem; font-weight: 600; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .footer-col ul a { color: var(--off); font-size: .88rem; text-decoration: none; transition: color .18s; }
+    .footer-col ul a:hover { color: var(--cyan-bright); }
+    .footer-bottom { max-width: 1140px; margin: 1.5rem auto 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: .82rem; }
+
+    @media (max-width: 1040px) {
+      .nav-inner { gap: .8rem; }
+      .nav-trigger { padding-inline: .55rem; font-size: .86rem; }
+      .nav-book { padding-inline: 1rem; }
+      .about-hero-inner { display: block; }
+    }
+    @media (max-width: 900px) {
+      .nav-links, .nav-book { display: none; }
+      .nav-toggle { display: flex; }
+      .about-hero { min-height: auto; }
+      .trust-rail-inner { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .trust-proof:nth-child(3), .trust-proof:nth-child(4) { border-top: 1px solid rgba(255,255,255,.08); }
+      .trust-proof:nth-child(3)::before { display: none; }
+      .story-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-aside { position: static; }
+      .story-art { max-width: 280px; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .team-grid, .reviews-layout { grid-template-columns: 1fr; }
+      .contact-panel { grid-template-columns: 1fr; text-align: center; }
+      .contact-copy p { margin-left: auto; margin-right: auto; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .footer-inner > :first-child { grid-column: 1 / -1; }
     }
-    @media(max-width:600px){
-      .nav-inner,.page{padding-left:1.25rem;padding-right:1.25rem;}
-      .team-grid,.values-grid,.photo-grid{grid-template-columns:1fr;}
-      .photo-item.wide{grid-column:1;}
-      .cta-row{flex-direction:column;align-items:flex-start;}
-      .footer-inner { grid-template-columns: 1fr; }
-      .footer-bottom { text-align:center; }
-      footer { padding: 2rem 1.25rem 1.5rem; }
+    @media (min-width: 901px) { .mobile-menu { display: none !important; } }
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .container { width: min(100% - 2.5rem, 1140px); }
+      .nav-inner { padding: .75rem 1.25rem; }
+      .mobile-menu { padding-inline: 1.25rem; }
+      .about-hero { padding: 7.5rem 0 4.5rem; }
+      .about-title { font-size: clamp(2.35rem, 13vw, 3.75rem); }
+      .about-actions { flex-direction: column; }
+      .button-primary, .button-secondary { width: 100%; }
+      .trust-rail-inner { grid-template-columns: 1fr; }
+      .trust-proof { grid-template-columns: 46px minmax(0,1fr); padding: 1.35rem 1rem; gap: .75rem; }
+      .trust-proof-icon { width: 46px; height: 46px; }
+      .trust-proof-icon svg { width: 42px; height: 42px; }
+      .trust-proof strong { font-size: 1.05rem; }
+      .trust-proof + .trust-proof::before { display: none; }
+      .trust-proof:nth-child(2), .trust-proof:nth-child(3), .trust-proof:nth-child(4) { border-top: 1px solid rgba(255,255,255,.075); }
+      .section { padding: 4.5rem 0; }
+      .story-chapter { grid-template-columns: 38px minmax(0,1fr); gap: .8rem; }
+      .team-photo-wrap { aspect-ratio: 1 / .86; }
+      .team-content { padding: 1.35rem; }
+      .review-featured { padding: 1.6rem; }
+      .contact-panel { padding: 2rem 1.35rem; }
+      .contact-icon { width: 125px; }
+      footer { padding: 2.5rem 1.25rem 1.5rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-inner > :first-child { grid-column: auto; }
+      .footer-bottom { justify-content: center; text-align: center; }
+      .nav-dropdown-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-
-<nav>
+<a href="#main" class="skip-link">Skip to main content</a>
+<nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" style="text-decoration:none;" aria-label="Tekpair home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-hidden="true"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+    <a href="/" class="nav-logo" aria-label="Tekpair home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#63B7C4;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
     </a>
-    <a href="/" class="nav-back">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back to Home
-    </a>
+    <ul class="nav-links" role="list">
+      <li class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-haspopup="true">Services <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        <div class="nav-dropdown nav-dropdown--services" role="menu">
+          <div class="nav-dropdown-grid"><a class="nav-dropdown-link" href="/webdesign/"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8h18"/><circle cx="6.2" cy="6" r=".65" fill="currentColor" stroke="none"/><circle cx="8.6" cy="6" r=".65" fill="currentColor" stroke="none"/><path d="m9 12-3 2.5L9 17M15 12l3 2.5-3 2.5M13 11l-2 7"/></svg></span><span><span class="nav-dropdown-title">Web Design & Development</span><span class="nav-dropdown-desc">Custom websites built around your business.</span></span></a><a class="nav-dropdown-link" href="/#branding"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18h1.2a2.2 2.2 0 0 0 0-4.4h-.8a1.7 1.7 0 0 1 0-3.4H16a5 5 0 0 0 5-5C21 5.4 17 3 12 3Z"/><circle cx="7.5" cy="9" r=".8" fill="currentColor"/><circle cx="10" cy="6.5" r=".8" fill="currentColor"/><circle cx="14" cy="6.5" r=".8" fill="currentColor"/><circle cx="17" cy="9" r=".8" fill="currentColor"/></svg></span><span><span class="nav-dropdown-title">Branding & Design</span><span class="nav-dropdown-desc">A clearer, more intentional visual identity.</span></span></a><a class="nav-dropdown-link" href="/#seo"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></span><span><span class="nav-dropdown-title">SEO Optimization</span><span class="nav-dropdown-desc">Help the right customers find you online.</span></span></a><a class="nav-dropdown-link" href="/#marketing"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13.5v-3L14 6v12L4 13.5Z"/><path d="m7 15 1.4 4.5h2.8L10 14.8"/><path d="M17 8.5c1.2.8 2 2 2 3.5s-.8 2.7-2 3.5M18.5 5.5l.8-1.5M20 18l1.2 1.2"/></svg></span><span><span class="nav-dropdown-title">Digital Marketing</span><span class="nav-dropdown-desc">Campaigns, social media, and lead generation.</span></span></a><a class="nav-dropdown-link" href="/#analytics"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 2 5-7"/></svg></span><span><span class="nav-dropdown-title">Business Analytics</span><span class="nav-dropdown-desc">Reporting and smarter business decisions.</span></span></a><a class="nav-dropdown-link" href="/it-retainers/"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 7 3v5c0 4.7-2.5 7.8-7 10-4.5-2.2-7-5.3-7-10V6l7-3Z"/><path d="m9 12 2 2 4-5"/></svg></span><span><span class="nav-dropdown-title">Local IT & Support</span><span class="nav-dropdown-desc">Reliable technical help from a local team.</span></span></a></div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-haspopup="true">Why Tekpair <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        <div class="nav-dropdown" role="menu"><div class="nav-dropdown-list"><a class="nav-dropdown-link" href="/#how"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="12" r="3"/></svg></span><span><span class="nav-dropdown-title">How We Work</span><span class="nav-dropdown-desc">What to expect from us. No surprises.</span></span></a><a class="nav-dropdown-link" href="/#why"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6a2 2 0 1 0 4 0h6v6a2 2 0 1 0 0 4v6h-6a2 2 0 1 0-4 0H4v-6a2 2 0 1 0 0-4V4Z"/></svg></span><span><span class="nav-dropdown-title">The Tekpair Difference</span><span class="nav-dropdown-desc">What seperates us from all the others.</span></span></a><a class="nav-dropdown-link" href="/#testimonial"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span><span><span class="nav-dropdown-title">Client Story</span><span class="nav-dropdown-desc">See how we support a growing local business.</span></span></a></div></div>
+      </li>
+      <li class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-haspopup="true">Company <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        <div class="nav-dropdown" role="menu"><div class="nav-dropdown-list"><a class="nav-dropdown-link" href="/about/" aria-current="page"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.8-5 3.3-7.5 7.5-7.5s6.7 2.5 7.5 7.5"/></svg></span><span><span class="nav-dropdown-title">About Tekpair</span><span class="nav-dropdown-desc">Meet the people and story behind the work.</span></span></a><a class="nav-dropdown-link" href="/#contact"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><span><span class="nav-dropdown-title">Contact Us</span><span class="nav-dropdown-desc">Talk directly with the team about your project.</span></span></a></div></div>
+      </li>
+      <li class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-haspopup="true">Resources <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+        <div class="nav-dropdown nav-dropdown--right" role="menu"><div class="nav-dropdown-list"><a class="nav-dropdown-link" href="/faq/"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.5 2.5 0 1 1 3.6 2.25c-.9.45-1.3 1-1.3 1.75M12 17h.01"/></svg></span><span><span class="nav-dropdown-title">Frequently Asked Questions</span><span class="nav-dropdown-desc">Answers about pricing, timelines, and services.</span></span></a><a class="nav-dropdown-link" href="/policies/"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><span class="nav-dropdown-title">Policies & Terms</span><span class="nav-dropdown-desc">Review service policies and working terms.</span></span></a><a class="nav-dropdown-link" href="/privacy/"><span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span><span class="nav-dropdown-title">Privacy Policy</span><span class="nav-dropdown-desc">See how information is handled and protected.</span></span></a></div></div>
+      </li>
+    </ul>
+    <div class="nav-cta-group">
+      <a href="/#contact" class="nav-book">Get a Free Quote</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile menu">
+    <div class="mobile-nav-group">
+      <button class="mobile-nav-trigger" type="button" aria-expanded="false">Services <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="mobile-nav-panel"><div class="mobile-nav-panel-inner">
+        <a href="/webdesign/"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8h18"/><circle cx="6.2" cy="6" r=".65" fill="currentColor" stroke="none"/><circle cx="8.6" cy="6" r=".65" fill="currentColor" stroke="none"/><path d="m9 12-3 2.5L9 17M15 12l3 2.5-3 2.5M13 11l-2 7"/></svg></span><span>Web Design & Development</span></a>
+        <a href="/#branding"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18h1.2a2.2 2.2 0 0 0 0-4.4h-.8a1.7 1.7 0 0 1 0-3.4H16a5 5 0 0 0 5-5C21 5.4 17 3 12 3Z"/><circle cx="7.5" cy="9" r=".8" fill="currentColor"/><circle cx="10" cy="6.5" r=".8" fill="currentColor"/><circle cx="14" cy="6.5" r=".8" fill="currentColor"/><circle cx="17" cy="9" r=".8" fill="currentColor"/></svg></span><span>Branding & Design</span></a>
+        <a href="/#seo"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></span><span>SEO Optimization</span></a>
+        <a href="/#marketing"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13.5v-3L14 6v12L4 13.5Z"/><path d="m7 15 1.4 4.5h2.8L10 14.8"/><path d="M17 8.5c1.2.8 2 2 2 3.5s-.8 2.7-2 3.5M18.5 5.5l.8-1.5M20 18l1.2 1.2"/></svg></span><span>Digital Marketing</span></a>
+        <a href="/#analytics"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 2 5-7"/></svg></span><span>Business Analytics</span></a>
+        <a href="/it-retainers/"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 7 3v5c0 4.7-2.5 7.8-7 10-4.5-2.2-7-5.3-7-10V6l7-3Z"/><path d="m9 12 2 2 4-5"/></svg></span><span>Local IT & Support</span></a>
+      </div></div>
+    </div>
+    <div class="mobile-nav-group">
+      <button class="mobile-nav-trigger" type="button" aria-expanded="false">Why Tekpair <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="mobile-nav-panel"><div class="mobile-nav-panel-inner">
+        <a href="/#how"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="12" r="3"/></svg></span><span>How We Work</span></a>
+        <a href="/#why"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6a2 2 0 1 0 4 0h6v6a2 2 0 1 0 0 4v6h-6a2 2 0 1 0-4 0H4v-6a2 2 0 1 0 0-4V4Z"/></svg></span><span>The Tekpair Difference</span></a>
+        <a href="/#testimonial"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span><span>Client Story</span></a>
+      </div></div>
+    </div>
+    <div class="mobile-nav-group">
+      <button class="mobile-nav-trigger" type="button" aria-expanded="false">Company <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="mobile-nav-panel"><div class="mobile-nav-panel-inner">
+        <a href="/about/" aria-current="page"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.8-5 3.3-7.5 7.5-7.5s6.7 2.5 7.5 7.5"/></svg></span><span>About Tekpair</span></a>
+        <a href="/#contact"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><span>Contact Us</span></a>
+      </div></div>
+    </div>
+    <div class="mobile-nav-group">
+      <button class="mobile-nav-trigger" type="button" aria-expanded="false">Resources <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="mobile-nav-panel"><div class="mobile-nav-panel-inner">
+        <a href="/faq/"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.5 2.5 0 1 1 3.6 2.25c-.9.45-1.3 1-1.3 1.75M12 17h.01"/></svg></span><span>Frequently Asked Questions</span></a>
+        <a href="/policies/"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span>Policies & Terms</span></a>
+        <a href="/privacy/"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span>Privacy Policy</span></a>
+      </div></div>
+    </div>
+    <a class="mobile-quote-link" href="/#contact">Get a Free Quote</a>
   </div>
 </nav>
-
-<main>
-<div class="page">
-
-  <!-- HEADER -->
-  <div class="page-top">
-    <div class="page-label">Tekpair · Cohoes, NY</div>
-    <h1 class="page-title">Who We Are</h1>
-    <p class="page-intro">A partner for growing businesses, creators, and local organizations — anything technical and growth-related, from a team that treats your growth like our own.</p>
-  </div>
-
-  <!-- OUR STORY -->
-  <div class="section">
-    <div class="sec-label">Our Story</div>
-    <div class="sec-title">How Tekpair started</div>
-    <p class="body-text">Honestly? We were broke students trying to find a real path forward. We both knew we wanted to build something — not just work a job. The first idea was a local event crew. That didn't pan out. But technology felt right. It was something we both understood, something the people around us clearly needed help with, and something we could actually start with very little.</p>
-    <p class="body-text">Tekpair began as a hands-on local tech service — helping neighbors and households across the Capital Region set up, fix, and understand their technology. We built it with what we had left from work. No investors. No funding. Just two people grinding to make something out of nothing, earning trust one job at a time.</p>
-    <p class="body-text">As we grew, so did the work. The same skills we sharpened on the ground — networking, troubleshooting, building things that actually work — were exactly what local businesses needed at a bigger scale. So we made the move: <strong style="color:var(--white);">Tekpair is now a technology and growth partner for growing businesses, creators, and local organizations.</strong> We build and source websites, handle branding, get you found with SEO, run your marketing, turn analytics into decisions, and keep your technology online with local IT support — all at pricing that makes sense. Same team, same standards, bigger mission.</p>
-    <p class="body-text">Right now, Tekpair operates primarily in the Capital Region, NY, with some remote services available worldwide. But this is just the start — we plan to keep expanding, with the goal of one day becoming one of the largest technology and growth agencies in the U.S.</p>
-  </div>
-
-  <!-- THE TEAM -->
-  <div class="section">
-    <div class="sec-label">The Team</div>
-    <div class="sec-title">The people behind your project</div>
-    <div class="team-grid">
-      <div class="team-card">
-        <picture>
-          <source srcset="/about/connor.webp" type="image/webp"/>
-          <img src="/about/connor.jpg" alt="Connor, founder of Tekpair" class="team-photo" width="1040" height="1040" fetchpriority="high" decoding="async" onerror="this.closest('picture').style.display='none';this.closest('picture').nextElementSibling.style.display='flex'"/>
-        </picture>
-        <div class="team-photo-placeholder" style="display:none;"><svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <div class="team-info">
-          <div class="team-name">Connor</div>
-          <div class="team-role">Co-Founder &amp; Owner · Operations &amp; Digital Lead</div>
-          <div class="team-bio">Connor is our operations and digital lead. He handles everything to do with the Tekpair website, social media, marketing and promotion, inquiries, web design and development, and any online services. He's the engine of the operation, and the first person you'll talk to.</div>
-        </div>
-      </div>
-      <div class="team-card">
-        <picture>
-          <source srcset="/about/kam.webp" type="image/webp"/>
-          <img src="/about/kam.jpg" alt="Kamryn, co-founder of Tekpair" class="team-photo" width="1040" height="1386" decoding="async" onerror="this.closest('picture').style.display='none';this.closest('picture').nextElementSibling.style.display='flex'"/>
-        </picture>
-        <div class="team-photo-placeholder" style="display:none;"><svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <div class="team-info">
-          <div class="team-name">Kamryn</div>
-          <div class="team-role">Co-Founder &amp; Owner · Hardware, Infrastructure &amp; IT Lead</div>
-          <div class="team-bio">Kamryn is a hardware nut. He gets hands-on with physical equipment and responds to emergencies like slow internet, POS problems, and more. He's our main guy for hardware, infrastructure, and IT — and also brings experience with web design, branding, AI services, and API usage.</div>
+<main id="main">
+  <section class="about-hero" aria-labelledby="about-heading">
+    <div class="container about-hero-inner">
+      <div class="reveal in">
+        <div class="eyebrow">About Tekpair</div>
+        <h1 class="about-title" id="about-heading">Tekpair is a smaller team built for <em>closer work.</em></h1>
+        <p class="about-lede">Meet Connor and Kamryn—the two people behind Tekpair. Together, they bring web, marketing, and hands-on tech support to help businesses grow without getting passed around or buried.</p>
+        <div class="about-actions">
+          <a class="button-primary" href="/#contact">Start a Conversation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="button-secondary" href="#story">Our Story</a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- TESTIMONIALS -->
-  <div class="section reveal">
-    <div class="sec-label">What Clients Say</div>
-    <div class="sec-title">Real reviews from real people</div>
-    <p class="body-text" style="margin-bottom:1.4rem;">We're just getting started on the business side — right now we're working with <strong style="color:var(--white);">Sweet Elevation Bakery</strong> in Latham, NY on website updates and in-person IT support. A few of the reviews below are from our earlier days as a mainly residential tech support business, but the standard behind them hasn't changed.</p>
-
-    <div class="testimonials-grid">
-
-                  <div class="testimonial">
-        <div class="testimonial-source">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </div>
-        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <div class="testimonial-text">Contacted Tekpair about problems with my printer. They arrived when they said they would, quickly diagnosed the problem and fixed it. Explained every step to me and how I could avoid the problem in the future. Great Company.</div>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">KB</div>
-          <div>
-            <div class="testimonial-name">Kerry B.</div>
-            <div class="testimonial-meta">Google Review · Albany, NY</div>
-          </div>
-        </div>
+  <section class="trust-rail" aria-label="Tekpair business credentials and commitments">
+    <div class="container trust-rail-inner">
+      <div class="trust-proof">
+        <div class="trust-proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-4.6 7-11a7 7 0 1 0-14 0c0 6.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.3"/></svg></div>
+        <div><strong>Capital Region</strong><span>Cohoes, NY.</span></div>
       </div>
-
-                  <div class="testimonial">
-        <div class="testimonial-source">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#00B246"/><path d="M9 6v2.4L3.5 12l1.5 2.3L7 13.2V19h10v-5.8l2 1.3 1.5-2.3L12 6.3 11 7V6H9z" fill="#fff"/></svg>
-        </div>
-        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <div class="testimonial-text">I used Tekpair to install a Microsoft 2024 office software program to my computer. Tekpair Technician Connor Waugaman was prompt and did the installment quickly. Great job at a reasonable price.</div>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">DS</div>
-          <div>
-            <div class="testimonial-name">Doug S.</div>
-            <div class="testimonial-meta">Nextdoor Review · Clifton Park, NY</div>
-          </div>
-        </div>
+      <div class="trust-proof">
+        <div class="trust-proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+        <div><strong>Registered</strong><span>in New York State.</span></div>
       </div>
-
-            <div class="testimonial">
-        <div class="testimonial-source">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </div>
-        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <div class="testimonial-text">Connor & Kamryn are knowledgeable and went above and beyond to fix my computer issues. They made sure everything was working correctly, explained and answered all questions. Highly recommend them!</div>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">SC</div>
-          <div>
-            <div class="testimonial-name">Sue C.</div>
-            <div class="testimonial-meta">Google Review · Halfmoon, NY</div>
-          </div>
-        </div>
+      <div class="trust-proof">
+        <div class="trust-proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h7M14 12h7"/><circle cx="12" cy="12" r="2"/><path d="M5 7h5M14 17h5"/></svg></div>
+        <div><strong>Clear scoping</strong><span>Everything agreed upfront.</span></div>
       </div>
-
-      <div class="testimonial">
-        <div class="testimonial-source">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        </div>
-        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <div class="testimonial-text">Great work and affordable! Helped us with our website, security cameras and hooking up all of our electronics. Will definitely use these guys again!</div>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">JG</div>
-          <div>
-            <div class="testimonial-name">Jennifer G.</div>
-            <div class="testimonial-meta">Google Review · Latham, NY</div>
-          </div>
-        </div>
+      <div class="trust-proof">
+        <div class="trust-proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h10l4 4v12H5V4Z"/><path d="M15 4v5h5M8 14l2.2 2.2L16 10.5"/></svg></div>
+        <div><strong>Your files</strong><span>No hostages.</span></div>
       </div>
-
-      <div class="testimonial-placeholder">
-        <svg width="28" height="28" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 0.75rem;display:block;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <p><a href="https://www.facebook.com/tekpairny" target="_blank" rel="noopener">Leave us a review on Facebook</a> or <a href="https://share.google/ODqzmQhFldM4bXHaO" target="_blank" rel="noopener">Google</a> — it means the world to a small local business just getting started.</p>
-      </div>
-
     </div>
-  </div>
+  </section>
 
-  <!-- CTA -->
-  <div class="cta-row reveal">
-    <p>Ready to grow your business? Let's talk about what we can build together.</p>
-    <a href="/#contact" class="btn">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Get a Free Quote
-    </a>
-  </div>
+  <section class="section" id="story" aria-labelledby="story-heading">
+    <div class="container story-layout">
+      <div class="story-aside reveal">
+        <div class="eyebrow">Our Story</div>
+        <h2 class="section-title" id="story-heading">Built from the ground up—one problem at a time.</h2>
+        <svg class="story-art" viewBox="0 0 390 280" fill="none" aria-hidden="true">
+          <path d="M44 217h84V91H44v126ZM128 217h104V49H128v168ZM232 217h114V121H232v96Z" stroke="currentColor" stroke-width="2" opacity=".42"/>
+          <path d="M66 183h39M66 161h39M66 139h26M155 83h50M155 105h50M155 127h35M260 154h57M260 176h43" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".68"/>
+          <path d="M42 239h307" stroke="currentColor" stroke-width="2" opacity=".25"/>
+          <path d="m68 112 70-54 67 31 82-62" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="m270 27 19-2-3 18" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="story-stack">
+        <article class="story-chapter reveal">
+          <div class="story-number">01</div>
+          <div><h3>It almost started with an event cleanup crew.</h3><p>Before Tekpair, we planned to launch C&K Event Crew, a Capital Region cleanup service for local events. The idea did not last long. We quickly realized the work was not for us—and that building a business around something we would eventually hate was probably not the smartest move.</p></div>
+        </article>
+        <article class="story-chapter reveal">
+          <div class="story-number">02</div>
+          <div><h3>Then came the idea that became Tekpair.</h3><p>After weeks of throwing around business ideas, Connor asked a simple question: what if we created a local tech service for seniors and everyday people who needed help with common technology problems? Something more personal and accessible than a big-box support service, with affordable pricing and same-day availability. That idea became Tekpair in March 2026.</p></div>
+        </article>
+        <article class="story-chapter reveal">
+          <div class="story-number">03</div>
+          <div><h3>Residential support showed us everything — but sustainability.</h3><p>Tekpair spent its first several months helping households throughout the Capital Region while also supporting small businesses such as Sweet Elevation Bakery. We loved showing up, solving problems, and giving people that feeling of relief when their technology finally worked again. But over time, we realized the residential model was not sustainable or leading us toward the business we wanted to build.</p></div>
+        </article>
+        <article class="story-chapter reveal">
+          <div class="story-number">04</div>
+          <div><h3>So we took what worked and built something bigger.</h3><p>Connor proposed shifting Tekpair from residential support to commercial technology and growth services. The idea took some discussion, but we eventually agreed that it allowed us to keep doing what we enjoyed—solving real problems—on a larger and more sustainable scale. Today, Tekpair helps businesses build, improve, and support the technology behind their growth while continuing to offer the direct, personal service we started with.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <section class="section section-surface" aria-labelledby="principles-heading">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="eyebrow">How We Show Up</div>
+        <h2 class="section-title" id="principles-heading">Practical help, clear communication, and work that belongs to you.</h2>
+      </div>
+      <div class="principles-grid">
+        <article class="principle reveal">
+          <svg class="principle-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 16h29v21H23L11 47V16Z"/><path d="M30 24h23v18H42l-8 7v-7" opacity=".65"/><path d="M18 24h15M18 30h10"/></svg>
+          <h3>You work directly with us</h3>
+          <p>The people you speak with are the same people planning and completing the work. No account managers, ticket queues, or getting passed from person to person.</p>
+        </article>
+        <article class="principle reveal">
+          <svg class="principle-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 14h38v36H13z"/><path d="M13 23h38M20 18h.01M26 18h.01"/><path d="m21 39 7-7 6 5 9-10"/></svg>
+          <h3>Honest recommendations</h3>
+          <p>We focus on what will genuinely help—not on selling you the biggest package possible. You’ll know the scope, pricing, and expected outcome before we begin.</p>
+        </article>
+        <article class="principle reveal">
+          <svg class="principle-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h22l9 9v39H17V8Z"/><path d="M39 8v11h11M24 31h17M24 39h17"/><path d="m25 49 4 4 9-9"/></svg>
+          <h3>Your work stays yours</h3>
+          <p>The files, source work, and final deliverables you pay for belong to you. We don’t charge artificial per-file fees or hold your project hostage, ever.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="team-heading">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="eyebrow">The Team</div>
+        <h2 class="section-title" id="team-heading">Meet Connor &amp; Kamryn</h2>
+      </div>
+      <div class="team-grid">
+        <article class="team-card reveal">
+          <div class="team-photo-wrap">
+            <picture>
+              <source srcset="/about/connor.webp" type="image/webp"/>
+              <img class="team-photo" src="/about/connor.jpg" alt="Connor, co-founder of Tekpair" width="1040" height="1040" fetchpriority="high" decoding="async" onerror="this.style.display='none';this.closest('.team-photo-wrap').classList.add('photo-missing')"/>
+            </picture>
+          </div>
+          <div class="team-content">
+            <div class="team-role">Co-Founder & Owner · Operations & Digital Lead</div>
+            <h3 class="team-name">Connor</h3>
+            <p class="team-bio">Connor first proposed the idea behind Tekpair and now oversees the company’s day-to-day operations and digital services. He manages Tekpair’s website, social media, advertising, staffing, internal documents, and overall project coordination. For clients, he leads web design and development, branding, SEO, business analytics, and digital marketing—keeping each project organized and running.</p>
+            <div class="team-tags"><span>Operations</span><span>Web Development</span><span>Marketing</span><span>SEO & Analytics</span></div>
+          </div>
+        </article>
+        <article class="team-card reveal">
+          <div class="team-photo-wrap">
+            <picture>
+              <source srcset="/about/kam.webp" type="image/webp"/>
+              <img class="team-photo" src="/about/kam.jpg" alt="Kamryn, co-founder of Tekpair" width="1040" height="1386" decoding="async" onerror="this.style.display='none';this.closest('.team-photo-wrap').classList.add('photo-missing')"/>
+            </picture>
+          </div>
+          <div class="team-content">
+            <div class="team-role">Co-Founder & Owner · IT & Infrastructure Lead</div>
+            <h3 class="team-name">Kamryn</h3>
+            <p class="team-bio">Kamryn helped turn the original Tekpair idea into a real business and leads its hands-on technology services. He manages the Local IT & Support team throughout the Capital Region and works directly with IT retainer clients to keep their systems running smoothly. He also supports Tekpair’s web design, branding, AI services, and API integrations whenever additional expertise is needed.</p>
+            <div class="team-tags"><span>Local IT</span><span>Infrastructure</span><span>AI Services</span><span>API Integration</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-surface" aria-labelledby="reviews-heading">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="eyebrow">Client Feedback</div>
+        <h2 class="section-title" id="reviews-heading">We are trusted because we show up and follow through.</h2>
+      </div>
+      <div class="reviews-layout">
+        <article class="review-featured reveal">
+          <div class="review-stars" aria-label="Five stars">★★★★★</div>
+          <p class="review-quote">Great work and affordable! Helped us with our website, security cameras and hooking up all of our electronics. Will definitely use these guys again!</p>
+          <div class="review-person"><strong>Jennifer G.</strong><span>Sweet Elevation Bakery · Latham, NY</span></div>
+        </article>
+        <div class="reviews-stack">
+          <article class="review-small reveal"><div class="review-stars" aria-label="Five stars">★★★★★</div><p>They arrived when they said they would, quickly diagnosed the printer problem, fixed it, and explained every step.</p><footer>Kerry B. · Google Review</footer></article>
+          <article class="review-small reveal"><div class="review-stars" aria-label="Five stars">★★★★★</div><p>Prompt, knowledgeable, and completed the Microsoft Office installation quickly at a reasonable price.</p><footer>Doug S. · Nextdoor Review</footer></article>
+          <article class="review-small reveal"><div class="review-stars" aria-label="Five stars">★★★★★</div><p>Connor and Kamryn went above and beyond, made sure everything worked correctly, and answered every question.</p><footer>Sue C. · Google Review</footer></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-panel reveal">
+        <svg class="contact-icon" viewBox="0 0 200 160" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="24" y="35" width="152" height="96" rx="14"/>
+          <path d="m31 45 69 54 69-54"/>
+        </svg>
+        <div class="contact-copy">
+          <div class="eyebrow">Talk With Us</div>
+          <h2 id="contact-heading">Got a problem to solve or an idea to build?</h2>
+          <p>Tell us what you are working on. You will hear directly from the Tekpair team, usually within one business day, with a clear next step.</p>
+          <a class="button-primary" href="/#contact">Get a Free Quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- FOOTER -->
@@ -319,7 +728,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#29D4F5;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="360 165 775 170" style="height:34px;width:auto;display:block;" aria-label="Tekpair"><style>.st0{fill:#63B7C4;}.st1{fill:#111318;}.st2{fill:#EEF1F8;}</style><g><polygon class="st2" points="596.91,217.95 622.22,217.95 622.22,297.56 641.28,297.56 641.28,217.95 666.59,217.95 666.59,202.57 596.91,202.57"/><polygon class="st2" points="680.47,297.56 735.59,297.56 735.59,282.05 699.52,282.05 699.52,256.87 731.51,256.87 731.51,241.77 699.52,241.77 699.52,217.95 735.59,217.95 735.59,202.44 680.47,202.44"/><polygon class="st2" points="829.49,202.57 806.49,202.57 771.92,245.17 771.92,202.57 752.87,202.57 752.87,297.56 771.92,297.56 771.92,255.24 806.49,297.56 830.58,297.56 790.3,249.66"/><path class="st2" d="M896.86,206.38c-5.17-2.54-11.43-3.81-18.78-3.81H843.1v94.99h19.05v-36.47h15.92c7.8,0,14.27-1.36,19.39-4.08c5.12-2.72,8.89-6.3,11.3-10.75c2.4-4.44,3.61-9.21,3.61-14.29c0-5.62-1.29-10.66-3.88-15.11C905.91,212.42,902.03,208.92,896.86,206.38z M888.96,242.11c-2.54,2.4-6.44,3.61-11.7,3.61h-15.11v-27.63h15.11c10.34,0,15.51,4.63,15.51,13.88C892.77,236.32,891.5,239.7,888.96,242.11z"/><path class="st2" d="M954.15,202.44l-34.16,95.13H940l6.26-18.1h37.83l6.26,18.1h20.14l-34.16-95.13H954.15z M951.43,264.22l13.75-39.74l13.75,39.74H951.43z"/><rect x="1023.28" y="202.57" class="st2" width="19.05" height="94.99"/><path class="st2" d="M1125.62,248.64c3.63-5.03,5.44-10.68,5.44-16.94c0-5.44-1.29-10.36-3.88-14.77c-2.59-4.4-6.46-7.89-11.64-10.48c-5.17-2.59-11.43-3.88-18.78-3.88h-35.66v94.99h19.05v-37.02h8.98l20.96,37.02h22.05l-22.73-38.51C1116.6,257.14,1121.99,253.67,1125.62,248.64z M1096.09,246.26h-15.92v-27.9h15.92c5.17,0,9.03,1.2,11.57,3.61c2.54,2.41,3.81,5.78,3.81,10.14c0,4.45-1.27,7.92-3.81,10.41C1105.12,245.01,1101.26,246.26,1096.09,246.26z"/><path class="st0" d="M512.54,167.92H387.32c-10.75,0-19.47,8.72-19.47,19.47v125.22c0,10.75,8.72,19.47,19.47,19.47h125.22c10.75,0,19.47-8.72,19.47-19.47V187.39C532.01,176.64,523.29,167.92,512.54,167.92z M442.19,314.94l-53.61-41.25v-47.38l20.56-15.82v39.5l-0.02,0.01l33.07,25.44V314.94z M442.19,224.56l-20.48,15.75v-39.5l20.48-15.76V224.56z M478.13,299.18l-20.48,15.76v-39.5l20.48-15.75V299.18z M511.26,273.69l-20.56,15.82v-39.5l0.02-0.01l-33.07-25.44v-39.49l53.61,41.25V273.69z"/><polygon class="st1" points="421.72,240.32 442.19,224.56 442.19,185.06 421.72,200.82"/><polygon class="st1" points="409.14,249.99 409.14,210.49 388.59,226.31 388.59,273.69 442.19,314.94 442.19,275.44 409.13,250"/><polygon class="st1" points="457.66,314.94 478.13,299.18 478.13,259.68 457.66,275.44"/><polygon class="st1" points="457.66,224.56 490.72,250 490.71,250.01 490.71,289.51 511.26,273.69 511.26,226.31 457.66,185.06"/></g></svg>
       </div>
       <p class="footer-brand-desc">Built for growing businesses, creators, and local organizations. We handle anything technical and growth-related — web, branding, SEO, marketing, analytics, and local IT support.</p>
       <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.2rem;">
@@ -344,7 +753,7 @@
     <div class="footer-col">
       <h3>Services</h3>
       <ul>
-        <li><a href="/webdesign/">Web Design &amp; Development</a></li>
+        <li><a href="/webdesign/">Web Design</a></li>
         <li><a href="/#services">Branding &amp; Design</a></li>
         <li><a href="/#services">SEO Optimization</a></li>
         <li><a href="/#services">Digital Marketing</a></li>
@@ -355,10 +764,10 @@
     <div class="footer-col">
       <h3>Company</h3>
       <ul>
-        <li><a href="/#contact">Contact Us</a></li>
+        <li><a href="/#contact">Contact</a></li>
         <li><a href="/#how">How We Work</a></li>
         <li><a href="/about/">About Tekpair</a></li>
-        <li><a href="/faq/">Frequently Asked Questions</a></li>
+        <li><a href="/faq/">FAQ</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -374,14 +783,88 @@
   </div>
 </footer>
 
+<!-- Analytics -->
 <script>
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 55); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.06 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YBXCB2DFWV');
+  function _loadGtag() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-YBXCB2DFWV';
+    document.head.appendChild(s);
+  }
+  if ('requestIdleCallback' in window) { requestIdleCallback(_loadGtag, {timeout:4000}); }
+  else { setTimeout(_loadGtag, 3000); }
+  function _loadClarity() {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","x2jgunqz83");
+  }
+  if ('requestIdleCallback' in window) { requestIdleCallback(_loadClarity, {timeout:4000}); }
+  else { setTimeout(_loadClarity, 3000); }
+</script>
+<script>
+  (function () {
+    const toggle = document.querySelector('.nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (toggle && mobileMenu) {
+      toggle.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
 
+    // Desktop dropdown labels remain hover/focus only and never pin open on click.
+    document.querySelectorAll('.nav-item').forEach(item => {
+      const trigger = item.querySelector('.nav-trigger');
+      if (!trigger) return;
+      item.addEventListener('mouseenter', () => trigger.setAttribute('aria-expanded', 'true'));
+      item.addEventListener('mouseleave', () => trigger.setAttribute('aria-expanded', 'false'));
+      trigger.addEventListener('click', event => { event.preventDefault(); trigger.blur(); });
+    });
+
+    document.querySelectorAll('.mobile-nav-trigger').forEach(button => {
+      button.addEventListener('click', () => {
+        const group = button.closest('.mobile-nav-group');
+        const willOpen = !group.classList.contains('is-open');
+        document.querySelectorAll('.mobile-nav-group').forEach(other => {
+          if (other === group) return;
+          other.classList.remove('is-open');
+          const otherButton = other.querySelector('.mobile-nav-trigger');
+          if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+        });
+        group.classList.toggle('is-open', willOpen);
+        button.setAttribute('aria-expanded', String(willOpen));
+      });
+    });
+
+    const revealGroups = document.querySelectorAll('.principles-grid, .team-grid, .reviews-stack, .trust-rail-inner');
+    revealGroups.forEach(group => {
+      Array.from(group.children).forEach((child, index) => {
+        if (child.classList.contains('reveal')) child.style.setProperty('--reveal-delay', `${Math.min(index * 90, 360)}ms`);
+      });
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .11, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => observer.observe(el));
+  }());
 </script>
 <script src="/cookie-banner.js"></script>
 <script src="/mobile-nav.js"></script>
