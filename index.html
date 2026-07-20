@@ -2990,22 +2990,6 @@
 </script>
 <script>
 setTimeout(function() {
-  // Mobile nav toggle
-  const toggle = document.querySelector('.nav-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  toggle.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open);
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', false);
-    });
-  });
-
   // Desktop dropdowns are hover-only: clicking a label never pins a menu open.
   document.querySelectorAll('.nav-item').forEach(item => {
     const trigger = item.querySelector('.nav-trigger');
@@ -3031,22 +3015,6 @@ setTimeout(function() {
         if (button) button.setAttribute('aria-expanded', 'false');
       });
     }
-  });
-
-  // Mobile dropdown groups behave as compact accordions.
-  document.querySelectorAll('.mobile-nav-trigger').forEach(button => {
-    button.addEventListener('click', () => {
-      const group = button.closest('.mobile-nav-group');
-      const willOpen = !group.classList.contains('is-open');
-      document.querySelectorAll('.mobile-nav-group').forEach(other => {
-        if (other === group) return;
-        other.classList.remove('is-open');
-        const otherButton = other.querySelector('.mobile-nav-trigger');
-        if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
-      });
-      group.classList.toggle('is-open', willOpen);
-      button.setAttribute('aria-expanded', String(willOpen));
-    });
   });
 
   // Scroll reveal: smooth entrance motion with predictable group staggering.
